@@ -1,0 +1,26 @@
+# Claude Code — absolut inget i detta repot
+.claude/
+CLAUDE.md
+MEMORY.md
+memory/
+
+# Utkast och experimentfiler
+index_v3.html
+index_utkast1.html
+carlbomsdata-v2.md
+
+# Backend (ligger på Anvil.works, ska inte i publika repo)
+anvil_server.py
+worker.js
+
+# Källdokument (interna, inte publika)
+*.docx
+*.pdf
+
+# OS/editor-skräp
+.DS_Store
+Thumbs.db
+*.swp
+*~
+.vscode/
+.idea/

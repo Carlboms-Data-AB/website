@@ -1,0 +1,1149 @@
+<!DOCTYPE html>
+<html lang="sv">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Carlboms Data</title>
+    <meta name="description" content="Carlboms Data — relationsexperten för systemintegration." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@700&family=Inter:wght@400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <style>
+        :root {
+            --bg: #EAF2FB;
+            --bg-soft: #F5F9FD;
+            --bg-alt: #FFFFFF;
+            --primary: #0F1720;
+            --accent: #E63946;
+            --accent-dark: #C72B38;
+            --heart-gray: #B8BCC4;
+            --border: #D4E2EF;
+            --text: #1F2937;
+            --text-muted: #4B5563;
+            --radius: 14px;
+            --shadow-sm: 0 1px 2px rgba(15, 23, 32, 0.04), 0 2px 8px rgba(15, 23, 32, 0.05);
+            --shadow-md: 0 4px 12px rgba(15, 23, 32, 0.06), 0 8px 24px rgba(15, 23, 32, 0.08);
+            --nav-h: 68px;
+            --max: 1120px;
+        }
+
+        * { box-sizing: border-box; }
+
+        html { scroll-behavior: smooth; scroll-padding-top: var(--nav-h); }
+
+        body {
+            margin: 0;
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Helvetica, Arial, sans-serif;
+            background: var(--bg);
+            color: var(--text);
+            font-size: 18px;
+            line-height: 1.7;
+            -webkit-font-smoothing: antialiased;
+            text-rendering: optimizeLegibility;
+        }
+
+        .container {
+            max-width: var(--max);
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* ===== NAV ===== */
+        header.nav {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background: rgba(234, 242, 251, 0.85);
+            backdrop-filter: saturate(180%) blur(12px);
+            -webkit-backdrop-filter: saturate(180%) blur(12px);
+            border-bottom: 1px solid transparent;
+            transition: border-color 0.2s ease, box-shadow 0.2s ease, background 0.2s ease;
+        }
+        header.nav.scrolled {
+            border-bottom-color: var(--border);
+            box-shadow: 0 1px 8px rgba(15, 23, 32, 0.06);
+        }
+        .nav-inner {
+            height: var(--nav-h);
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+        .brand {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            text-decoration: none;
+            color: var(--primary);
+            font-family: 'Inter', sans-serif;
+            font-weight: 900;
+            font-size: 1.05rem;
+            letter-spacing: -0.02em;
+            text-transform: uppercase;
+        }
+        nav.main-nav ul {
+            list-style: none;
+            margin: 0; padding: 0;
+            display: flex;
+            gap: 8px;
+        }
+        nav.main-nav a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 500;
+            font-size: 0.95rem;
+            padding: 8px 14px;
+            border-radius: 8px;
+            transition: background 0.15s ease, color 0.15s ease;
+        }
+        nav.main-nav a:hover { background: var(--border); }
+        nav.main-nav a.active { color: var(--accent); background: rgba(230, 57, 70, 0.08); }
+
+        .nav-toggle {
+            display: none;
+            background: transparent;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            width: 40px; height: 40px;
+            cursor: pointer;
+            padding: 0;
+            align-items: center;
+            justify-content: center;
+        }
+        .nav-toggle span {
+            display: block;
+            width: 18px; height: 2px;
+            background: var(--primary);
+            position: relative;
+        }
+        .nav-toggle span::before,
+        .nav-toggle span::after {
+            content: '';
+            position: absolute;
+            left: 0;
+            width: 18px; height: 2px;
+            background: var(--primary);
+            transition: transform 0.2s ease;
+        }
+        .nav-toggle span::before { top: -6px; }
+        .nav-toggle span::after { top: 6px; }
+        .nav-toggle.open span { background: transparent; }
+        .nav-toggle.open span::before { transform: translateY(6px) rotate(45deg); }
+        .nav-toggle.open span::after { transform: translateY(-6px) rotate(-45deg); }
+
+        /* ===== SECTIONS ===== */
+        section {
+            padding: 96px 0;
+            position: relative;
+        }
+        section + section { border-top: 1px solid var(--border); }
+        section.alt { background: var(--bg-alt); }
+        section.dotted {
+            background-image:
+                radial-gradient(circle at 1px 1px, rgba(15, 23, 32, 0.06) 1px, transparent 0);
+            background-size: 22px 22px;
+            background-position: 0 0;
+        }
+        section.dotted.alt {
+            background-color: var(--bg-alt);
+            background-image:
+                radial-gradient(circle at 1px 1px, rgba(15, 23, 32, 0.05) 1px, transparent 0);
+            background-size: 22px 22px;
+        }
+
+        h1, h2, h3, h4 {
+            color: var(--primary);
+            font-weight: 700;
+            letter-spacing: -0.02em;
+            margin: 0 0 0.5em 0;
+            line-height: 1.2;
+        }
+        h1 { font-size: clamp(2.1rem, 5vw, 3.3rem); line-height: 1.15; }
+        h2 { font-size: clamp(1.7rem, 3.5vw, 2.4rem); margin-bottom: 0.8em; line-height: 1.2; }
+        h3 { font-size: 1.22rem; font-weight: 600; line-height: 1.35; }
+
+        p { margin: 0 0 1.1em 0; color: var(--text); }
+        p:last-child { margin-bottom: 0; }
+        .muted { color: var(--text-muted); }
+
+        /* ===== HERO ===== */
+        #start { padding-top: 80px; padding-bottom: 80px; }
+        .hero-grid {
+            display: grid;
+            grid-template-columns: 1.25fr 1fr;
+            gap: 48px;
+            align-items: center;
+        }
+        .hero-art {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px 0;
+        }
+        .hero-equation {
+            display: inline-flex;
+            align-items: baseline;
+            gap: 0.25em;
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
+            font-weight: 700;
+            font-size: clamp(2rem, 4.5vw, 3.5rem);
+            color: var(--primary);
+            letter-spacing: -0.01em;
+            white-space: nowrap;
+        }
+        .hero-equation .eq-op {
+            color: var(--accent);
+        }
+        .hero-sub {
+            font-size: clamp(1.15rem, 2vw, 1.4rem);
+            color: var(--text-muted);
+            max-width: 640px;
+            margin-top: 0.5em;
+            margin-bottom: 1.75em;
+            line-height: 1.55;
+            font-weight: 400;
+        }
+        .hero-body { max-width: 58ch; font-size: 1.05rem; line-height: 1.8; }
+        .hero-body p { margin-bottom: 1.25em; }
+        .emph {
+            font-weight: 600;
+            color: var(--primary);
+            text-decoration: underline;
+            text-decoration-color: var(--accent);
+            text-decoration-thickness: 2px;
+            text-underline-offset: 4px;
+        }
+
+        .usp-heading { margin-top: 64px; margin-bottom: 24px; font-size: 1.3rem; }
+
+        .usp-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 8px;
+        }
+        .usp-card {
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 24px;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        .usp-card:hover { box-shadow: var(--shadow-md); border-color: rgba(230, 57, 70, 0.25); }
+        .usp-icon {
+            width: 40px; height: 40px;
+            border-radius: 10px;
+            background: rgba(230, 57, 70, 0.1);
+            color: var(--accent);
+            display: grid; place-items: center;
+            margin-bottom: 14px;
+        }
+        .usp-card h3 { margin-bottom: 12px; font-size: 1.1rem; line-height: 1.35; }
+        .usp-card p { font-size: 1rem; line-height: 1.7; margin: 0; color: var(--text-muted); }
+
+        .cta-row { margin-top: 40px; display: flex; flex-wrap: wrap; gap: 14px; }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            padding: 14px 22px;
+            font-size: 1rem;
+            font-weight: 600;
+            border-radius: 10px;
+            text-decoration: none;
+            cursor: pointer;
+            border: 1px solid transparent;
+            transition: background 0.15s ease, transform 0.1s ease, box-shadow 0.2s ease;
+        }
+        .btn-primary {
+            background: var(--accent);
+            color: #FFFFFF;
+            box-shadow: 0 4px 14px rgba(230, 57, 70, 0.3);
+        }
+        .btn-primary:hover { background: var(--accent-dark); color: #FFFFFF; }
+        .btn-primary:active { transform: translateY(1px); }
+        .btn-ghost {
+            background: transparent;
+            color: var(--primary);
+            border-color: var(--border);
+        }
+        .btn-ghost:hover { background: var(--border); color: var(--primary); }
+
+        /* ===== ERBJUDANDE ===== */
+        .lede {
+            font-size: 1.15rem;
+            line-height: 1.75;
+            max-width: 68ch;
+            color: var(--text);
+        }
+        .block { margin-top: 56px; }
+        .block h3 { font-size: 1.3rem; margin-bottom: 18px; }
+
+        .competence-grid {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 20px;
+            margin-top: 20px;
+        }
+        .comp-card {
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 24px 26px;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        .comp-card:hover { box-shadow: var(--shadow-md); border-color: rgba(230, 57, 70, 0.25); }
+        .comp-icon {
+            width: 44px;
+            height: 44px;
+            border-radius: 12px;
+            background: rgba(230, 57, 70, 0.1);
+            color: var(--accent);
+            display: grid;
+            place-items: center;
+            margin-bottom: 18px;
+        }
+        .comp-card strong {
+            display: block;
+            color: var(--primary);
+            font-size: 1.12rem;
+            margin-bottom: 10px;
+        }
+        .comp-card p { margin: 0; color: var(--text-muted); font-size: 1rem; line-height: 1.7; }
+
+        .chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 18px;
+        }
+        .chip-label {
+            display: block;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 500;
+            margin-top: 24px;
+            letter-spacing: 0.04em;
+            text-transform: uppercase;
+        }
+        .chip-label:first-child { margin-top: 0; }
+        .chip {
+            padding: 8px 16px;
+            border-radius: 999px;
+            font-size: 0.92rem;
+            font-weight: 600;
+            letter-spacing: 0.01em;
+            font-family: 'IBM Plex Mono', 'Courier New', monospace;
+            border: 1px solid transparent;
+            transition: transform 0.15s ease;
+        }
+        .chip-primary {
+            background: var(--accent);
+            color: #FFFFFF;
+            border-color: var(--accent);
+            box-shadow: 0 2px 8px rgba(230, 57, 70, 0.25);
+        }
+        .chip-secondary {
+            background: var(--bg-alt);
+            color: var(--accent);
+            border-color: rgba(230, 57, 70, 0.35);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .steps {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-top: 28px;
+            counter-reset: step;
+        }
+        .step {
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 28px 28px 30px 84px;
+            position: relative;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+        }
+        .step:hover { box-shadow: var(--shadow-md); border-color: rgba(230, 57, 70, 0.25); }
+        .step::before {
+            counter-increment: step;
+            content: counter(step);
+            position: absolute;
+            left: 24px;
+            top: 26px;
+            width: 40px;
+            height: 40px;
+            border-radius: 50%;
+            background: var(--accent);
+            color: #FFFFFF;
+            display: grid;
+            place-items: center;
+            font-size: 1.05rem;
+            font-weight: 700;
+            font-variant-numeric: tabular-nums;
+            box-shadow: 0 2px 8px rgba(230, 57, 70, 0.3);
+        }
+        .step strong {
+            display: block;
+            color: var(--primary);
+            font-size: 1.12rem;
+            margin-bottom: 10px;
+        }
+        .step p { margin: 0; color: var(--text-muted); font-size: 1rem; line-height: 1.7; }
+
+        /* ===== REFERENSER ===== */
+        .cases {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-top: 48px;
+        }
+        .case {
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 40px 48px 44px;
+            box-shadow: var(--shadow-sm);
+            transition: box-shadow 0.2s ease, border-color 0.2s ease;
+            display: grid;
+            grid-template-columns: 72px 1fr;
+            gap: 28px;
+            align-items: start;
+        }
+        .case:hover { box-shadow: var(--shadow-md); border-color: rgba(230, 57, 70, 0.25); }
+        .case-icon {
+            width: 56px;
+            height: 56px;
+            border-radius: 14px;
+            background: rgba(230, 57, 70, 0.1);
+            color: var(--accent);
+            display: grid;
+            place-items: center;
+            margin-bottom: 0;
+        }
+        .case-body { max-width: 68ch; }
+        .case h3 {
+            font-size: 1.35rem;
+            margin-bottom: 18px;
+            line-height: 1.3;
+        }
+        .case p {
+            color: var(--text);
+            font-size: 1.05rem;
+            line-height: 1.85;
+            margin: 0;
+        }
+
+
+        /* ===== OM ===== */
+        .om-wrap {
+            display: grid;
+            grid-template-columns: 1.3fr 1fr;
+            gap: 56px;
+            align-items: start;
+        }
+        .om-body { font-size: 1.08rem; line-height: 1.8; }
+        .om-body p { margin-bottom: 1.5em; }
+        .om-body p:last-child { margin-bottom: 0; }
+        .om-photo {
+            position: relative;
+            width: 100%;
+            aspect-ratio: 4 / 5;
+            border-radius: var(--radius);
+            overflow: hidden;
+            background: linear-gradient(135deg, var(--bg) 0%, var(--bg-alt) 100%);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border);
+        }
+        .om-photo img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            display: block;
+        }
+        .om-photo-placeholder {
+            position: absolute;
+            inset: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            gap: 12px;
+            color: var(--text-muted);
+            padding: 24px;
+            text-align: center;
+        }
+        .om-photo-placeholder svg {
+            width: 64px;
+            height: 64px;
+            opacity: 0.5;
+        }
+        .om-photo-placeholder span {
+            font-size: 0.9rem;
+            font-weight: 500;
+        }
+        .om-caption {
+            margin-top: 14px;
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            font-style: italic;
+            text-align: center;
+        }
+
+        /* ===== KONTAKT ===== */
+        .contact-wrap {
+            display: grid;
+            grid-template-columns: 1.4fr 1fr;
+            gap: 40px;
+            margin-top: 40px;
+            align-items: start;
+        }
+        .contact-form {
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 36px;
+            box-shadow: var(--shadow-sm);
+            display: flex;
+            flex-direction: column;
+            gap: 18px;
+        }
+        .contact-form h3 {
+            margin: 0 0 4px 0;
+            font-size: 1.3rem;
+        }
+        .form-intro {
+            margin: 0 0 8px 0;
+            color: var(--text-muted);
+            font-size: 1rem;
+            line-height: 1.6;
+        }
+        .contact-form label {
+            display: flex;
+            flex-direction: column;
+            gap: 6px;
+            font-size: 0.92rem;
+            font-weight: 500;
+            color: var(--text-muted);
+        }
+        .contact-form input,
+        .contact-form textarea {
+            font-family: inherit;
+            font-size: 1rem;
+            padding: 12px 14px;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--bg);
+            color: var(--text);
+            transition: border-color 0.15s ease, box-shadow 0.15s ease;
+            resize: vertical;
+        }
+        .contact-form input:focus,
+        .contact-form textarea:focus {
+            outline: none;
+            border-color: var(--accent);
+            box-shadow: 0 0 0 3px rgba(230, 57, 70, 0.12);
+        }
+        .contact-form textarea {
+            min-height: 120px;
+            font-family: inherit;
+            line-height: 1.5;
+        }
+        .contact-form button {
+            align-self: flex-start;
+            margin-top: 8px;
+        }
+        .contact-alt {
+            padding: 28px;
+            background: var(--bg-alt);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            box-shadow: var(--shadow-sm);
+        }
+        .contact-alt h4 {
+            margin: 0 0 14px 0;
+            font-size: 1.05rem;
+        }
+        .contact-alt-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+        .contact-alt-item:last-child { margin-bottom: 0; }
+        .contact-alt-icon {
+            width: 36px; height: 36px;
+            border-radius: 9px;
+            background: rgba(230, 57, 70, 0.1);
+            color: var(--accent);
+            display: grid; place-items: center;
+            flex-shrink: 0;
+        }
+        .contact-alt a {
+            color: var(--primary);
+            font-weight: 600;
+            text-decoration: none;
+            word-break: break-word;
+        }
+        .contact-alt a:hover { color: var(--accent); }
+        .contact-alt .location {
+            color: var(--text-muted);
+            font-weight: 500;
+            font-size: 0.95rem;
+        }
+        .business-info {
+            margin-top: 24px;
+            padding-top: 20px;
+            border-top: 1px solid var(--border);
+        }
+        .business-info h5 {
+            margin: 0 0 12px 0;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            font-weight: 600;
+            letter-spacing: 0.06em;
+            text-transform: uppercase;
+        }
+        .business-info dl {
+            margin: 0;
+            display: grid;
+            grid-template-columns: auto 1fr;
+            gap: 6px 16px;
+            font-size: 0.92rem;
+        }
+        .business-info dt {
+            color: var(--text-muted);
+            font-weight: 500;
+        }
+        .business-info dd {
+            margin: 0;
+            color: var(--primary);
+            font-weight: 500;
+        }
+        .form-status {
+            font-size: 0.9rem;
+            color: var(--text-muted);
+            margin-top: 4px;
+            min-height: 1.2em;
+        }
+        .form-status.success { color: var(--accent); font-weight: 500; }
+
+        /* ===== FOOTER ===== */
+        footer.site-footer {
+            padding: 32px 0;
+            border-top: 1px solid var(--border);
+            background: var(--bg-alt);
+        }
+        .foot-inner {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            color: var(--text-muted);
+            font-size: 0.88rem;
+            text-align: center;
+        }
+        .foot-sep { opacity: 0.5; }
+
+        /* ===== RESPONSIVE ===== */
+        @media (max-width: 960px) {
+            .hero-grid { grid-template-columns: 1fr; gap: 24px; }
+            .hero-art { order: -1; max-width: 380px; margin: 0 auto; }
+            .om-wrap { grid-template-columns: 1fr; gap: 32px; max-width: 480px; margin: 0 auto; }
+        }
+
+        @media (max-width: 860px) {
+            .usp-grid, .competence-grid, .steps, .contact-wrap {
+                grid-template-columns: 1fr;
+            }
+            .case {
+                grid-template-columns: 1fr;
+                padding: 28px 24px 32px;
+                gap: 20px;
+            }
+            .case-icon { margin-bottom: 0; }
+        }
+
+        @media (max-width: 720px) {
+            section { padding: 64px 0; }
+            #start { padding-top: 56px; padding-bottom: 56px; }
+            .nav-toggle { display: inline-flex; }
+            nav.main-nav {
+                position: absolute;
+                top: var(--nav-h);
+                left: 0; right: 0;
+                background: var(--bg-alt);
+                border-bottom: 1px solid var(--border);
+                box-shadow: var(--shadow-md);
+                transform: translateY(-10px);
+                opacity: 0;
+                pointer-events: none;
+                transition: opacity 0.2s ease, transform 0.2s ease;
+            }
+            nav.main-nav.open {
+                transform: translateY(0);
+                opacity: 1;
+                pointer-events: auto;
+            }
+            nav.main-nav ul {
+                flex-direction: column;
+                padding: 12px;
+                gap: 2px;
+            }
+            nav.main-nav a { display: block; padding: 12px 14px; }
+        }
+
+        /* ===== Misc ===== */
+        a { color: var(--accent); }
+        a:hover { color: var(--accent-dark); }
+        ::selection { background: rgba(230, 57, 70, 0.2); }
+    </style>
+</head>
+<body>
+
+<header class="nav" id="siteNav">
+    <div class="container nav-inner">
+        <a href="#start" class="brand" aria-label="Carlboms Data — startsida">
+            <span>CARLBOMS</span>
+            <span>DATA</span>
+        </a>
+        <button class="nav-toggle" id="navToggle" aria-label="Öppna meny" aria-expanded="false">
+            <span></span>
+        </button>
+        <nav class="main-nav" id="mainNav">
+            <ul>
+                <li><a href="#erbjudande">Erbjudande</a></li>
+                <li><a href="#referenser">Referenser</a></li>
+                <li><a href="#om">Om</a></li>
+                <li><a href="#kontakt">Kontakt</a></li>
+            </ul>
+        </nav>
+    </div>
+</header>
+
+<main>
+
+    <!-- ============ START / HERO ============ -->
+    <section id="start">
+        <div class="container">
+            <div class="hero-grid">
+                <div>
+                    <h1>Relationsexperten för systemintegration</h1>
+                    <p class="hero-sub">Alla bra relationer kräver fungerande kommunikation. Särskilt när IT och OT ska prata med varandra.</p>
+
+                    <div class="hero-body">
+                        <p>Grunden i alla starka relationer är tydlig kommunikation. Det gäller i allra högsta grad mellan komplexa system. När IT och produktion slutar förstå varandra, går jag in som en förenande länk. Jag kartlägger bristerna och bygger broarna som får din teknik att samverka friktionsfritt igen. För i en bransch där systemintegration ofta handlar om att sälja in stora plattformar och låsa in kunden, <span class="emph">vill jag vara en prestigelös motreaktion.</span></p>
+                        <p>Med lång erfarenhet och skräddarsydda lösningar där du själv äger koden är Carlboms Data din relationsexpert som bygger broar mellan system.</p>
+                    </div>
+                </div>
+
+                <div class="hero-art" aria-hidden="true">
+                    <div class="hero-equation" role="img" aria-label="IT och OT är lika med True">
+                        <span>IT</span>
+                        <span class="eq-op">&amp;</span>
+                        <span>OT == True</span>
+                    </div>
+                </div>
+            </div>
+
+            <h3 class="usp-heading">Därför ska du välja Carlboms Data:</h3>
+            <div class="usp-grid">
+                <div class="usp-card">
+                    <div class="usp-icon" aria-hidden="true">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M8 3H5a2 2 0 0 0-2 2v3"/><path d="M21 8V5a2 2 0 0 0-2-2h-3"/><path d="M3 16v3a2 2 0 0 0 2 2h3"/><path d="M16 21h3a2 2 0 0 0 2-2v-3"/><path d="M9 12h6"/></svg>
+                    </div>
+                    <h3>Teknisk medlare mellan IT och OT</h3>
+                    <p>Jag hjälper dig att bryta ner silotänkandet och bygga säkra integrationer som möter både produktionens realtidsstrikta krav och IT-sidans säkerhetsprotokoll.</p>
+                </div>
+                <div class="usp-card">
+                    <div class="usp-icon" aria-hidden="true">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="16 18 22 12 16 6"/><polyline points="8 6 2 12 8 18"/></svg>
+                    </div>
+                    <h3>Skräddarsydd arkitektur med öppen källkod</h3>
+                    <p>Äkta relationer bygger på frihet. Därför undviker jag proprietära ”svarta lådor” och skapar transparenta lösningar där du alltid äger din egen kod.</p>
+                </div>
+                <div class="usp-card">
+                    <div class="usp-icon" aria-hidden="true">
+                        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
+                    </div>
+                    <h3>Agilt och personligt</h3>
+                    <p>Med Carlboms Data får du korta beslutsvägar och direktkontakt med experten. Inga juniora konsulter eller byråkratiska startsträckor. Tillsammans börjar vi lösa problemet direkt.</p>
+                </div>
+            </div>
+
+            <div class="cta-row">
+                <a href="#kontakt" class="btn btn-primary">
+                    Boka ett förutsättningslöst rådgivningssamtal
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                </a>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ ERBJUDANDE ============ -->
+    <section id="erbjudande" class="alt dotted">
+        <div class="container">
+            <h2>Jag får din teknik att tala samma språk</h2>
+
+            <div class="block">
+                <h3>Så här hjälper jag dig:</h3>
+                <p class="lede">När äldre maskinparker ska kopplas upp mot moderna molntjänster eller affärssystem uppstår ofta friktion och kostsamma stopp. Med Carlboms Data får du en oberoende part som bygger det mellanlager (middleware) som saknas. Som analyserar, tolkar och översätter data mellan dina maskiner (OT) och dina affärssystem (IT). Genom robust systemintegration skapar jag en stabil arkitektur där informationen flödar precis som den ska, dygnet runt.</p>
+            </div>
+
+            <div class="block">
+                <h3>Mina kompetensområden:</h3>
+                <p class="lede">Carlboms Data kombinerar djup teknisk förståelse för hårdvara med modern mjukvaruutveckling inom:</p>
+                <div class="competence-grid">
+                    <div class="comp-card">
+                        <div class="comp-icon" aria-hidden="true">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="2"/><path d="M12 2v4"/><path d="M12 18v4"/><path d="M4.93 4.93l2.83 2.83"/><path d="M16.24 16.24l2.83 2.83"/><path d="M2 12h4"/><path d="M18 12h4"/><path d="M4.93 19.07l2.83-2.83"/><path d="M16.24 7.76l2.83-2.83"/></svg>
+                        </div>
+                        <strong>Systemintegration</strong>
+                        <p>API-utveckling, databashantering (SQL) och backend-skript.</p>
+                    </div>
+                    <div class="comp-card">
+                        <div class="comp-icon" aria-hidden="true">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M7 20h10"/><path d="M12 16v4"/><circle cx="8.5" cy="10" r="1.5"/><circle cx="15.5" cy="10" r="1.5"/><path d="M10 10h4"/></svg>
+                        </div>
+                        <strong>Automation &amp; PLC</strong>
+                        <p>Djup kunskap om hur styrsystem från bland annat Siemens, ABB och Mitsubishi kommunicerar.</p>
+                    </div>
+                    <div class="comp-card">
+                        <div class="comp-icon" aria-hidden="true">
+                            <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12a7 7 0 0 1 14 0"/><path d="M8.5 12a3.5 3.5 0 0 1 7 0"/><circle cx="12" cy="12" r="1" fill="currentColor"/><path d="M12 19v2"/><path d="M9 21h6"/></svg>
+                        </div>
+                        <strong>Industri 4.0 och IoT</strong>
+                        <p>Säker uppkoppling av produktionsdata för analys och övervakning.</p>
+                    </div>
+                </div>
+            </div>
+
+            <div class="block">
+                <h3>Språken jag talar:</h3>
+                <p class="lede">Oavsett om dina system kommunicerar via Modbus, OPC UA, MQTT, REST, JSON eller äldre seriella protokoll, ser jag till att datan struktureras och landar rätt.</p>
+
+                <span class="chip-label">Programmeringsspråk</span>
+                <div class="chips">
+                    <span class="chip chip-primary">Python</span>
+                    <span class="chip chip-primary">C#</span>
+                    <span class="chip chip-primary">JavaScript</span>
+                    <span class="chip chip-primary">SQL</span>
+                </div>
+
+                <span class="chip-label">Kommunikationsprotokoll</span>
+                <div class="chips">
+                    <span class="chip chip-secondary">Modbus</span>
+                    <span class="chip chip-secondary">OPC UA</span>
+                    <span class="chip chip-secondary">MQTT</span>
+                    <span class="chip chip-secondary">REST</span>
+                    <span class="chip chip-secondary">JSON</span>
+                    <span class="chip chip-secondary">Seriella protokoll</span>
+                </div>
+            </div>
+
+            <div class="block">
+                <h3>Carlbom Datas metod för lyckad systemintegration:</h3>
+                <p class="lede">Jag har en beprövad process i fyra steg för att säkerställa att din produktion aldrig äventyras:</p>
+                <div class="steps">
+                    <div class="step">
+                        <strong>Analys &amp; Arkitektur</strong>
+                        <p>Jag börjar med att kartlägga din systemtopologi och befintliga protokoll. Sedan definierar jag brister och designar en säker lösning som inte belastar dina existerande system.</p>
+                    </div>
+                    <div class="step">
+                        <strong>Integration &amp; Utveckling</strong>
+                        <p>Själva hantverket. Jag bygger den logik, de skript och de broar som krävs för att systemen ska kunna utbyta data sömlöst och autonomt.</p>
+                    </div>
+                    <div class="step">
+                        <strong>Stresstestning i trygg miljö</strong>
+                        <p>För att garantera noll stopptid verifierar och stresstestar jag alltid integrationen noggrant innan den driftsätts i din skarpa produktionsmiljö.</p>
+                    </div>
+                    <div class="step">
+                        <strong>Överlämning (inkl. källkod)</strong>
+                        <p>När relationen mellan systemen är på plats får du full dokumentation. När du anlitar Carlboms Data finns inga inlåsningseffekter. Du äger alltid lösningen och källkoden fullt ut.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ REFERENSER ============ -->
+    <section id="referenser">
+        <div class="container">
+            <h2>När systemen hittade tillbaka till varandra</h2>
+            <p class="lede">Med en gedigen erfarenhet av komplex systemintegration vet jag exakt vad som krävs för att bygga broar som håller över tid. För mig handlar det inte bara om att skriva kod som fungerar problemfritt i bakgrunden, utan om att leverera skräddarsydda lösningar som skapar verkligt värde för din verksamhet i form av minskat krångel, färre produktionsstopp och frigjord tid.</p>
+            <p class="lede">Här är några exempel på hur Carlboms Data har hjälpt isolerad teknik att börja samarbeta på riktigt.</p>
+
+            <div class="cases">
+                <article class="case">
+                    <div class="case-icon" aria-hidden="true">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M1 17h2l2-8h10l2 4h4v4h-2"/><circle cx="7" cy="18" r="2"/><circle cx="18" cy="18" r="2"/><path d="M9 17h6"/></svg>
+                    </div>
+                    <div class="case-body">
+                        <h3>Full koll på tunga fordon</h3>
+                        <p>Ute i gruvor och smältverk skulle nya tunga fordon driftsättas, och kunden ville ha digital övervakning på plats från start — både för att följa fordonens driftstatus i realtid och för att logga deras beteende över tid. Carlboms Data byggde ett säkert webbaserat övervaknings- och loggersystem där driftstatus nås direkt i webbläsaren oavsett var man befinner sig. Resultatet blev att problem kunde fångas upp långt innan de förvandlades till kostsamma produktionsstopp, och att all driftdata loggades säkert för analys och uppföljning.</p>
+                    </div>
+                </article>
+                <article class="case">
+                    <div class="case-icon" aria-hidden="true">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h10"/><polyline points="10,4 13,7 10,10"/><path d="M21 17H11"/><polyline points="14,20 11,17 14,14"/></svg>
+                    </div>
+                    <div class="case-body">
+                        <h3>Smidigare dataflöden utan handpåläggning</h3>
+                        <p>En kund matade manuellt in data från flera produktionssystem i affärssystemet — en tidskrävande process där fel lätt smög sig in i siffrorna. Carlboms Data kopplade ihop produktionssystemen med affärssystemet så att data nu flödar helt automatiskt och utan mellanhänder. Rapporter som tidigare tog timmar att ställa samman genereras idag på sekunder, med betydligt färre fel.</p>
+                    </div>
+                </article>
+                <article class="case">
+                    <div class="case-icon" aria-hidden="true">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="13" rx="2"/><line x1="8" y1="21" x2="16" y2="21"/><line x1="12" y1="17" x2="12" y2="21"/><path d="M8 10a4 4 0 0 1 8 0" opacity="0.6"/><circle cx="12" cy="11" r="1" fill="currentColor"/></svg>
+                    </div>
+                    <div class="case-body">
+                        <h3>Närhet på distans för snabbare felsökning</h3>
+                        <p>Hos kunder inom vindkraft och stenkross krävdes tidigare en tekniker på plats ute på anläggningen varje gång utrustningen behövde felsökas — både tidskrävande och kostsamt. Carlboms Data installerade en säker fjärranslutning som ger teknikerna full åtkomst till utrustningen direkt från kontoret eller hemifrån. En felsökning som tidigare krävde en hel resdag tar nu en kvart.</p>
+                    </div>
+                </article>
+                <article class="case">
+                    <div class="case-icon" aria-hidden="true">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><path d="M20.59 13.41L13.42 20.58a2 2 0 0 1-2.83 0L2 12V2h10l8.59 8.59a2 2 0 0 1 0 2.82z"/><circle cx="7" cy="7" r="1.5" fill="currentColor"/></svg>
+                    </div>
+                    <div class="case-body">
+                        <h3>Rätt etikett på rätt plats – varje gång</h3>
+                        <p>På en fabrik hos ett större tillverkande bolag var etikettsystemet utdaterat och mycket kostsamt att vidareutveckla. Carlboms Data byggde ett nytt integrerat system som automatiskt hämtar rätt information och skriver ut rätt etikett oavsett produkttyp — med en modern och helt öppen kodbas som kunden äger fullt ut.</p>
+                    </div>
+                </article>
+                <article class="case">
+                    <div class="case-icon" aria-hidden="true">
+                        <svg width="26" height="26" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10"/><path d="M20.49 15A9 9 0 0 1 5.64 18.36L1 14"/></svg>
+                    </div>
+                    <div class="case-body">
+                        <h3>Nytt liv i gamla styrsystem</h3>
+                        <p>En kabeltillverkare hade ett egenutvecklat styrsystem som över tid blivit så långsamt att det började bromsa produktionen. Istället för att byta ut hela systemet gick Carlboms Data in och optimerade den befintliga koden från grunden. Styrsystemet blev snabbt och responsivt igen, och kunden sparar idag flera timmar varje dag.</p>
+                    </div>
+                </article>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ OM ============ -->
+    <section id="om" class="alt">
+        <div class="container">
+            <h2>Den personliga länken i din systempark</h2>
+            <div class="om-wrap">
+                <div class="om-body">
+                    <p>Jag startade Carlboms Data med en enkel idé: att skapa bra relationer både mellan systemen och med mina kunder. I en bransch där systemintegration ofta handlar om att sälja in stora plattformar och låsa in kunden, <span class="emph">ville jag vara en prestigelös motreaktion.</span></p>
+
+                    <p>Det är därför jag bygger broar med robusta, skräddarsydda lösningar som håller över tid. Och det är därför jag alltid låter dig äga koden.</p>
+
+                    <p>För mig är integritet allt. Din data är trygg hos mig och jag lämnar aldrig ett uppdrag förrän jag vet att relationen mellan dina system fungerar felfritt.</p>
+
+                    <p>Jag är den oberoende experten som säkerställer att din teknik samverkar oavsett plattform. Men jag ger dig också det där speciella engagemanget som du bara kan få när du ringer direkt till den som gör jobbet.</p>
+                </div>
+
+                <div>
+                    <figure class="om-photo">
+                        <img src="DSC_5078_low.jpeg" alt="Tobias Carlbom, grundare av Carlboms Data" />
+                    </figure>
+                    <p class="om-caption">Tobias Carlbom, grundare</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ============ KONTAKT ============ -->
+    <section id="kontakt">
+        <div class="container">
+            <h2>Låt oss prata</h2>
+            <p class="lede">Berätta om ditt uppdrag, så hör jag av mig för ett förutsättningslöst rådgivningsmöte. Carlboms Data är baserat i Lund, men bygger integrationer och broar oavsett var du befinner dig.</p>
+
+            <div class="contact-wrap">
+                <form class="contact-form" id="contactForm" novalidate>
+                    <h3>Berätta om ditt uppdrag</h3>
+
+                    <label>
+                        Ditt namn
+                        <input type="text" name="namn" required autocomplete="name" />
+                    </label>
+                    <label>
+                        Din e-post
+                        <input type="email" name="email" required autocomplete="email" />
+                    </label>
+                    <label>
+                        Företag <span style="font-weight:400;color:var(--text-muted);">(valfritt)</span>
+                        <input type="text" name="foretag" autocomplete="organization" />
+                    </label>
+                    <label>
+                        Beskriv din utmaning
+                        <textarea name="meddelande" required rows="5"></textarea>
+                    </label>
+
+                    <!-- Honeypot-fält: gömt för människor, bots fyller i det -->
+                    <input type="text" name="website" tabindex="-1" autocomplete="off" aria-hidden="true" style="position:absolute;left:-9999px;width:1px;height:1px;" />
+
+                    <button type="submit" class="btn btn-primary" id="submitBtn">
+                        <span class="btn-label">Skicka</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+                    </button>
+                    <span class="form-status" id="formStatus" aria-live="polite"></span>
+                </form>
+
+                <aside class="contact-alt">
+                    <h4>Eller ta kontakt direkt</h4>
+                    <div class="contact-alt-item">
+                        <div class="contact-alt-icon" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+                        </div>
+                        <a href="mailto:hello@carlbomsdata.se">hello@carlbomsdata.se</a>
+                    </div>
+                    <div class="contact-alt-item">
+                        <div class="contact-alt-icon" aria-hidden="true">
+                            <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/><circle cx="12" cy="10" r="3"/></svg>
+                        </div>
+                        <span class="location">Linerovägen 24 B, 224 75 Lund</span>
+                    </div>
+
+                    <div class="business-info">
+                        <h5>Bolagsinformation</h5>
+                        <dl>
+                            <dt>Bolag</dt><dd>Carlboms Data AB</dd>
+                            <dt>Org.nr</dt><dd>559494-0461</dd>
+                            <dt>Momsreg.nr</dt><dd>SE559494046101</dd>
+                            <dt>F-skatt</dt><dd>Godkänd</dd>
+                        </dl>
+                    </div>
+                </aside>
+            </div>
+        </div>
+    </section>
+
+</main>
+
+<footer class="site-footer">
+    <div class="container foot-inner">
+        <span>© <span id="year">2026</span> Carlboms Data AB</span>
+        <span class="foot-sep">·</span>
+        <span>Org.nr: 559494-0461</span>
+        <span class="foot-sep">·</span>
+        <span>Godkänd för F-skatt</span>
+    </div>
+</footer>
+
+<script>
+(function () {
+    'use strict';
+
+    var nav = document.getElementById('siteNav');
+    var navToggle = document.getElementById('navToggle');
+    var mainNav = document.getElementById('mainNav');
+    var navLinks = mainNav.querySelectorAll('a');
+    var sections = document.querySelectorAll('main section[id]');
+
+    // Sticky nav shadow on scroll
+    function onScroll() {
+        if (window.scrollY > 4) {
+            nav.classList.add('scrolled');
+        } else {
+            nav.classList.remove('scrolled');
+        }
+    }
+    window.addEventListener('scroll', onScroll, { passive: true });
+    onScroll();
+
+    // Mobile menu toggle
+    navToggle.addEventListener('click', function () {
+        var open = mainNav.classList.toggle('open');
+        navToggle.classList.toggle('open', open);
+        navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+    });
+
+    // Close mobile menu when a link is clicked
+    navLinks.forEach(function (link) {
+        link.addEventListener('click', function () {
+            mainNav.classList.remove('open');
+            navToggle.classList.remove('open');
+            navToggle.setAttribute('aria-expanded', 'false');
+        });
+    });
+
+    // Active section highlighting
+    if ('IntersectionObserver' in window) {
+        var observer = new IntersectionObserver(function (entries) {
+            entries.forEach(function (entry) {
+                if (entry.isIntersecting) {
+                    var id = entry.target.getAttribute('id');
+                    navLinks.forEach(function (l) {
+                        l.classList.toggle('active', l.getAttribute('href') === '#' + id);
+                    });
+                }
+            });
+        }, { rootMargin: '-40% 0px -55% 0px', threshold: 0 });
+
+        sections.forEach(function (s) { observer.observe(s); });
+    }
+
+    // Current year in footer
+    var yearEl = document.getElementById('year');
+    if (yearEl) { yearEl.textContent = new Date().getFullYear(); }
+
+    // Contact form — submits to Anvil.works endpoint
+    var FORM_ENDPOINT = 'https://carlbomsdata-form-submission.anvil.app/_/api/contact';
+
+    var form = document.getElementById('contactForm');
+    var status = document.getElementById('formStatus');
+    var submitBtn = document.getElementById('submitBtn');
+
+    if (form) {
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+            var data = new FormData(form);
+            var payload = {
+                namn: (data.get('namn') || '').trim(),
+                email: (data.get('email') || '').trim(),
+                foretag: (data.get('foretag') || '').trim(),
+                meddelande: (data.get('meddelande') || '').trim(),
+                website: (data.get('website') || '').trim()
+            };
+
+            if (!payload.namn || !payload.email || !payload.meddelande) {
+                status.textContent = 'Fyll i namn, e-post och meddelande.';
+                status.className = 'form-status';
+                return;
+            }
+
+            status.textContent = 'Skickar…';
+            status.className = 'form-status';
+            submitBtn.disabled = true;
+
+            try {
+                var res = await fetch(FORM_ENDPOINT, {
+                    method: 'POST',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(payload)
+                });
+                var result = await res.json();
+                if (res.ok && result.ok) {
+                    form.reset();
+                    status.textContent = 'Tack! Jag hör av mig inom kort.';
+                    status.className = 'form-status success';
+                } else {
+                    status.textContent = result.error || 'Något gick fel. Prova mejla hello@carlbomsdata.se istället.';
+                    status.className = 'form-status';
+                }
+            } catch (err) {
+                status.textContent = 'Kunde inte nå servern. Prova mejla hello@carlbomsdata.se istället.';
+                status.className = 'form-status';
+            } finally {
+                submitBtn.disabled = false;
+            }
+        });
+    }
+})();
+</script>
+
+</body>
+</html>
