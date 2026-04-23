@@ -759,7 +759,7 @@ a.usp-card:hover h3 {
 /* ===== PUZZLE (landing — competence areas) ===== */
 .puzzle-wrap {
     margin: 56px auto 0;
-    max-width: 700px;
+    max-width: 780px;
     text-align: center;
 }
 .puzzle-heading {
@@ -777,8 +777,8 @@ a.usp-card:hover h3 {
     gap: 14px;
 }
 .puzzle-piece {
-    width: 140px;
-    height: 140px;
+    width: 170px;
+    height: 170px;
     flex-shrink: 0;
 }
 .puzzle-piece svg {
@@ -820,3 +820,13 @@ a.usp-card:hover h3 {
 .ref-hero h1 {
     margin-top: 0;
 }
+
+/* ===== STICKY FOOTER — footer always at viewport bottom when content is short ===== */
+html, body { height: 100%; }
+body {
+    min-height: 100vh;
+    display: flex;
+    flex-direction: column;
+}
+main { flex: 1 0 auto; }
+footer.site-footer { flex-shrink: 0; }
