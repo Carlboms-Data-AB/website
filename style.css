@@ -734,7 +734,7 @@ a.usp-card:hover,
 a.usp-card:active,
 a.usp-card h3,
 a.usp-card p {
-    text-decoration: none;
+    text-decoration: none !important;
 }
 a.usp-card {
     color: inherit;
@@ -784,13 +784,13 @@ a.usp-card:hover h3 {
     height: auto;
     overflow: visible;
 }
-.puzzle .pz path {
+.puzzle .pz > path {
     fill: var(--bg-alt);
     stroke: var(--border);
     stroke-width: 1.5;
     transition: fill 0.2s ease, stroke 0.2s ease;
 }
-.puzzle .pz:hover path {
+.puzzle .pz:hover > path {
     fill: rgba(230, 57, 70, 0.06);
     stroke: var(--accent);
 }
