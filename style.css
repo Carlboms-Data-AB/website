@@ -804,6 +804,17 @@ a.usp-card:hover h3 {
     letter-spacing: 0.04em;
     pointer-events: none;
 }
+.puzzle .pz .ic {
+    color: var(--text-muted);
+    stroke: currentColor;
+    stroke-width: 1.5;
+    fill: none;
+    pointer-events: none;
+    transition: color 0.2s ease;
+}
+.puzzle .pz:hover .ic {
+    color: var(--accent);
+}
 
 /* ===== REFERENSER hero ===== */
 .ref-hero {
