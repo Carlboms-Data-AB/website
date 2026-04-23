@@ -727,8 +727,16 @@
     </style>
 
 /* ===== CLICKABLE NAV CARDS (landing page) ===== */
-a.usp-card {
+a.usp-card,
+a.usp-card:link,
+a.usp-card:visited,
+a.usp-card:hover,
+a.usp-card:active,
+a.usp-card h3,
+a.usp-card p {
     text-decoration: none;
+}
+a.usp-card {
     color: inherit;
     display: block;
     transition: transform 0.15s ease, box-shadow 0.15s ease, border-color 0.15s ease;
@@ -756,10 +764,10 @@ a.usp-card:hover h3 {
     margin-right: auto;
 }
 
-/* ===== PUZZLE (landing — competence areas) ===== */
+/* ===== PUZZLE (landing — competence areas, interlocking 4x3) ===== */
 .puzzle-wrap {
     margin: 56px auto 0;
-    max-width: 780px;
+    max-width: 720px;
     text-align: center;
 }
 .puzzle-heading {
@@ -771,35 +779,24 @@ a.usp-card:hover h3 {
     margin-bottom: 28px;
 }
 .puzzle {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
-    gap: 14px;
-}
-.puzzle-piece {
-    width: 170px;
-    height: 170px;
-    flex-shrink: 0;
-}
-.puzzle-piece svg {
-    width: 100%;
-    height: 100%;
-    overflow: visible;
     display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
 }
-.puzzle-piece path {
+.puzzle .pz path {
     fill: var(--bg-alt);
     stroke: var(--border);
     stroke-width: 1.5;
     transition: fill 0.2s ease, stroke 0.2s ease;
 }
-.puzzle-piece:hover path {
+.puzzle .pz:hover path {
     fill: rgba(230, 57, 70, 0.06);
     stroke: var(--accent);
 }
-.puzzle-piece text {
+.puzzle .pz text {
     font-family: 'Inter', sans-serif;
-    font-size: 13px;
+    font-size: 11px;
     font-weight: 700;
     fill: var(--primary);
     text-anchor: middle;
