@@ -764,10 +764,10 @@ a.usp-card:hover h3 {
     margin-right: auto;
 }
 
-/* ===== PUZZLE (landing — competence areas, interlocking 4x3) ===== */
+/* ===== PUZZLE (landing — competence areas, separated tiles) ===== */
 .puzzle-wrap {
     margin: 56px auto 0;
-    max-width: 720px;
+    max-width: 780px;
     text-align: center;
 }
 .puzzle-heading {
@@ -779,22 +779,33 @@ a.usp-card:hover h3 {
     margin-bottom: 28px;
 }
 .puzzle {
-    display: block;
-    width: 100%;
-    height: auto;
-    overflow: visible;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 16px;
 }
-.puzzle .pz > path {
+.puzzle-piece {
+    width: 170px;
+    height: 170px;
+    flex-shrink: 0;
+}
+.puzzle-piece svg {
+    width: 100%;
+    height: 100%;
+    overflow: visible;
+    display: block;
+}
+.puzzle-piece > svg > path {
     fill: var(--bg-alt);
     stroke: var(--border);
     stroke-width: 1.5;
     transition: fill 0.2s ease, stroke 0.2s ease;
 }
-.puzzle .pz:hover > path {
+.puzzle-piece:hover > svg > path {
     fill: rgba(230, 57, 70, 0.06);
     stroke: var(--accent);
 }
-.puzzle .pz text {
+.puzzle-piece text {
     font-family: 'Inter', sans-serif;
     font-size: 11px;
     font-weight: 700;
@@ -804,7 +815,7 @@ a.usp-card:hover h3 {
     letter-spacing: 0.04em;
     pointer-events: none;
 }
-.puzzle .pz .ic {
+.puzzle-piece .ic {
     color: var(--text-muted);
     stroke: currentColor;
     stroke-width: 1.5;
@@ -812,7 +823,7 @@ a.usp-card:hover h3 {
     pointer-events: none;
     transition: color 0.2s ease;
 }
-.puzzle .pz:hover .ic {
+.puzzle-piece:hover .ic {
     color: var(--accent);
 }
 
