@@ -744,3 +744,44 @@ a.usp-card h3 {
 a.usp-card:hover h3 {
     color: var(--accent);
 }
+
+/* ===== PUZZLE (landing — competence areas) ===== */
+.puzzle-wrap {
+    margin: 56px auto 0;
+    max-width: 680px;
+    text-align: center;
+}
+.puzzle-heading {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+    color: var(--text-muted);
+    font-weight: 600;
+    margin-bottom: 24px;
+}
+.puzzle {
+    width: 100%;
+    height: auto;
+    overflow: visible;
+    display: block;
+}
+.puzzle .pz path {
+    fill: var(--bg-alt);
+    stroke: var(--border);
+    stroke-width: 1.5;
+    transition: fill 0.15s ease, stroke 0.15s ease;
+}
+.puzzle .pz:hover path {
+    fill: rgba(230, 57, 70, 0.06);
+    stroke: var(--accent);
+}
+.puzzle .pz text {
+    font-family: 'Inter', sans-serif;
+    font-size: 11px;
+    font-weight: 700;
+    fill: var(--primary);
+    text-anchor: middle;
+    dominant-baseline: middle;
+    letter-spacing: 0.04em;
+    pointer-events: none;
+}
