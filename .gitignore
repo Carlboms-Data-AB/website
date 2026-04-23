@@ -24,3 +24,7 @@ Thumbs.db
 *~
 .vscode/
 .idea/
+
+# Debug/testing screenshots — endast lokalt
+_debug_images/
+debug/
