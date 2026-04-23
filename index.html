@@ -672,12 +672,14 @@
 
         /* ===== RESPONSIVE ===== */
         @media (max-width: 1050px) {
-            .hero-grid { grid-template-columns: 1fr; gap: 24px; }
-            .hero-art { order: -1; margin: 0 auto; padding: 8px 0 24px; }
-            .om-wrap { grid-template-columns: 1fr; gap: 32px; max-width: 520px; margin: 0 auto; }
-        }
-
-        @media (max-width: 860px) {
+            .hero-grid { grid-template-columns: 1fr; gap: 20px; }
+            .hero-art {
+                order: -1;
+                margin: 0;
+                padding: 4px 0 16px;
+                justify-content: flex-start;
+            }
+            .om-wrap { grid-template-columns: 1fr; gap: 32px; max-width: 640px; margin: 0 auto; }
             .usp-grid, .competence-grid, .steps, .contact-wrap {
                 grid-template-columns: 1fr;
             }
@@ -847,7 +849,7 @@
 
             <div class="block">
                 <h3>Språken jag talar:</h3>
-                <p class="lede">Oavsett om dina system kommunicerar via Modbus, OPC UA, MQTT, REST, JSON eller äldre seriella protokoll, ser jag till att datan struktureras och landar rätt.</p>
+                <p class="lede">Oavsett vilket protokoll dina system kommunicerar via, ser jag till att datan struktureras och landar rätt.</p>
 
                 <span class="chip-label">Programmeringsspråk</span>
                 <div class="chips">
@@ -855,16 +857,6 @@
                     <span class="chip chip-primary">C#</span>
                     <span class="chip chip-primary">JavaScript</span>
                     <span class="chip chip-primary">SQL</span>
-                </div>
-
-                <span class="chip-label">Kommunikationsprotokoll</span>
-                <div class="chips">
-                    <span class="chip chip-secondary">Modbus</span>
-                    <span class="chip chip-secondary">OPC UA</span>
-                    <span class="chip chip-secondary">MQTT</span>
-                    <span class="chip chip-secondary">REST</span>
-                    <span class="chip chip-secondary">JSON</span>
-                    <span class="chip chip-secondary">Seriella protokoll</span>
                 </div>
             </div>
 
