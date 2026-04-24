@@ -976,13 +976,13 @@ a.usp-card:hover h3 {
     .skills-grid {
         grid-template-columns: repeat(3, 1fr);
     }
-    .services-preview {
-        grid-template-columns: repeat(2, 1fr);
-    }
 }
 @media (max-width: 820px) {
     .case-grid {
         grid-template-columns: 1fr;
+    }
+    .services-preview {
+        grid-template-columns: repeat(2, 1fr);
     }
 }
 @media (max-width: 640px) {
@@ -990,7 +990,7 @@ a.usp-card:hover h3 {
         grid-template-columns: repeat(2, 1fr);
     }
 }
-@media (max-width: 520px) {
+@media (max-width: 480px) {
     .services-preview {
         grid-template-columns: 1fr;
     }
