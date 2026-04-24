@@ -724,7 +724,6 @@
         a { color: var(--accent); text-decoration: none; }
         a:hover { color: var(--accent-dark); }
         ::selection { background: rgba(230, 57, 70, 0.2); }
-    </style>
 
 /* ===== CLICKABLE NAV CARDS (landing page) ===== */
 a.usp-card,
