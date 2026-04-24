@@ -8,6 +8,7 @@ memory/
 index_v3.html
 index_utkast1.html
 carlbomsdata-v2.md
+webbtexter-underlag.md
 
 # Backend (ligger på Anvil.works, ska inte i publika repo)
 anvil_server.py
