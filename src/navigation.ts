@@ -29,7 +29,7 @@ export const footerData = {
       links: [
         { text: 'Systemintegration', href: getPermalink('/tjanster') },
         { text: 'Automation & PLC', href: getPermalink('/tjanster') },
-        { text: 'Industri 4.0 & IoT', href: getPermalink('/tjanster') },
+        { text: 'HMI, SCADA & övervakning', href: getPermalink('/tjanster') },
       ],
     },
     {
@@ -43,7 +43,7 @@ export const footerData = {
   ],
   secondaryLinks: [],
   socialLinks: [
-    { ariaLabel: 'LinkedIn', icon: 'tabler:brand-linkedin', href: '#' },
+    { ariaLabel: 'LinkedIn', icon: 'tabler:brand-linkedin', href: 'https://www.linkedin.com/company/carlboms-data-ab' },
   ],
   footNote: `
     &copy; ${new Date().getFullYear()} Carlboms Data AB · Org.nr 559494-0461 · Baserat i Lund

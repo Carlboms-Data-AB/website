@@ -23,8 +23,8 @@ const metadata = {
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Systemintegration mellan IT och OT',
+      src: 'https://images.unsplash.com/photo-1558618666-fcd25c85f82e?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Industriellt nätverk och kablar',
     }}
   >
     <Fragment slot="title">
@@ -41,8 +41,8 @@ const metadata = {
     title="Jag bygger broar mellan system"
     items={[]}
     image={{
-      src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Systemintegration',
+      src: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Industriell produktion',
     }}
   >
     <Fragment slot="content">
@@ -62,8 +62,55 @@ const metadata = {
     </Fragment>
   </Content>
 
+  <!-- Teknisk sektion: vad jag faktiskt gör -->
   <Features
-    id="usps"
+    id="vad-jag-gor"
+    tagline="Konkret"
+    title="Det här gör jag"
+    subtitle="Jag bygger mellanlagret som saknas — den logik och de kopplingar som krävs för att era system ska utbyta data sömlöst."
+    items={[
+      {
+        title: 'Systemintegration OT/IT',
+        description:
+          'Kopplar samman PLC, SCADA och maskiner med affärssystem, databaser och molntjänster. API-utveckling, middleware och dataflöden.',
+        icon: 'tabler:plug-connected',
+      },
+      {
+        title: 'Automation & PLC-programmering',
+        description:
+          'Programmering och optimering av styrsystem med CODESYS — leverantörsoberoende och portabelt.',
+        icon: 'tabler:cpu',
+      },
+      {
+        title: 'HMI, SCADA & övervakning',
+        description:
+          'Operatörsgränssnitt, SCADA och realtidsövervakning. CODESYS, WinCC, WideQuick, FUXA och egenutvecklade webbaserade gränssnitt med larmhantering.',
+        icon: 'tabler:device-desktop-analytics',
+      },
+      {
+        title: 'Mjukvaruutveckling',
+        description:
+          'C#/.NET, Python, T-SQL, CODESYS Structured Text, JavaScript, Flux, HTML/CSS. Backend-tjänster, databearbetning och webbaserade verktyg.',
+        icon: 'tabler:code',
+      },
+      {
+        title: 'Säker fjärråtkomst',
+        description:
+          'VPN-lösningar, nätverkssegmentering och fjärranslutning till industriella anläggningar — felsök utan att vara på plats.',
+        icon: 'tabler:network',
+      },
+      {
+        title: 'Felsökning & optimering',
+        description:
+          'Diagnostik och prestandaoptimering av befintliga system — PLC-logik, nätverkskonfiguration, databaser och applikationskod.',
+        icon: 'tabler:bug',
+      },
+    ]}
+  />
+
+  <!-- Varför Carlboms Data (copywriterns USP:ar) -->
+  <Content
+    isReversed
     tagline="Därför Carlboms Data"
     title="Tre skäl att välja mig"
     items={[
@@ -71,22 +118,27 @@ const metadata = {
         title: 'Teknisk medlare mellan IT och OT',
         description:
           'Jag hjälper dig att bryta ner silotänkandet och bygga säkra integrationer som möter både produktionens realtidsstrikta krav och IT-sidans säkerhetsprotokoll.',
-        icon: 'tabler:plug-connected',
       },
       {
-        title: 'Skräddarsytt med öppen källkod',
+        title: 'Inga inlåsningar — du äger koden',
         description:
           'Äkta relationer bygger på frihet. Därför undviker jag proprietära "svarta lådor" och skapar transparenta lösningar där du alltid äger din egen kod.',
-        icon: 'tabler:lock-open',
       },
       {
         title: 'Agilt och personligt',
         description:
-          'Med Carlboms Data får du korta beslutsvägar och direktkontakt med experten. Inga juniora konsulter eller byråkratiska startsträckor. Tillsammans börjar vi lösa problemet direkt.',
-        icon: 'tabler:user-check',
+          'Korta beslutsvägar och direktkontakt med experten. Inga juniora konsulter eller byråkratiska startsträckor. Vi börjar lösa problemet direkt.',
       },
     ]}
-  />
+    image={{
+      src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Samarbete och teknik',
+    }}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
 
   <CallToAction
     actions={[
@@ -99,7 +151,7 @@ const metadata = {
     ]}
   >
     <Fragment slot="title">
-      Dags att lösa fnurran<br class="block sm:hidden" /> på tråden?
+      Låt oss prata
     </Fragment>
 
     <Fragment slot="subtitle">
