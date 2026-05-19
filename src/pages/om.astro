@@ -1,4 +1,5 @@
 ---
+import Content from '~/components/widgets/Content.astro';
 import Features2 from '~/components/widgets/Features2.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Steps2 from '~/components/widgets/Steps2.astro';
@@ -6,47 +7,85 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import Layout from '~/layouts/PageLayout.astro';
 
 const metadata = {
-  title: 'Om oss',
+  title: 'Om Carlboms Data',
 };
 ---
 
 <Layout metadata={metadata}>
   <Hero
-    tagline="Om oss"
+    tagline="Om Carlboms Data"
     image={{
       src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Carlboms Data AB',
+      alt: 'Carlboms Data',
     }}
   >
     <Fragment slot="title">
-      Teknik som fungerar<br />
-      <span class="text-accent">i verkligheten</span>
+      Den personliga länken <span class="text-accent">i din systempark</span>
     </Fragment>
 
     <Fragment slot="subtitle">
-      Carlboms Data AB är ett konsultbolag specialiserat på mjukvara för industri och automation.
-      Vi kombinerar djup teknisk kunskap med förståelse för de verksamheter vi jobbar med — och
-      levererar lösningar som faktiskt används.
+      Jag startade Carlboms Data med en enkel idé: att skapa bra relationer — både
+      mellan systemen och med mina kunder. I en bransch där systemintegration ofta handlar om att
+      sälja in stora plattformar och låsa in kunden, ville jag vara en prestigelös motreaktion.
     </Fragment>
   </Hero>
 
+  <Content
+    tagline="Min filosofi"
+    items={[]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
+      alt: 'Tobias Carlbom',
+    }}
+  >
+    <Fragment slot="content">
+      <p class="text-lg text-muted mb-4">
+        Det är därför jag bygger broar med robusta, skräddarsydda lösningar som håller över tid.
+        Och det är därför jag alltid låter dig äga koden.
+      </p>
+      <p class="text-lg text-muted mb-4">
+        För mig är integritet allt. Din data är trygg hos mig och jag lämnar aldrig ett uppdrag
+        förrän jag vet att relationen mellan dina system fungerar felfritt.
+      </p>
+      <p class="text-lg text-muted">
+        Jag är den oberoende experten som säkerställer att din teknik samverkar oavsett plattform.
+        Men jag ger dig också det där speciella engagemanget som du bara kan få när du ringer
+        direkt till den som gör jobbet.
+      </p>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
   <Steps2
-    title="Det här driver oss"
+    title="Varumärkesvärden"
+    subtitle="Fyra ord som definierar Carlboms Data."
     items={[
       {
-        title: 'Lösa riktiga problem',
+        title: 'Integritet',
         description:
-          'Vi bygger inte teknik för teknikens skull. Varje lösning vi levererar ska göra en konkret skillnad i er vardag — spara tid, minska fel eller ge bättre beslutsunderlag.',
+          '"Your secrets are safe with me." Datasäkerhet och personlig moral genomsyrar allt jag gör.',
+        icon: 'tabler:shield-check',
       },
       {
-        title: 'Prata klartext',
+        title: 'Transparens',
         description:
-          'Ingen jargong, inga overheads fulla av buzzwords. Vi förklarar vad vi gör, varför vi gör det, och vad det kostar. Om vi inte tror vi kan hjälpa er säger vi det.',
+          'Du äger alltid lösningen och koden. Inga inlåsningar, inga svarta lådor.',
+        icon: 'tabler:lock-open',
       },
       {
-        title: 'Långsiktiga relationer',
+        title: 'Prestigelöshet',
         description:
-          'Våra bästa uppdrag kommer från kunder vi jobbat med länge. Vi vill vara er tekniska partner — inte en leverantör ni byter varje år.',
+          'Jag löser problemet oavsett vem som orsakade det. Inga ego, bara resultat.',
+        icon: 'tabler:hand-stop',
+      },
+      {
+        title: 'Omtanke',
+        description:
+          'Jag värnar om din verksamhet och din sinnesro. Ditt problem är mitt problem tills det är löst.',
+        icon: 'tabler:heart',
       },
     ]}
   />
@@ -56,34 +95,19 @@ const metadata = {
     columns={3}
     items={[
       {
-        title: 'Industriell mjukvara',
-        description: 'Operatörsgränssnitt, processövervakning, datahantering och styrning.',
-        icon: 'tabler:cpu',
-      },
-      {
-        title: 'OT/IT-integration',
-        description: 'PLC, SCADA, OPC UA, Modbus, REST API, databaser och molntjänster.',
+        title: 'Systemintegration',
+        description: 'API-utveckling, databashantering (SQL) och backend-skript.',
         icon: 'tabler:plug-connected',
       },
       {
-        title: 'Nätverksteknik',
-        description: 'Industriella nätverk, VPN, segmentering och säker fjärråtkomst.',
-        icon: 'tabler:network',
+        title: 'Automation & PLC',
+        description: 'Djup kunskap om styrsystem från Siemens, Mitsubishi m.fl.',
+        icon: 'tabler:cpu',
       },
       {
-        title: 'Webbutveckling',
-        description: 'Dashboards, rapportportaler och interna verktyg som webbaserade applikationer.',
-        icon: 'tabler:browser',
-      },
-      {
-        title: 'Dataanalys & rapportering',
-        description: 'Automatiserad datainsamling, bearbetning och visualisering av processdata.',
-        icon: 'tabler:chart-bar',
-      },
-      {
-        title: 'Python, C#, .NET, SQL',
-        description: 'Vi väljer rätt teknik för uppgiften — inte det som råkar vara populärt just nu.',
-        icon: 'tabler:code',
+        title: 'Industri 4.0 & IoT',
+        description: 'Säker uppkoppling av produktionsdata för analys och övervakning.',
+        icon: 'tabler:cloud-computing',
       },
     ]}
   >
@@ -96,15 +120,16 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: 'Ta kontakt',
+        text: 'Kontakta mig',
         href: '/kontakt',
         icon: 'tabler:mail',
       },
     ]}
   >
-    <Fragment slot="title">Vill ni veta mer?</Fragment>
+    <Fragment slot="title">Välkommen till Carlboms Data</Fragment>
     <Fragment slot="subtitle">
-      Vi tar gärna ett samtal om hur vi kan hjälpa er. Helt förutsättningslöst.
+      Din relationsexpert för systemintegration.<br />
+      <span class="text-sm text-muted">Vänliga hälsningar, Tobias Carlbom</span>
     </Fragment>
   </CallToAction>
 </Layout>

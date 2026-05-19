@@ -10,12 +10,16 @@ const metadata = {
 ---
 
 <Layout metadata={metadata}>
-  <HeroText tagline="Kontakt" title="Hör av dig" subtitle="Berätta om ert projekt eller er utmaning — vi återkommer inom ett dygn." />
+  <HeroText
+    tagline="Kontakt"
+    title="Dags att lösa fnurran på tråden?"
+    subtitle="Låt oss prata om hur jag kan få dina system att samarbeta bättre. Carlboms Data är baserat i Lund, men bygger integrationer och broar oavsett var du befinner dig."
+  />
 
   <ContactUs
     id="form"
-    title="Skicka ett meddelande"
-    subtitle="Fyll i formuläret så hör vi av oss. Vill ni hellre ringa eller maila direkt? Se kontaktuppgifterna nedan."
+    title="Vad skaver just nu?"
+    subtitle="Beskriv din utmaning, så hör jag av mig för ett förutsättningslöst rådgivningsmöte."
     inputs={[
       {
         type: 'text',
@@ -34,9 +38,9 @@ const metadata = {
       },
     ]}
     textarea={{
-      label: 'Meddelande',
+      label: 'Beskriv din utmaning',
     }}
-    description="Vi svarar normalt inom 24 timmar."
+    description="Jag svarar normalt inom 24 timmar."
   />
 
   <Features2
@@ -44,19 +48,19 @@ const metadata = {
     columns={3}
     items={[
       {
+        title: 'Telefon',
+        description: '073-566 70 46',
+        icon: 'tabler:phone',
+      },
+      {
         title: 'E-post',
         description: 'tobias@carlbomsdata.se',
         icon: 'tabler:mail',
       },
       {
-        title: 'Telefon',
-        description: 'Se e-post för bokning',
-        icon: 'tabler:phone',
-      },
-      {
-        title: 'Organisationsnummer',
-        description: '559494-0461',
-        icon: 'tabler:building',
+        title: 'Plats',
+        description: 'Baserat i Lund — verksam i hela Sverige',
+        icon: 'tabler:map-pin',
       },
     ]}
   />
