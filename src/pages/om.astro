@@ -1,5 +1,6 @@
 ---
 import Content from '~/components/widgets/Content.astro';
+import Features from '~/components/widgets/Features.astro';
 import Features2 from '~/components/widgets/Features2.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Steps2 from '~/components/widgets/Steps2.astro';
@@ -15,8 +16,8 @@ const metadata = {
   <Hero
     tagline="Om Carlboms Data"
     image={{
-      src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Carlboms Data',
+      src: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Konsult vid arbete',
     }}
   >
     <Fragment slot="title">
@@ -30,12 +31,59 @@ const metadata = {
     </Fragment>
   </Hero>
 
+  <!-- Teknisk kompetens först -->
+  <Features
+    title="Teknisk kompetens"
+    subtitle="Det här kan jag — och det här jobbar jag med varje dag."
+    items={[
+      {
+        title: 'Styrsystem & PLC',
+        description:
+          'CODESYS (IEC 61131-3). Leverantörsoberoende PLC-programmering, felsökning och optimering.',
+        icon: 'tabler:cpu',
+      },
+      {
+        title: 'Protokoll & kommunikation',
+        description:
+          'J1939 CAN bus, Modbus, OPC UA, UDP/NVL, TCP, WireGuard, HTTP/REST, ODBC, SMB, SSH, DNS, VLAN.',
+        icon: 'tabler:transfer-vertical',
+      },
+      {
+        title: 'Mjukvaruutveckling',
+        description:
+          'C#/.NET, Python, T-SQL, CODESYS Structured Text, HTML/CSS, JavaScript, Flux, Inno Setup.',
+        icon: 'tabler:code',
+      },
+      {
+        title: 'Nätverksteknik',
+        description:
+          'VPN, brandväggar, nätverkssegmentering (IT/OT), säker fjärråtkomst. Design och implementation i industriella miljöer.',
+        icon: 'tabler:network',
+      },
+      {
+        title: 'HMI & SCADA',
+        description:
+          'Utveckling av operatörsgränssnitt och SCADA-system. CODESYS, WinCC, WideQuick, FUXA samt egenutvecklade webbaserade gränssnitt.',
+        icon: 'tabler:device-desktop-analytics',
+      },
+      {
+        title: 'Databaser & rapportering',
+        description:
+          'Databasdesign, automatiserad datainsamling och rapportgenerering. Från processdata till beslutsstöd.',
+        icon: 'tabler:database',
+      },
+    ]}
+  />
+
+  <!-- Personlig story (copywritern) -->
   <Content
+    isReversed
     tagline="Min filosofi"
+    title="Robusta lösningar, inga inlåsningar"
     items={[]}
     image={{
-      src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
-      alt: 'Tobias Carlbom',
+      src: 'https://images.unsplash.com/photo-1597852074816-d933c7d2b988?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
+      alt: 'Industriell miljö',
     }}
   >
     <Fragment slot="content">
@@ -59,14 +107,14 @@ const metadata = {
     </Fragment>
   </Content>
 
+  <!-- Varumärkesvärden -->
   <Steps2
     title="Varumärkesvärden"
-    subtitle="Fyra ord som definierar Carlboms Data."
     items={[
       {
         title: 'Integritet',
         description:
-          '"Your secrets are safe with me." Datasäkerhet och personlig moral genomsyrar allt jag gör.',
+          'Din data är trygg hos mig. Datasäkerhet och personlig moral genomsyrar allt jag gör.',
         icon: 'tabler:shield-check',
       },
       {
@@ -89,32 +137,6 @@ const metadata = {
       },
     ]}
   />
-
-  <Features2
-    title="Kompetensområden"
-    columns={3}
-    items={[
-      {
-        title: 'Systemintegration',
-        description: 'API-utveckling, databashantering (SQL) och backend-skript.',
-        icon: 'tabler:plug-connected',
-      },
-      {
-        title: 'Automation & PLC',
-        description: 'Djup kunskap om styrsystem från Siemens, Mitsubishi m.fl.',
-        icon: 'tabler:cpu',
-      },
-      {
-        title: 'Industri 4.0 & IoT',
-        description: 'Säker uppkoppling av produktionsdata för analys och övervakning.',
-        icon: 'tabler:cloud-computing',
-      },
-    ]}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Features2>
 
   <CallToAction
     actions={[
