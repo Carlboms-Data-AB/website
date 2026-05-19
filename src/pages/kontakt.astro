@@ -1,0 +1,63 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+import HeroText from '~/components/widgets/HeroText.astro';
+import ContactUs from '~/components/widgets/Contact.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+
+const metadata = {
+  title: 'Kontakt',
+};
+---
+
+<Layout metadata={metadata}>
+  <HeroText tagline="Kontakt" title="Hör av dig" subtitle="Berätta om ert projekt eller er utmaning — vi återkommer inom ett dygn." />
+
+  <ContactUs
+    id="form"
+    title="Skicka ett meddelande"
+    subtitle="Fyll i formuläret så hör vi av oss. Vill ni hellre ringa eller maila direkt? Se kontaktuppgifterna nedan."
+    inputs={[
+      {
+        type: 'text',
+        name: 'name',
+        label: 'Namn',
+      },
+      {
+        type: 'email',
+        name: 'email',
+        label: 'E-post',
+      },
+      {
+        type: 'text',
+        name: 'company',
+        label: 'Företag',
+      },
+    ]}
+    textarea={{
+      label: 'Meddelande',
+    }}
+    description="Vi svarar normalt inom 24 timmar."
+  />
+
+  <Features2
+    title="Kontaktuppgifter"
+    columns={3}
+    items={[
+      {
+        title: 'E-post',
+        description: 'tobias@carlbomsdata.se',
+        icon: 'tabler:mail',
+      },
+      {
+        title: 'Telefon',
+        description: 'Se e-post för bokning',
+        icon: 'tabler:phone',
+      },
+      {
+        title: 'Organisationsnummer',
+        description: '559494-0461',
+        icon: 'tabler:building',
+      },
+    ]}
+  />
+</Layout>

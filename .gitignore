@@ -1,31 +1,24 @@
-# Claude Code — absolut inget i detta repot
-.claude/
-CLAUDE.md
-MEMORY.md
-memory/
+# build output
+dist/
+.output/
 
-# Utkast och experimentfiler
-index_v3.html
-index_utkast1.html
-carlbomsdata-v2.md
-webbtexter-underlag.md
+# dependencies
+node_modules/
 
-# Backend (ligger på Anvil.works, ska inte i publika repo)
-anvil_server.py
-worker.js
+# logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
 
-# Källdokument (interna, inte publika)
-*.docx
-*.pdf
 
-# OS/editor-skräp
+# environment variables
+.env
+.env.production
+
+# macOS-specific files
 .DS_Store
-Thumbs.db
-*.swp
-*~
-.vscode/
-.idea/
 
-# Debug/testing screenshots — endast lokalt
-_debug_images/
-debug/
+pnpm-lock.yaml
+
+.astro

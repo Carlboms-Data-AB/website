@@ -1,0 +1,171 @@
+---
+import Layout from '~/layouts/PageLayout.astro';
+
+import Hero from '~/components/widgets/Hero.astro';
+import Features from '~/components/widgets/Features.astro';
+import Steps from '~/components/widgets/Steps.astro';
+import Content from '~/components/widgets/Content.astro';
+import Stats from '~/components/widgets/Stats.astro';
+import CallToAction from '~/components/widgets/CallToAction.astro';
+
+const metadata = {
+  title: 'Carlboms Data AB — Skräddarsydd mjukvara för industri och automation',
+  ignoreTitleTemplate: true,
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Boka ett samtal',
+        href: '/kontakt',
+        icon: 'tabler:arrow-right',
+      },
+      { text: 'Våra tjänster', href: '/tjanster' },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Industriell automation och mjukvara',
+    }}
+  >
+    <Fragment slot="title">
+      Skräddarsydd mjukvara för <span class="text-accent">industri och automation</span>
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Vi bygger specialanpassade mjukvarulösningar som kopplar samman era industrisystem,
+      automatiserar rapportering och ger er full kontroll — från fabriksgolv till ledningsgrupp.
+    </Fragment>
+  </Hero>
+
+  <Features
+    id="tjanster"
+    tagline="Tjänster"
+    title="Vad vi gör"
+    subtitle="Vi hjälper industriföretag att digitalisera, integrera och automatisera med skräddarsydda lösningar."
+    items={[
+      {
+        title: 'Specialutvecklad mjukvara',
+        description:
+          'Applikationer byggda för era specifika behov — operatörsgränssnitt, datahantering och processövervakning som passar er verksamhet.',
+        icon: 'tabler:code',
+      },
+      {
+        title: 'Systemintegration',
+        description:
+          'Vi kopplar samman PLC, SCADA och OT-system med era IT- och affärssystem. Data flödar sömlöst från maskin till beslutsstöd.',
+        icon: 'tabler:plug-connected',
+      },
+      {
+        title: 'Nätverk & fjärråtkomst',
+        description:
+          'Säkra nätverkslösningar och fjärråtkomst till era anläggningar. Felsök och övervaka utan att vara på plats.',
+        icon: 'tabler:network',
+      },
+      {
+        title: 'Automatiserad rapportering',
+        description:
+          'Slut på manuella rapporter. Vi bygger system som samlar in data och genererar rapporter automatiskt — i rätt format, till rätt person.',
+        icon: 'tabler:report-analytics',
+      },
+    ]}
+  />
+
+  <Content
+    isReversed
+    tagline="Arbetssätt"
+    title="Nära samarbete, konkreta resultat"
+    items={[
+      {
+        title: 'Förstår er verklighet',
+        description:
+          'Vi börjar alltid med att förstå er verksamhet, era processer och era flaskhalsar — inte med en kravspecifikation.',
+      },
+      {
+        title: 'Iterativ utveckling',
+        description:
+          'Ni ser framsteg tidigt och ofta. Vi levererar i korta cykler så att ni kan ge feedback och styra riktningen.',
+      },
+      {
+        title: 'Långsiktig partner',
+        description:
+          'Vi lämnar inte projektet vid leverans. Drift, vidareutveckling och support ingår i relationen.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Samarbete och utveckling',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Byggt för industrin</h3>
+      Med erfarenhet från automation och industriella system förstår vi de krav som ställs på tillförlitlighet, säkerhet och prestanda.
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <Steps
+    title="Så här jobbar vi"
+    items={[
+      {
+        title: 'Steg 1: <span class="font-medium">Kartläggning</span>',
+        description:
+          'Vi lyssnar, ställer frågor och kartlägger era behov. Målet är att förstå helheten innan vi skriver en rad kod.',
+        icon: 'tabler:search',
+      },
+      {
+        title: 'Steg 2: <span class="font-medium">Prototyp & design</span>',
+        description:
+          'Vi tar fram en prototyp eller proof-of-concept som visar riktningen. Ni ger feedback, vi justerar.',
+        icon: 'tabler:bulb',
+      },
+      {
+        title: 'Steg 3: <span class="font-medium">Utveckling & leverans</span>',
+        description:
+          'Mjukvaran utvecklas iterativt med regelbundna demo-tillfällen. Ni är med hela vägen.',
+        icon: 'tabler:rocket',
+      },
+      {
+        title: 'I drift!',
+        icon: 'tabler:check',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80',
+      alt: 'Industriell process',
+    }}
+  />
+
+  <Stats
+    stats={[
+      { title: 'Års erfarenhet', amount: '10+' },
+      { title: 'Levererade projekt', amount: '50+' },
+      { title: 'Nöjda kunder', amount: '20+' },
+      { title: 'Branscher', amount: '5+' },
+    ]}
+  />
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Kontakta oss',
+        href: '/kontakt',
+        icon: 'tabler:mail',
+      },
+    ]}
+  >
+    <Fragment slot="title">
+      Har ni en utmaning<br class="block sm:hidden" /> vi kan lösa?
+    </Fragment>
+
+    <Fragment slot="subtitle">
+      Berätta om ert behov så återkommer vi med ett förslag — helt förutsättningslöst.
+    </Fragment>
+  </CallToAction>
+</Layout>
