@@ -3,13 +3,11 @@ import Layout from '~/layouts/PageLayout.astro';
 
 import Hero from '~/components/widgets/Hero.astro';
 import Features from '~/components/widgets/Features.astro';
-import Steps from '~/components/widgets/Steps.astro';
 import Content from '~/components/widgets/Content.astro';
-import Stats from '~/components/widgets/Stats.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 
 const metadata = {
-  title: 'Carlboms Data AB — Skräddarsydd mjukvara för industri och automation',
+  title: 'Carlboms Data — Relationsexperten för systemintegration',
   ignoreTitleTemplate: true,
 };
 ---
@@ -19,89 +17,44 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: 'Boka ett samtal',
+        text: 'Boka ett förutsättningslöst rådgivningssamtal',
         href: '/kontakt',
         icon: 'tabler:arrow-right',
       },
-      { text: 'Våra tjänster', href: '/tjanster' },
     ]}
     image={{
       src: 'https://images.unsplash.com/photo-1581091226825-a6a2a5aee158?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Industriell automation och mjukvara',
+      alt: 'Systemintegration mellan IT och OT',
     }}
   >
     <Fragment slot="title">
-      Skräddarsydd mjukvara för <span class="text-accent">industri och automation</span>
+      Relationsexperten för <span class="text-accent">systemintegration</span>
     </Fragment>
 
     <Fragment slot="subtitle">
-      Vi bygger specialanpassade mjukvarulösningar som kopplar samman era industrisystem,
-      automatiserar rapportering och ger er full kontroll — från fabriksgolv till ledningsgrupp.
+      Alla bra relationer kräver fungerande kommunikation. Särskilt när OT ska prata med IT.
     </Fragment>
   </Hero>
 
-  <Features
-    id="tjanster"
-    tagline="Tjänster"
-    title="Vad vi gör"
-    subtitle="Vi hjälper industriföretag att digitalisera, integrera och automatisera med skräddarsydda lösningar."
-    items={[
-      {
-        title: 'Specialutvecklad mjukvara',
-        description:
-          'Applikationer byggda för era specifika behov — operatörsgränssnitt, datahantering och processövervakning som passar er verksamhet.',
-        icon: 'tabler:code',
-      },
-      {
-        title: 'Systemintegration',
-        description:
-          'Vi kopplar samman PLC, SCADA och OT-system med era IT- och affärssystem. Data flödar sömlöst från maskin till beslutsstöd.',
-        icon: 'tabler:plug-connected',
-      },
-      {
-        title: 'Nätverk & fjärråtkomst',
-        description:
-          'Säkra nätverkslösningar och fjärråtkomst till era anläggningar. Felsök och övervaka utan att vara på plats.',
-        icon: 'tabler:network',
-      },
-      {
-        title: 'Automatiserad rapportering',
-        description:
-          'Slut på manuella rapporter. Vi bygger system som samlar in data och genererar rapporter automatiskt — i rätt format, till rätt person.',
-        icon: 'tabler:report-analytics',
-      },
-    ]}
-  />
-
   <Content
-    isReversed
-    tagline="Arbetssätt"
-    title="Nära samarbete, konkreta resultat"
-    items={[
-      {
-        title: 'Förstår er verklighet',
-        description:
-          'Vi börjar alltid med att förstå er verksamhet, era processer och era flaskhalsar — inte med en kravspecifikation.',
-      },
-      {
-        title: 'Iterativ utveckling',
-        description:
-          'Ni ser framsteg tidigt och ofta. Vi levererar i korta cykler så att ni kan ge feedback och styra riktningen.',
-      },
-      {
-        title: 'Långsiktig partner',
-        description:
-          'Vi lämnar inte projektet vid leverans. Drift, vidareutveckling och support ingår i relationen.',
-      },
-    ]}
+    tagline="Om Carlboms Data"
+    title="Jag bygger broar mellan system"
+    items={[]}
     image={{
       src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Samarbete och utveckling',
+      alt: 'Systemintegration',
     }}
   >
     <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Byggt för industrin</h3>
-      Med erfarenhet från automation och industriella system förstår vi de krav som ställs på tillförlitlighet, säkerhet och prestanda.
+      <p class="text-lg text-muted mb-6">
+        Alla bra relationer kräver fungerande kommunikation. Det gäller även maskiner och IT-system.
+        Så om de talar förbi varandra, finns jag där. Hjälper dem att hitta tillbaka till varandra
+        när de har fått en fnurra på tråden.
+      </p>
+      <p class="text-lg text-muted">
+        Med lång erfarenhet, skräddarsydda lösningar och programvara med öppen källkod är Carlboms Data
+        din relationsexpert som bygger broar mellan system.
+      </p>
     </Fragment>
 
     <Fragment slot="bg">
@@ -109,44 +62,29 @@ const metadata = {
     </Fragment>
   </Content>
 
-  <Steps
-    title="Så här jobbar vi"
+  <Features
+    id="usps"
+    tagline="Därför Carlboms Data"
+    title="Tre skäl att välja mig"
     items={[
       {
-        title: 'Steg 1: <span class="font-medium">Kartläggning</span>',
+        title: 'Teknisk medlare mellan IT och OT',
         description:
-          'Vi lyssnar, ställer frågor och kartlägger era behov. Målet är att förstå helheten innan vi skriver en rad kod.',
-        icon: 'tabler:search',
+          'Jag hjälper dig att bryta ner silotänkandet och bygga säkra integrationer som möter både produktionens realtidsstrikta krav och IT-sidans säkerhetsprotokoll.',
+        icon: 'tabler:plug-connected',
       },
       {
-        title: 'Steg 2: <span class="font-medium">Prototyp & design</span>',
+        title: 'Skräddarsytt med öppen källkod',
         description:
-          'Vi tar fram en prototyp eller proof-of-concept som visar riktningen. Ni ger feedback, vi justerar.',
-        icon: 'tabler:bulb',
+          'Äkta relationer bygger på frihet. Därför undviker jag proprietära "svarta lådor" och skapar transparenta lösningar där du alltid äger din egen kod.',
+        icon: 'tabler:lock-open',
       },
       {
-        title: 'Steg 3: <span class="font-medium">Utveckling & leverans</span>',
+        title: 'Agilt och personligt',
         description:
-          'Mjukvaran utvecklas iterativt med regelbundna demo-tillfällen. Ni är med hela vägen.',
-        icon: 'tabler:rocket',
+          'Med Carlboms Data får du korta beslutsvägar och direktkontakt med experten. Inga juniora konsulter eller byråkratiska startsträckor. Tillsammans börjar vi lösa problemet direkt.',
+        icon: 'tabler:user-check',
       },
-      {
-        title: 'I drift!',
-        icon: 'tabler:check',
-      },
-    ]}
-    image={{
-      src: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80',
-      alt: 'Industriell process',
-    }}
-  />
-
-  <Stats
-    stats={[
-      { title: 'Års erfarenhet', amount: '10+' },
-      { title: 'Levererade projekt', amount: '50+' },
-      { title: 'Nöjda kunder', amount: '20+' },
-      { title: 'Branscher', amount: '5+' },
     ]}
   />
 
@@ -154,18 +92,18 @@ const metadata = {
     actions={[
       {
         variant: 'primary',
-        text: 'Kontakta oss',
+        text: 'Boka ett förutsättningslöst rådgivningssamtal',
         href: '/kontakt',
-        icon: 'tabler:mail',
+        icon: 'tabler:arrow-right',
       },
     ]}
   >
     <Fragment slot="title">
-      Har ni en utmaning<br class="block sm:hidden" /> vi kan lösa?
+      Dags att lösa fnurran<br class="block sm:hidden" /> på tråden?
     </Fragment>
 
     <Fragment slot="subtitle">
-      Berätta om ert behov så återkommer vi med ett förslag — helt förutsättningslöst.
+      Beskriv din utmaning, så hör jag av mig.
     </Fragment>
   </CallToAction>
 </Layout>

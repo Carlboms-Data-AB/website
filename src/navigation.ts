@@ -3,15 +3,15 @@ import { getPermalink } from './utils/permalinks';
 export const headerData = {
   links: [
     {
-      text: 'Tjänster',
+      text: 'Erbjudande',
       href: getPermalink('/tjanster'),
     },
     {
-      text: 'Case',
+      text: 'Referenser',
       href: getPermalink('/case'),
     },
     {
-      text: 'Om oss',
+      text: 'Om Carlboms Data',
       href: getPermalink('/om'),
     },
     {
@@ -19,25 +19,24 @@ export const headerData = {
       href: getPermalink('/kontakt'),
     },
   ],
-  actions: [{ text: 'Boka möte', href: getPermalink('/kontakt'), variant: 'primary' as const }],
+  actions: [{ text: 'Boka rådgivning', href: getPermalink('/kontakt'), variant: 'primary' as const }],
 };
 
 export const footerData = {
   links: [
     {
-      title: 'Tjänster',
+      title: 'Erbjudande',
       links: [
-        { text: 'Specialutvecklad mjukvara', href: getPermalink('/tjanster') },
         { text: 'Systemintegration', href: getPermalink('/tjanster') },
-        { text: 'Nätverk & fjärråtkomst', href: getPermalink('/tjanster') },
-        { text: 'Automatiserad rapportering', href: getPermalink('/tjanster') },
+        { text: 'Automation & PLC', href: getPermalink('/tjanster') },
+        { text: 'Industri 4.0 & IoT', href: getPermalink('/tjanster') },
       ],
     },
     {
-      title: 'Företag',
+      title: 'Carlboms Data',
       links: [
-        { text: 'Om oss', href: getPermalink('/om') },
-        { text: 'Case', href: getPermalink('/case') },
+        { text: 'Om mig', href: getPermalink('/om') },
+        { text: 'Referenser', href: getPermalink('/case') },
         { text: 'Kontakt', href: getPermalink('/kontakt') },
       ],
     },
@@ -45,9 +44,8 @@ export const footerData = {
   secondaryLinks: [],
   socialLinks: [
     { ariaLabel: 'LinkedIn', icon: 'tabler:brand-linkedin', href: '#' },
-    { ariaLabel: 'GitHub', icon: 'tabler:brand-github', href: 'https://github.com/Carlboms-Data-AB' },
   ],
   footNote: `
-    &copy; ${new Date().getFullYear()} Carlboms Data AB · Org.nr 559494-0461
+    &copy; ${new Date().getFullYear()} Carlboms Data AB · Org.nr 559494-0461 · Baserat i Lund
   `,
 };

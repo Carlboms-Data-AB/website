@@ -3,98 +3,40 @@ import CallToAction from '~/components/widgets/CallToAction.astro';
 import Content from '~/components/widgets/Content.astro';
 import Features2 from '~/components/widgets/Features2.astro';
 import Hero from '~/components/widgets/Hero.astro';
+import Steps from '~/components/widgets/Steps.astro';
 import Layout from '~/layouts/PageLayout.astro';
 
 const metadata = {
-  title: 'Tjänster',
+  title: 'Erbjudande',
 };
 ---
 
 <Layout metadata={metadata}>
   <Hero
-    tagline="Tjänster"
-    title="Mjukvara som löser riktiga problem"
-    subtitle="Vi levererar specialanpassade lösningar för industriföretag som vill digitalisera, integrera och automatisera sina processer."
-    actions={[{ variant: 'primary', text: 'Boka ett samtal', href: '/kontakt' }]}
+    tagline="Erbjudande"
+    title="Jag får din teknik att tala samma språk"
+    subtitle="När äldre maskinparker ska kopplas upp mot moderna molntjänster eller affärssystem uppstår ofta friktion och kostsamma stopp. Med Carlboms Data får du en oberoende part som bygger det mellanlager som saknas."
     image={{
       src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
-      alt: 'Industriell mjukvara',
+      alt: 'Systemintegration',
     }}
-  />
-
-  <Features2
-    title="Våra tjänsteområden"
-    subtitle="Varje projekt börjar med era behov — inte en färdig mall."
-    columns={2}
-    items={[
-      {
-        title: 'Specialutvecklad mjukvara',
-        description:
-          'Vi bygger applikationer från grunden för era specifika krav. Operatörsgränssnitt, datahantering, processövervakning och verktyg som passar ert sätt att arbeta — inte tvärtom.',
-        icon: 'tabler:code',
-      },
-      {
-        title: 'Systemintegration (OT/IT)',
-        description:
-          'Vi kopplar samman era PLC-, SCADA- och OT-system med affärssystem, databaser och molntjänster. Data ska flöda sömlöst — från sensor till dashboard.',
-        icon: 'tabler:plug-connected',
-      },
-      {
-        title: 'Nätverk & säker fjärråtkomst',
-        description:
-          'Vi designar och implementerar nätverkslösningar för industriella miljöer. VPN, segmentering och säker fjärråtkomst till era anläggningar — så att ni kan felsöka och övervaka var ni än befinner er.',
-        icon: 'tabler:network',
-      },
-      {
-        title: 'Automatiserad rapportering',
-        description:
-          'Manuella rapporter tar tid och innehåller fel. Vi bygger system som automatiskt samlar in processdata och genererar rapporter — dagligen, veckovis eller i realtid.',
-        icon: 'tabler:report-analytics',
-      },
-      {
-        title: 'Felsökning & debugging',
-        description:
-          'Har ni ett system som inte beter sig som det ska? Vi hjälper er att hitta grundorsaken — i PLC-logik, nätverkskonfiguration, databasstrukturer eller applikationskod.',
-        icon: 'tabler:bug',
-      },
-      {
-        title: 'Rådgivning & arkitektur',
-        description:
-          'Ibland behöver ni inte en leverans utan ett bollplank. Vi hjälper er att utvärdera alternativ, designa systemarkitektur och fatta välgrundade teknikbeslut.',
-        icon: 'tabler:topology-star-3',
-      },
-    ]}
   />
 
   <Content
-    isReversed
-    items={[
-      {
-        title: 'Branschkunskap',
-        description:
-          'Vi har erfarenhet från tillverkning, processindustri, energi och infrastruktur. Vi förstår miljön ni arbetar i.',
-        icon: 'tabler:building-factory-2',
-      },
-      {
-        title: 'Teknikbredd',
-        description:
-          'Python, C#, .NET, SQL, OPC UA, Modbus, REST API — vi väljer rätt verktyg för jobbet, inte det trendiga.',
-        icon: 'tabler:tools',
-      },
-      {
-        title: 'Från prototyp till produktion',
-        description:
-          'Vi levererar inte bara proof-of-concepts. Vi tar lösningen hela vägen till stabil drift med dokumentation och överlämning.',
-        icon: 'tabler:rocket',
-      },
-    ]}
+    tagline="Så här hjälper jag dig"
+    title="Analys, tolkning och översättning"
+    items={[]}
     image={{
       src: 'https://images.unsplash.com/photo-1565043666747-69f6646db940?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80',
-      alt: 'Industriell teknik',
+      alt: 'Industriell integration',
     }}
   >
     <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Varför Carlboms Data?</h3>
+      <p class="text-lg text-muted">
+        Jag analyserar, tolkar och översätter data mellan dina maskiner (OT) och dina affärssystem (IT).
+        Genom robust systemintegration skapar jag en stabil arkitektur där informationen flödar precis
+        som den ska, dygnet runt.
+      </p>
     </Fragment>
 
     <Fragment slot="bg">
@@ -102,16 +44,110 @@ const metadata = {
     </Fragment>
   </Content>
 
+  <Features2
+    title="Mina kompetensområden"
+    subtitle="Carlboms Data kombinerar djup teknisk förståelse för hårdvara med modern mjukvaruutveckling."
+    columns={3}
+    items={[
+      {
+        title: 'Systemintegration',
+        description: 'API-utveckling, databashantering (SQL) och backend-skript som kopplar samman era system.',
+        icon: 'tabler:plug-connected',
+      },
+      {
+        title: 'Automation & PLC',
+        description: 'Djup kunskap om styrsystem från bland annat Siemens och Mitsubishi.',
+        icon: 'tabler:cpu',
+      },
+      {
+        title: 'Industri 4.0 & IoT',
+        description: 'Säker uppkoppling av produktionsdata för analys och övervakning.',
+        icon: 'tabler:cloud-computing',
+      },
+    ]}
+  />
+
+  <Features2
+    title="Språken jag talar"
+    subtitle="Oavsett om dina system kommunicerar via dessa protokoll, ser jag till att datan struktureras och landar rätt."
+    columns={3}
+    items={[
+      {
+        title: 'Modbus',
+        icon: 'tabler:binary-tree',
+      },
+      {
+        title: 'OPC UA',
+        icon: 'tabler:binary-tree',
+      },
+      {
+        title: 'MQTT',
+        icon: 'tabler:binary-tree',
+      },
+      {
+        title: 'REST',
+        icon: 'tabler:api',
+      },
+      {
+        title: 'JSON',
+        icon: 'tabler:braces',
+      },
+      {
+        title: 'Seriella protokoll',
+        icon: 'tabler:plug',
+      },
+    ]}
+  >
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Features2>
+
+  <Steps
+    title="Min metod för lyckad systemintegration"
+    subtitle="En beprövad process i fyra steg för att säkerställa att din produktion aldrig äventyras."
+    items={[
+      {
+        title: 'Steg 1: <span class="font-medium">Analys & arkitektur</span>',
+        description:
+          'Jag börjar med att kartlägga din nätverkstopologi och befintliga protokoll. Sedan definierar jag var kommunikationen brister och designar en säker lösning som inte belastar dina existerande system.',
+        icon: 'tabler:search',
+      },
+      {
+        title: 'Steg 2: <span class="font-medium">Integration & utveckling</span>',
+        description:
+          'Själva hantverket. Jag bygger den logik, de skript och de broar som krävs för att systemen ska kunna utbyta data sömlöst och autonomt.',
+        icon: 'tabler:code',
+      },
+      {
+        title: 'Steg 3: <span class="font-medium">Stresstestning i trygg miljö</span>',
+        description:
+          'För att garantera noll stopptid verifierar och stresstestar jag alltid integrationen noggrant innan den driftsätts i din skarpa produktionsmiljö.',
+        icon: 'tabler:test-pipe',
+      },
+      {
+        title: 'Steg 4: <span class="font-medium">Överlämning (inkl. källkod)</span>',
+        description:
+          'När relationen mellan systemen är på plats får du full dokumentation. Inga inlåsningseffekter. Du äger alltid lösningen och källkoden fullt ut.',
+        icon: 'tabler:check',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80',
+      alt: 'Arbetsprocess',
+    }}
+  />
+
   <CallToAction
     actions={[
       {
         variant: 'primary',
-        text: 'Kontakta oss',
+        text: 'Boka rådgivningssamtal',
         href: '/kontakt',
-        icon: 'tabler:mail',
+        icon: 'tabler:arrow-right',
       },
     ]}
-    title="Redo att ta nästa steg?"
-    subtitle="Beskriv er utmaning så återkommer vi med ett förslag. Inget snack — bara en rak dialog om vad vi kan göra för er."
+    title="Redo att få systemen att prata med varandra?"
+    subtitle="Beskriv din utmaning kort, så hör jag av mig för ett förutsättningslöst rådgivningsmöte."
   />
 </Layout>
