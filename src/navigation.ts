@@ -42,10 +42,8 @@ export const footerData = {
     },
   ],
   secondaryLinks: [],
-  socialLinks: [
-    { ariaLabel: 'LinkedIn', icon: 'tabler:brand-linkedin', href: 'https://www.linkedin.com/company/carlboms-data-ab' },
-  ],
+  socialLinks: [],
   footNote: `
-    &copy; ${new Date().getFullYear()} Carlboms Data AB · Org.nr 559494-0461 · Baserat i Lund
+    &copy; ${new Date().getFullYear()} Carlboms Data AB · Org.nr 559494-0461 · Momsreg SE559494046101 · Baserat i Lund
   `,
 };
