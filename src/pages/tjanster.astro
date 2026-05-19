@@ -1,0 +1,117 @@
+---
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Content from '~/components/widgets/Content.astro';
+import Features2 from '~/components/widgets/Features2.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Layout from '~/layouts/PageLayout.astro';
+
+const metadata = {
+  title: 'Tjänster',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Tjänster"
+    title="Mjukvara som löser riktiga problem"
+    subtitle="Vi levererar specialanpassade lösningar för industriföretag som vill digitalisera, integrera och automatisera sina processer."
+    actions={[{ variant: 'primary', text: 'Boka ett samtal', href: '/kontakt' }]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
+      alt: 'Industriell mjukvara',
+    }}
+  />
+
+  <Features2
+    title="Våra tjänsteområden"
+    subtitle="Varje projekt börjar med era behov — inte en färdig mall."
+    columns={2}
+    items={[
+      {
+        title: 'Specialutvecklad mjukvara',
+        description:
+          'Vi bygger applikationer från grunden för era specifika krav. Operatörsgränssnitt, datahantering, processövervakning och verktyg som passar ert sätt att arbeta — inte tvärtom.',
+        icon: 'tabler:code',
+      },
+      {
+        title: 'Systemintegration (OT/IT)',
+        description:
+          'Vi kopplar samman era PLC-, SCADA- och OT-system med affärssystem, databaser och molntjänster. Data ska flöda sömlöst — från sensor till dashboard.',
+        icon: 'tabler:plug-connected',
+      },
+      {
+        title: 'Nätverk & säker fjärråtkomst',
+        description:
+          'Vi designar och implementerar nätverkslösningar för industriella miljöer. VPN, segmentering och säker fjärråtkomst till era anläggningar — så att ni kan felsöka och övervaka var ni än befinner er.',
+        icon: 'tabler:network',
+      },
+      {
+        title: 'Automatiserad rapportering',
+        description:
+          'Manuella rapporter tar tid och innehåller fel. Vi bygger system som automatiskt samlar in processdata och genererar rapporter — dagligen, veckovis eller i realtid.',
+        icon: 'tabler:report-analytics',
+      },
+      {
+        title: 'Felsökning & debugging',
+        description:
+          'Har ni ett system som inte beter sig som det ska? Vi hjälper er att hitta grundorsaken — i PLC-logik, nätverkskonfiguration, databasstrukturer eller applikationskod.',
+        icon: 'tabler:bug',
+      },
+      {
+        title: 'Rådgivning & arkitektur',
+        description:
+          'Ibland behöver ni inte en leverans utan ett bollplank. Vi hjälper er att utvärdera alternativ, designa systemarkitektur och fatta välgrundade teknikbeslut.',
+        icon: 'tabler:topology-star-3',
+      },
+    ]}
+  />
+
+  <Content
+    isReversed
+    items={[
+      {
+        title: 'Branschkunskap',
+        description:
+          'Vi har erfarenhet från tillverkning, processindustri, energi och infrastruktur. Vi förstår miljön ni arbetar i.',
+        icon: 'tabler:building-factory-2',
+      },
+      {
+        title: 'Teknikbredd',
+        description:
+          'Python, C#, .NET, SQL, OPC UA, Modbus, REST API — vi väljer rätt verktyg för jobbet, inte det trendiga.',
+        icon: 'tabler:tools',
+      },
+      {
+        title: 'Från prototyp till produktion',
+        description:
+          'Vi levererar inte bara proof-of-concepts. Vi tar lösningen hela vägen till stabil drift med dokumentation och överlämning.',
+        icon: 'tabler:rocket',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1565043666747-69f6646db940?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80',
+      alt: 'Industriell teknik',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">Varför Carlboms Data?</h3>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Kontakta oss',
+        href: '/kontakt',
+        icon: 'tabler:mail',
+      },
+    ]}
+    title="Redo att ta nästa steg?"
+    subtitle="Beskriv er utmaning så återkommer vi med ett förslag. Inget snack — bara en rak dialog om vad vi kan göra för er."
+  />
+</Layout>

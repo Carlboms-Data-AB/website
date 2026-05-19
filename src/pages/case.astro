@@ -1,0 +1,143 @@
+---
+import CallToAction from '~/components/widgets/CallToAction.astro';
+import Content from '~/components/widgets/Content.astro';
+import Hero from '~/components/widgets/Hero.astro';
+import Layout from '~/layouts/PageLayout.astro';
+
+const metadata = {
+  title: 'Case',
+};
+---
+
+<Layout metadata={metadata}>
+  <Hero
+    tagline="Case"
+    title="Projekt vi är stolta över"
+    subtitle="Här är ett urval av uppdrag vi genomfört. Varje projekt är unikt — men gemensamt är att de löser verkliga problem i verkliga verksamheter."
+  />
+
+  <Content
+    isReversed
+    items={[
+      {
+        title: 'Utmaning',
+        description:
+          'Produktionsdata fastnade i PLC-system och kunde inte nås av ledning eller kvalitetsavdelning. Manuella rapporter tog timmar varje vecka.',
+      },
+      {
+        title: 'Lösning',
+        description:
+          'Vi byggde en integration mellan PLC-systemen och en central databas, med automatisk rapportgenerering och en webbaserad dashboard för realtidsövervakning.',
+      },
+      {
+        title: 'Resultat',
+        description:
+          'Rapporteringstiden minskade med 90%. Kvalitetsavvikelser upptäcks nu i realtid istället för i efterhand.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Tillverkningsindustri',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Produktionsdata i realtid
+      </h3>
+      <span class="text-sm text-muted">Tillverkningsindustri · Systemintegration & rapportering</span>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <Content
+    isAfterContent
+    items={[
+      {
+        title: 'Utmaning',
+        description:
+          'Servicetekniker behövde åka till anläggningar för att felsöka och uppdatera system. Restiden kostade mer än själva arbetet.',
+      },
+      {
+        title: 'Lösning',
+        description:
+          'Vi implementerade en säker VPN-lösning med segmenterat nätverk, som gav fjärråtkomst till PLC och HMI utan att exponera produktionsnätet.',
+      },
+      {
+        title: 'Resultat',
+        description:
+          'Felsökningstiden minskade från dagar till timmar. Resor reducerades med 70%, med bibehållen säkerhet.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1558346490-a72e53ae2d4f?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Fjärråtkomst och nätverk',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Säker fjärråtkomst
+      </h3>
+      <span class="text-sm text-muted">Energisektorn · Nätverk & fjärråtkomst</span>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <Content
+    isReversed
+    isAfterContent
+    items={[
+      {
+        title: 'Utmaning',
+        description:
+          'Operatörer använde ett föråldrat gränssnitt som var svårt att lära sig och ledde till felaktiga inmatningar. Inget stöd för mobila enheter.',
+      },
+      {
+        title: 'Lösning',
+        description:
+          'Vi utvecklade ett modernt webbaserat operatörsgränssnitt med realtidsdata, tydliga larmhantering och responsiv design för surfplattor.',
+      },
+      {
+        title: 'Resultat',
+        description:
+          'Upplärning av nya operatörer gick dubbelt så snabbt. Felinmatningar minskade markant och systemet används nu på surfplatta ute i anläggningen.',
+      },
+    ]}
+    image={{
+      src: 'https://images.unsplash.com/photo-1551288049-bebda4e38f71?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
+      alt: 'Operatörsgränssnitt',
+    }}
+  >
+    <Fragment slot="content">
+      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-2">
+        Modernt operatörsgränssnitt
+      </h3>
+      <span class="text-sm text-muted">Processindustri · Specialutvecklad mjukvara</span>
+    </Fragment>
+
+    <Fragment slot="bg">
+      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
+    </Fragment>
+  </Content>
+
+  <CallToAction
+    actions={[
+      {
+        variant: 'primary',
+        text: 'Berätta om ert projekt',
+        href: '/kontakt',
+        icon: 'tabler:arrow-right',
+      },
+    ]}
+  >
+    <Fragment slot="title">Har ni en liknande utmaning?</Fragment>
+    <Fragment slot="subtitle">
+      Vi tar gärna en förutsättningslös diskussion om hur vi kan hjälpa just er verksamhet.
+    </Fragment>
+  </CallToAction>
+</Layout>

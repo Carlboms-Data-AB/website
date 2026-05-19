@@ -1,0 +1,50 @@
+---
+import '@fontsource-variable/inter';
+import '@fontsource/space-grotesk/400.css';
+import '@fontsource/space-grotesk/500.css';
+import '@fontsource/space-grotesk/600.css';
+import '@fontsource/space-grotesk/700.css';
+---
+
+<style is:inline>
+  :root {
+    --aw-font-sans: 'Inter Variable';
+    --aw-font-serif: 'Inter Variable';
+    --aw-font-heading: 'Space Grotesk', sans-serif;
+
+    --aw-color-primary: rgb(15 23 42);
+    --aw-color-secondary: rgb(51 65 85);
+    --aw-color-accent: rgb(234 88 12);
+
+    --aw-color-text-heading: rgb(15 23 42);
+    --aw-color-text-default: rgb(30 41 59);
+    --aw-color-text-muted: rgb(100 116 139);
+    --aw-color-bg-page: rgb(255 255 255);
+
+    --aw-color-bg-page-dark: rgb(15 23 42);
+
+    ::selection {
+      background-color: rgb(234 88 12 / 20%);
+    }
+  }
+
+  .dark {
+    --aw-font-sans: 'Inter Variable';
+    --aw-font-serif: 'Inter Variable';
+    --aw-font-heading: 'Space Grotesk', sans-serif;
+
+    --aw-color-primary: rgb(234 88 12);
+    --aw-color-secondary: rgb(148 163 184);
+    --aw-color-accent: rgb(251 146 60);
+
+    --aw-color-text-heading: rgb(248 250 252);
+    --aw-color-text-default: rgb(226 232 240);
+    --aw-color-text-muted: rgb(148 163 184);
+    --aw-color-bg-page: rgb(15 23 42);
+
+    ::selection {
+      background-color: rgb(234 88 12 / 30%);
+      color: white;
+    }
+  }
+</style>
