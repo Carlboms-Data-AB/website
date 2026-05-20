@@ -1,9 +1,6 @@
 ---
 import Content from '~/components/widgets/Content.astro';
-import Features from '~/components/widgets/Features.astro';
-import Features2 from '~/components/widgets/Features2.astro';
 import Hero from '~/components/widgets/Hero.astro';
-import Steps2 from '~/components/widgets/Steps2.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import Layout from '~/layouts/PageLayout.astro';
 
@@ -31,55 +28,8 @@ const metadata = {
     </Fragment>
   </Hero>
 
-  <!-- Teknisk kompetens först -->
-  <Features
-    title="Teknisk kompetens"
-    subtitle="Det här kan jag — och det här jobbar jag med varje dag."
-    items={[
-      {
-        title: 'Styrsystem & PLC',
-        description:
-          'CODESYS (IEC 61131-3). Leverantörsoberoende PLC-programmering, felsökning och optimering.',
-        icon: 'tabler:cpu',
-      },
-      {
-        title: 'Protokoll & kommunikation',
-        description:
-          'J1939 CAN bus, Modbus, OPC UA, UDP/NVL, TCP, WireGuard, HTTP/REST, ODBC, SMB, SSH, DNS, VLAN.',
-        icon: 'tabler:transfer-vertical',
-      },
-      {
-        title: 'Mjukvaruutveckling',
-        description:
-          'C#/.NET, Python, T-SQL, CODESYS Structured Text, HTML/CSS, JavaScript, Flux, Inno Setup.',
-        icon: 'tabler:code',
-      },
-      {
-        title: 'Nätverksteknik',
-        description:
-          'VPN, brandväggar, nätverkssegmentering (IT/OT), säker fjärråtkomst. Design och implementation i industriella miljöer.',
-        icon: 'tabler:network',
-      },
-      {
-        title: 'HMI & SCADA',
-        description:
-          'Utveckling av operatörsgränssnitt och SCADA-system. CODESYS, WinCC, WideQuick, FUXA samt egenutvecklade webbaserade gränssnitt.',
-        icon: 'tabler:device-desktop-analytics',
-      },
-      {
-        title: 'Databaser & rapportering',
-        description:
-          'Databasdesign, automatiserad datainsamling och rapportgenerering. Från processdata till beslutsstöd.',
-        icon: 'tabler:database',
-      },
-    ]}
-  />
-
-  <!-- Personlig story (copywritern) -->
   <Content
     isReversed
-    tagline="Min filosofi"
-    title="Robusta lösningar, inga inlåsningar"
     items={[]}
     image={{
       src: 'https://images.unsplash.com/photo-1597852074816-d933c7d2b988?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
@@ -106,37 +56,6 @@ const metadata = {
       <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
     </Fragment>
   </Content>
-
-  <!-- Varumärkesvärden -->
-  <Steps2
-    title="Varumärkesvärden"
-    items={[
-      {
-        title: 'Integritet',
-        description:
-          'Din data är trygg hos mig. Datasäkerhet och personlig moral genomsyrar allt jag gör.',
-        icon: 'tabler:shield-check',
-      },
-      {
-        title: 'Transparens',
-        description:
-          'Du äger alltid lösningen och koden. Inga inlåsningar, inga svarta lådor.',
-        icon: 'tabler:lock-open',
-      },
-      {
-        title: 'Prestigelöshet',
-        description:
-          'Jag löser problemet oavsett vem som orsakade det. Inga ego, bara resultat.',
-        icon: 'tabler:hand-stop',
-      },
-      {
-        title: 'Omtanke',
-        description:
-          'Jag värnar om din verksamhet och din sinnesro. Ditt problem är mitt problem tills det är löst.',
-        icon: 'tabler:heart',
-      },
-    ]}
-  />
 
   <CallToAction
     actions={[
