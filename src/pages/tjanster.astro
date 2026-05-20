@@ -7,9 +7,6 @@ import Hero from '~/components/widgets/Hero.astro';
 import Steps from '~/components/widgets/Steps.astro';
 
 import Layout from '~/layouts/PageLayout.astro';
-import dataFlow from '~/assets/images/data-flow.svg';
-import bridge from '~/assets/images/bridge.svg';
-import processSteps from '~/assets/images/process-steps.svg';
 
 const metadata = {
   title: 'Erbjudande',
@@ -21,7 +18,7 @@ const metadata = {
     tagline="Erbjudande"
     title="Jag får din teknik att tala samma språk"
     image={{
-      src: dataFlow,
+      src: '/images/data-flow.svg',
       alt: 'Dataflöde mellan system',
     }}
   />
@@ -30,7 +27,7 @@ const metadata = {
     title="Så här hjälper jag dig"
     items={[]}
     image={{
-      src: bridge,
+      src: '/images/bridge.svg',
       alt: 'Bro mellan OT och IT',
     }}
   >
@@ -152,7 +149,7 @@ const metadata = {
       },
     ]}
     image={{
-      src: processSteps,
+      src: '/images/process-steps.svg',
       alt: 'Arbetsprocess i fyra steg',
     }}
   />
