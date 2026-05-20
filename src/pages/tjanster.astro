@@ -5,7 +5,11 @@ import Features from '~/components/widgets/Features.astro';
 import Features2 from '~/components/widgets/Features2.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Steps from '~/components/widgets/Steps.astro';
+
 import Layout from '~/layouts/PageLayout.astro';
+import dataFlow from '~/assets/images/data-flow.svg';
+import bridge from '~/assets/images/bridge.svg';
+import processSteps from '~/assets/images/process-steps.svg';
 
 const metadata = {
   title: 'Erbjudande',
@@ -16,10 +20,9 @@ const metadata = {
   <Hero
     tagline="Erbjudande"
     title="Jag får din teknik att tala samma språk"
-    subtitle="När äldre maskinparker ska kopplas upp mot moderna molntjänster eller affärssystem uppstår ofta friktion och kostsamma stopp. Med Carlboms Data får du en oberoende part som bygger det mellanlager som saknas."
     image={{
-      src: 'https://images.unsplash.com/photo-1565043666747-69f6646db940?ixlib=rb-4.0.3&auto=format&fit=crop&w=1974&q=80',
-      alt: 'Industriell maskinpark',
+      src: dataFlow,
+      alt: 'Dataflöde mellan system',
     }}
   />
 
@@ -27,13 +30,18 @@ const metadata = {
     title="Så här hjälper jag dig"
     items={[]}
     image={{
-      src: 'https://images.unsplash.com/photo-1620712943543-bcc4688e7485?ixlib=rb-4.0.3&auto=format&fit=crop&w=1965&q=80',
-      alt: 'Data och integration',
+      src: bridge,
+      alt: 'Bro mellan OT och IT',
     }}
   >
     <Fragment slot="content">
+      <p class="text-lg text-muted mb-6">
+        När äldre maskinparker ska kopplas upp mot moderna molntjänster eller affärssystem uppstår ofta
+        friktion och kostsamma stopp. Med Carlboms Data får du en oberoende part som bygger det mellanlager
+        (middleware) som saknas.
+      </p>
       <p class="text-lg text-muted">
-        Jag analyserar, tolkar och översätter data mellan dina maskiner (OT) och dina affärssystem (IT).
+        Som analyserar, tolkar och översätter data mellan dina maskiner (OT) och dina affärssystem (IT).
         Genom robust systemintegration skapar jag en stabil arkitektur där informationen flödar precis
         som den ska, dygnet runt.
       </p>
@@ -119,33 +127,33 @@ const metadata = {
     subtitle="Jag har en beprövad process i fyra steg för att säkerställa att din produktion aldrig äventyras."
     items={[
       {
-        title: 'Steg 1: <span class="font-medium">Analys & arkitektur</span>',
+        title: 'Analys & arkitektur',
         description:
           'Jag börjar med att kartlägga din nätverkstopologi och befintliga protokoll. Sedan definierar jag var kommunikationen brister och designar en säker lösning som inte belastar dina existerande system.',
         icon: 'tabler:search',
       },
       {
-        title: 'Steg 2: <span class="font-medium">Integration & utveckling</span>',
+        title: 'Integration & utveckling',
         description:
           'Själva hantverket. Jag bygger den logik, de skript och de broar som krävs för att systemen ska kunna utbyta data sömlöst och autonomt.',
         icon: 'tabler:code',
       },
       {
-        title: 'Steg 3: <span class="font-medium">Stresstestning i trygg miljö</span>',
+        title: 'Stresstestning i trygg miljö',
         description:
           'För att garantera noll stopptid verifierar och stresstestar jag alltid integrationen noggrant innan den driftsätts i din skarpa produktionsmiljö.',
         icon: 'tabler:test-pipe',
       },
       {
-        title: 'Steg 4: <span class="font-medium">Överlämning inkl. källkod</span>',
+        title: 'Överlämning inkl. källkod',
         description:
           'När relationen mellan systemen är på plats får du full dokumentation. Inga inlåsningseffekter — du äger alltid lösningen och källkoden fullt ut.',
         icon: 'tabler:check',
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1581092918056-0c4c3acd3789?ixlib=rb-4.0.3&auto=format&fit=crop&w=987&q=80',
-      alt: 'Arbetsprocess i industrimiljö',
+      src: processSteps,
+      alt: 'Arbetsprocess i fyra steg',
     }}
   />
 

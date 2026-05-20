@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none" stroke="#0f172a" stroke-width="1.5" stroke-linecap="round">
+  <!-- Left system block -->
+  <rect x="80" y="220" width="180" height="160" rx="8" opacity="0.06" fill="#0f172a" stroke="none"/>
+  <rect x="80" y="220" width="180" height="160" rx="8" opacity="0.4"/>
+  <line x1="120" y1="270" x2="220" y2="270" opacity="0.3"/>
+  <line x1="120" y1="300" x2="200" y2="300" opacity="0.3"/>
+  <line x1="120" y1="330" x2="210" y2="330" opacity="0.3"/>
+  <text x="170" y="258" text-anchor="middle" font-family="system-ui" font-size="13" fill="#0f172a" opacity="0.5" stroke="none">OT</text>
+  <!-- Right system block -->
+  <rect x="540" y="220" width="180" height="160" rx="8" opacity="0.06" fill="#0f172a" stroke="none"/>
+  <rect x="540" y="220" width="180" height="160" rx="8" opacity="0.4"/>
+  <line x1="580" y1="270" x2="680" y2="270" opacity="0.3"/>
+  <line x1="580" y1="300" x2="660" y2="300" opacity="0.3"/>
+  <line x1="580" y1="330" x2="670" y2="330" opacity="0.3"/>
+  <text x="630" y="258" text-anchor="middle" font-family="system-ui" font-size="13" fill="#0f172a" opacity="0.5" stroke="none">IT</text>
+  <!-- Bridge / connection -->
+  <path d="M260 300 C330 300 340 260 400 260 C460 260 470 300 540 300" stroke-width="2" opacity="0.5"/>
+  <circle cx="400" cy="260" r="5" fill="#0f172a" opacity="0.6"/>
+  <!-- Data flow dots -->
+  <circle cx="310" cy="288" r="2.5" fill="#0f172a" opacity="0.3"/>
+  <circle cx="350" cy="272" r="2.5" fill="#0f172a" opacity="0.3"/>
+  <circle cx="450" cy="272" r="2.5" fill="#0f172a" opacity="0.3"/>
+  <circle cx="490" cy="288" r="2.5" fill="#0f172a" opacity="0.3"/>
+</svg>
