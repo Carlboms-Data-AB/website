@@ -51,8 +51,8 @@ const columnsClass =
     }}
   />
   <div class="mx-auto max-w-7xl p-4 md:px-8">
-    <div class={`lg:flex ${isReversed ? 'lg:flex-row-reverse' : ''} lg:gap-16`}>
-      <div class="lg:basis-1/2 self-center">
+    <div class={`md:flex ${isReversed ? 'md:flex-row-reverse' : ''} md:gap-16`}>
+      <div class="md:basis-1/2 self-center">
         {content && <div class="mb-12 text-lg dark:text-slate-400" set:html={content} />}
 
         {
@@ -105,7 +105,7 @@ const columnsClass =
           )
         }
       </div>
-      <div aria-hidden="true" class="mt-10 lg:mt-0 lg:basis-1/2">
+      <div aria-hidden="true" class="mt-10 md:mt-0 md:basis-1/2">
         {
           image && (
             <div class="relative m-auto max-w-4xl">
