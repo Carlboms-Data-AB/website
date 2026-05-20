@@ -3,6 +3,8 @@ import Content from '~/components/widgets/Content.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
 import Layout from '~/layouts/PageLayout.astro';
+import tobiasOutdoor from '~/assets/images/tobias-outdoor.jpeg';
+import tobiasStudio from '~/assets/images/tobias-studio.jpeg';
 
 const metadata = {
   title: 'Om Carlboms Data',
@@ -13,8 +15,8 @@ const metadata = {
   <Hero
     tagline="Om Carlboms Data"
     image={{
-      src: 'https://images.unsplash.com/photo-1531482615713-2afd69097998?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Konsult vid arbete',
+      src: tobiasOutdoor,
+      alt: 'Tobias Carlbom, grundare av Carlboms Data',
     }}
   >
     <Fragment slot="title">
@@ -32,8 +34,8 @@ const metadata = {
     isReversed
     items={[]}
     image={{
-      src: 'https://images.unsplash.com/photo-1597852074816-d933c7d2b988?ixlib=rb-4.0.3&auto=format&fit=crop&w=1740&q=80',
-      alt: 'Industriell miljö',
+      src: tobiasStudio,
+      alt: 'Tobias Carlbom',
     }}
   >
     <Fragment slot="content">
