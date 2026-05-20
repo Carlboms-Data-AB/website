@@ -1,0 +1,24 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none" stroke="#0f172a" stroke-width="1.5" stroke-linecap="round">
+  <!-- System A -->
+  <rect x="100" y="180" width="120" height="80" rx="6" opacity="0.06" fill="#0f172a" stroke="none"/>
+  <rect x="100" y="180" width="120" height="80" rx="6" opacity="0.35"/>
+  <!-- System B -->
+  <rect x="100" y="340" width="120" height="80" rx="6" opacity="0.06" fill="#0f172a" stroke="none"/>
+  <rect x="100" y="340" width="120" height="80" rx="6" opacity="0.35"/>
+  <!-- Arrow hub -->
+  <circle cx="400" cy="300" r="28" opacity="0.06" fill="#0f172a" stroke="none"/>
+  <circle cx="400" cy="300" r="28" opacity="0.4"/>
+  <!-- Target system -->
+  <rect x="580" y="250" width="140" height="100" rx="6" opacity="0.06" fill="#0f172a" stroke="none"/>
+  <rect x="580" y="250" width="140" height="100" rx="6" opacity="0.35"/>
+  <line x1="610" y1="285" x2="690" y2="285" opacity="0.2"/>
+  <line x1="610" y1="305" x2="670" y2="305" opacity="0.2"/>
+  <line x1="610" y1="325" x2="680" y2="325" opacity="0.2"/>
+  <!-- Connections -->
+  <path d="M220 220 L372 290" opacity="0.25"/>
+  <path d="M220 380 L372 310" opacity="0.25"/>
+  <path d="M428 300 L580 300" opacity="0.25"/>
+  <!-- Flow dots -->
+  <circle cx="300" cy="255" r="2.5" fill="#0f172a" opacity="0.2"/>
+  <circle cx="500" cy="300" r="2.5" fill="#0f172a" opacity="0.2"/>
+</svg>

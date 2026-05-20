@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 600" fill="none" stroke="#0f172a" stroke-width="1.5" stroke-linecap="round">
+  <!-- Left: machine/PLC -->
+  <rect x="60" y="200" width="140" height="100" rx="6" opacity="0.06" fill="#0f172a" stroke="none"/>
+  <rect x="60" y="200" width="140" height="100" rx="6" opacity="0.35"/>
+  <rect x="60" y="340" width="140" height="100" rx="6" opacity="0.06" fill="#0f172a" stroke="none"/>
+  <rect x="60" y="340" width="140" height="100" rx="6" opacity="0.35"/>
+  <!-- Center: middleware -->
+  <rect x="320" y="240" width="160" height="120" rx="12" opacity="0.08" fill="#0f172a" stroke="none"/>
+  <rect x="320" y="240" width="160" height="120" rx="12" opacity="0.5"/>
+  <line x1="360" y1="290" x2="440" y2="290" opacity="0.3"/>
+  <line x1="360" y1="310" x2="420" y2="310" opacity="0.3"/>
+  <line x1="360" y1="330" x2="430" y2="330" opacity="0.3"/>
+  <!-- Right: business systems -->
+  <rect x="600" y="200" width="140" height="100" rx="6" opacity="0.06" fill="#0f172a" stroke="none"/>
+  <rect x="600" y="200" width="140" height="100" rx="6" opacity="0.35"/>
+  <rect x="600" y="340" width="140" height="100" rx="6" opacity="0.06" fill="#0f172a" stroke="none"/>
+  <rect x="600" y="340" width="140" height="100" rx="6" opacity="0.35"/>
+  <!-- Arrows left to center -->
+  <path d="M200 250 L320 280" opacity="0.3"/>
+  <path d="M200 390 L320 320" opacity="0.3"/>
+  <!-- Arrows center to right -->
+  <path d="M480 280 L600 250" opacity="0.3"/>
+  <path d="M480 320 L600 390" opacity="0.3"/>
+  <!-- Flow dots -->
+  <circle cx="250" cy="262" r="2.5" fill="#0f172a" opacity="0.25"/>
+  <circle cx="280" cy="270" r="2.5" fill="#0f172a" opacity="0.25"/>
+  <circle cx="520" cy="270" r="2.5" fill="#0f172a" opacity="0.25"/>
+  <circle cx="550" cy="262" r="2.5" fill="#0f172a" opacity="0.25"/>
+</svg>

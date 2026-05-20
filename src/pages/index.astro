@@ -4,6 +4,9 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Content from '~/components/widgets/Content.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
+import heroNetwork from '~/assets/images/hero-network.svg';
+import bridge from '~/assets/images/bridge.svg';
+import dataFlow from '~/assets/images/data-flow.svg';
 
 const metadata = {
   title: 'Carlboms Data — Relationsexperten för systemintegration',
@@ -22,8 +25,8 @@ const metadata = {
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1451187580459-43490279c0fa?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Nätverk och teknologi',
+      src: heroNetwork,
+      alt: 'Nätverk och systemintegration',
     }}
   >
     <Fragment slot="title">
@@ -38,8 +41,8 @@ const metadata = {
   <Content
     items={[]}
     image={{
-      src: 'https://images.unsplash.com/photo-1581092160562-40aa08e78837?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Industriell produktion',
+      src: bridge,
+      alt: 'Bro mellan OT och IT',
     }}
   >
     <Fragment slot="content">
@@ -81,8 +84,8 @@ const metadata = {
       },
     ]}
     image={{
-      src: 'https://images.unsplash.com/photo-1504384308090-c894fdcc538d?ixlib=rb-4.0.3&auto=format&fit=crop&w=2070&q=80',
-      alt: 'Samarbete och teknik',
+      src: dataFlow,
+      alt: 'Dataflöde mellan system',
     }}
   >
     <Fragment slot="bg">
