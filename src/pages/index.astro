@@ -4,9 +4,6 @@ import Layout from '~/layouts/PageLayout.astro';
 import Hero from '~/components/widgets/Hero.astro';
 import Content from '~/components/widgets/Content.astro';
 import CallToAction from '~/components/widgets/CallToAction.astro';
-import heroNetwork from '~/assets/images/hero-network.svg';
-import bridge from '~/assets/images/bridge.svg';
-import dataFlow from '~/assets/images/data-flow.svg';
 
 const metadata = {
   title: 'Carlboms Data — Relationsexperten för systemintegration',
@@ -25,7 +22,7 @@ const metadata = {
       },
     ]}
     image={{
-      src: heroNetwork,
+      src: '/images/hero-network.svg',
       alt: 'Nätverk och systemintegration',
     }}
   >
@@ -41,7 +38,7 @@ const metadata = {
   <Content
     items={[]}
     image={{
-      src: bridge,
+      src: '/images/bridge.svg',
       alt: 'Bro mellan OT och IT',
     }}
   >
@@ -84,7 +81,7 @@ const metadata = {
       },
     ]}
     image={{
-      src: dataFlow,
+      src: '/images/data-flow.svg',
       alt: 'Dataflöde mellan system',
     }}
   >
