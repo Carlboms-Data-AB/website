@@ -1,111 +1,257 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-
-import Hero from '~/components/widgets/Hero.astro';
-import Content from '~/components/widgets/Content.astro';
-import CallToAction from '~/components/widgets/CallToAction.astro';
+import CtaBand from '~/components/site/CtaBand.astro';
 
 const metadata = {
   title: 'Carlboms Data — Relationsexperten för systemintegration',
+  description: 'Carlboms Data är den oberoende systemintegratören som bygger broar mellan IT och OT. Skräddarsydda lösningar, öppen källkod, direktkontakt med experten.',
   ignoreTitleTemplate: true,
+};
+
+const kompetensOmraden = [
+  { icon: 'git-merge', title: 'Systemintegration', short: 'Mellanlaget som får era system att prata med varandra — API:er, databaskopplingar och middleware.' },
+  { icon: 'cpu', title: 'Automation & PLC', short: 'Programmering och optimering av styrsystem med CODESYS — portabelt, utan inlåsning hos en enda leverantör.' },
+  { icon: 'monitor', title: 'HMI, SCADA & övervakning', short: 'Operatörsgränssnitt och SCADA-lösningar — från WinCC och FUXA till helt egenutvecklade webbgränssnitt.' },
+  { icon: 'code', title: 'Mjukvaruutveckling', short: 'Skräddarsydda applikationer, backend-tjänster och databearbetning i det språk som passar utmaningen.' },
+  { icon: 'shield-check', title: 'Nätverk & fjärråtkomst', short: 'VPN, segmentering mellan IT och OT, brandväggar — och säker fjärråtkomst så ni slipper skicka ut tekniker.' },
+  { icon: 'search', title: 'Felsökning & optimering', short: 'Jag gräver i PLC-logik, nätverk, databaser och kod tills jag hittar roten till problemet.' },
+];
+
+const uspList = [
+  { icon: 'git-merge', title: 'Teknisk medlare mellan IT och OT', body: 'Jag hjälper dig att bryta ner silotänkandet och bygga säkra integrationer som möter både produktionens realtidsstrikta krav och IT-sidans säkerhetsprotokoll.' },
+  { icon: 'lock-open', title: 'Skräddarsydd arkitektur med öppen källkod', body: 'Äkta relationer bygger på frihet. Därför undviker jag proprietära "svarta lådor" och skapar transparenta lösningar där du alltid äger din egen kod.' },
+  { icon: 'bolt', title: 'Agilt och personligt', body: 'Med Carlboms Data får du korta beslutsvägar och direktkontakt med experten. Inga juniora konsulter eller byråkratiska startsträckor. Tillsammans börjar vi lösa problemet direkt.' },
+];
+
+const iconPaths: Record<string, string> = {
+  'git-merge': 'M7 7a4 4 0 1 0-4-4 4 4 0 0 0 4 4zm0 0v10m8-4a4 4 0 1 0 4 4 4 4 0 0 0-4-4zm0 0H7',
+  'cpu': 'M5 5h14v14H5zm4-3v3m6-3v3M5 9h-3m3 6h-3m17-6h3m-3 6h3M9 22v-3m6 3v-3',
+  'monitor': 'M3 5h18v12H3zm5 16h8m-4-4v4',
+  'code': 'M8 7l-5 5 5 5m8-10l5 5-5 5',
+  'shield-check': 'M12 2l8 4v6c0 5.5-3.8 10.7-8 12-4.2-1.3-8-6.5-8-12V6l8-4zm-2 10l2 2 4-4',
+  'search': 'M11 3a8 8 0 1 0 0 16 8 8 0 0 0 0-16zm10 18l-4-4',
+  'lock-open': 'M5 11h14v10H5zm3-4a4 4 0 0 1 8 0v4',
+  'bolt': 'M13 2L3 14h9l-1 8 10-12h-9l1-8',
 };
 ---
 
-<Layout metadata={metadata}>
-  <Hero
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Boka ett förutsättningslöst rådgivningssamtal',
-        href: '/kontakt',
-        icon: 'tabler:arrow-right',
-      },
-    ]}
-    image={{
-      src: '/images/hero-network.svg',
-      alt: 'Nätverk och systemintegration',
-    }}
-  >
-    <Fragment slot="title">
-      Relationsexperten för <span class="text-accent">systemintegration</span>
-    </Fragment>
+<Layout metadata={metadata} active="start">
+  <!-- Hero -->
+  <section class="hero-section">
+    <div class="hero-backdrop" aria-hidden="true">
+      <div class="hero-gradient"></div>
+      <div class="hero-grid-texture"></div>
+    </div>
 
-    <Fragment slot="subtitle">
-      Alla bra relationer kräver fungerande kommunikation. Särskilt när OT ska prata med IT.
-    </Fragment>
-  </Hero>
+    <div class="container hero-content">
+      <div class="hero-center">
+        <h1 class="display-hero">
+          Relationsexperten för<br/>systemintegration.
+        </h1>
+        <p class="lead" style="margin-top:28px;max-width:680px;margin-left:auto;margin-right:auto;">
+          Alla bra relationer kräver fungerande kommunikation. Särskilt när OT ska prata med IT.
+        </p>
+        <div class="hero-actions">
+          <a href="/kontakt" class="cta">
+            Boka ett förutsättningslöst rådgivningssamtal
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </a>
+          <a href="/tjanster" class="cta secondary">Se mina tjänster</a>
+        </div>
+      </div>
+    </div>
+  </section>
 
-  <Content
-    items={[]}
-    image={{
-      src: '/images/bridge.svg',
-      alt: 'Bro mellan OT och IT',
-    }}
-  >
-    <Fragment slot="content">
-      <p class="text-lg text-muted mb-6">
-        Alla bra relationer kräver fungerande kommunikation. Det gäller även maskiner och IT-system.
-        Så om de talar förbi varandra, finns jag där. Hjälper dem att hitta tillbaka till varandra
-        när de har fått en fnurra på tråden.
-      </p>
-      <p class="text-lg text-muted">
-        Med lång erfarenhet, skräddarsydda lösningar och programvara med öppen källkod är Carlboms Data
-        din relationsexpert som bygger broar mellan system.
-      </p>
-    </Fragment>
+  <!-- Brand Story -->
+  <section class="section tight">
+    <div class="container">
+      <div class="brand-story-inner">
+        <p class="brand-story-lead">
+          Alla bra relationer kräver fungerande kommunikation. Det gäller även maskiner och IT-system. Så om de talar förbi varandra, finns jag där.
+        </p>
+        <p class="brand-story-body">
+          Med lång erfarenhet, skräddarsydda lösningar och programvara med öppen källkod är Carlboms Data din relationsexpert som bygger broar mellan system.
+        </p>
+      </div>
+    </div>
+  </section>
 
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
+  <!-- Kompetens Teaser -->
+  <section class="section tight" id="kompetens-teaser">
+    <div class="container">
+      <div class="section-intro-center">
+        <div class="eyebrow"><span class="dot"></span>Vad jag gör</div>
+        <h2 class="display-section" style="margin-top:14px;">
+          Sex kompetensområden. En oberoende expert.
+        </h2>
+        <p class="lead" style="margin-top:20px;">
+          Carlboms Data kombinerar djup teknisk förståelse för hårdvara med modern mjukvaruutveckling. Här är allt jag tar mig an — från enstaka felsökning till komplett systemintegration.
+        </p>
+      </div>
 
-  <!-- Varför Carlboms Data (copywriterns USP:ar) -->
-  <Content
-    isReversed
-    title="Därför ska du välja Carlboms Data"
-    items={[
-      {
-        title: 'Teknisk medlare mellan IT och OT',
-        description:
-          'Jag hjälper dig att bryta ner silotänkandet och bygga säkra integrationer som möter både produktionens realtidsstrikta krav och IT-sidans säkerhetsprotokoll.',
-      },
-      {
-        title: 'Inga inlåsningar — du äger koden',
-        description:
-          'Äkta relationer bygger på frihet. Därför undviker jag proprietära "svarta lådor" och skapar transparenta lösningar där du alltid äger din egen kod.',
-      },
-      {
-        title: 'Agilt och personligt',
-        description:
-          'Korta beslutsvägar och direktkontakt med experten. Inga juniora konsulter eller byråkratiska startsträckor. Vi börjar lösa problemet direkt.',
-      },
-    ]}
-    image={{
-      src: '/images/data-flow.svg',
-      alt: 'Dataflöde mellan system',
-    }}
-  >
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
+      <div class="kompetens-grid">
+        {kompetensOmraden.map((k, i) => (
+          <div class="card hover kompetens-card">
+            <div class="kompetens-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={iconPaths[k.icon]} /></svg>
+            </div>
+            <div class="kompetens-num">{String(i + 1).padStart(2, '0')}</div>
+            <h3 class="display-card" style="margin-top:16px;">{k.title}</h3>
+            <p style="margin-top:8px;color:var(--color-body);font-size:14px;line-height:1.55;">
+              {k.short}
+            </p>
+          </div>
+        ))}
+      </div>
 
-  <CallToAction
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Boka ett förutsättningslöst rådgivningssamtal',
-        href: '/kontakt',
-        icon: 'tabler:arrow-right',
-      },
-    ]}
-  >
-    <Fragment slot="title">
-      Låt oss prata
-    </Fragment>
+      <div style="margin-top:28px;display:flex;justify-content:center;">
+        <a href="/tjanster" class="cta secondary" style="height:44px;font-size:14px;">
+          Se alla tjänster i detalj
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+      </div>
+    </div>
+  </section>
 
-    <Fragment slot="subtitle">
-      Beskriv din utmaning, så hör jag av mig.
-    </Fragment>
-  </CallToAction>
+  <!-- USP Boxar -->
+  <section class="section tight" id="varfor">
+    <div class="container">
+      <div class="section-intro-center">
+        <div class="eyebrow"><span class="dot"></span>Därför ska du välja Carlboms Data</div>
+        <h2 class="display-section" style="margin-top:14px;">
+          En fristående part — utan inlåsning, utan mellanhänder.
+        </h2>
+      </div>
+
+      <div class="usp-grid">
+        {uspList.map((u) => (
+          <article class="usp-card">
+            <div class="usp-icon">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d={iconPaths[u.icon]} /></svg>
+            </div>
+            <h3 style="font:600 20px/1.2 var(--font-sans);letter-spacing:-0.02em;margin:0 0 12px;color:var(--color-ink);">
+              {u.title}
+            </h3>
+            <p style="margin:0;font:400 15px/1.55 var(--font-sans);color:var(--color-body);">{u.body}</p>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    heading="Låt oss prata."
+    subheading="Boka ett förutsättningslöst rådgivningssamtal. Berätta vad som skaver, så hör jag av mig."
+    secondaryHref="/tjanster"
+    secondaryLabel="Se mina tjänster"
+  />
 </Layout>
+
+<style>
+  .hero-section {
+    position: relative;
+    overflow: hidden;
+  }
+  .hero-backdrop {
+    position: absolute; inset: 0; z-index: 0; pointer-events: none;
+  }
+  .hero-gradient {
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(at 50% -10%, rgba(22,176,121,0.18) 0%, transparent 55%),
+      radial-gradient(at 85% 40%, rgba(0,124,240,0.10) 0%, transparent 50%),
+      radial-gradient(at 15% 60%, rgba(22,176,121,0.10) 0%, transparent 55%);
+  }
+  .hero-grid-texture {
+    position: absolute; inset: 0;
+    background-image: linear-gradient(rgba(0,0,0,0.035) 1px, transparent 1px), linear-gradient(90deg, rgba(0,0,0,0.035) 1px, transparent 1px);
+    background-size: 72px 72px;
+    mask-image: radial-gradient(ellipse at 50% 35%, #000 25%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse at 50% 35%, #000 25%, transparent 75%);
+  }
+  .hero-content {
+    position: relative; z-index: 1;
+    padding-top: 96px; padding-bottom: 64px;
+  }
+  .hero-center {
+    text-align: center;
+    max-width: 980px;
+    margin: 0 auto;
+  }
+  .hero-actions {
+    display: flex; gap: 12px; justify-content: center;
+    margin-top: 36px; flex-wrap: wrap;
+  }
+
+  .brand-story-inner {
+    max-width: 820px;
+    margin: 0 auto;
+    text-align: center;
+  }
+  .brand-story-lead {
+    margin: 0 0 24px;
+    font: 500 clamp(22px, 2.6vw, 30px)/1.4 var(--font-sans);
+    letter-spacing: -0.02em;
+    color: var(--color-ink);
+    text-wrap: balance;
+  }
+  .brand-story-body {
+    margin: 0;
+    font: 400 18px/1.6 var(--font-sans);
+    color: var(--color-body);
+  }
+
+  .section-intro-center {
+    margin: 0 auto 48px;
+    max-width: 760px;
+    text-align: center;
+  }
+  .section-intro-center .eyebrow { justify-content: center; }
+
+  .kompetens-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  @media (max-width: 980px) { .kompetens-grid { grid-template-columns: repeat(2, 1fr); } }
+  @media (max-width: 600px) { .kompetens-grid { grid-template-columns: 1fr; } }
+  .kompetens-card {
+    padding: 24px;
+    position: relative;
+  }
+  .kompetens-icon {
+    width: 40px; height: 40px; border-radius: 10px;
+    background: linear-gradient(180deg, #f0fdf4 0%, #d6f5e6 100%);
+    color: #0e7a55;
+    display: inline-flex; align-items: center; justify-content: center;
+    box-shadow: inset 0 0 0 1px rgba(14,122,85,0.18);
+  }
+  .kompetens-num {
+    position: absolute; top: 22px; right: 24px;
+    font: 400 11px/16px var(--font-mono);
+    color: var(--color-mute);
+    letter-spacing: 0.08em;
+  }
+
+  .usp-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 16px;
+  }
+  .usp-card {
+    padding: 32px;
+    background: #fff;
+    border-radius: 14px;
+    box-shadow: var(--elev-3);
+    display: flex; flex-direction: column;
+  }
+  .usp-icon {
+    width: 44px; height: 44px; border-radius: 12px;
+    background: var(--gray-1000); color: #fff;
+    display: inline-flex; align-items: center; justify-content: center;
+    margin-bottom: 24px;
+  }
+  @media (max-width: 880px) {
+    .usp-grid { grid-template-columns: 1fr; }
+  }
+</style>

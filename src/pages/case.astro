@@ -1,216 +1,258 @@
 ---
-import CallToAction from '~/components/widgets/CallToAction.astro';
-import Content from '~/components/widgets/Content.astro';
-import Hero from '~/components/widgets/Hero.astro';
 import Layout from '~/layouts/PageLayout.astro';
+import CtaBand from '~/components/site/CtaBand.astro';
+import { Image } from 'astro:assets';
+import walkingImg from '~/assets/images/tobias-walking.jpg';
 
 const metadata = {
   title: 'Referenser',
+  description: 'När systemen hittade tillbaka till varandra — fem case från övervakning, integration, fjärråtkomst, lagerautomation och optimering.',
 };
+
+const cases = [
+  {
+    cat: 'Övervakning & loggning',
+    title: 'Full koll på tunga fordon.',
+    metric: '0', metricUnit: 'kostsamma stopp', metricLabel: 'Driftstatus i webbläsaren — överallt.',
+    utmaning: 'Ute i gruvor och smältverk driftades tunga fordon helt utan överblick, vilket innebar att ingen visste hur maskinerna mådde förrän något redan hade gått fel. Dessutom saknades det loggning av fordonens beteende över tid.',
+    losning: 'För att lösa detta byggde Carlboms Data ett webbaserat övervaknings- och loggersystem där driftstatus, larm och styrning kunde nås direkt i webbläsaren oavsett var man befann sig.',
+    resultat: 'Resultatet blev att problem kunde fångas upp långt innan de förvandlades till kostsamma produktionsstopp och att all driftdata loggades säkert för analys och uppföljning.',
+  },
+  {
+    cat: 'Systemintegration',
+    title: 'Smidigare dataflöden utan handpåläggning.',
+    metric: '0', metricUnit: 'manuella inmatningar', metricLabel: 'Rapporter som tog timmar — nu på sekunder.',
+    utmaning: 'En kund kämpade med att data från flera olika produktionssystem behövde knappas in för hand i affärssystemet. Det var en process som slukade enormt mycket tid och som gjorde att fel konstant smög sig in i siffrorna.',
+    losning: 'Carlboms Data kopplade därför ihop de olika produktionssystemen med affärssystemet så att all data plötsligt flödade helt automatiskt och utan mellanhänder.',
+    resultat: 'Efter det krävdes ingen mer manuell inmatning och rapporter, som tidigare tog timmar att ställa samman, genererades nu på sekunder med betydligt färre fel.',
+  },
+  {
+    cat: 'Säker fjärråtkomst',
+    title: 'Närhet på distans för snabbare felsökning.',
+    metric: '15', metricUnit: 'minuter', metricLabel: 'Tidigare en hel resdag — nu en kvart.',
+    utmaning: 'Varje gång något krånglade på en anläggning tvingades en tekniker att åka ut fysiskt, vilket var både dyrt och långsamt.',
+    losning: 'För att korta ledtiderna installerade Carlboms Data en säker fjärranslutning som gav teknikerna full tillgång till utrustningen direkt från kontoret eller till och med hemmet.',
+    resultat: 'Det skapade ett helt nytt och effektivt flöde: en felsökning som tidigare krävde en hel resdag klarades av på en kvart.',
+  },
+  {
+    cat: 'Lagerautomation',
+    title: 'Rätt etikett på rätt plats — varje gång.',
+    metric: '0', metricUnit: 'reklamationer', metricLabel: 'Tre system ersattes av en knapp.',
+    utmaning: 'På ett lager användes tre olika system för att skriva ut etiketter, vilket skapade stora problem. Fel etikett på fel produkt ledde till reklamationer och försenade leveranser.',
+    losning: 'Carlboms Data klev in och byggde ett enda integrerat system som automatiskt hämtade rätt information och skrev ut exakt rätt etikett oavsett produkttyp.',
+    resultat: 'Plötsligt räckte det med en enda knapp och ett enda system, vilket ledde till att alla reklamationer på grund av felmärkning försvann helt.',
+  },
+  {
+    cat: 'Optimering',
+    title: 'Nytt liv i gamla styrsystem.',
+    metric: '10×', metricUnit: 'snabbare', metricLabel: 'Kabeltillverkare — utan att byta ut systemet.',
+    utmaning: 'En kabeltillverkare satt med ett egenutvecklat styrsystem som hade blivit så långsamt att det började påverka hela produktionen negativt.',
+    losning: 'Men istället för att slänga ut allt och börja om gick Carlboms Data in och optimerade den befintliga koden från grunden, helt utan att behöva ersätta själva systemet.',
+    resultat: 'Resultatet blev att styrsystemet gick från att vara oanvändbart långsamt till att bli blixtsnabbt och responsivt, vilket sparade kunden flera värdefulla timmar varje dag.',
+  },
+];
 ---
 
-<Layout metadata={metadata}>
-  <Hero
-    tagline="Referenser"
-    title="När systemen hittade tillbaka till varandra"
-    subtitle="Med en gedigen erfarenhet av komplex systemintegration vet jag exakt vad som krävs för att bygga broar som håller över tid. Det handlar inte bara om att skriva kod som fungerar problemfritt i bakgrunden, utan om att leverera skräddarsydda lösningar som skapar verkligt värde för din verksamhet i form av minskat krångel, färre produktionsstopp och frigjord tid. Här är några exempel på hur Carlboms Data har hjälpt isolerad teknik att börja samarbeta på riktigt."
+<Layout metadata={metadata} active="case">
+  <section class="section" style="background:var(--color-canvas-soft);">
+    <div class="container">
+      <!-- Intro 2-column -->
+      <div class="ref-intro-grid">
+        <div>
+          <div class="eyebrow"><span class="dot"></span>Referenser</div>
+          <h2 class="display-section" style="margin-top:14px;">
+            När systemen hittade tillbaka till varandra.
+          </h2>
+          <div class="ref-body">
+            <p>Med en gedigen erfarenhet av komplex systemintegration vet jag exakt vad som krävs för att bygga broar som håller över tid.</p>
+            <p>För mig handlar det inte bara om att skriva kod som fungerar problemfritt i bakgrunden, utan om att leverera skräddarsydda lösningar som skapar verkligt värde för din verksamhet — i form av minskat krångel, färre produktionsstopp och frigjord tid.</p>
+            <p>Här är några exempel på hur Carlboms Data har hjälpt isolerad teknik att börja samarbeta på riktigt.</p>
+          </div>
+        </div>
+        <div class="ref-intro-img-wrap">
+          <div class="ref-intro-img">
+            <Image src={walkingImg} alt="Tobias Carlbom" width={600} height={800} style="width:100%;height:100%;object-fit:cover;display:block;" />
+          </div>
+          <div class="ref-intro-mono">
+            <span>$ status</span><br/>
+            <span style="color:var(--brand-green);">→ redo att hjälpa dig</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Case cards -->
+      <div class="cases-stack">
+        {cases.map((c, idx) => (
+          <article class="case-card">
+            <div class="case-left">
+              <div class="case-meta">
+                <span class="case-meta-num">{String(idx + 1).padStart(2, '0')}</span>
+                <span class="case-meta-sep">&middot;</span>
+                <span class="case-meta-cat">{c.cat}</span>
+              </div>
+              <h3 class="case-title">{c.title}</h3>
+              <div class="case-metric-card">
+                <div class="case-metric-row">
+                  <span class="case-metric-num">{c.metric}</span>
+                  <span class="case-metric-unit">{c.metricUnit}</span>
+                </div>
+                <div class="case-metric-label">{c.metricLabel}</div>
+              </div>
+            </div>
+            <div class="case-right">
+              <div class="case-section">
+                <div class="case-section-label">
+                  <span class="cs-dot" style="background:#c50000;"></span>
+                  Utmaningen
+                </div>
+                <p>{c.utmaning}</p>
+              </div>
+              <div class="case-section">
+                <div class="case-section-label">
+                  <span class="cs-dot" style="background:var(--color-ink);"></span>
+                  Lösningen
+                </div>
+                <p>{c.losning}</p>
+              </div>
+              <div class="case-section">
+                <div class="case-section-label">
+                  <span class="cs-dot" style="background:#0e7a55;"></span>
+                  Resultatet
+                </div>
+                <p>{c.resultat}</p>
+              </div>
+            </div>
+          </article>
+        ))}
+      </div>
+    </div>
+  </section>
+
+  <CtaBand
+    heading="Har du en liknande utmaning?"
+    subheading="Berätta vad som hänger upp sig — så hör jag av mig med en första reaktion senast nästa arbetsdag."
+    secondaryHref="/tjanster"
+    secondaryLabel="Se mina tjänster"
   />
-
-  <Content
-    isReversed
-    items={[
-      {
-        title: 'Utmaning',
-        description:
-          'Ute i gruvor och smältverk driftades tunga fordon helt utan överblick — ingen visste hur maskinerna mådde förrän något redan hade gått fel. Dessutom saknades loggning av fordonens beteende över tid.',
-      },
-      {
-        title: 'Lösning',
-        description:
-          'Byggde ett webbaserat övervaknings- och loggersystem där driftstatus, larm och styrning kunde nås direkt i webbläsaren oavsett var man befann sig.',
-      },
-      {
-        title: 'Resultat',
-        description:
-          'Problem fångas upp långt innan de förvandlas till kostsamma produktionsstopp. All driftdata loggas säkert för analys och uppföljning.',
-      },
-    ]}
-    image={{
-      src: '/images/case-monitoring.svg',
-      alt: 'Realtidsövervakning av fordon',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-1">
-        Full koll på tunga fordon
-      </h3>
-      <p class="text-sm text-muted mb-4">Webbutveckling · Realtidsövervakning · Larmhantering · Databasinloggning</p>
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <Content
-    isAfterContent
-    items={[
-      {
-        title: 'Utmaning',
-        description:
-          'Data från flera olika produktionssystem behövde knappas in för hand i affärssystemet — en process som slukade enormt mycket tid och som gjorde att fel konstant smög sig in.',
-      },
-      {
-        title: 'Lösning',
-        description:
-          'Kopplade ihop de olika produktionssystemen med affärssystemet så att all data flödade helt automatiskt och utan mellanhänder.',
-      },
-      {
-        title: 'Resultat',
-        description:
-          'Ingen mer manuell inmatning. Rapporter som tidigare tog timmar genererades nu på sekunder med betydligt färre fel.',
-      },
-    ]}
-    image={{
-      src: '/images/case-integration.svg',
-      alt: 'Systemintegration och dataflöden',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-1">
-        Smidigare dataflöden utan handpåläggning
-      </h3>
-      <p class="text-sm text-muted mb-4">Systemintegration · API-utveckling · SQL · Automatiserad rapportering</p>
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <Content
-    isReversed
-    isAfterContent
-    items={[
-      {
-        title: 'Utmaning',
-        description:
-          'Varje gång något krånglade på en anläggning tvingades en tekniker att åka ut fysiskt — både dyrt och långsamt.',
-      },
-      {
-        title: 'Lösning',
-        description:
-          'Installerade en säker fjärranslutning som gav teknikerna full tillgång till utrustningen direkt från kontoret eller hemmet.',
-      },
-      {
-        title: 'Resultat',
-        description:
-          'En felsökning som tidigare krävde en hel resdag klarades av på en kvart.',
-      },
-    ]}
-    image={{
-      src: '/images/case-remote.svg',
-      alt: 'Säker fjärråtkomst',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-1">
-        Närhet på distans för snabbare felsökning
-      </h3>
-      <p class="text-sm text-muted mb-4">VPN · Nätverkssegmentering · Fjärråtkomst till PLC/HMI</p>
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <Content
-    isAfterContent
-    items={[
-      {
-        title: 'Utmaning',
-        description:
-          'Tre olika system för att skriva ut etiketter skapade stora problem. Fel etikett på fel produkt ledde till reklamationer och försenade leveranser.',
-      },
-      {
-        title: 'Lösning',
-        description:
-          'Byggde ett enda integrerat system som automatiskt hämtade rätt information och skrev ut exakt rätt etikett oavsett produkttyp.',
-      },
-      {
-        title: 'Resultat',
-        description:
-          'En enda knapp, ett enda system. Alla reklamationer på grund av felmärkning försvann helt.',
-      },
-    ]}
-    image={{
-      src: '/images/case-label.svg',
-      alt: 'Etiketthantering',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-1">
-        Rätt etikett på rätt plats — varje gång
-      </h3>
-      <p class="text-sm text-muted mb-4">Systemintegration · Databaslogik · Utskriftsautomation</p>
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <Content
-    isReversed
-    isAfterContent
-    items={[
-      {
-        title: 'Utmaning',
-        description:
-          'En kabeltillverkare satt med ett egenutvecklat styrsystem som hade blivit så långsamt att det började påverka hela produktionen negativt.',
-      },
-      {
-        title: 'Lösning',
-        description:
-          'Istället för att slänga ut allt och börja om optimerade jag den befintliga koden från grunden — helt utan att behöva ersätta själva systemet.',
-      },
-      {
-        title: 'Resultat',
-        description:
-          'Styrsystemet gick från oanvändbart långsamt till blixtsnabbt och responsivt, vilket sparade kunden flera värdefulla timmar varje dag.',
-      },
-    ]}
-    image={{
-      src: '/images/case-optimize.svg',
-      alt: 'Kodoptimering och prestanda',
-    }}
-  >
-    <Fragment slot="content">
-      <h3 class="text-2xl font-bold tracking-tight dark:text-white sm:text-3xl mb-1">
-        Nytt liv i gamla styrsystem
-      </h3>
-      <p class="text-sm text-muted mb-4">Kodoptimering · PLC-felsökning · Prestandaanalys</p>
-    </Fragment>
-
-    <Fragment slot="bg">
-      <div class="absolute inset-0 bg-slate-50 dark:bg-transparent"></div>
-    </Fragment>
-  </Content>
-
-  <CallToAction
-    actions={[
-      {
-        variant: 'primary',
-        text: 'Berätta om din utmaning',
-        href: '/kontakt',
-        icon: 'tabler:arrow-right',
-      },
-    ]}
-  >
-    <Fragment slot="title">Har du en liknande utmaning?</Fragment>
-    <Fragment slot="subtitle">
-      Beskriv din situation kort, så hör jag av mig för ett förutsättningslöst rådgivningsmöte.
-    </Fragment>
-  </CallToAction>
 </Layout>
+
+<style>
+  .ref-intro-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 1fr;
+    gap: 64px;
+    align-items: start;
+    margin-bottom: 96px;
+  }
+  .ref-body {
+    margin-top: 32px;
+    display: grid; gap: 24px;
+    max-width: 580px;
+  }
+  .ref-body p {
+    font: 400 18px/1.85 var(--font-sans);
+    color: var(--color-body);
+    margin: 0;
+  }
+  .ref-intro-img-wrap {
+    position: sticky; top: 96px;
+    display: flex; flex-direction: column; gap: 16px;
+  }
+  .ref-intro-img {
+    border-radius: 16px;
+    overflow: hidden;
+    box-shadow: var(--elev-5);
+    aspect-ratio: 3/4;
+    background: var(--color-canvas);
+  }
+  .ref-intro-mono {
+    font: 400 12px/18px var(--font-mono);
+    color: var(--color-mute);
+    padding: 12px 16px;
+    background: var(--color-canvas);
+    border-radius: 10px;
+    box-shadow: inset 0 0 0 1px var(--color-hairline);
+  }
+  .ref-intro-mono span:first-child { color: var(--color-body); }
+  @media (max-width: 760px) {
+    .ref-intro-grid { grid-template-columns: 1fr; gap: 40px; }
+    .ref-intro-img-wrap { position: static; }
+  }
+
+  .cases-stack { display: grid; gap: 0; }
+  .case-card {
+    padding: 56px 0;
+    border-top: 1px solid var(--color-hairline);
+    display: grid;
+    grid-template-columns: 300px 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .case-card:last-child { border-bottom: 1px solid var(--color-hairline); }
+  .case-left {
+    position: sticky; top: 96px;
+    display: flex; flex-direction: column; gap: 20px;
+  }
+  .case-meta {
+    font: 400 11px/16px var(--font-mono);
+    color: var(--color-mute);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    display: flex; align-items: center; gap: 8px;
+    white-space: nowrap;
+  }
+  .case-meta-num { color: var(--color-ink); font-weight: 500; }
+  .case-meta-sep { color: var(--color-hairline-strong); }
+  .case-meta-cat { color: var(--color-body); }
+  .case-title {
+    font: 600 clamp(24px, 2.6vw, 30px)/1.15 var(--font-sans);
+    letter-spacing: -0.03em;
+    color: var(--color-ink);
+    margin: 0;
+    text-wrap: balance;
+  }
+  .case-metric-card { display: flex; flex-direction: column; gap: 4px; }
+  .case-metric-row { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
+  .case-metric-num {
+    font: 600 48px/1 var(--font-sans);
+    letter-spacing: -0.04em;
+    color: #0e7a55;
+  }
+  .case-metric-unit {
+    font: 400 14px/1.3 var(--font-sans);
+    color: var(--color-body);
+  }
+  .case-metric-label {
+    font: 400 13px/1.5 var(--font-sans);
+    color: var(--color-mute);
+    margin-top: 4px;
+  }
+  .case-right { display: grid; gap: 4px; }
+  .case-section { padding: 16px 0; }
+  .case-section:first-child { padding-top: 0; }
+  .case-section + .case-section {
+    border-top: 1px solid var(--color-hairline);
+  }
+  .case-section-label {
+    font: 500 11px/16px var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.1em;
+    color: var(--color-mute);
+    display: inline-flex; align-items: center; gap: 10px;
+    margin-bottom: 10px;
+  }
+  .cs-dot {
+    width: 6px; height: 6px; border-radius: 2px;
+    display: inline-block;
+  }
+  .case-section p {
+    font: 400 16px/1.7 var(--font-sans);
+    color: var(--gray-900);
+    margin: 0;
+    max-width: 62ch;
+  }
+  @media (max-width: 880px) {
+    .case-card { grid-template-columns: 1fr; gap: 24px; padding: 40px 0; }
+    .case-left { position: static; }
+  }
+</style>

@@ -1,67 +1,240 @@
 ---
 import Layout from '~/layouts/PageLayout.astro';
-import HeroText from '~/components/widgets/HeroText.astro';
-import ContactUs from '~/components/widgets/Contact.astro';
-import Features2 from '~/components/widgets/Features2.astro';
 
 const metadata = {
   title: 'Kontakt',
+  description: 'Skicka ett mejl eller beskriv din utmaning i formuläret. Carlboms Data är baserat i Lund.',
 };
 ---
 
-<Layout metadata={metadata}>
-  <HeroText
-    tagline="Kontakt"
-    title="Låt oss prata"
-    subtitle="Låt oss prata om hur jag kan få dina system att samarbeta bättre. Carlboms Data är baserat i Lund, men bygger integrationer och broar oavsett var du befinner dig."
-  />
+<Layout metadata={metadata} active="kontakt">
+  <section class="kontakt-section">
+    <div class="kontakt-bg" aria-hidden="true"></div>
 
-  <Features2
-    title="Kontaktuppgifter"
-    columns={3}
-    items={[
-      {
-        title: 'Telefon',
-        description: '073-566 70 46',
-        icon: 'tabler:phone',
-      },
-      {
-        title: 'E-post',
-        description: 'tobias@carlbomsdata.se',
-        icon: 'tabler:mail',
-      },
-      {
-        title: 'Plats',
-        description: 'Baserat i Lund — verksam i hela Sverige',
-        icon: 'tabler:map-pin',
-      },
-    ]}
-  />
+    <div class="container" style="position:relative;">
+      <div class="kontakt-grid">
+        <!-- Left: info -->
+        <div>
+          <div class="eyebrow" style="color:rgba(255,255,255,0.55);">
+            <span style="width:6px;height:6px;border-radius:50%;background:var(--brand-green);display:inline-block;"></span>
+            Kontakt
+          </div>
+          <h2 class="kontakt-heading">Låt oss prata.</h2>
+          <p style="font-size:18px;line-height:1.55;color:rgba(255,255,255,0.78);max-width:480px;margin:0;">
+            Låt oss prata om hur jag kan få dina system att samarbeta bättre. Carlboms Data är baserat i Lund, men bygger integrationer och broar oavsett var du befinner dig.
+          </p>
 
-  <ContactUs
-    id="form"
-    title="Vad skaver just nu?"
-    subtitle="Beskriv din utmaning, så hör jag av mig för ett förutsättningslöst rådgivningsmöte."
-    inputs={[
-      {
-        type: 'text',
-        name: 'name',
-        label: 'Namn',
-      },
-      {
-        type: 'email',
-        name: 'email',
-        label: 'E-post',
-      },
-      {
-        type: 'text',
-        name: 'company',
-        label: 'Företag',
-      },
-    ]}
-    textarea={{
-      label: 'Beskriv din utmaning',
-    }}
-    description="Jag svarar normalt inom 24 timmar."
-  />
+          <div class="kontakt-info">
+            <a href="mailto:hello@carlbomsdata.se" class="kontakt-row">
+              <span class="kontakt-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="4" width="20" height="16" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+              </span>
+              <span class="kontakt-row-text">
+                <span class="kontakt-label">E-post</span>
+                <span class="kontakt-value">hello@carlbomsdata.se</span>
+              </span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+            </a>
+            <a href="https://linkedin.com" target="_blank" rel="noopener noreferrer" class="kontakt-row">
+              <span class="kontakt-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
+              </span>
+              <span class="kontakt-row-text">
+                <span class="kontakt-label">LinkedIn</span>
+                <span class="kontakt-value">Följ Carlboms Data för fler insikter om systemintegration.</span>
+              </span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M7 17L17 7"/><path d="M7 7h10v10"/></svg>
+            </a>
+            <div class="kontakt-row" style="cursor:default;">
+              <span class="kontakt-icon">
+                <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0z"/><circle cx="12" cy="10" r="3"/></svg>
+              </span>
+              <span class="kontakt-row-text">
+                <span class="kontakt-label">Plats</span>
+                <span class="kontakt-value">Lund, Sverige — för hela landet.</span>
+              </span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Right: form -->
+        <form class="kontakt-form" action="mailto:hello@carlbomsdata.se" method="post" enctype="text/plain">
+          <div class="form-header">
+            <div class="form-mono">
+              <span style="width:6px;height:6px;border-radius:50%;background:var(--brand-green);display:inline-block;"></span>
+              Vad skaver just nu?
+            </div>
+            <h3 style="font:600 22px/1.2 var(--font-sans);letter-spacing:-0.02em;color:var(--color-ink);margin:10px 0 6px;">
+              Beskriv din utmaning.
+            </h3>
+            <p style="font:400 14px/20px var(--font-sans);color:var(--color-body);margin:0;">
+              Så hör jag av mig för ett förutsättningslöst rådgivningsmöte.
+            </p>
+          </div>
+
+          <div class="form-row-2">
+            <div class="form-field">
+              <label for="k-name">Namn *</label>
+              <input type="text" id="k-name" name="name" required />
+            </div>
+            <div class="form-field">
+              <label for="k-company">Företag</label>
+              <input type="text" id="k-company" name="company" />
+            </div>
+          </div>
+          <div class="form-field">
+            <label for="k-email">E-post *</label>
+            <input type="email" id="k-email" name="email" required />
+          </div>
+          <div class="form-field">
+            <label for="k-msg">Vad skaver? *</label>
+            <textarea id="k-msg" name="message" required placeholder="T.ex. &quot;PLC pratar inte med affärssystemet. Vi tappar rapportdata.&quot;"></textarea>
+          </div>
+
+          <button type="submit" class="form-submit">
+            Skicka — låt oss prata
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+
+          <div class="form-note">
+            <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+            Din data stannar hos mig. Inga tredjeparter, inga nyhetsbrev.
+          </div>
+        </form>
+      </div>
+    </div>
+  </section>
 </Layout>
+
+<style>
+  .kontakt-section {
+    padding: 96px 0;
+    background: var(--gray-1000);
+    color: #fff;
+    position: relative;
+    overflow: hidden;
+  }
+  .kontakt-bg {
+    position: absolute; inset: 0; opacity: 0.30;
+    background:
+      radial-gradient(at 80% 20%, #16b079 0%, transparent 45%),
+      radial-gradient(at 20% 80%, #007cf0 0%, transparent 45%);
+    filter: blur(60px);
+  }
+  .kontakt-heading {
+    font: 600 clamp(36px, 5vw, 64px)/1.05 var(--font-sans);
+    letter-spacing: -0.035em;
+    color: #fff;
+    margin: 16px 0 24px;
+    text-wrap: balance;
+  }
+
+  .kontakt-grid {
+    display: grid;
+    grid-template-columns: 1.1fr 1fr;
+    gap: 64px;
+    align-items: start;
+  }
+  .kontakt-info {
+    margin-top: 40px;
+    display: grid; gap: 8px;
+    max-width: 480px;
+  }
+  .kontakt-row {
+    display: flex; align-items: center; gap: 16px;
+    padding: 16px 20px;
+    background: rgba(255,255,255,0.04);
+    border-radius: 12px;
+    box-shadow: inset 0 0 0 1px rgba(255,255,255,0.10);
+    color: #fff;
+    text-decoration: none;
+    transition: background-color 120ms ease;
+  }
+  a.kontakt-row:hover { background: rgba(255,255,255,0.09); }
+  .kontakt-icon {
+    width: 36px; height: 36px; border-radius: 10px;
+    background: rgba(22,176,121,0.18);
+    color: var(--brand-green);
+    display: inline-flex; align-items: center; justify-content: center;
+    flex-shrink: 0;
+  }
+  .kontakt-row-text { display: flex; flex-direction: column; flex: 1; }
+  .kontakt-label {
+    font: 400 11px/16px var(--font-mono);
+    color: rgba(255,255,255,0.55);
+    text-transform: uppercase; letter-spacing: 0.08em;
+  }
+  .kontakt-value {
+    font: 500 15px/20px var(--font-sans);
+    color: #fff;
+    margin-top: 2px;
+  }
+
+  .kontakt-form {
+    background: #fff;
+    border-radius: 20px;
+    padding: 32px;
+    box-shadow: 0 30px 60px -20px rgba(0,0,0,0.6), inset 0 0 0 1px rgba(255,255,255,0.1);
+    display: grid; gap: 16px;
+  }
+  .form-header { margin-bottom: 4px; }
+  .form-mono {
+    font: 400 11px/16px var(--font-mono);
+    text-transform: uppercase; letter-spacing: 0.08em;
+    color: var(--color-body);
+    display: inline-flex; align-items: center; gap: 8px;
+  }
+  .form-row-2 {
+    display: grid; grid-template-columns: 1fr 1fr; gap: 12px;
+  }
+  .form-field { display: flex; flex-direction: column; gap: 6px; }
+  .form-field label {
+    font: 500 12px/16px var(--font-sans);
+    color: var(--color-ink);
+  }
+  .form-field input,
+  .form-field textarea {
+    font: 400 15px/22px var(--font-sans);
+    color: var(--color-ink);
+    background: var(--color-canvas-soft);
+    border: 1px solid var(--color-hairline);
+    border-radius: 10px;
+    padding: 12px 14px;
+    outline: none;
+    width: 100%;
+    transition: border-color 120ms ease, box-shadow 120ms ease, background-color 120ms ease;
+    font-family: var(--font-sans);
+  }
+  .form-field textarea {
+    resize: vertical; min-height: 120px;
+  }
+  .form-field input:focus,
+  .form-field textarea:focus {
+    border-color: var(--brand-green);
+    background: #fff;
+    box-shadow: 0 0 0 3px rgba(22,176,121,0.18);
+  }
+  .form-submit {
+    margin-top: 8px;
+    display: inline-flex; align-items: center; justify-content: center; gap: 8px;
+    height: 48px;
+    background: var(--color-ink); color: #fff;
+    border: 0; border-radius: 100px;
+    font: 500 15px/1 var(--font-sans);
+    cursor: pointer;
+    transition: opacity 120ms ease, transform 120ms ease;
+  }
+  .form-submit:hover { opacity: .86; }
+  .form-submit:active { transform: scale(.985); }
+  .form-note {
+    font: 400 12px/16px var(--font-sans);
+    color: var(--color-mute);
+    display: inline-flex; align-items: center; gap: 6px;
+    justify-content: center;
+  }
+
+  @media (max-width: 880px) {
+    .kontakt-grid { grid-template-columns: 1fr; gap: 40px; }
+    .form-row-2 { grid-template-columns: 1fr; }
+  }
+</style>

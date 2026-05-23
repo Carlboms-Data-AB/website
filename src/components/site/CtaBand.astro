@@ -1,0 +1,74 @@
+---
+interface Props {
+  heading?: string;
+  subheading?: string;
+  primaryHref?: string;
+  primaryLabel?: string;
+  secondaryHref?: string;
+  secondaryLabel?: string;
+}
+
+const {
+  heading = 'Låt oss prata.',
+  subheading = 'Berätta vad som skaver, så hör jag av mig.',
+  primaryHref = '/kontakt',
+  primaryLabel = 'Boka rådgivning',
+  secondaryHref,
+  secondaryLabel,
+} = Astro.props;
+---
+
+<section class="cta-band">
+  <div class="container">
+    <div class="cta-band-inner">
+      <div>
+        <h2 class="cta-band-heading">{heading}</h2>
+        <p class="cta-band-sub">{subheading}</p>
+      </div>
+      <div class="cta-band-actions">
+        <a href={primaryHref} class="cta" style="background:#fff;color:var(--color-ink);">
+          {primaryLabel}
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+        </a>
+        {secondaryHref && secondaryLabel && (
+          <a href={secondaryHref} class="cta" style="background:transparent;color:#fff;box-shadow:inset 0 0 0 1px rgba(255,255,255,0.25);">
+            {secondaryLabel}
+          </a>
+        )}
+      </div>
+    </div>
+  </div>
+</section>
+
+<style>
+  .cta-band {
+    background: var(--gray-1000); color: #fff;
+    padding: 64px 0;
+    position: relative;
+    overflow: hidden;
+  }
+  .cta-band::before {
+    content: "";
+    position: absolute; top: -120px; right: -80px;
+    width: 480px; height: 480px;
+    background: radial-gradient(closest-side, rgba(22,176,121,0.30), transparent 70%);
+    filter: blur(40px); pointer-events: none;
+  }
+  .cta-band-inner {
+    display: flex; flex-direction: column; align-items: center; text-align: center;
+    gap: 32px;
+    position: relative;
+  }
+  .cta-band-heading {
+    font: 600 clamp(28px, 3.5vw, 44px)/1.1 var(--font-sans);
+    letter-spacing: -0.03em; color: #fff; margin: 0 0 12px;
+    text-wrap: balance;
+  }
+  .cta-band-sub {
+    font: 400 16px/1.55 var(--font-sans);
+    color: rgba(255,255,255,0.72); margin: 0 auto; max-width: 540px;
+  }
+  .cta-band-actions {
+    display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
+  }
+</style>
