@@ -13,7 +13,8 @@ const cases = [
   {
     cat: 'Övervakning & loggning',
     title: 'Full koll på tunga fordon.',
-    metric: '0', metricUnit: 'kostsamma stopp', metricLabel: 'Driftstatus i webbläsaren — överallt.',
+    metric: '24/7', metricUnit: 'övervakning', metricLabel: 'Planerade driftstopp istället för akuta.',
+    tech: ['Node-RED', 'JavaScript', 'J1939 CAN', 'CODESYS', 'HTTP / REST', 'Webb-HMI', 'Grafana', 'WireGuard', 'UDP / NVL'],
     utmaning: 'Ute i gruvor och smältverk driftades tunga fordon helt utan överblick, vilket innebar att ingen visste hur maskinerna mådde förrän något redan hade gått fel. Dessutom saknades det loggning av fordonens beteende över tid.',
     losning: 'För att lösa detta byggde Carlboms Data ett webbaserat övervaknings- och loggersystem där driftstatus, larm och styrning kunde nås direkt i webbläsaren oavsett var man befann sig.',
     resultat: 'Resultatet blev att problem kunde fångas upp långt innan de förvandlades till kostsamma produktionsstopp och att all driftdata loggades säkert för analys och uppföljning.',
@@ -22,6 +23,7 @@ const cases = [
     cat: 'Systemintegration',
     title: 'Smidigare dataflöden utan handpåläggning.',
     metric: '0', metricUnit: 'manuella inmatningar', metricLabel: 'Rapporter som tog timmar — nu på sekunder.',
+    tech: ['C# / .NET', 'T-SQL', 'ODBC', 'HTTP / REST', 'Grafana'],
     utmaning: 'En kund kämpade med att data från flera olika produktionssystem behövde knappas in för hand i affärssystemet. Det var en process som slukade enormt mycket tid och som gjorde att fel konstant smög sig in i siffrorna.',
     losning: 'Carlboms Data kopplade därför ihop de olika produktionssystemen med affärssystemet så att all data plötsligt flödade helt automatiskt och utan mellanhänder.',
     resultat: 'Efter det krävdes ingen mer manuell inmatning och rapporter, som tidigare tog timmar att ställa samman, genererades nu på sekunder med betydligt färre fel.',
@@ -30,6 +32,7 @@ const cases = [
     cat: 'Säker fjärråtkomst',
     title: 'Närhet på distans för snabbare felsökning.',
     metric: '15', metricUnit: 'minuter', metricLabel: 'Tidigare en hel resdag — nu en kvart.',
+    tech: ['WireGuard', 'VLAN', 'SSH', 'DNS', 'Bash'],
     utmaning: 'Varje gång något krånglade på en anläggning tvingades en tekniker att åka ut fysiskt, vilket var både dyrt och långsamt.',
     losning: 'För att korta ledtiderna installerade Carlboms Data en säker fjärranslutning som gav teknikerna full tillgång till utrustningen direkt från kontoret eller till och med hemmet.',
     resultat: 'Det skapade ett helt nytt och effektivt flöde: en felsökning som tidigare krävde en hel resdag klarades av på en kvart.',
@@ -37,17 +40,19 @@ const cases = [
   {
     cat: 'Lagerautomation',
     title: 'Rätt etikett på rätt plats — varje gång.',
-    metric: '0', metricUnit: 'reklamationer', metricLabel: 'Tre system ersattes av en knapp.',
+    metric: '1', metricUnit: 'system', metricLabel: 'Full spårbarhet — färre reklamationer.',
+    tech: ['C# / .NET', 'Python', 'C++', 'T-SQL', 'ODBC', 'HTTP / REST'],
     utmaning: 'På ett lager användes tre olika system för att skriva ut etiketter, vilket skapade stora problem. Fel etikett på fel produkt ledde till reklamationer och försenade leveranser.',
-    losning: 'Carlboms Data klev in och byggde ett enda integrerat system som automatiskt hämtade rätt information och skrev ut exakt rätt etikett oavsett produkttyp.',
-    resultat: 'Plötsligt räckte det med en enda knapp och ett enda system, vilket ledde till att alla reklamationer på grund av felmärkning försvann helt.',
+    losning: 'Carlboms Data analyserade de befintliga systemen och byggde ett enda integrerat system som automatiskt hämtade rätt information och skrev ut exakt rätt etikett oavsett produkttyp. I lösningen ingick också ett egenutvecklat designverktyg där användarna själva kunde designa och bygga etiketter on the fly.',
+    resultat: 'Nu räcker det med ett enda system — främst med ökad spårbarhet, betydligt färre reklamationer på grund av felmärkning, och full flexibilitet att skapa nya etiketter direkt när behovet uppstår.',
   },
   {
     cat: 'Optimering',
     title: 'Nytt liv i gamla styrsystem.',
-    metric: '10×', metricUnit: 'snabbare', metricLabel: 'Kabeltillverkare — utan att byta ut systemet.',
-    utmaning: 'En kabeltillverkare satt med ett egenutvecklat styrsystem som hade blivit så långsamt att det började påverka hela produktionen negativt.',
-    losning: 'Men istället för att slänga ut allt och börja om gick Carlboms Data in och optimerade den befintliga koden från grunden, helt utan att behöva ersätta själva systemet.',
+    metric: '10×', metricUnit: 'snabbare', metricLabel: 'Systemoptimering — utan att byta ut systemet.',
+    tech: ['C# / .NET', 'WPF', 'ODBC'],
+    utmaning: 'En kabeltillverkare hade ett egenutvecklat styrsystem som blivit så långsamt att det började påverka hela produktionen negativt.',
+    losning: 'Men istället för att slänga ut allt och börja om optimerade Carlboms Data den befintliga koden från grunden, helt utan att behöva ersätta själva systemet.',
     resultat: 'Resultatet blev att styrsystemet gick från att vara oanvändbart långsamt till att bli blixtsnabbt och responsivt, vilket sparade kunden flera värdefulla timmar varje dag.',
   },
 ];
@@ -98,6 +103,14 @@ const cases = [
                 </div>
                 <div class="case-metric-label">{c.metricLabel}</div>
               </div>
+              {c.tech && c.tech.length > 0 && (
+                <div class="case-tech">
+                  <div class="case-tech-label">Tekniker</div>
+                  <div class="case-tech-chips">
+                    {c.tech.map((t: string) => <span class="case-tech-chip">{t}</span>)}
+                  </div>
+                </div>
+              )}
             </div>
             <div class="case-right">
               <div class="case-section">
@@ -223,9 +236,34 @@ const cases = [
     color: var(--color-body);
   }
   .case-metric-label {
-    font: 400 13px/1.5 var(--font-sans);
-    color: var(--color-mute);
+    font: 500 16px/1.45 var(--font-sans);
+    color: var(--color-ink);
+    letter-spacing: -0.01em;
     margin-top: 4px;
+  }
+  .case-tech {
+    margin-top: 24px;
+    padding-top: 20px;
+    border-top: 1px solid var(--color-hairline);
+  }
+  .case-tech-label {
+    font: 400 11px/16px var(--font-mono);
+    color: var(--color-mute);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    margin-bottom: 10px;
+  }
+  .case-tech-chips {
+    display: flex; flex-wrap: wrap; gap: 6px;
+  }
+  .case-tech-chip {
+    display: inline-flex; align-items: center;
+    padding: 4px 10px; border-radius: 100px;
+    background: var(--color-canvas);
+    font: 400 12px/16px var(--font-mono);
+    color: var(--color-body);
+    box-shadow: inset 0 0 0 1px var(--color-hairline);
+    white-space: nowrap;
   }
   .case-right { display: grid; gap: 4px; }
   .case-section { padding: 16px 0; }
