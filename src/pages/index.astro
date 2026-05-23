@@ -4,7 +4,7 @@ import CtaBand from '~/components/site/CtaBand.astro';
 
 const metadata = {
   title: 'Carlboms Data — Relationsexperten för systemintegration',
-  description: 'Carlboms Data är den oberoende systemintegratören som bygger broar mellan IT och OT. Skräddarsydda lösningar, öppen källkod, direktkontakt med experten.',
+  description: 'Carlboms Data är den oberoende systemintegratören som bygger broar mellan IT och OT. Skräddarsydda lösningar, ingen inlåsning, direktkontakt med experten.',
   ignoreTitleTemplate: true,
 };
 
@@ -19,7 +19,7 @@ const kompetensOmraden = [
 
 const uspList = [
   { icon: 'git-merge', title: 'Teknisk medlare mellan IT och OT', body: 'Jag hjälper dig att bryta ner silotänkandet och bygga säkra integrationer som möter både produktionens realtidsstrikta krav och IT-sidans säkerhetsprotokoll.' },
-  { icon: 'lock-open', title: 'Skräddarsydd arkitektur med öppen källkod', body: 'Äkta relationer bygger på frihet. Därför undviker jag proprietära "svarta lådor" och skapar transparenta lösningar där du alltid äger din egen kod.' },
+  { icon: 'lock-open', title: 'Skräddarsydd arkitektur utan inlåsning', body: 'Äkta relationer bygger på frihet. Därför undviker jag proprietära "svarta lådor" och skapar transparenta lösningar där du alltid äger din egen kod.' },
   { icon: 'bolt', title: 'Agilt och personligt', body: 'Med Carlboms Data får du korta beslutsvägar och direktkontakt med experten. Inga juniora konsulter eller byråkratiska startsträckor. Tillsammans börjar vi lösa problemet direkt.' },
 ];
 
@@ -48,8 +48,8 @@ const iconPaths: Record<string, string> = {
         <h1 class="display-hero">
           Relationsexperten för<br/>systemintegration.
         </h1>
-        <p class="lead" style="margin-top:28px;max-width:680px;margin-left:auto;margin-right:auto;">
-          Alla bra relationer kräver fungerande kommunikation. Särskilt när OT ska prata med IT.
+        <p class="lead" style="margin-top:28px;max-width:720px;margin-left:auto;margin-right:auto;">
+          Alla bra relationer kräver fungerande kommunikation. Särskilt när OT ska prata med IT. Talar systemen förbi varandra? Då finns jag där — med skräddarsydda lösningar och kod du själv äger.
         </p>
         <div class="hero-actions">
           <a href="/kontakt" class="cta">
@@ -58,20 +58,6 @@ const iconPaths: Record<string, string> = {
           </a>
           <a href="/tjanster" class="cta secondary">Se mina tjänster</a>
         </div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Brand Story -->
-  <section class="section tight">
-    <div class="container">
-      <div class="brand-story-inner">
-        <p class="brand-story-lead">
-          Alla bra relationer kräver fungerande kommunikation. Det gäller även maskiner och IT-system. Så om de talar förbi varandra, finns jag där.
-        </p>
-        <p class="brand-story-body">
-          Med lång erfarenhet, skräddarsydda lösningar och programvara med öppen källkod är Carlboms Data din relationsexpert som bygger broar mellan system.
-        </p>
       </div>
     </div>
   </section>
@@ -181,24 +167,6 @@ const iconPaths: Record<string, string> = {
   .hero-actions {
     display: flex; gap: 12px; justify-content: center;
     margin-top: 36px; flex-wrap: wrap;
-  }
-
-  .brand-story-inner {
-    max-width: 820px;
-    margin: 0 auto;
-    text-align: center;
-  }
-  .brand-story-lead {
-    margin: 0 0 24px;
-    font: 500 clamp(22px, 2.6vw, 30px)/1.4 var(--font-sans);
-    letter-spacing: -0.02em;
-    color: var(--color-ink);
-    text-wrap: balance;
-  }
-  .brand-story-body {
-    margin: 0;
-    font: 400 18px/1.6 var(--font-sans);
-    color: var(--color-body);
   }
 
   .section-intro-center {
