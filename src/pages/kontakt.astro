@@ -58,7 +58,7 @@ const metadata = {
         </div>
 
         <!-- Right: form -->
-        <form class="kontakt-form" action="mailto:hello@carlbomsdata.se" method="post" enctype="text/plain">
+        <form class="kontakt-form" id="kontakt-form">
           <div class="form-header">
             <div class="form-mono">
               <span style="width:6px;height:6px;border-radius:50%;background:var(--brand-green);display:inline-block;"></span>
@@ -74,12 +74,12 @@ const metadata = {
 
           <div class="form-row-2">
             <div class="form-field">
-              <label for="k-name">Namn *</label>
-              <input type="text" id="k-name" name="name" required />
+              <label for="k-namn">Namn *</label>
+              <input type="text" id="k-namn" name="namn" required />
             </div>
             <div class="form-field">
-              <label for="k-company">Företag</label>
-              <input type="text" id="k-company" name="company" />
+              <label for="k-foretag">Företag</label>
+              <input type="text" id="k-foretag" name="foretag" />
             </div>
           </div>
           <div class="form-field">
@@ -87,14 +87,26 @@ const metadata = {
             <input type="email" id="k-email" name="email" required />
           </div>
           <div class="form-field">
-            <label for="k-msg">Vad skaver? *</label>
-            <textarea id="k-msg" name="message" required placeholder="T.ex. &quot;PLC pratar inte med affärssystemet. Vi tappar rapportdata.&quot;"></textarea>
+            <label for="k-meddelande">Vad skaver? *</label>
+            <textarea id="k-meddelande" name="meddelande" required placeholder="T.ex. &quot;PLC pratar inte med affärssystemet. Vi tappar rapportdata.&quot;"></textarea>
           </div>
+          <input type="text" name="website" style="position:absolute;left:-9999px;opacity:0;height:0;" tabindex="-1" autocomplete="off" />
 
-          <button type="submit" class="form-submit">
-            Skicka — låt oss prata
-            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          <button type="submit" class="form-submit" id="kontakt-submit">
+            <span class="submit-label">Skicka — låt oss prata
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+            </span>
+            <span class="submit-sending" style="display:none;">Skickar…</span>
           </button>
+
+          <div class="form-status form-success" id="form-success" style="display:none;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            Tack! Jag hör av mig inom kort.
+          </div>
+          <div class="form-status form-error" id="form-error" style="display:none;">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
+            Något gick fel. Försök igen eller maila <a href="mailto:hello@carlbomsdata.se">hello@carlbomsdata.se</a>.
+          </div>
 
           <div class="form-note">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
@@ -233,8 +245,65 @@ const metadata = {
     justify-content: center;
   }
 
+  .form-status {
+    font: 500 14px/20px var(--font-sans);
+    padding: 12px 16px;
+    border-radius: 10px;
+    display: inline-flex; align-items: center; gap: 8px;
+    justify-content: center;
+  }
+  .form-success {
+    background: rgba(22,176,121,0.08);
+    color: var(--brand-green-deep);
+  }
+  .form-error {
+    background: rgba(220,38,38,0.06);
+    color: #b91c1c;
+  }
+  .form-error a { color: inherit; text-decoration: underline; }
+  .form-submit:disabled {
+    opacity: 0.55;
+    cursor: not-allowed;
+  }
+
   @media (max-width: 880px) {
     .kontakt-grid { grid-template-columns: 1fr; gap: 40px; }
     .form-row-2 { grid-template-columns: 1fr; }
   }
 </style>
+
+<script>
+  const FORM_API = "https://carlbomsdata-form-submission.anvil.app/_/api/contact";
+
+  document.getElementById("kontakt-form")?.addEventListener("submit", async (e) => {
+    e.preventDefault();
+    const form = e.currentTarget;
+    const btn = document.getElementById("kontakt-submit");
+    const successEl = document.getElementById("form-success");
+    const errorEl = document.getElementById("form-error");
+
+    successEl.style.display = "none";
+    errorEl.style.display = "none";
+    btn.disabled = true;
+    btn.querySelector(".submit-label").style.display = "none";
+    btn.querySelector(".submit-sending").style.display = "inline";
+
+    try {
+      const data = Object.fromEntries(new FormData(form));
+      const res = await fetch(FORM_API, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(data),
+      });
+      if (!res.ok) throw new Error(res.statusText);
+      form.reset();
+      successEl.style.display = "inline-flex";
+    } catch {
+      errorEl.style.display = "inline-flex";
+    } finally {
+      btn.disabled = false;
+      btn.querySelector(".submit-label").style.display = "inline-flex";
+      btn.querySelector(".submit-sending").style.display = "none";
+    }
+  });
+</script>
