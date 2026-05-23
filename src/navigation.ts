@@ -8,7 +8,7 @@ export const headerData = {
     },
     {
       text: 'Referenser',
-      href: getPermalink('/case'),
+      href: getPermalink('/referenser'),
     },
     {
       text: 'Om Carlboms Data',
@@ -36,7 +36,7 @@ export const footerData = {
       title: 'Carlboms Data',
       links: [
         { text: 'Om mig', href: getPermalink('/om') },
-        { text: 'Referenser', href: getPermalink('/case') },
+        { text: 'Referenser', href: getPermalink('/referenser') },
         { text: 'Kontakt', href: getPermalink('/kontakt') },
       ],
     },
