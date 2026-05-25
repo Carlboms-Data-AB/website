@@ -46,7 +46,7 @@ const iconPaths: Record<string, string> = {
     <div class="container hero-content">
       <div class="hero-center">
         <h1 class="display-hero">
-          Relationsexperten för<br/>systemintegration.
+          Relationsexperten för systemintegration.
         </h1>
         <p class="lead" style="margin-top:28px;max-width:720px;margin-left:auto;margin-right:auto;">
           Alla bra relationer kräver fungerande kommunikation. Särskilt när OT ska prata med IT. Talar systemen förbi varandra? Då finns jag där — med skräddarsydda lösningar och kod du själv äger.
@@ -167,6 +167,11 @@ const iconPaths: Record<string, string> = {
   .hero-actions {
     display: flex; gap: 12px; justify-content: center;
     margin-top: 36px; flex-wrap: wrap;
+  }
+  @media (max-width: 640px) {
+    .hero-content { padding-top: 56px; padding-bottom: 48px; }
+    .hero-actions { flex-direction: column; align-items: stretch; }
+    .hero-actions .cta { justify-content: center; height: 48px; font-size: 15px; padding: 0 20px; }
   }
 
   .section-intro-center {
