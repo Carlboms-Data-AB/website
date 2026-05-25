@@ -58,7 +58,7 @@ const steg = [
 
       <!-- Kompetensområden -->
       <div class="kompetens-wrap">
-        <div style="margin:0 auto 40px;text-align:center;">
+        <div class="kompetens-intro">
           <div class="eyebrow" style="justify-content:center;"><span class="dot"></span>Mina kompetensområden</div>
         </div>
 
@@ -114,7 +114,7 @@ const steg = [
 
       <!-- Metod -->
       <div class="metod-section">
-        <div style="margin:0 auto 56px;max-width:620px;text-align:center;">
+        <div class="metod-intro">
           <div class="eyebrow" style="justify-content:center;"><span class="dot"></span>Metod</div>
           <h3 style="font:600 clamp(28px, 3.2vw, 40px)/1.1 var(--font-sans);letter-spacing:-0.03em;margin:12px 0 16px;color:var(--color-ink);">
             En beprövad process i fyra steg.
@@ -295,6 +295,8 @@ const steg = [
     .sprak-section { padding: 48px 24px; margin-bottom: 64px; }
   }
 
+  .kompetens-intro { margin: 0 auto 40px; text-align: center; }
+  .metod-intro { margin: 0 auto 56px; max-width: 620px; text-align: center; }
   .metod-section { padding-top: 24px; padding-bottom: 24px; }
   .metod-timeline { list-style: none; margin: 0; padding: 0; }
   .metod-row {
@@ -359,6 +361,8 @@ const steg = [
     margin: 0; max-width: 640px;
   }
   @media (max-width: 640px) {
+    .kompetens-intro { margin-bottom: 28px; }
+    .metod-intro { margin-bottom: 36px; }
     .metod-row {
       grid-template-columns: 40px 1fr;
       gap: 20px; padding: 24px 0 32px;

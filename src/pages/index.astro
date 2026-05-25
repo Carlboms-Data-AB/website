@@ -90,8 +90,8 @@ const iconPaths: Record<string, string> = {
         ))}
       </div>
 
-      <div style="margin-top:28px;display:flex;justify-content:center;">
-        <a href="/tjanster" class="cta secondary" style="height:44px;font-size:14px;">
+      <div class="kompetens-cta-wrap">
+        <a href="/tjanster" class="cta secondary kompetens-cta">
           Se alla tjänster i detalj
           <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
         </a>
@@ -227,5 +227,19 @@ const iconPaths: Record<string, string> = {
   }
   @media (max-width: 880px) {
     .usp-grid { grid-template-columns: 1fr; }
+  }
+  .kompetens-cta-wrap {
+    margin-top: 28px; display: flex; justify-content: center;
+  }
+  .kompetens-cta {
+    height: 44px; font-size: 14px;
+  }
+  @media (max-width: 640px) {
+    .section-intro-center { margin-bottom: 32px; }
+    .kompetens-card { padding: 20px; }
+    .kompetens-cta-wrap { margin-top: 20px; }
+    .kompetens-cta { width: 100%; justify-content: center; }
+    .usp-card { padding: 24px; }
+    .usp-icon { width: 40px; height: 40px; margin-bottom: 20px; }
   }
 </style>
