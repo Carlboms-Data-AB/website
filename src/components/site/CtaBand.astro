@@ -71,4 +71,9 @@ const {
   .cta-band-actions {
     display: flex; gap: 12px; flex-wrap: wrap; justify-content: center;
   }
+  @media (max-width: 480px) {
+    .cta-band { padding: 48px 0; }
+    .cta-band-actions { flex-direction: column; align-items: stretch; width: 100%; }
+    .cta-band-actions .cta { justify-content: center; height: 48px; font-size: 15px; }
+  }
 </style>

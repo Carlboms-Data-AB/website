@@ -57,7 +57,7 @@ const steg = [
       </div>
 
       <!-- Kompetensområden -->
-      <div style="margin-bottom:96px;">
+      <div class="kompetens-wrap">
         <div style="margin:0 auto 40px;text-align:center;">
           <div class="eyebrow" style="justify-content:center;"><span class="dot"></span>Mina kompetensområden</div>
         </div>
@@ -195,10 +195,12 @@ const steg = [
   }
   .offer-intro-mono span:first-child { color: var(--color-body); }
   @media (max-width: 760px) {
-    .offer-intro-grid { grid-template-columns: 1fr; gap: 40px; }
+    .offer-intro-grid { grid-template-columns: 1fr; gap: 40px; margin-bottom: 64px; }
     .offer-intro-img-wrap { position: static; }
+    .offer-body p { font-size: 16px; line-height: 1.7; }
   }
 
+  .kompetens-wrap { margin-bottom: 96px; }
   .kompetens-long {
     display: grid; gap: 0;
     border-top: 1px solid var(--color-hairline);
@@ -239,6 +241,7 @@ const steg = [
     white-space: nowrap;
   }
   @media (max-width: 640px) {
+    .kompetens-wrap { margin-bottom: 64px; }
     .kompetens-long-card {
       grid-template-columns: 48px 1fr;
       gap: 16px;
@@ -289,7 +292,7 @@ const steg = [
   .sprak-pill:hover { background: rgba(255,255,255,0.12); }
   @media (max-width: 760px) {
     .sprak-cols { grid-template-columns: 1fr; gap: 32px; }
-    .sprak-section { padding: 48px 24px; }
+    .sprak-section { padding: 48px 24px; margin-bottom: 64px; }
   }
 
   .metod-section { padding-top: 24px; padding-bottom: 24px; }
