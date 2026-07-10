@@ -12,14 +12,14 @@ Företagssajt for Carlboms Data AB. Statisk sajt byggd med Astro och Tailwind CS
 
 ## Sidor
 
+Sajten är en one-page med ankarnavigering. Allt innehåll ligger i `index.astro`.
+
 | Sökväg | Fil | Beskrivning |
 |---|---|---|
-| `/` | `index.astro` | Startsida med hero, kompetenser, USP:er |
-| `/tjanster` | `tjanster.astro` | Tjänsteöversikt, teknikstack, metod |
-| `/referenser` | `referenser.astro` | Fem kundcase med teknikchips |
-| `/om` | `om.astro` | Om Carlboms Data, värderingar |
-| `/kontakt` | `kontakt.astro` | Kontaktformulär (Anvil-backend) |
+| `/` | `index.astro` | One-page: hero, tjänster, referenser, om, kontaktformulär (Anvil-backend) |
 | `/404` | `404.astro` | Felsida |
+
+Navigeringen (`#tjanster`, `#referenser`, `#om`, `#kontakt`) scrollar mellan sektionerna på startsidan.
 
 ## Kom igång
 
