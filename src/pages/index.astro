@@ -32,7 +32,6 @@ const cases = [
     cat: 'Övervakning & loggning',
     kund: 'Tillverkare av tunga industrifordon',
     title: 'Full koll på tunga fordon.',
-    metric: '24/7', metricUnit: 'övervakning', metricLabel: 'Planerade driftstopp istället för akuta.',
     tech: ['Node-RED', 'JavaScript', 'J1939 CAN', 'CODESYS', 'Webb-HMI', 'Grafana', 'WireGuard'],
     utmaning: 'Tunga fordon användes i gruvor och smältverk utan samlad övervakning eller historisk loggning. Problem upptäcktes först när något redan hade gått fel.',
     losning: 'Jag byggde ett webbaserat system för övervakning och loggning. Driftstatus, larm och styrning blev tillgängliga direkt i webbläsaren, oavsett var fordonet befann sig.',
@@ -42,7 +41,6 @@ const cases = [
     cat: 'Modernisering & virtualisering',
     kund: 'Tillverkningsföretag med äldre visionsystem',
     title: 'Ett äldre visionsystem i fortsatt drift.',
-    metric: '1', metricUnit: 'virtuell maskin', metricLabel: 'Det befintliga produktionssystemet är i drift på ny hårdvara.',
     tech: ['VMware Workstation', 'Windows XP Embedded', 'GigE Vision', 'WAGO PLC', 'MOXA NPort', 'Seriell kommunikation'],
     utmaning: 'Ett äldre visionsystem stod stilla efter att industridatorns moderkort gått sönder. Reservdelar gick inte längre att få tag på från leverantören.',
     losning: 'Jag återskapade den befintliga systemmiljön som en virtuell maskin och flyttade den till ny hårdvara.',
@@ -52,7 +50,6 @@ const cases = [
     cat: 'Säker fjärråtkomst',
     kund: 'Industriföretag med geografiskt spridda anläggningar',
     title: 'Närhet på distans för snabbare felsökning.',
-    metric: '15', metricUnit: 'minuter', metricLabel: 'Tidigare en hel resdag — nu en kvart.',
     tech: ['WireGuard', 'VLAN', 'SSH', 'DNS', 'Bash'],
     utmaning: 'När ett fel uppstod behövde en tekniker resa till anläggningen för att felsöka på plats. Det gjorde varje insats både dyr och långsam.',
     losning: 'Jag satte upp en säker fjärranslutning som gav teknikerna tillgång till utrustningen direkt från kontoret.',
@@ -62,7 +59,6 @@ const cases = [
     cat: 'Lagerautomation',
     kund: 'Tillverkningsföretag med lagerverksamhet',
     title: 'Rätt etikett på rätt plats — varje gång.',
-    metric: '1', metricUnit: 'system', metricLabel: 'Full spårbarhet — färre reklamationer.',
     tech: ['C# / .NET', 'Python', 'C++', 'T-SQL', 'ODBC', 'HTTP / REST'],
     utmaning: 'Tre olika system användes för etikettutskrift. Fel etikett kunde hamna på fel produkt, vilket orsakade reklamationer och försenade leveranser.',
     losning: 'Jag ersatte de separata flödena med ett integrerat system som automatiskt hämtade rätt information och skrev ut rätt etikett för varje produkt. Användarna fick också ett verktyg för att själva skapa och ändra etikettmallar.',
@@ -72,7 +68,6 @@ const cases = [
     cat: 'Optimering',
     kund: 'Svensk kabeltillverkare',
     title: 'Nytt liv i gamla styrsystem.',
-    metric: '10×', metricUnit: 'snabbare', metricLabel: 'Systemoptimering — utan att byta ut systemet.',
     tech: ['C# / .NET', 'WPF', 'ODBC'],
     utmaning: 'Ett egenutvecklat styrsystem hade blivit så långsamt att det påverkade produktionen.',
     losning: 'Jag optimerade den befintliga koden i stället för att ersätta hela systemet.',
@@ -187,13 +182,6 @@ const iconPaths: Record<string, string> = {
               </div>
               <h3 class="case-title">{c.title}</h3>
               <div class="case-kund">{c.kund}</div>
-              <div class="case-metric-card">
-                <div class="case-metric-row">
-                  <span class="case-metric-num">{c.metric}</span>
-                  <span class="case-metric-unit">{c.metricUnit}</span>
-                </div>
-                <div class="case-metric-label">{c.metricLabel}</div>
-              </div>
               <div class="case-tech">
                 <div class="case-tech-label">Tekniker</div>
                 <div class="case-tech-chips">
@@ -462,12 +450,7 @@ const iconPaths: Record<string, string> = {
     color: var(--color-body);
     margin-top: -8px;
   }
-  .case-metric-card { display: flex; flex-direction: column; gap: 4px; }
-  .case-metric-row { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
-  .case-metric-num { font: 600 48px/1 var(--font-sans); letter-spacing: -0.04em; color: #0e7a55; }
-  .case-metric-unit { font: 400 14px/1.3 var(--font-sans); color: var(--color-body); }
-  .case-metric-label { font: 500 16px/1.45 var(--font-sans); color: var(--color-ink); letter-spacing: -0.01em; margin-top: 4px; }
-  .case-tech { margin-top: 24px; padding-top: 20px; border-top: 1px solid var(--color-hairline); }
+  .case-tech { padding-top: 20px; border-top: 1px solid var(--color-hairline); }
   .case-tech-label { font: 400 11px/16px var(--font-mono); color: var(--color-mute); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
   .case-tech-chips { display: flex; flex-wrap: wrap; gap: 6px; }
   .case-tech-chip {
@@ -491,7 +474,6 @@ const iconPaths: Record<string, string> = {
   }
   @media (max-width: 640px) {
     .case-card { padding: 32px 0; }
-    .case-metric-num { font-size: 40px; }
     .case-section p { font-size: 15px; }
   }
 
