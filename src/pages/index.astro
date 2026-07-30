@@ -11,12 +11,12 @@ const metadata = {
 
 // Kompetensområden — de två positioneringspelarna först, därefter djupet
 const tjanster = [
-  { icon: 'git-merge', title: 'MES/ERP-integration', body: 'Integrerar affärssystem, produktionssystem och databaser så att information flödar automatiskt mellan systemen.', chips: ['MES / ERP', 'SQL', 'API'] },
-  { icon: 'code', title: 'Specialutvecklade program', body: 'När standardlösningar inte räcker bygger jag det som gör exakt det verksamheten behöver.', chips: ['C# / .NET', 'Python', 'SQL'] },
-  { icon: 'cpu', title: 'Automation och styrsystem', body: 'Programmering, felsökning och optimering av styrsystem för en stabil och effektiv produktion.', chips: ['CODESYS', 'Structured Text', 'J1939'] },
-  { icon: 'monitor', title: 'Operatörsgränssnitt och övervakning', body: 'Rätt information till rätt person — i produktionen och på kontoret.', chips: ['WinCC', 'FUXA', 'Grafana'] },
-  { icon: 'shield-check', title: 'Säker fjärråtkomst', body: 'Era tekniker kommer åt maskiner och produktionssystem utan att åka ut på plats.', chips: ['WireGuard', 'VLAN', 'SSH'] },
-  { icon: 'search', title: 'Felsökning av befintliga system', body: 'Jag hittar grundorsaken till problemen — även när flera system är inblandade.', chips: ['Root-cause', 'Prestanda', 'Akut support'] },
+  { icon: 'git-merge', title: 'Systemintegration', body: 'Jag integrerar affärssystem, produktionssystem och databaser så att informationen flödar automatiskt mellan systemen.', chips: ['MES / ERP', 'SQL', 'API'] },
+  { icon: 'code', title: 'Specialutvecklade verktyg', body: 'Jag utvecklar verktyg för de behov där standardlösningar inte räcker.', chips: ['C# / .NET', 'Python', 'SQL'] },
+  { icon: 'cpu', title: 'Automation & PLC', body: 'Programmering, felsökning och optimering av styrsystem för en stabil och effektiv produktion.', chips: ['CODESYS', 'Structured Text', 'J1939'] },
+  { icon: 'monitor', title: 'HMI, SCADA & övervakning', body: 'Operatörsgränssnitt och övervakning som ger rätt information till rätt person.', chips: ['WinCC', 'FUXA', 'Grafana'] },
+  { icon: 'shield-check', title: 'Nätverk & fjärråtkomst', body: 'Säker fjärråtkomst till maskiner och produktionssystem.', chips: ['WireGuard', 'VLAN', 'SSH'] },
+  { icon: 'search', title: 'Felsökning & optimering', body: 'Jag hittar grundorsaken till problemen — även när flera system är inblandade.', chips: ['Root-cause', 'Prestanda', 'Akut support'] },
 ];
 
 // Konkurrensfördelar — samlade på ett ställe i stället för utspridda i löptext
@@ -89,12 +89,15 @@ const iconPaths: Record<string, string> = {
         <p class="lead" style="margin-top:28px;max-width:720px;margin-left:auto;margin-right:auto;">
           MES/ERP-integration och specialutvecklade verktyg för tillverkningsindustrin.
         </p>
+        <p class="hero-note">
+          Jag arbetar med både IT och automation och kan därför ta ansvar för hela lösningen — från produktionen till affärssystemet.
+        </p>
         <div class="hero-actions">
           <a href="#kontakt" class="cta">
             Boka ett rådgivningssamtal
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </a>
-          <a href="#tjanster" class="cta secondary">Se mina tjänster</a>
+          <a href="#referenser" class="cta secondary">Se referenser</a>
         </div>
       </div>
     </div>
@@ -223,7 +226,7 @@ const iconPaths: Record<string, string> = {
           <h2 class="display-section" style="margin-top:14px;">Jag arbetar i båda världarna.</h2>
           <div class="om-body">
             <p>Jag heter Tobias Carlbom. Jag har arbetat med programmering, automation och systemintegration i många år — och det roligaste är fortfarande att lösa problem där flera system måste samarbeta.</p>
-            <p>De flesta konsulter arbetar antingen med IT eller med automation. Jag arbetar i båda världarna och bygger lösningarna mellan dem. Därför kan jag ta ansvar för hela lösningen i stället för en liten del av den — ingen behöver stå emellan och tolka, och ansvaret faller aldrig mellan två leverantörer.</p>
+            <p>De flesta konsulter arbetar antingen med IT eller med automation. Det som gör Carlboms Data annorlunda är att jag arbetar med båda. Därför kan jag förstå hela kedjan och ta ansvar för lösningen mellan produktionen och affärssystemet — ingen behöver stå emellan och tolka, och ansvaret faller aldrig mellan två leverantörer.</p>
             <p>I en bransch där systemintegration ofta handlar om att sälja in stora plattformar och låsa in kunden, ville jag vara en prestigelös motreaktion. Det är därför jag bygger broar mellan de två världarna — med robusta, skräddarsydda lösningar som håller över tid. Och det är därför jag alltid låter er äga koden.</p>
           </div>
           <div class="om-sig">
@@ -280,10 +283,10 @@ const iconPaths: Record<string, string> = {
         <form class="kontakt-form" id="kontakt-form">
           <div class="form-header">
             <h3 style="font:600 22px/1.2 var(--font-sans);letter-spacing:-0.02em;color:var(--color-ink);margin:0 0 6px;">
-              Beskriv er utmaning.
+              Ett förutsättningslöst samtal.
             </h3>
             <p style="font:400 14px/20px var(--font-sans);color:var(--color-body);margin:0;">
-              Så hör jag av mig för ett förutsättningslöst rådgivningsmöte.
+              Berätta vad som behöver lösas, så hör jag av mig.
             </p>
           </div>
 
@@ -302,7 +305,7 @@ const iconPaths: Record<string, string> = {
             <input type="email" id="k-email" name="email" required />
           </div>
           <div class="form-field">
-            <label for="k-meddelande">Vad behöver ni hjälp med? *</label>
+            <label for="k-meddelande">Beskriv er utmaning *</label>
             <textarea id="k-meddelande" name="meddelande" required placeholder="T.ex. &quot;PLC pratar inte med affärssystemet. Vi tappar rapportdata.&quot;"></textarea>
           </div>
           <input type="text" name="website" style="position:absolute;left:-9999px;opacity:0;height:0;" tabindex="-1" autocomplete="off" />
@@ -353,6 +356,15 @@ const iconPaths: Record<string, string> = {
     mask-image: radial-gradient(ellipse at 50% 35%, #000 25%, transparent 75%);
     -webkit-mask-image: radial-gradient(ellipse at 50% 35%, #000 25%, transparent 75%);
   }
+  .hero-note {
+    font: 400 16px/1.6 var(--font-sans);
+    color: var(--gray-700);
+    max-width: 620px;
+    margin: 18px auto 0;
+    text-wrap: pretty;
+  }
+  @media (max-width: 640px) { .hero-note { font-size: 15px; margin-top: 14px; } }
+
   .hero-content { position: relative; z-index: 1; padding-top: 104px; padding-bottom: 80px; }
   .hero-center { text-align: center; max-width: 920px; margin: 0 auto; }
   .hero-actions { display: flex; gap: 12px; justify-content: center; margin-top: 36px; flex-wrap: wrap; }
