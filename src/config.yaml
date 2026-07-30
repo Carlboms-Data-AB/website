@@ -59,7 +59,7 @@ apps:
 analytics:
   vendors:
     googleAnalytics:
-      id: null
+      id: G-M0ZJJLLGBF
 
 ui:
   theme: 'light:only'
