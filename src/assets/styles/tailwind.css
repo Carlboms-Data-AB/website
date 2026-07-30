@@ -5,9 +5,6 @@
 :root {
   --color-primary: #171717;
   --color-ink: #171717;
-  --color-cyan: #50e3c2;
-  --color-highlight-pink: #ff0080;
-  --color-violet: #7928ca;
   --color-link: #0070f3;
 
   --color-canvas: #ffffff;
@@ -73,14 +70,6 @@ html { scroll-behavior: smooth; }
   position: relative;
 }
 .section.tight { padding: 64px 0; }
-.section.dark {
-  background: var(--gray-1000);
-  color: var(--color-on-primary);
-}
-.section.dark p,
-.section.dark .body-lg,
-.section.dark .body-md { color: rgba(255,255,255,0.72); }
-.section.dark .eyebrow { color: rgba(255,255,255,0.55); }
 @media (max-width: 640px) {
   .section { padding: 48px 0; }
   .section.tight { padding: 40px 0; }
@@ -156,4 +145,3 @@ h3.display-card {
   box-shadow: var(--elev-3);
   transition: box-shadow 200ms ease;
 }
-.card.hover:hover { box-shadow: var(--elev-4); }
