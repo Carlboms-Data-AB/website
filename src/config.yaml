@@ -8,7 +8,7 @@ metadata:
   title:
     default: Carlboms Data AB
     template: '%s — Carlboms Data AB'
-  description: 'Carlboms Data hjälper tillverkningsindustrin med MES/ERP-integration och specialutvecklade program. En konsult som kan både IT och automation.'
+  description: 'Carlboms Data hjälper tillverkningsindustrin med MES/ERP-integration och specialutvecklade verktyg. En konsult som kan både IT och automation.'
   robots:
     index: true
     follow: true
