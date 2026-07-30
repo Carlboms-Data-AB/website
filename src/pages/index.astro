@@ -11,12 +11,12 @@ const metadata = {
 
 // Kompetensområden — de två positioneringspelarna först, därefter djupet
 const tjanster = [
-  { icon: 'git-merge', title: 'MES/ERP-integration', body: 'Produktionen och affärssystemet i samma flöde — API:er, databaskopplingar och middleware.', chips: ['HTTP / REST', 'T-SQL', 'ODBC', 'Middleware'] },
-  { icon: 'code', title: 'Specialutvecklade program', body: 'När standardlösningar inte räcker bygger jag programmet som gör exakt det verksamheten behöver.', chips: ['C# / .NET', 'Python', 'JavaScript', 'HTML / CSS'] },
-  { icon: 'cpu', title: 'Automation och styrsystem', body: 'Programmering och optimering av styrsystem med CODESYS — portabelt, utan inlåsning hos en enda leverantör.', chips: ['CODESYS', 'Structured Text', 'J1939 CAN', 'UDP / NVL'] },
-  { icon: 'monitor', title: 'Operatörsgränssnitt och övervakning', body: 'Operatörsgränssnitt och SCADA — från WinCC och FUXA till helt egenutvecklade webbgränssnitt.', chips: ['WinCC', 'FUXA', 'Webb-HMI', 'Grafana'] },
-  { icon: 'shield-check', title: 'Säker fjärråtkomst', body: 'VPN, segmentering mellan IT och automation, brandväggar — och säker fjärråtkomst så ni slipper skicka ut tekniker.', chips: ['WireGuard', 'VLAN', 'SSH', 'DNS'] },
-  { icon: 'search', title: 'Felsökning av befintliga system', body: 'Jag gräver i styrlogik, nätverk, databaser och kod tills jag hittar roten till problemet.', chips: ['Root-cause', 'Prestanda', 'Kodgranskning', 'Akut support'] },
+  { icon: 'git-merge', title: 'MES/ERP-integration', body: 'Integrerar affärssystem, produktionssystem och databaser så att information flödar automatiskt mellan systemen.', chips: ['MES / ERP', 'SQL', 'API'] },
+  { icon: 'code', title: 'Specialutvecklade program', body: 'När standardlösningar inte räcker bygger jag det som gör exakt det verksamheten behöver.', chips: ['C# / .NET', 'Python', 'SQL'] },
+  { icon: 'cpu', title: 'Automation och styrsystem', body: 'Programmering, felsökning och optimering av styrsystem för en stabil och effektiv produktion.', chips: ['CODESYS', 'Structured Text', 'J1939'] },
+  { icon: 'monitor', title: 'Operatörsgränssnitt och övervakning', body: 'Rätt information till rätt person — i produktionen och på kontoret.', chips: ['WinCC', 'FUXA', 'Grafana'] },
+  { icon: 'shield-check', title: 'Säker fjärråtkomst', body: 'Era tekniker kommer åt maskiner och produktionssystem utan att åka ut på plats.', chips: ['WireGuard', 'VLAN', 'SSH'] },
+  { icon: 'search', title: 'Felsökning av befintliga system', body: 'Jag hittar grundorsaken till problemen — även när flera system är inblandade.', chips: ['Root-cause', 'Prestanda', 'Akut support'] },
 ];
 
 // Konkurrensfördelar — samlade på ett ställe i stället för utspridda i löptext
@@ -33,6 +33,7 @@ const fordelar = [
 const cases = [
   {
     cat: 'MES/ERP-integration',
+    kund: 'Tillverkningsföretag med flera produktionssystem',
     title: 'Smidigare dataflöden utan handpåläggning.',
     metric: '0', metricUnit: 'manuella inmatningar', metricLabel: 'Rapporter som tog timmar — nu på sekunder.',
     tech: ['C# / .NET', 'T-SQL', 'ODBC', 'HTTP / REST', 'Grafana'],
@@ -42,6 +43,7 @@ const cases = [
   },
   {
     cat: 'Säker fjärråtkomst',
+    kund: 'Industriföretag med anläggningar på flera orter',
     title: 'Närhet på distans för snabbare felsökning.',
     metric: '15', metricUnit: 'minuter', metricLabel: 'Tidigare en hel resdag — nu en kvart.',
     tech: ['WireGuard', 'VLAN', 'SSH', 'DNS', 'Bash'],
@@ -51,6 +53,7 @@ const cases = [
   },
   {
     cat: 'Optimering',
+    kund: 'Svensk kabeltillverkare',
     title: 'Nytt liv i gamla styrsystem.',
     metric: '10×', metricUnit: 'snabbare', metricLabel: 'Systemoptimering — utan att byta ut systemet.',
     tech: ['C# / .NET', 'WPF', 'ODBC'],
@@ -84,7 +87,7 @@ const iconPaths: Record<string, string> = {
           Jag får IT och automation att fungera tillsammans.
         </h1>
         <p class="lead" style="margin-top:28px;max-width:720px;margin-left:auto;margin-right:auto;">
-          MES/ERP-integration och specialutvecklade program för tillverkningsindustrin. En konsult som kan båda världarna — ingen inlåsning, och ni äger alltid koden.
+          MES/ERP-integration och specialutvecklade verktyg för tillverkningsindustrin.
         </p>
         <div class="hero-actions">
           <a href="#kontakt" class="cta">
@@ -167,6 +170,7 @@ const iconPaths: Record<string, string> = {
                 <span class="case-meta-cat">{c.cat}</span>
               </div>
               <h3 class="case-title">{c.title}</h3>
+              <div class="case-kund">{c.kund}</div>
               <div class="case-metric-card">
                 <div class="case-metric-row">
                   <span class="case-metric-num">{c.metric}</span>
@@ -219,7 +223,7 @@ const iconPaths: Record<string, string> = {
           <h2 class="display-section" style="margin-top:14px;">Jag arbetar i båda världarna.</h2>
           <div class="om-body">
             <p>Jag heter Tobias Carlbom. Jag har arbetat med programmering, automation och systemintegration i många år — och det roligaste är fortfarande att lösa problem där flera system måste samarbeta.</p>
-            <p>De flesta konsulter är specialister på antingen affärssystem och IT eller på PLC och automation. Jag arbetar i båda världarna. Det betyder att ingen behöver stå emellan och tolka, och att ansvaret aldrig faller mellan två leverantörer.</p>
+            <p>De flesta konsulter arbetar antingen med IT eller med automation. Jag arbetar i båda världarna och bygger lösningarna mellan dem. Därför kan jag ta ansvar för hela lösningen i stället för en liten del av den — ingen behöver stå emellan och tolka, och ansvaret faller aldrig mellan två leverantörer.</p>
             <p>I en bransch där systemintegration ofta handlar om att sälja in stora plattformar och låsa in kunden, ville jag vara en prestigelös motreaktion. Det är därför jag bygger broar mellan de två världarna — med robusta, skräddarsydda lösningar som håller över tid. Och det är därför jag alltid låter er äga koden.</p>
           </div>
           <div class="om-sig">
@@ -298,7 +302,7 @@ const iconPaths: Record<string, string> = {
             <input type="email" id="k-email" name="email" required />
           </div>
           <div class="form-field">
-            <label for="k-meddelande">Vad skaver? *</label>
+            <label for="k-meddelande">Vad behöver ni hjälp med? *</label>
             <textarea id="k-meddelande" name="meddelande" required placeholder="T.ex. &quot;PLC pratar inte med affärssystemet. Vi tappar rapportdata.&quot;"></textarea>
           </div>
           <input type="text" name="website" style="position:absolute;left:-9999px;opacity:0;height:0;" tabindex="-1" autocomplete="off" />
@@ -443,6 +447,11 @@ const iconPaths: Record<string, string> = {
   .case-title {
     font: 600 clamp(24px, 2.6vw, 30px)/1.15 var(--font-sans); letter-spacing: -0.03em;
     color: var(--color-ink); margin: 0; text-wrap: balance;
+  }
+  .case-kund {
+    font: 400 14px/1.45 var(--font-sans);
+    color: var(--color-body);
+    margin-top: -8px;
   }
   .case-metric-card { display: flex; flex-direction: column; gap: 4px; }
   .case-metric-row { display: flex; align-items: baseline; gap: 8px; flex-wrap: wrap; }
