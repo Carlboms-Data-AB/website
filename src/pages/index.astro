@@ -44,9 +44,9 @@ const cases = [
     title: 'Ett äldre visionsystem i fortsatt drift.',
     metric: '1', metricUnit: 'virtuell maskin', metricLabel: 'Det befintliga produktionssystemet är i drift på ny hårdvara.',
     tech: ['VMware Workstation', 'Windows XP Embedded', 'GigE Vision', 'WAGO PLC', 'MOXA NPort', 'Seriell kommunikation'],
-    utmaning: 'Ett system för kamerabaserad kvalitetskontroll kördes på en åldrande industri-PC med Windows XP Embedded och ett slitet CompactFlash-kort. Systemet var beroende av äldre programvara, industrikameror, PLC, seriell kommunikation och en fysisk licensdongel.',
-    losning: 'Jag analyserade den befintliga BoxPC-miljön och virtualiserade hela installationen i VMware Workstation. Därefter anpassade jag den nya datorn och anslutningarna så att den virtuella miljön kunde kommunicera med kameror, PLC, seriell utrustning och licensdongeln.',
-    resultat: 'Det kompletta visionsystemet är i drift på ny hårdvara. Kunden kunde behålla den befintliga specialapplikationen och automationsutrustningen utan att ersätta hela systemet.',
+    utmaning: 'Ett äldre visionsystem stod stilla efter att industridatorns moderkort gått sönder. Reservdelar gick inte längre att få tag på från leverantören.',
+    losning: 'Jag återskapade den befintliga systemmiljön som en virtuell maskin och flyttade den till ny hårdvara.',
+    resultat: 'Visionsystemet är åter i drift utan att kunden behövde ersätta den befintliga applikationen eller automationsutrustningen.',
   },
   {
     cat: 'Säker fjärråtkomst',
