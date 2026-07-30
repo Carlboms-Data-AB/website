@@ -4,31 +4,41 @@ import { Image } from 'astro:assets';
 import portraitImg from '~/assets/images/tobias-portrait.jpg';
 
 const metadata = {
-  title: 'Carlboms Data — Systemintegration mellan IT och OT',
-  description: 'Carlboms Data är den oberoende systemintegratören som bygger broar mellan IT och OT. Skräddarsydda lösningar, ingen inlåsning, direktkontakt med experten.',
+  title: 'Carlboms Data — IT och automation för tillverkningsindustrin',
+  description: 'Jag får IT och automation att fungera tillsammans. MES/ERP-integration och specialutvecklade program för tillverkningsindustrin — ingen inlåsning, ni äger alltid koden.',
   ignoreTitleTemplate: true,
 };
 
-// Kompetensområden — korta blurbar (från startsidan) + teknik-chips
+// Kompetensområden — de två positioneringspelarna först, därefter djupet
 const tjanster = [
-  { icon: 'git-merge', title: 'Systemintegration', body: 'Mellanlaget som får era system att prata med varandra — API:er, databaskopplingar och middleware.', chips: ['HTTP / REST', 'T-SQL', 'ODBC', 'Middleware'] },
-  { icon: 'cpu', title: 'Automation & PLC', body: 'Programmering och optimering av styrsystem med CODESYS — portabelt, utan inlåsning hos en enda leverantör.', chips: ['CODESYS', 'Structured Text', 'J1939 CAN', 'UDP / NVL'] },
-  { icon: 'monitor', title: 'HMI, SCADA & övervakning', body: 'Operatörsgränssnitt och SCADA-lösningar — från WinCC och FUXA till helt egenutvecklade webbgränssnitt.', chips: ['WinCC', 'FUXA', 'Webb-HMI', 'Grafana'] },
-  { icon: 'code', title: 'Mjukvaruutveckling', body: 'Skräddarsydda applikationer, backend-tjänster och databearbetning i det språk som passar utmaningen.', chips: ['C# / .NET', 'Python', 'JavaScript', 'HTML / CSS'] },
-  { icon: 'shield-check', title: 'Nätverk & fjärråtkomst', body: 'VPN, segmentering mellan IT och OT, brandväggar — och säker fjärråtkomst så ni slipper skicka ut tekniker.', chips: ['WireGuard', 'VLAN', 'SSH', 'DNS'] },
-  { icon: 'search', title: 'Felsökning & optimering', body: 'Jag gräver i PLC-logik, nätverk, databaser och kod tills jag hittar roten till problemet.', chips: ['Root-cause', 'Prestanda', 'Kodgranskning', 'Akut support'] },
+  { icon: 'git-merge', title: 'MES/ERP-integration', body: 'Produktionen och affärssystemet i samma flöde — API:er, databaskopplingar och middleware.', chips: ['HTTP / REST', 'T-SQL', 'ODBC', 'Middleware'] },
+  { icon: 'code', title: 'Specialutvecklade program', body: 'När standardlösningar inte räcker bygger jag programmet som gör exakt det verksamheten behöver.', chips: ['C# / .NET', 'Python', 'JavaScript', 'HTML / CSS'] },
+  { icon: 'cpu', title: 'Automation och styrsystem', body: 'Programmering och optimering av styrsystem med CODESYS — portabelt, utan inlåsning hos en enda leverantör.', chips: ['CODESYS', 'Structured Text', 'J1939 CAN', 'UDP / NVL'] },
+  { icon: 'monitor', title: 'Operatörsgränssnitt och övervakning', body: 'Operatörsgränssnitt och SCADA — från WinCC och FUXA till helt egenutvecklade webbgränssnitt.', chips: ['WinCC', 'FUXA', 'Webb-HMI', 'Grafana'] },
+  { icon: 'shield-check', title: 'Säker fjärråtkomst', body: 'VPN, segmentering mellan IT och automation, brandväggar — och säker fjärråtkomst så ni slipper skicka ut tekniker.', chips: ['WireGuard', 'VLAN', 'SSH', 'DNS'] },
+  { icon: 'search', title: 'Felsökning av befintliga system', body: 'Jag gräver i styrlogik, nätverk, databaser och kod tills jag hittar roten till problemet.', chips: ['Root-cause', 'Prestanda', 'Kodgranskning', 'Akut support'] },
+];
+
+// Konkurrensfördelar — samlade på ett ställe i stället för utspridda i löptext
+const fordelar = [
+  { title: 'Kan både IT och automation', body: 'Jag behöver aldrig lämna över mellan styrsystemet och affärssystemet.' },
+  { title: 'En kontaktperson', body: 'Ni pratar med den som faktiskt bygger lösningen.' },
+  { title: 'Ni äger alltid koden', body: 'Koden är er. Ingen licens som håller den gisslan.' },
+  { title: 'Ingen leverantörsinlåsning', body: 'Jag väljer teknik som går att flytta, byta och underhålla av andra.' },
+  { title: 'Ansvar hela vägen', body: 'Från givare och styrsystem till databas, API och rapport.' },
+  { title: 'Felsöker även andras lösningar', body: 'Ni behöver inte ha byggt det med mig för att jag ska kunna laga det.' },
 ];
 
 // Utvalda projekt (originaltext från referenssidan)
 const cases = [
   {
-    cat: 'Systemintegration',
+    cat: 'MES/ERP-integration',
     title: 'Smidigare dataflöden utan handpåläggning.',
     metric: '0', metricUnit: 'manuella inmatningar', metricLabel: 'Rapporter som tog timmar — nu på sekunder.',
     tech: ['C# / .NET', 'T-SQL', 'ODBC', 'HTTP / REST', 'Grafana'],
     utmaning: 'Kunden matade in data från flera produktionssystem för hand i affärssystemet. Det tog mycket tid och gav återkommande fel i siffrorna.',
     losning: 'Jag kopplade ihop produktionssystemen med affärssystemet så att datan flödar automatiskt, utan mellanhänder.',
-    resultat: 'Den manuella inmatningen försvann. Rapporter som tidigare tog timmar tar nu sekunder — med färre fel.',
+    resultat: 'Den manuella inmatningen försvann. Produktionsledarna väntade tidigare flera timmar på rapporter — nu genereras de automatiskt på sekunder, med färre fel.',
   },
   {
     cat: 'Säker fjärråtkomst',
@@ -37,7 +47,7 @@ const cases = [
     tech: ['WireGuard', 'VLAN', 'SSH', 'DNS', 'Bash'],
     utmaning: 'Vid varje fel på en anläggning behövde en tekniker åka ut på plats — både dyrt och långsamt.',
     losning: 'Jag satte upp en säker fjärranslutning som ger teknikerna full tillgång till utrustningen direkt från kontoret.',
-    resultat: 'En felsökning som tidigare krävde en hel resdag klaras nu av på en kvart.',
+    resultat: 'En felsökning som tidigare krävde en hel resdag klaras nu av på en kvart — utan att någon lämnar kontoret.',
   },
   {
     cat: 'Optimering',
@@ -46,7 +56,7 @@ const cases = [
     tech: ['C# / .NET', 'WPF', 'ODBC'],
     utmaning: 'En kabeltillverkares egenutvecklade styrsystem hade blivit så långsamt att det påverkade produktionen.',
     losning: 'Istället för att byta ut systemet optimerade jag den befintliga koden från grunden.',
-    resultat: 'Styrsystemet gick från oanvändbart långsamt till snabbt och responsivt — och sparade kunden flera timmar om dagen.',
+    resultat: 'Styrsystemet gick från oanvändbart långsamt till snabbt och responsivt — och operatörerna sparar flera timmar om dagen.',
   },
 ];
 
@@ -71,10 +81,10 @@ const iconPaths: Record<string, string> = {
     <div class="container hero-content">
       <div class="hero-center">
         <h1 class="display-hero">
-          Oberoende expert på systemintegration.
+          Jag får IT och automation att fungera tillsammans.
         </h1>
         <p class="lead" style="margin-top:28px;max-width:720px;margin-left:auto;margin-right:auto;">
-          Jag hjälper kunder inom industriautomation med att bygga program som får IT och OT att samverka. Ingen inlåsning och ni äger alltid koden.
+          MES/ERP-integration och specialutvecklade program för tillverkningsindustrin. En konsult som kan båda världarna — ingen inlåsning, och ni äger alltid koden.
         </p>
         <div class="hero-actions">
           <a href="#kontakt" class="cta">
@@ -92,7 +102,7 @@ const iconPaths: Record<string, string> = {
     <div class="container">
       <div class="section-intro">
         <div class="eyebrow"><span class="dot"></span>Mina tjänster</div>
-        <h2 class="display-section" style="margin-top:14px;">Jag får er teknik att tala samma språk.</h2>
+        <h2 class="display-section" style="margin-top:14px;">Det här hjälper jag er med.</h2>
       </div>
 
       <div class="tjanst-grid">
@@ -115,8 +125,32 @@ const iconPaths: Record<string, string> = {
     </div>
   </section>
 
+  <!-- Varför Carlboms Data -->
+  <section class="section tight" id="varfor" style="background:var(--color-canvas);">
+    <div class="container">
+      <div class="section-intro">
+        <div class="eyebrow"><span class="dot"></span>Varför Carlboms Data</div>
+        <h2 class="display-section" style="margin-top:14px;">En konsult som täcker hela kedjan.</h2>
+      </div>
+
+      <div class="fordel-grid">
+        {fordelar.map(f => (
+          <div class="fordel">
+            <span class="fordel-icon" aria-hidden="true">
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
+            </span>
+            <div>
+              <h3 class="fordel-title">{f.title}</h3>
+              <p class="fordel-body">{f.body}</p>
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  </section>
+
   <!-- Referenser -->
-  <section class="section tight" id="referenser" style="background:var(--color-canvas);">
+  <section class="section tight" id="referenser">
     <div class="container">
       <div class="section-intro">
         <div class="eyebrow"><span class="dot"></span>Referenser</div>
@@ -177,16 +211,16 @@ const iconPaths: Record<string, string> = {
   </section>
 
   <!-- Om -->
-  <section class="section tight" id="om">
+  <section class="section tight" id="om" style="background:var(--color-canvas);">
     <div class="container">
       <div class="om-grid">
         <div class="om-text">
           <div class="eyebrow"><span class="dot"></span>Om Carlboms Data</div>
-          <h2 class="display-section" style="margin-top:14px;">Den personliga länken i er systempark.</h2>
+          <h2 class="display-section" style="margin-top:14px;">Jag arbetar i båda världarna.</h2>
           <div class="om-body">
-            <p>Jag startade Carlboms Data med en enkel idé: att skapa fungerande samspel både mellan systemen och med mina kunder.</p>
-            <p>I en bransch där systemintegration ofta handlar om att sälja in stora plattformar och låsa in kunden, ville jag vara en prestigelös motreaktion.</p>
-            <p>Det är därför jag bygger broar med robusta, skräddarsydda lösningar som håller över tid. Och det är därför jag alltid låter er äga koden.</p>
+            <p>Jag heter Tobias Carlbom. Jag har arbetat med programmering, automation och systemintegration i många år — och det roligaste är fortfarande att lösa problem där flera system måste samarbeta.</p>
+            <p>De flesta konsulter är specialister på antingen affärssystem och IT eller på PLC och automation. Jag arbetar i båda världarna. Det betyder att ingen behöver stå emellan och tolka, och att ansvaret aldrig faller mellan två leverantörer.</p>
+            <p>I en bransch där systemintegration ofta handlar om att sälja in stora plattformar och låsa in kunden, ville jag vara en prestigelös motreaktion. Det är därför jag bygger broar mellan de två världarna — med robusta, skräddarsydda lösningar som håller över tid. Och det är därför jag alltid låter er äga koden.</p>
           </div>
           <div class="om-sig">
             <div class="om-sig-name">Tobias Carlbom</div>
@@ -214,7 +248,7 @@ const iconPaths: Record<string, string> = {
           </div>
           <h2 class="kontakt-heading">Låt oss prata.</h2>
           <p class="kontakt-lead">
-            Låt oss prata om hur jag kan få era system att samarbeta bättre. Carlboms Data är baserat i Lund, men bygger integrationer och broar oavsett var ni befinner er.
+            Låt oss prata om hur jag kan få IT och automation att fungera tillsammans hos er. Carlboms Data är baserat i Lund, men bygger integrationer oavsett var ni befinner er.
           </p>
 
           <div class="kontakt-info">
@@ -349,6 +383,47 @@ const iconPaths: Record<string, string> = {
   .tjanst-num { font: 400 11px/16px var(--font-mono); color: var(--color-mute); letter-spacing: 0.08em; }
   .tjanst-body { margin: 8px 0 0; color: var(--color-body); font-size: 14px; line-height: 1.55; flex: 1; }
   .tjanst-chips { margin-top: 16px; display: flex; flex-wrap: wrap; gap: 6px; }
+
+  /* Varför Carlboms Data — hairline-separerad lista, inte ännu ett kortgrid */
+  .fordel-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0 64px;
+  }
+  .fordel {
+    display: flex;
+    align-items: flex-start;
+    gap: 14px;
+    padding: 24px 0;
+    border-top: 1px solid var(--color-hairline);
+  }
+  .fordel-icon {
+    flex-shrink: 0;
+    width: 28px; height: 28px; border-radius: 8px;
+    display: inline-flex; align-items: center; justify-content: center;
+    background: linear-gradient(180deg, #f0fdf4 0%, #d6f5e6 100%);
+    color: #0e7a55;
+    box-shadow: inset 0 0 0 1px rgba(14,122,85,0.18);
+  }
+  .fordel-title {
+    font: 600 17px/1.3 var(--font-sans);
+    letter-spacing: -0.015em;
+    color: var(--color-ink);
+    margin: 3px 0 0;
+  }
+  .fordel-body {
+    font: 400 14px/1.55 var(--font-sans);
+    color: var(--color-body);
+    margin: 6px 0 0;
+    max-width: 42ch;
+  }
+  @media (max-width: 880px) {
+    .fordel-grid { gap: 0 40px; }
+  }
+  @media (max-width: 640px) {
+    .fordel-grid { grid-template-columns: 1fr; }
+    .fordel { padding: 20px 0; }
+  }
 
   /* Referenser — projekt (Utmaning / Lösning / Resultat) */
   .cases-stack { display: grid; gap: 0; }
