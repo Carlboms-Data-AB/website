@@ -5,51 +5,76 @@ import portraitImg from '~/assets/images/tobias-portrait.jpg';
 
 const metadata = {
   title: 'Carlboms Data — IT och automation för tillverkningsindustrin',
-  description: 'Jag får IT och automation att fungera tillsammans. MES/ERP-integration och specialutvecklade verktyg för tillverkningsindustrin — ingen inlåsning, ni äger alltid koden.',
+  description: 'MES/ERP-integration och specialutvecklade verktyg som får IT och automation att fungera tillsammans.',
   ignoreTitleTemplate: true,
 };
 
 // Kompetensområden — de två positioneringspelarna först, därefter djupet
 const tjanster = [
-  { icon: 'git-merge', title: 'Systemintegration', body: 'Jag integrerar affärssystem, produktionssystem och databaser så att informationen flödar automatiskt mellan systemen.', chips: ['MES / ERP', 'SQL', 'API'] },
-  { icon: 'code', title: 'Specialutvecklade verktyg', body: 'Jag utvecklar verktyg för de behov där standardlösningar inte räcker.', chips: ['C# / .NET', 'Python', 'SQL'] },
-  { icon: 'cpu', title: 'Automation & PLC', body: 'Programmering, felsökning och optimering av styrsystem för en stabil och effektiv produktion.', chips: ['CODESYS', 'Structured Text', 'J1939'] },
-  { icon: 'monitor', title: 'HMI, SCADA & övervakning', body: 'Operatörsgränssnitt och övervakning som ger rätt information till rätt person.', chips: ['WinCC', 'FUXA', 'Grafana'] },
-  { icon: 'shield-check', title: 'Nätverk & fjärråtkomst', body: 'Säker fjärråtkomst till maskiner och produktionssystem.', chips: ['WireGuard', 'VLAN', 'SSH'] },
-  { icon: 'search', title: 'Felsökning & optimering', body: 'Jag hittar grundorsaken till problemen — även när flera system är inblandade.', chips: ['Root-cause', 'Prestanda', 'Akut support'] },
+  { icon: 'git-merge', title: 'MES/ERP-integration', body: 'Jag kopplar samman produktionssystem, affärssystem och databaser så att informationen flödar automatiskt mellan systemen.', chips: ['MES / ERP', 'T-SQL', 'HTTP / REST', 'ODBC'] },
+  { icon: 'cpu', title: 'Automation & PLC', body: 'Jag programmerar, felsöker och optimerar styrsystem för en stabil och effektiv produktion.', chips: ['CODESYS', 'Structured Text', 'J1939', 'CAN'] },
+  { icon: 'monitor', title: 'HMI, SCADA & övervakning', body: 'Jag utvecklar operatörsgränssnitt och övervakning som ger rätt information till rätt person.', chips: ['WinCC', 'FUXA', 'Webb-HMI', 'Grafana'] },
+  { icon: 'code', title: 'Specialutvecklade verktyg', body: 'Jag utvecklar verktyg för de behov där standardlösningar inte räcker.', chips: ['C# / .NET', 'Python', 'JavaScript', 'SQL'] },
+  { icon: 'shield-check', title: 'Nätverk & fjärråtkomst', body: 'Jag skapar säker fjärråtkomst till maskiner och produktionssystem så att felsökning kan göras utan onödiga resor.', chips: ['WireGuard', 'VLAN', 'SSH', 'DNS'] },
+  { icon: 'search', title: 'Felsökning & optimering', body: 'Jag hittar grundorsaken till problemen — även när flera system är inblandade.', chips: ['Root-cause-analys', 'Prestanda', 'Kodgranskning', 'Akut support'] },
 ];
 
 // Konkurrensfördelar — samlade på ett ställe i stället för utspridda i löptext
 const fordelar = [
-  { title: 'Kan både IT och automation', body: 'Jag behöver aldrig lämna över mellan styrsystemet och affärssystemet.' },
-  { title: 'En kontaktperson', body: 'Ni pratar med den som faktiskt bygger lösningen.' },
-  { title: 'Ni äger alltid koden', body: 'Koden är er. Ingen licens som håller den gisslan.' },
-  { title: 'Ingen leverantörsinlåsning', body: 'Jag väljer teknik som går att flytta, byta och underhålla av andra.' },
-  { title: 'Ansvar hela vägen', body: 'Från givare och styrsystem till databas, API och rapport.' },
-  { title: 'Felsöker även andras lösningar', body: 'Ni behöver inte ha byggt det med mig för att jag ska kunna laga det.' },
+  { title: 'Både IT och automation', body: 'De flesta konsulter arbetar inom ett av områdena. Jag förstår hela kedjan och kan bygga lösningen mellan produktionen och affärssystemet.' },
+  { title: 'En kontakt genom hela uppdraget', body: 'Ni har direktkontakt med den som analyserar, utvecklar, testar och driftsätter lösningen.' },
+  { title: 'Ni äger lösningen', body: 'Inga onödiga plattformar eller svarta lådor. Ni äger alltid lösningen och källkoden.' },
 ];
 
-// Utvalda projekt (originaltext från referenssidan)
+// Värderingar (om-sektionen)
+const varderingar = [
+  { title: 'Helhet', body: 'Jag förstår både IT och automation och kan ta ansvar för hela lösningen.' },
+  { title: 'Transparens', body: 'Ni vet hur lösningen fungerar och äger alltid koden.' },
+  { title: 'Prestigelöshet', body: 'Jag utgår från problemet, inte från en viss produkt eller plattform.' },
+  { title: 'Direktkontakt', body: 'Ni arbetar direkt med personen som analyserar, utvecklar och driftsätter lösningen.' },
+];
+
+// Utvalda projekt — fem case, återställda från den tidigare referenssidan
 const cases = [
   {
-    cat: 'MES/ERP-integration',
+    cat: 'Övervakning & loggning',
+    kund: 'Tillverkare av tunga industrifordon',
+    title: 'Full koll på tunga fordon.',
+    metric: '24/7', metricUnit: 'övervakning', metricLabel: 'Planerade driftstopp istället för akuta.',
+    tech: ['Node-RED', 'JavaScript', 'J1939 CAN', 'CODESYS', 'Webb-HMI', 'Grafana', 'WireGuard'],
+    utmaning: 'Tunga fordon användes i gruvor och smältverk utan samlad övervakning eller historisk loggning. Problem upptäcktes först när något redan hade gått fel.',
+    losning: 'Jag byggde ett webbaserat system för övervakning och loggning. Driftstatus, larm och styrning blev tillgängliga direkt i webbläsaren, oavsett var fordonet befann sig.',
+    resultat: 'Problem kunde upptäckas tidigare och planeras innan de ledde till kostsamma produktionsstopp. Samtidigt sparades driftdata för analys och uppföljning.',
+  },
+  {
+    cat: 'Systemintegration',
     kund: 'Tillverkningsföretag med flera produktionssystem',
     title: 'Smidigare dataflöden utan handpåläggning.',
     metric: '0', metricUnit: 'manuella inmatningar', metricLabel: 'Rapporter som tog timmar — nu på sekunder.',
     tech: ['C# / .NET', 'T-SQL', 'ODBC', 'HTTP / REST', 'Grafana'],
-    utmaning: 'Kunden matade in data från flera produktionssystem för hand i affärssystemet. Det tog mycket tid och gav återkommande fel i siffrorna.',
-    losning: 'Jag kopplade ihop produktionssystemen med affärssystemet så att datan flödar automatiskt, utan mellanhänder.',
-    resultat: 'Den manuella inmatningen försvann. Produktionsledarna väntade tidigare flera timmar på rapporter — nu genereras de automatiskt på sekunder, med färre fel.',
+    utmaning: 'Data från flera produktionssystem behövde matas in manuellt i affärssystemet. Det tog mycket tid och gav återkommande fel i siffrorna.',
+    losning: 'Jag kopplade samman produktionssystemen med affärssystemet så att informationen flödade automatiskt utan manuell handpåläggning.',
+    resultat: 'Den manuella inmatningen försvann. Rapporter som tidigare tog timmar genererades på sekunder, med färre fel.',
   },
   {
     cat: 'Säker fjärråtkomst',
-    kund: 'Industriföretag med anläggningar på flera orter',
+    kund: 'Industriföretag med geografiskt spridda anläggningar',
     title: 'Närhet på distans för snabbare felsökning.',
     metric: '15', metricUnit: 'minuter', metricLabel: 'Tidigare en hel resdag — nu en kvart.',
     tech: ['WireGuard', 'VLAN', 'SSH', 'DNS', 'Bash'],
-    utmaning: 'Vid varje fel på en anläggning behövde en tekniker åka ut på plats — både dyrt och långsamt.',
-    losning: 'Jag satte upp en säker fjärranslutning som ger teknikerna full tillgång till utrustningen direkt från kontoret.',
-    resultat: 'En felsökning som tidigare krävde en hel resdag klaras nu av på en kvart — utan att någon lämnar kontoret.',
+    utmaning: 'När ett fel uppstod behövde en tekniker resa till anläggningen för att felsöka på plats. Det gjorde varje insats både dyr och långsam.',
+    losning: 'Jag satte upp en säker fjärranslutning som gav teknikerna tillgång till utrustningen direkt från kontoret.',
+    resultat: 'En felsökning som tidigare krävde en hel resdag kunde genomföras på cirka 15 minuter.',
+  },
+  {
+    cat: 'Lagerautomation',
+    kund: 'Tillverkningsföretag med lagerverksamhet',
+    title: 'Rätt etikett på rätt plats — varje gång.',
+    metric: '1', metricUnit: 'system', metricLabel: 'Full spårbarhet — färre reklamationer.',
+    tech: ['C# / .NET', 'Python', 'C++', 'T-SQL', 'ODBC', 'HTTP / REST'],
+    utmaning: 'Tre olika system användes för etikettutskrift. Fel etikett kunde hamna på fel produkt, vilket orsakade reklamationer och försenade leveranser.',
+    losning: 'Jag ersatte de separata flödena med ett integrerat system som automatiskt hämtade rätt information och skrev ut rätt etikett för varje produkt. Användarna fick också ett verktyg för att själva skapa och ändra etikettmallar.',
+    resultat: 'Ett enda system gav bättre spårbarhet, färre felmärkningar och möjlighet att skapa nya etiketter direkt när behovet uppstod.',
   },
   {
     cat: 'Optimering',
@@ -57,9 +82,9 @@ const cases = [
     title: 'Nytt liv i gamla styrsystem.',
     metric: '10×', metricUnit: 'snabbare', metricLabel: 'Systemoptimering — utan att byta ut systemet.',
     tech: ['C# / .NET', 'WPF', 'ODBC'],
-    utmaning: 'En kabeltillverkares egenutvecklade styrsystem hade blivit så långsamt att det påverkade produktionen.',
-    losning: 'Istället för att byta ut systemet optimerade jag den befintliga koden från grunden.',
-    resultat: 'Styrsystemet gick från oanvändbart långsamt till snabbt och responsivt — och operatörerna sparar flera timmar om dagen.',
+    utmaning: 'Ett egenutvecklat styrsystem hade blivit så långsamt att det påverkade produktionen.',
+    losning: 'Jag optimerade den befintliga koden i stället för att ersätta hela systemet.',
+    resultat: 'Styrsystemet blev snabbt och responsivt igen och sparade kunden flera timmar varje dag.',
   },
 ];
 
@@ -90,14 +115,14 @@ const iconPaths: Record<string, string> = {
           MES/ERP-integration och specialutvecklade verktyg för tillverkningsindustrin.
         </p>
         <p class="hero-note">
-          Jag arbetar med både IT och automation och kan därför ta ansvar för hela lösningen — från produktionen till affärssystemet.
+          De flesta konsulter arbetar antingen med IT eller automation. Jag arbetar i båda världarna och kan därför ta ansvar för hela lösningen — från produktionen till affärssystemet.
         </p>
         <div class="hero-actions">
           <a href="#kontakt" class="cta">
             Boka ett rådgivningssamtal
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
           </a>
-          <a href="#referenser" class="cta secondary">Se referenser</a>
+          <a href="#tjanster" class="cta secondary">Se tjänsterna</a>
         </div>
       </div>
     </div>
@@ -108,7 +133,7 @@ const iconPaths: Record<string, string> = {
     <div class="container">
       <div class="section-intro">
         <div class="eyebrow"><span class="dot"></span>Mina tjänster</div>
-        <h2 class="display-section" style="margin-top:14px;">Det här hjälper jag er med.</h2>
+        <h2 class="display-section" style="margin-top:14px;">Jag får er teknik att tala samma språk.</h2>
       </div>
 
       <div class="tjanst-grid">
@@ -136,7 +161,7 @@ const iconPaths: Record<string, string> = {
     <div class="container">
       <div class="section-intro">
         <div class="eyebrow"><span class="dot"></span>Varför Carlboms Data</div>
-        <h2 class="display-section" style="margin-top:14px;">En konsult som täcker hela kedjan.</h2>
+        <h2 class="display-section" style="margin-top:14px;">En konsult som förstår båda sidorna.</h2>
       </div>
 
       <div class="fordel-grid">
@@ -223,13 +248,15 @@ const iconPaths: Record<string, string> = {
       <div class="om-grid">
         <div class="om-text">
           <div class="eyebrow"><span class="dot"></span>Om Carlboms Data</div>
-          <h2 class="display-section" style="margin-top:14px;">Jag arbetar i båda världarna.</h2>
+          <h2 class="display-section" style="margin-top:14px;">Jag arbetar där IT möter automation.</h2>
           <div class="om-body">
-            <p>Jag heter Tobias Carlbom. Jag har arbetat med programmering, automation och systemintegration i många år — och det roligaste är fortfarande att lösa problem där flera system måste samarbeta.</p>
-            <p>De flesta konsulter arbetar antingen med IT eller med automation. Det som gör Carlboms Data annorlunda är att jag arbetar med båda. Därför kan jag förstå hela kedjan och ta ansvar för lösningen mellan produktionen och affärssystemet — ingen behöver stå emellan och tolka, och ansvaret faller aldrig mellan två leverantörer.</p>
-            <p>I en bransch där systemintegration ofta handlar om att sälja in stora plattformar och låsa in kunden, ville jag vara en prestigelös motreaktion. Det är därför jag bygger broar mellan de två världarna — med robusta, skräddarsydda lösningar som håller över tid. Och det är därför jag alltid låter er äga koden.</p>
+            <p>Jag heter Tobias Carlbom och driver Carlboms Data AB i Lund. Jag hjälper tillverkningsföretag med MES/ERP-integration, systemintegration och specialutvecklade verktyg.</p>
+            <p>Min styrka är att jag arbetar med både IT och automation. Det gör att jag kan förstå hela kedjan — från maskiner och styrsystem till databaser, affärssystem och användarnas arbetsflöden.</p>
+            <p>Jag startade Carlboms Data för att skapa fungerande samspel både mellan systemen och med mina kunder. Jag arbetar prestigelöst och utgår från problemet, inte från en viss produkt eller plattform.</p>
+            <p>Jag bygger lösningar som passar den befintliga verksamheten, utan onödig leverantörsinlåsning. Ni har direktkontakt med mig genom hela uppdraget och ni äger alltid lösningen och källkoden.</p>
           </div>
           <div class="om-sig">
+            <div class="om-sig-greeting">Vänliga hälsningar,</div>
             <div class="om-sig-name">Tobias Carlbom</div>
             <div class="om-sig-role">Grundare · Carlboms Data AB · Lund</div>
           </div>
@@ -239,6 +266,15 @@ const iconPaths: Record<string, string> = {
             <Image src={portraitImg} alt="Tobias Carlbom" width={600} height={800} style="width:100%;height:100%;object-fit:cover;display:block;" />
           </div>
         </div>
+      </div>
+
+      <div class="varde-grid">
+        {varderingar.map(v => (
+          <div class="varde">
+            <h3 class="varde-title">{v.title}</h3>
+            <p class="varde-body">{v.body}</p>
+          </div>
+        ))}
       </div>
     </div>
   </section>
@@ -255,7 +291,7 @@ const iconPaths: Record<string, string> = {
           </div>
           <h2 class="kontakt-heading">Låt oss prata.</h2>
           <p class="kontakt-lead">
-            Låt oss prata om hur jag kan få IT och automation att fungera tillsammans hos er. Carlboms Data är baserat i Lund, men bygger integrationer oavsett var ni befinner er.
+            Låt oss prata om hur jag kan få era system att samarbeta bättre. Carlboms Data är baserat i Lund och arbetar med kunder i hela Sverige.
           </p>
 
           <div class="kontakt-info">
@@ -306,7 +342,7 @@ const iconPaths: Record<string, string> = {
           </div>
           <div class="form-field">
             <label for="k-meddelande">Beskriv er utmaning *</label>
-            <textarea id="k-meddelande" name="meddelande" required placeholder="T.ex. &quot;PLC pratar inte med affärssystemet. Vi tappar rapportdata.&quot;"></textarea>
+            <textarea id="k-meddelande" name="meddelande" required placeholder="T.ex. &quot;Vårt produktionssystem pratar inte med affärssystemet och vi tappar rapportdata.&quot;"></textarea>
           </div>
           <input type="text" name="website" style="position:absolute;left:-9999px;opacity:0;height:0;" tabindex="-1" autocomplete="off" />
 
@@ -328,7 +364,7 @@ const iconPaths: Record<string, string> = {
 
           <div class="form-note">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-            Er data stannar hos mig. Inga tredjeparter, inga nyhetsbrev.
+            Era uppgifter används endast för att återkomma om er förfrågan. Inga nyhetsbrev och inga tredjeparter.
           </div>
         </form>
       </div>
@@ -503,6 +539,22 @@ const iconPaths: Record<string, string> = {
   .om-body { margin-top: 28px; display: grid; gap: 20px; max-width: 560px; }
   .om-body p { font: 400 17px/1.75 var(--font-sans); color: var(--color-body); margin: 0; }
   .om-sig { margin-top: 32px; padding-top: 20px; border-top: 1px solid var(--color-hairline); }
+  .om-sig-greeting { font: 400 15px/1.4 var(--font-sans); color: var(--color-body); margin-bottom: 8px; }
+
+  /* Värderingar */
+  .varde-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr); gap: 32px;
+    margin-top: 64px; padding-top: 40px; border-top: 1px solid var(--color-hairline);
+  }
+  .varde-title {
+    font: 600 16px/1.3 var(--font-sans); letter-spacing: -0.015em;
+    color: var(--color-ink); margin: 0;
+  }
+  .varde-body {
+    font: 400 14px/1.55 var(--font-sans); color: var(--color-body); margin: 8px 0 0;
+  }
+  @media (max-width: 900px) { .varde-grid { grid-template-columns: 1fr 1fr; gap: 28px 32px; margin-top: 48px; } }
+  @media (max-width: 560px) { .varde-grid { grid-template-columns: 1fr; gap: 24px; } }
   .om-sig-name { font: 600 20px/1.2 var(--font-sans); letter-spacing: -0.02em; color: var(--color-ink); }
   .om-sig-role { margin-top: 4px; font: 400 12px/16px var(--font-mono); color: var(--color-mute); text-transform: uppercase; letter-spacing: 0.06em; }
   .om-portrait-wrap { position: sticky; top: 96px; }
