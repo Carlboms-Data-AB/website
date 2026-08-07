@@ -1,0 +1,29 @@
+/* ---------------------------------------------------------------------------
+   The colour theme. Carlboms Data — green.
+   ---------------------------------------------------------------------------
+   This file is the ONLY stylesheet that differs between this repository and
+   Carlboms-Data-AB/rowmantic-print-web. brand.css is byte-identical in both and
+   reaches every accent through the tokens below, so a theme is a colour change
+   and nothing else.
+
+   --accent is a graphic colour: 3.21:1 on white, so it fills shapes and never
+   sets type. Accent that has to be read is --accent-deep at 6.75:1.
+   See brand-guide/brand/04-color.md.
+--------------------------------------------------------------------------- */
+
+:root {
+  --accent: #16b079;
+  --accent-deep: #0e7a55;
+  --accent-rgb: 22, 176, 121;
+  --accent-deep-rgb: 14, 122, 85;
+
+  /* The second colour in atmospheric washes, never on its own. */
+  --accent-2: #007cf0;
+  --accent-2-rgb: 0, 124, 240;
+
+  --accent-tint-top: #f0fdf4;
+  --accent-tint-bottom: #d6f5e6;
+
+  --accent-selection-bg: #d6f3e6;
+  --accent-selection-ink: #0e2a1d;
+}
