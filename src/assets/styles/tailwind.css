@@ -102,8 +102,8 @@ html { scroll-behavior: smooth; }
 }
 
 h1.display-hero {
-  font: 600 clamp(36px, 6vw, 76px)/1.02 var(--font-sans);
-  letter-spacing: -0.04em;
+  font: 600 clamp(26px, 4vw, 44px)/1.12 var(--font-sans);
+  letter-spacing: -0.02em;
   color: var(--color-ink);
   margin: 0;
   text-wrap: balance;
