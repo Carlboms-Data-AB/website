@@ -1,0 +1,55 @@
+---
+/**
+ * The sticky header. Identical in both repositories: the brand word, the link
+ * list, the language toggle and the call to action all come from the copy
+ * object, and a site that has no links or no second language passes none.
+ */
+import { url } from '~/site';
+import type { Copy } from '~/copy';
+
+export interface Props {
+  t: Copy;
+}
+
+const { t } = Astro.props;
+---
+
+<header class="nav">
+  <div class="container nav-inner">
+    <a class="nav-brand" href={url(t.home)}>
+      <img src={url('/favicon.svg')} alt="" width="28" height="28" />
+      <span>{t.brand}</span>
+    </a>
+
+    {
+      t.nav.links.length > 0 && (
+        <nav class="nav-links">
+          {t.nav.links.map((link) => (
+            <a href={link.href}>{link.label}</a>
+          ))}
+        </nav>
+      )
+    }
+
+    <div class="nav-right">
+      {t.other && <a class="nav-lang" href={url(t.other.href)}>{t.other.label}</a>}
+      <a class="cta nav-cta" href={t.nav.ctaHref}>
+        {t.nav.cta}
+        <svg
+          width="14"
+          height="14"
+          viewBox="0 0 24 24"
+          fill="none"
+          stroke="currentColor"
+          stroke-width="2"
+          stroke-linecap="round"
+          stroke-linejoin="round"
+          aria-hidden="true"
+        >
+          <path d="M5 12h14"></path>
+          <path d="m12 5 7 7-7 7"></path>
+        </svg>
+      </a>
+    </div>
+  </div>
+</header>

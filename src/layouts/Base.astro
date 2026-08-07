@@ -1,0 +1,77 @@
+---
+/**
+ * The document. Identical in Carlboms-Data-AB/website and
+ * Carlboms-Data-AB/rowmantic-print-web — everything that differs between the
+ * two arrives through the copy object.
+ */
+import '~/styles/brand.css';
+import { url } from '~/site';
+import { SITE_NAME, type Copy } from '~/copy';
+
+export interface Props {
+  t: Copy;
+  /** Set on pages that are addresses rather than content, such as 404. */
+  noindex?: boolean;
+}
+
+const { t, noindex = false } = Astro.props;
+const canonical = new URL(Astro.url.pathname, Astro.site).toString();
+
+// The social preview, if the site has one. Resolved at build time, so a site
+// without src/assets/images/og.png simply emits no og:image rather than a link
+// to a file that is not there.
+//
+// Relative rather than the ~ alias: Vite's glob plugin resolves the pattern
+// before Astro's aliases are applied, and rejects one it cannot make absolute.
+const found = import.meta.glob<{ default: ImageMetadata }>('../assets/images/og.{png,jpg,jpeg}', {
+  eager: true,
+});
+const ogEntry = Object.values(found)[0]?.default;
+const ogImage = ogEntry ? new URL(ogEntry.src, Astro.site).toString() : undefined;
+---
+
+<!doctype html>
+<html lang={t.htmlLang}>
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>{t.meta.title}</title>
+    <meta name="description" content={t.meta.description} />
+    {noindex ? <meta name="robots" content="noindex, follow" /> : <link rel="canonical" href={canonical} />}
+
+    <link rel="icon" href={url('/favicon.svg')} type="image/svg+xml" />
+    <link rel="apple-touch-icon" href={url('/apple-touch-icon.png')} />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:site_name" content={SITE_NAME} />
+    <meta property="og:title" content={t.meta.title} />
+    <meta property="og:description" content={t.meta.description} />
+    <meta property="og:url" content={canonical} />
+    {ogImage && <meta property="og:image" content={ogImage} />}
+    <meta name="twitter:card" content={ogImage ? 'summary_large_image' : 'summary'} />
+
+    {
+      /* Every language the page exists in, so one language's search result does
+         not outrank another's for a reader of that language. Trailing slashes
+         on purpose: Pages serves /en/ and redirects /en to it, and an hreflang
+         pointing at a redirect while the canonical points at its target is the
+         kind of disagreement that is free to avoid. */
+    }
+    {
+      t.alternates?.map((alternate) => (
+        <link
+          rel="alternate"
+          hreflang={alternate.hreflang}
+          href={new URL(url(alternate.href), Astro.site).toString()}
+        />
+      ))
+    }
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  </head>
+
+  <body>
+    <slot />
+  </body>
+</html>

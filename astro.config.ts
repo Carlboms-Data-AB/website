@@ -1,53 +1,18 @@
-import path from 'path';
-import { fileURLToPath } from 'url';
-
 import { defineConfig } from 'astro/config';
+import tailwind from '@tailwindcss/vite';
 
-import sitemap from '@astrojs/sitemap';
-import tailwindcss from '@tailwindcss/vite';
-import compress from 'astro-compress';
-
-import astrowind from './vendor/integration';
-
-import { readingTimeRemarkPlugin, responsiveTablesRehypePlugin } from './src/utils/frontmatter';
-
-const __dirname = path.dirname(fileURLToPath(import.meta.url));
-
+// Served from the apex domain, so there is no `base` to set — but internal
+// links still go through the helper in src/site.ts rather than being written by
+// hand, because that is what keeps this file and the one in
+// Carlboms-Data-AB/rowmantic-print-web, which is served from a subdirectory,
+// the same shape.
+//
+// The `~` alias is not configured here: Astro reads it from tsconfig.json's
+// `paths` and hands it to Vite.
 export default defineConfig({
-  output: 'static',
-
-  integrations: [
-    sitemap(),
-
-    compress({
-      CSS: true,
-      HTML: {
-        'html-minifier-terser': {
-          removeAttributeQuotes: false,
-        },
-      },
-      Image: false,
-      JavaScript: true,
-      SVG: false,
-      Logger: 1,
-    }),
-
-    astrowind({
-      config: './src/config.yaml',
-    }),
-  ],
-
-  markdown: {
-    remarkPlugins: [readingTimeRemarkPlugin],
-    rehypePlugins: [responsiveTablesRehypePlugin],
-  },
-
+  site: 'https://carlbomsdata.se',
+  trailingSlash: 'ignore',
   vite: {
-    plugins: [tailwindcss()],
-    resolve: {
-      alias: {
-        '~': path.resolve(__dirname, './src'),
-      },
-    },
+    plugins: [tailwind()],
   },
 });
