@@ -1,12 +1,15 @@
 name: Deploy to GitHub Pages
 
+# Identical in Carlboms-Data-AB/website and Carlboms-Data-AB/rowmantic-print-web,
+# so both sites publish the same way. Pull requests build but do not deploy,
+# which catches a broken page before it is the live one.
+
 on:
   push:
-    branches:
-      - main
+    branches: [main]
   pull_request:
-    branches:
-      - main
+    branches: [main]
+  workflow_dispatch:
 
 permissions:
   contents: read
@@ -14,7 +17,7 @@ permissions:
   id-token: write
 
 concurrency:
-  group: "pages"
+  group: 'pages'
   cancel-in-progress: false
 
 jobs:
@@ -22,21 +25,24 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v4
+
       - name: Use Node.js 22
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: npm
+
       - run: npm ci
       - run: npm run build
+
       - name: Upload artifact
-        if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+        if: github.event_name != 'pull_request'
         uses: actions/upload-pages-artifact@v3
         with:
           path: ./dist
 
   deploy:
-    if: github.event_name == 'push' && github.ref == 'refs/heads/main'
+    if: github.event_name != 'pull_request'
     needs: build
     runs-on: ubuntu-latest
     environment:

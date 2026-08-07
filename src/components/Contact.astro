@@ -1,0 +1,73 @@
+---
+/**
+ * The closing contact section: the invitation and the details on the left, the
+ * form on the right, on the one inverted band of the page.
+ *
+ * Identical in both repositories — heading, lead and rows are read from the
+ * copy object, and the form is the same component posting to the same backend.
+ */
+import ContactForm from '~/components/ContactForm.astro';
+import type { Copy } from '~/copy';
+
+export interface Props {
+  t: Copy;
+}
+
+const { t } = Astro.props;
+
+// Line art, drawn at 24×24 on a single path so an icon is one string.
+const icons: Record<string, string> = {
+  mail: 'M2 4h20v16H2zm20 3-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7',
+  pin: 'M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0zm-8 3a3 3 0 1 0 0-6 3 3 0 0 0 0 6z',
+  phone: 'M22 16.9v3a2 2 0 0 1-2.2 2 19.8 19.8 0 0 1-8.6-3.1 19.5 19.5 0 0 1-6-6A19.8 19.8 0 0 1 2 4.2 2 2 0 0 1 4 2h3a2 2 0 0 1 2 1.7c.1 1 .4 1.9.7 2.8a2 2 0 0 1-.4 2.1L8 9.9a16 16 0 0 0 6 6l1.3-1.3a2 2 0 0 1 2.1-.4c.9.3 1.8.6 2.8.7A2 2 0 0 1 22 16.9z',
+};
+---
+
+{/* The id comes from the copy object: it is an address, and the two sites
+    publish different ones. A link someone sent last month should not stop
+    working because this component was made shared. */}
+<section class="section section--dark" id={t.contact.id}>
+  <div class="contact-bg" aria-hidden="true"></div>
+
+  <div class="container contact-inner">
+    <div class="contact-grid">
+      <div>
+        <h2 class="contact-heading">{t.contact.heading}</h2>
+        <p class="contact-lead">{t.contact.lead}</p>
+
+        <div class="contact-info">
+          {
+            t.contact.rows.map((row) => {
+              const Tag = row.href ? 'a' : 'div';
+              return (
+                <Tag class="contact-row" href={row.href}>
+                  <span class="contact-icon">
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="none"
+                      stroke="currentColor"
+                      stroke-width="1.5"
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      aria-hidden="true"
+                    >
+                      <path d={icons[row.icon]} />
+                    </svg>
+                  </span>
+                  <span class="contact-row-text">
+                    <span class="contact-label">{row.label}</span>
+                    <span class="contact-value">{row.value}</span>
+                  </span>
+                </Tag>
+              );
+            })
+          }
+        </div>
+      </div>
+
+      <ContactForm t={t} />
+    </div>
+  </div>
+</section>

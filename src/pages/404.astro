@@ -1,23 +1,29 @@
 ---
-import Layout from '~/layouts/PageLayout.astro';
+/**
+ * Not found. Identical in both repositories — the words come from the copy
+ * object, and the title is swapped in rather than written a second time.
+ */
+import Base from '~/layouts/Base.astro';
+import Nav from '~/components/Nav.astro';
+import Footer from '~/components/Footer.astro';
+import { url } from '~/site';
+import { copy } from '~/copy';
 
-const metadata = {
-  title: 'Sidan kunde inte hittas',
-  robots: { index: false, follow: false },
-};
+const base = copy.sv;
+const t = { ...base, meta: { ...base.meta, title: base.notFound.title } };
 ---
 
-<Layout metadata={metadata}>
-  <section class="section" style="min-height:60vh;display:flex;align-items:center;">
-    <div class="container" style="text-align:center;max-width:520px;margin:0 auto;">
-      <div style="font:600 96px/1 var(--font-sans);color:var(--color-hairline-strong);letter-spacing:-0.04em;">404</div>
-      <h1 style="font:600 28px/1.2 var(--font-sans);letter-spacing:-0.02em;margin:24px 0 12px;color:var(--color-ink);">
-        Sidan kunde inte hittas.
-      </h1>
-      <p style="font:400 16px/1.55 var(--font-sans);color:var(--color-body);margin:0 0 32px;">
-        Sidan ni letade efter finns inte längre eller har flyttats.
-      </p>
-      <a href="/" class="cta">Tillbaka till startsidan</a>
-    </div>
-  </section>
-</Layout>
+<Base t={t} noindex>
+  <Nav t={t} />
+  <main>
+    <section class="section notfound">
+      <div class="container notfound-inner">
+        <div class="notfound-code">{t.notFound.code}</div>
+        <h1 class="notfound-title">{t.notFound.title}</h1>
+        <p class="notfound-body">{t.notFound.body}</p>
+        <a class="cta" href={url(t.home)}>{t.notFound.cta}</a>
+      </div>
+    </section>
+  </main>
+  <Footer t={t} />
+</Base>

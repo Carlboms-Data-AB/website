@@ -1,0 +1,178 @@
+---
+/**
+ * The contact form. Identical in both repositories, posting to the same Anvil
+ * app, which forwards to SMTP2Go.
+ *
+ * SOURCE rides along so the two sites can be told apart in the inbox: without
+ * it an enquiry from either arrives as the same "Förfrågan från …". The Anvil
+ * handler has to read it — see the README.
+ *
+ * Endpoint and source travel as data attributes rather than being inlined in
+ * the script, because a module script is bundled and cannot see the component's
+ * frontmatter.
+ */
+import { EMAIL, FORM_API, SOURCE, type Copy } from '~/copy';
+
+export interface Props {
+  t: Copy;
+}
+
+const { t } = Astro.props;
+const f = t.form;
+---
+
+<form class="form" id="contact-form" data-endpoint={FORM_API} data-source={SOURCE}>
+  <div class="form-row-2">
+    <div class="form-field">
+      <label for="field-name">{f.name} *</label>
+      <input type="text" id="field-name" name="namn" required maxlength="200" autocomplete="name" />
+    </div>
+    <div class="form-field">
+      <label for="field-company">{f.company}</label>
+      <input
+        type="text"
+        id="field-company"
+        name="foretag"
+        maxlength="200"
+        autocomplete="organization"
+      />
+    </div>
+  </div>
+
+  <div class="form-field">
+    <label for="field-email">{f.email} *</label>
+    <input type="email" id="field-email" name="email" required autocomplete="email" />
+  </div>
+
+  <div class="form-field">
+    <label for="field-message">{f.message} *</label>
+    <textarea id="field-message" name="meddelande" required maxlength="5000" placeholder={f.placeholder}
+    ></textarea>
+  </div>
+
+  {/* A real person never fills this; the backend returns ok and sends nothing when it is set. */}
+  <input
+    type="text"
+    name="website"
+    class="form-honeypot"
+    tabindex="-1"
+    autocomplete="off"
+    aria-hidden="true"
+  />
+
+  <button type="submit" class="cta form-submit" id="contact-submit">
+    <span class="submit-label">
+      {f.submit}
+      <svg
+        width="16"
+        height="16"
+        viewBox="0 0 24 24"
+        fill="none"
+        stroke="currentColor"
+        stroke-width="2"
+        stroke-linecap="round"
+        stroke-linejoin="round"
+        aria-hidden="true"
+      >
+        <path d="M5 12h14"></path>
+        <path d="m12 5 7 7-7 7"></path>
+      </svg>
+    </span>
+    <span class="submit-sending is-hidden">{f.sending}</span>
+  </button>
+
+  <div class="form-status form-success is-hidden" id="form-success" role="status">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M20 6 9 17l-5-5"></path>
+    </svg>
+    {f.success}
+  </div>
+
+  <div class="form-status form-error is-hidden" id="form-error" role="alert">
+    <svg
+      width="16"
+      height="16"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="2"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <circle cx="12" cy="12" r="10"></circle>
+      <path d="m15 9-6 6"></path>
+      <path d="m9 9 6 6"></path>
+    </svg>
+    <span>{f.errorBefore}<a href={`mailto:${EMAIL}`}>{EMAIL}</a>{f.errorAfter}</span>
+  </div>
+
+  <p class="form-note">
+    <svg
+      width="12"
+      height="12"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      stroke-width="1.5"
+      stroke-linecap="round"
+      stroke-linejoin="round"
+      aria-hidden="true"
+    >
+      <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path>
+    </svg>
+    {f.note}
+  </p>
+</form>
+
+<script>
+  const form = document.getElementById('contact-form') as HTMLFormElement | null;
+
+  form?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const button = document.getElementById('contact-submit') as HTMLButtonElement;
+    const label = button.querySelector('.submit-label') as HTMLElement;
+    const sending = button.querySelector('.submit-sending') as HTMLElement;
+    const success = document.getElementById('form-success') as HTMLElement;
+    const error = document.getElementById('form-error') as HTMLElement;
+
+    success.classList.add('is-hidden');
+    error.classList.add('is-hidden');
+    button.disabled = true;
+    label.classList.add('is-hidden');
+    sending.classList.remove('is-hidden');
+
+    try {
+      const data = Object.fromEntries(new FormData(form));
+      // Which site the enquiry came from. Read by the Anvil handler.
+      data.source = form.dataset.source ?? '';
+
+      const response = await fetch(form.dataset.endpoint ?? '', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) throw new Error(response.statusText);
+
+      form.reset();
+      success.classList.remove('is-hidden');
+    } catch {
+      error.classList.remove('is-hidden');
+    } finally {
+      button.disabled = false;
+      label.classList.remove('is-hidden');
+      sending.classList.add('is-hidden');
+    }
+  });
+</script>

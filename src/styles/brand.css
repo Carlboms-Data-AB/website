@@ -1,0 +1,1394 @@
+/* ===========================================================================
+   The stylesheet.
+   ===========================================================================
+   This file is byte-identical in Carlboms-Data-AB/website and
+   Carlboms-Data-AB/rowmantic-print-web. Every accent reaches its colour through
+   a token in theme.css, which is the only stylesheet that differs between the
+   two — so the sites cannot drift apart visually, and a fix made here applies
+   to both by copying one file.
+
+   It therefore holds classes that only one of the two sites uses. That is the
+   point: when the company site one day wants a numbered how-it-works section,
+   or the product page wants case studies, the styling is already here and
+   already identical.
+
+   Sections are separated by rules and follow the page down: tokens, base,
+   layout, type, controls, cards, nav, hero, footer, contact, screenshots, then
+   the page sections themselves.
+   =========================================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Geist:wght@400;500;600&family=Geist+Mono:wght@400&display=swap');
+@import 'tailwindcss';
+@import './theme.css';
+
+/* ---------------------------------------------------------------------------
+   Tokens
+--------------------------------------------------------------------------- */
+
+:root {
+  --color-primary: #171717;
+  --color-ink: #171717;
+  --color-link: #0070f3;
+
+  --color-canvas: #ffffff;
+  --color-canvas-soft: #fafafa;
+  --color-canvas-soft-2: #f5f5f5;
+  --color-hairline: #ebebeb;
+  --color-hairline-strong: #a1a1a1;
+
+  --color-body: #4d4d4d;
+  --color-mute: #888888;
+  --color-on-primary: #ffffff;
+
+  --gray-100: #fafafa;
+  --gray-200: #f5f5f5;
+  --gray-300: #ebebeb;
+  --gray-400: #d4d4d4;
+  --gray-500: #a1a1a1;
+  --gray-600: #888888;
+  --gray-700: #666666;
+  --gray-800: #4d4d4d;
+  --gray-900: #2d2d2d;
+  --gray-1000: #171717;
+
+  /* The company's colours, which the favicon and the OG images are drawn in.
+     Components must not reach for these — they use --accent from theme.css, so
+     that a page styled by this file takes its own site's colour. */
+  --brand-green: #16b079;
+  --brand-green-deep: #0e7a55;
+  --brand-graphite: #2c3a4a;
+
+  /* A signal colour, not a brand one: it marks the problem half of a case
+     study and means the same thing under either theme. */
+  --color-warn: #c50000;
+
+  --font-sans: 'Geist', -apple-system, BlinkMacSystemFont, 'Segoe UI', Helvetica, Arial, sans-serif;
+  --font-mono: 'Geist Mono', 'SFMono-Regular', Menlo, Consolas, monospace;
+
+  --elev-1: inset 0 0 0 1px rgba(0, 0, 0, 0.08);
+  --elev-2: 0 1px 1px rgba(0, 0, 0, 0.02), 0 2px 2px rgba(0, 0, 0, 0.04), inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+  --elev-3: 0 2px 2px rgba(0, 0, 0, 0.04), 0 8px 8px -8px rgba(0, 0, 0, 0.04), inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+  --elev-4: 0 2px 2px rgba(0, 0, 0, 0.04), 0 8px 16px -4px rgba(0, 0, 0, 0.04), inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+  --elev-5: 0 1px 1px rgba(0, 0, 0, 0.02), 0 8px 16px -4px rgba(0, 0, 0, 0.04), 0 24px 32px -8px rgba(0, 0, 0, 0.06),
+    inset 0 0 0 1px rgba(0, 0, 0, 0.06);
+}
+
+/* ---------------------------------------------------------------------------
+   Base
+--------------------------------------------------------------------------- */
+
+html,
+body {
+  margin: 0;
+  background: var(--color-canvas-soft);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+  text-rendering: optimizeLegibility;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+::selection {
+  background: var(--accent-selection-bg);
+  color: var(--accent-selection-ink);
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+section[id] {
+  scroll-margin-top: 80px;
+}
+
+/* ---------------------------------------------------------------------------
+   Layout
+--------------------------------------------------------------------------- */
+
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin: 0 auto;
+  padding: 0 32px;
+}
+
+.section {
+  padding: 96px 0;
+  position: relative;
+}
+.section.tight {
+  padding: 64px 0;
+}
+
+/* The two backgrounds a section can take instead of the page's soft canvas. */
+.section--canvas {
+  background: var(--color-canvas);
+}
+.section--band {
+  background: linear-gradient(180deg, var(--accent-tint-top), var(--accent-tint-bottom));
+}
+
+/* Inverted. Used for the closing contact block, and for any section that has
+   to carry more weight than the ones around it.
+
+   The descendant rules are wrapped in :where() so they carry no specificity of
+   their own. A dark section contains light things — the contact form is a white
+   card — and without this every `p` inside that card would inherit the
+   section's near-white text and disappear against it. */
+.section--dark {
+  background: var(--gray-1000);
+  color: #fff;
+  overflow: hidden;
+}
+.section--dark :where(h1, h2, h3) {
+  color: #fff;
+}
+.section--dark :where(p) {
+  color: rgba(255, 255, 255, 0.72);
+}
+.section--dark :where(.eyebrow) {
+  color: rgba(255, 255, 255, 0.72);
+}
+
+/* brand-guide/brand/06-layout-ui.md: centred intro, left-aligned content. The
+   eyebrow and heading are centred in a 720px column; everything under them is
+   left-aligned, and body copy is never centred. */
+.section-intro {
+  max-width: 720px;
+  margin: 0 auto 48px;
+  text-align: center;
+}
+.section-intro .eyebrow {
+  justify-content: center;
+}
+.section-intro .lead {
+  margin-top: 18px;
+}
+
+/* A readable column, centred as a block, ragged right as text. */
+.prose {
+  max-width: 720px;
+  margin: 0 auto;
+}
+
+@media (max-width: 640px) {
+  .container {
+    padding: 0 20px;
+  }
+  .section {
+    padding: 48px 0;
+  }
+  .section.tight {
+    padding: 40px 0;
+  }
+  .section-intro {
+    margin-bottom: 32px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Type
+--------------------------------------------------------------------------- */
+
+.eyebrow {
+  font: 400 12px/16px var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--color-body);
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+  margin: 0;
+}
+.eyebrow .dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--accent);
+  display: inline-block;
+  animation: eyebrow-dot-pulse 2s ease-out infinite;
+}
+@keyframes eyebrow-dot-pulse {
+  0% {
+    box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0.5);
+  }
+  70% {
+    box-shadow: 0 0 0 6px rgba(var(--accent-rgb), 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba(var(--accent-rgb), 0);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .eyebrow .dot {
+    animation: none;
+  }
+}
+
+h1.display-hero {
+  font: 600 clamp(36px, 6vw, 76px)/1.02 var(--font-sans);
+  letter-spacing: -0.04em;
+  color: var(--color-ink);
+  margin: 0;
+  text-wrap: balance;
+}
+h2.display-section {
+  font: 600 clamp(28px, 4vw, 52px)/1.05 var(--font-sans);
+  letter-spacing: -0.035em;
+  color: var(--color-ink);
+  margin: 0;
+  text-wrap: balance;
+}
+h3.display-card {
+  font: 600 20px/1.2 var(--font-sans);
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+  margin: 16px 0 0;
+}
+.lead {
+  font: 400 clamp(17px, 1.6vw, 22px)/1.5 var(--font-sans);
+  color: var(--color-body);
+  margin: 0;
+  text-wrap: pretty;
+  letter-spacing: -0.005em;
+}
+.body-para {
+  margin-top: 18px;
+}
+
+/* The one number anyone remembers. Deep accent, because a number is text. */
+.figure {
+  font: 600 clamp(34px, 5vw, 60px)/1 var(--font-sans);
+  letter-spacing: -0.035em;
+  color: var(--accent-deep);
+  margin: 0;
+}
+
+.quote {
+  margin: 28px 0 0;
+  padding: 0 0 0 20px;
+  border-left: 3px solid var(--accent);
+  font: 600 clamp(20px, 2.6vw, 30px)/1.3 var(--font-sans);
+  letter-spacing: -0.02em;
+  text-wrap: balance;
+}
+
+.note {
+  margin-top: 16px;
+  color: var(--color-mute);
+  font: 400 14px/1.5 var(--font-mono);
+}
+
+/* Never hyphenate. Swedish is a compound-writing language, and the browser's
+   hyphenation dictionary breaks compounds at their seams — "etikett-" /
+   "utskrifter" over two lines reads as the särskrivning the brand's voice guide
+   is at pains to avoid. overflow-wrap covers the one case hyphens were there
+   for: a single word wider than its column, which now breaks without a hyphen
+   instead of overflowing. */
+h1,
+h2,
+h3,
+h4,
+p,
+li,
+.lead {
+  hyphens: none;
+  -webkit-hyphens: none;
+  overflow-wrap: break-word;
+}
+
+/* ---------------------------------------------------------------------------
+   Controls
+--------------------------------------------------------------------------- */
+
+.cta {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 52px;
+  padding: 0 24px;
+  background: var(--color-ink);
+  color: #fff;
+  border-radius: 100px;
+  font: 500 16px/1 var(--font-sans);
+  letter-spacing: -0.1px;
+  border: 0;
+  cursor: pointer;
+  text-decoration: none;
+  transition:
+    opacity 120ms ease,
+    transform 120ms ease;
+}
+.cta:hover {
+  opacity: 0.86;
+}
+.cta:active {
+  transform: scale(0.985);
+}
+.cta:disabled {
+  opacity: 0.55;
+  cursor: not-allowed;
+}
+.cta.secondary {
+  background: #fff;
+  color: var(--color-ink);
+  box-shadow: inset 0 0 0 1px rgba(0, 0, 0, 0.1);
+}
+.cta.secondary:hover {
+  background: var(--color-canvas-soft);
+}
+/* Opt-in rather than a `.section--dark .cta` descendant rule, which would also
+   catch the submit button of the white form that sits inside a dark section. */
+.cta.on-dark {
+  background: #fff;
+  color: var(--gray-1000);
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 4px 10px;
+  border-radius: 100px;
+  background: var(--color-canvas-soft);
+  font: 400 12px/16px var(--font-mono);
+  color: var(--color-body);
+  box-shadow: inset 0 0 0 1px var(--color-hairline);
+  white-space: nowrap;
+}
+
+/* A small square-cornered accent tile: the icon holder on a service card, the
+   tick beside a reason. Same treatment at two sizes. */
+.tile {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: linear-gradient(180deg, var(--accent-tint-top) 0%, var(--accent-tint-bottom) 100%);
+  color: var(--accent-deep);
+  box-shadow: inset 0 0 0 1px rgba(var(--accent-deep-rgb), 0.18);
+}
+.tile.small {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+}
+
+/* ---------------------------------------------------------------------------
+   Cards and grids
+--------------------------------------------------------------------------- */
+
+.card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: var(--elev-3);
+  transition: box-shadow 200ms ease;
+}
+.card:hover {
+  box-shadow: var(--elev-4);
+}
+.card p {
+  color: var(--color-body);
+  font-size: 16px;
+  line-height: 1.6;
+  margin: 10px 0 0;
+}
+.card .num {
+  font: 400 12px/1 var(--font-mono);
+  color: var(--accent-deep);
+  display: block;
+  margin-bottom: 14px;
+  letter-spacing: 0.06em;
+}
+
+.grid-auto {
+  display: grid;
+  gap: 20px;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+}
+.grid-2 {
+  display: grid;
+  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+}
+.grid-3 {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+@media (max-width: 980px) {
+  .grid-3 {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+@media (max-width: 600px) {
+  .grid-3 {
+    grid-template-columns: 1fr;
+  }
+}
+
+.ticks {
+  list-style: none;
+  margin: 18px 0 0;
+  padding: 0;
+}
+.ticks li {
+  position: relative;
+  padding-left: 26px;
+  margin-bottom: 10px;
+  color: var(--color-body);
+  font-size: 15px;
+  line-height: 1.5;
+}
+.ticks li::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 6px;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent);
+}
+
+/* ---------------------------------------------------------------------------
+   Nav
+--------------------------------------------------------------------------- */
+
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 50;
+  background: rgba(250, 250, 250, 0.78);
+  backdrop-filter: saturate(180%) blur(12px);
+  -webkit-backdrop-filter: saturate(180%) blur(12px);
+  border-bottom: 1px solid var(--color-hairline);
+}
+/* space-between rather than a sibling selector, so the right-hand group sits at
+   the edge whether or not the link list is there — and still does at the width
+   where the links are hidden but their element remains in the DOM. */
+.nav-inner {
+  height: 64px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 24px;
+}
+.nav-brand {
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  text-decoration: none;
+  color: var(--color-ink);
+  font: 600 17px/1 var(--font-sans);
+  letter-spacing: -0.4px;
+  white-space: nowrap;
+}
+.nav-brand img {
+  width: 28px;
+  height: 28px;
+  display: block;
+}
+.nav-links {
+  display: flex;
+  gap: 24px;
+  margin-left: auto;
+}
+.nav-links a {
+  color: var(--color-body);
+  text-decoration: none;
+  font: 400 15px/1 var(--font-sans);
+}
+.nav-links a:hover {
+  color: var(--color-ink);
+}
+.nav-right {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+.nav-lang {
+  font: 400 13px/1 var(--font-mono);
+  color: var(--color-body);
+  text-decoration: none;
+  padding: 8px 12px;
+  border-radius: 100px;
+  box-shadow: inset 0 0 0 1px var(--color-hairline);
+}
+.nav-lang:hover {
+  background: var(--color-canvas);
+}
+.nav-cta {
+  height: 36px;
+  padding: 0 16px;
+  gap: 6px;
+  font-size: 14px;
+  white-space: nowrap;
+}
+
+@media (max-width: 860px) {
+  .nav-links {
+    display: none;
+  }
+}
+@media (max-width: 380px) {
+  .nav-cta {
+    display: none;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Hero
+--------------------------------------------------------------------------- */
+
+.hero {
+  position: relative;
+  overflow: hidden;
+}
+.hero-backdrop {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  pointer-events: none;
+}
+/* Kept under the 0.18 ceiling the brand guide sets for atmospheric gradients
+   on light backgrounds. */
+.hero-wash {
+  position: absolute;
+  inset: 0;
+  background:
+    radial-gradient(at 50% -10%, rgba(var(--accent-rgb), 0.18) 0%, transparent 55%),
+    radial-gradient(at 85% 40%, rgba(var(--accent-2-rgb), 0.1) 0%, transparent 50%),
+    radial-gradient(at 15% 60%, rgba(var(--accent-rgb), 0.1) 0%, transparent 55%);
+}
+.hero-grid-texture {
+  position: absolute;
+  inset: 0;
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.035) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(0, 0, 0, 0.035) 1px, transparent 1px);
+  background-size: 72px 72px;
+  mask-image: radial-gradient(ellipse at 50% 35%, #000 25%, transparent 75%);
+  -webkit-mask-image: radial-gradient(ellipse at 50% 35%, #000 25%, transparent 75%);
+}
+.hero-inner {
+  position: relative;
+  z-index: 1;
+  padding-top: 160px;
+  padding-bottom: 130px;
+}
+.hero-center {
+  text-align: center;
+  max-width: 920px;
+  margin: 0 auto;
+}
+.hero-center .eyebrow {
+  justify-content: center;
+  margin-bottom: 20px;
+}
+.hero-lead {
+  max-width: 720px;
+  margin: 20px auto 0;
+}
+.hero-actions {
+  display: flex;
+  gap: 12px;
+  justify-content: center;
+  margin-top: 36px;
+  flex-wrap: wrap;
+}
+.hero-shot {
+  position: relative;
+  z-index: 1;
+  margin-top: 56px;
+}
+
+@media (max-width: 640px) {
+  .hero-inner {
+    padding-top: 100px;
+    padding-bottom: 80px;
+  }
+  .hero-actions {
+    flex-direction: column;
+    align-items: stretch;
+  }
+  .hero-actions .cta {
+    justify-content: center;
+    height: 48px;
+    font-size: 15px;
+    padding: 0 20px;
+  }
+  .hero-shot {
+    margin-top: 36px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Footer
+--------------------------------------------------------------------------- */
+
+.footer {
+  background: var(--gray-1000);
+  color: rgba(255, 255, 255, 0.72);
+  padding: 80px 0 40px;
+}
+.footer a {
+  color: rgba(255, 255, 255, 0.86);
+  text-decoration: none;
+}
+.footer a:hover {
+  color: #fff;
+}
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 48px;
+  margin-bottom: 64px;
+}
+.footer-brand {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 16px;
+}
+.footer-brand img {
+  width: 32px;
+  height: 32px;
+  display: block;
+}
+.footer-brand span {
+  font: 600 18px/1 var(--font-sans);
+  letter-spacing: -0.4px;
+  color: #fff;
+}
+.footer-tagline {
+  color: rgba(255, 255, 255, 0.65);
+  max-width: 320px;
+  font-size: 14px;
+  line-height: 1.6;
+  margin: 0;
+}
+.footer-col h2 {
+  font: 400 12px/16px var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: rgba(255, 255, 255, 0.55);
+  margin: 0 0 16px;
+}
+.footer-col ul {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  gap: 10px;
+}
+.footer-col li {
+  font: 400 14px/20px var(--font-sans);
+}
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+  padding-top: 24px;
+  border-top: 1px solid rgba(255, 255, 255, 0.1);
+  font: 400 12px/16px var(--font-mono);
+  color: rgba(255, 255, 255, 0.45);
+}
+
+@media (max-width: 760px) {
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 32px;
+  }
+  .footer-bottom {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}
+@media (max-width: 480px) {
+  .footer {
+    padding: 56px 0 32px;
+  }
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: 28px;
+    margin-bottom: 40px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Contact
+--------------------------------------------------------------------------- */
+
+.contact-bg {
+  position: absolute;
+  inset: 0;
+  opacity: 0.3;
+  background:
+    radial-gradient(at 80% 20%, var(--accent) 0%, transparent 45%),
+    radial-gradient(at 20% 80%, var(--accent-2) 0%, transparent 45%);
+  filter: blur(60px);
+  pointer-events: none;
+}
+.contact-inner {
+  position: relative;
+  z-index: 1;
+}
+.contact-grid {
+  display: grid;
+  grid-template-columns: 1.1fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.contact-heading {
+  font: 600 clamp(28px, 5vw, 56px)/1.05 var(--font-sans);
+  letter-spacing: -0.035em;
+  color: #fff;
+  margin: 16px 0 20px;
+  text-wrap: balance;
+}
+.contact-lead {
+  font-size: 18px;
+  line-height: 1.55;
+  color: rgba(255, 255, 255, 0.78);
+  max-width: 460px;
+  margin: 0;
+}
+.contact-info {
+  margin-top: 36px;
+  display: grid;
+  gap: 8px;
+  max-width: 460px;
+}
+.contact-row {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 16px 20px;
+  background: rgba(255, 255, 255, 0.04);
+  border-radius: 12px;
+  box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  color: #fff;
+  text-decoration: none;
+  transition: background-color 120ms ease;
+}
+a.contact-row:hover {
+  background: rgba(255, 255, 255, 0.09);
+}
+.contact-icon {
+  width: 36px;
+  height: 36px;
+  border-radius: 10px;
+  background: rgba(var(--accent-rgb), 0.18);
+  color: var(--accent);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+.contact-row-text {
+  display: flex;
+  flex-direction: column;
+  flex: 1;
+}
+.contact-label {
+  font: 400 11px/16px var(--font-mono);
+  color: rgba(255, 255, 255, 0.55);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+}
+.contact-value {
+  font: 500 15px/20px var(--font-sans);
+  color: #fff;
+  margin-top: 2px;
+}
+
+/* ---------------------------------------------------------------------------
+   Form
+--------------------------------------------------------------------------- */
+
+.form {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px;
+  box-shadow:
+    0 30px 60px -20px rgba(0, 0, 0, 0.6),
+    inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  display: grid;
+  gap: 16px;
+  text-align: left;
+}
+.form-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+.form-field {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+.form-field label {
+  font: 500 12px/16px var(--font-sans);
+  color: var(--color-ink);
+}
+.form-field input,
+.form-field textarea {
+  font: 400 15px/22px var(--font-sans);
+  font-family: var(--font-sans);
+  color: var(--color-ink);
+  background: var(--color-canvas-soft);
+  border: 1px solid var(--color-hairline);
+  border-radius: 10px;
+  padding: 12px 14px;
+  outline: none;
+  width: 100%;
+  transition:
+    border-color 120ms ease,
+    box-shadow 120ms ease,
+    background-color 120ms ease;
+}
+.form-field textarea {
+  resize: vertical;
+  min-height: 120px;
+}
+.form-field input::placeholder,
+.form-field textarea::placeholder {
+  color: var(--color-mute);
+}
+/* Three signals at once — border, ring, background — so focus never depends on
+   one cue. brand-guide 4.7. */
+.form-field input:focus,
+.form-field textarea:focus {
+  border-color: var(--accent);
+  background: #fff;
+  box-shadow: 0 0 0 3px rgba(var(--accent-rgb), 0.18);
+}
+.form-submit {
+  margin-top: 8px;
+  width: 100%;
+  height: 48px;
+  justify-content: center;
+  font-size: 15px;
+}
+.form-note {
+  font: 400 12px/16px var(--font-sans);
+  color: var(--color-mute);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  justify-content: center;
+  margin: 0;
+}
+.form-status {
+  font: 500 14px/20px var(--font-sans);
+  padding: 12px 16px;
+  border-radius: 10px;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  justify-content: center;
+}
+.form-success {
+  background: rgba(var(--accent-rgb), 0.08);
+  color: var(--accent-deep);
+}
+.form-error {
+  background: rgba(220, 38, 38, 0.06);
+  color: #b91c1c;
+}
+.form-error a {
+  color: inherit;
+  text-decoration: underline;
+}
+/* Off-screen rather than display:none, which some bots check for. */
+.form-honeypot {
+  position: absolute;
+  left: -9999px;
+  opacity: 0;
+  height: 0;
+}
+
+@media (max-width: 880px) {
+  .contact-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .form-row-2 {
+    grid-template-columns: 1fr;
+  }
+}
+@media (max-width: 640px) {
+  .contact-lead {
+    font-size: 16px;
+  }
+  .contact-row {
+    padding: 12px 16px;
+    gap: 12px;
+  }
+  .contact-value {
+    font-size: 14px;
+  }
+  .form {
+    padding: 24px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Screenshots
+--------------------------------------------------------------------------- */
+
+.shot {
+  border-radius: 12px;
+  overflow: hidden;
+  box-shadow: var(--elev-5);
+  background: #fff;
+  display: block;
+  width: 100%;
+  margin: 0;
+}
+.shot img {
+  display: block;
+  width: 100%;
+  height: auto;
+}
+
+/* Until a capture exists its slot renders as a labelled placeholder rather than
+   a broken image, so the layout can be reviewed and each slot says exactly
+   which capture belongs in it. */
+.shot-placeholder {
+  border: 1px dashed var(--color-hairline-strong);
+  border-radius: 12px;
+  background: repeating-linear-gradient(
+    -45deg,
+    var(--color-canvas),
+    var(--color-canvas) 10px,
+    var(--color-canvas-soft) 10px,
+    var(--color-canvas-soft) 20px
+  );
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 32px;
+  min-height: 220px;
+  color: var(--gray-700);
+  font: 400 13px/1.5 var(--font-mono);
+}
+.shot-placeholder span {
+  max-width: 42ch;
+}
+.shot-placeholder .file {
+  display: block;
+  margin-top: 8px;
+  color: var(--accent-deep);
+}
+
+/* ---------------------------------------------------------------------------
+   Section: proof — one figure, stated once
+--------------------------------------------------------------------------- */
+
+.proof {
+  display: flex;
+  align-items: baseline;
+  flex-wrap: wrap;
+  gap: 8px 24px;
+}
+.proof-label {
+  font: 500 clamp(17px, 2vw, 22px)/1.4 var(--font-sans);
+  color: var(--color-ink);
+  margin: 0;
+}
+.proof-note {
+  font: 400 14px/1.4 var(--font-mono);
+  color: var(--color-body);
+  margin: 4px 0 0;
+}
+
+/* ---------------------------------------------------------------------------
+   Section: steps — numbered, each beside its screenshot
+--------------------------------------------------------------------------- */
+
+.steps {
+  margin-top: 40px;
+  display: grid;
+  gap: 28px;
+}
+.step {
+  display: grid;
+  grid-template-columns: minmax(260px, 1fr) minmax(0, 1.35fr);
+  gap: 32px;
+  align-items: center;
+  background: #fff;
+  border-radius: 12px;
+  padding: 28px;
+  box-shadow: var(--elev-3);
+}
+.step-text .num {
+  font: 400 12px/1 var(--font-mono);
+  color: var(--accent-deep);
+  letter-spacing: 0.06em;
+  display: block;
+  margin-bottom: 14px;
+}
+.step-text p {
+  margin: 10px 0 0;
+  color: var(--color-body);
+  font-size: 16px;
+  line-height: 1.6;
+}
+@media (max-width: 880px) {
+  .step {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Section: services — icon, number, body, technology chips
+--------------------------------------------------------------------------- */
+
+.service-card {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+}
+.service-head {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+.service-num {
+  font: 400 11px/16px var(--font-mono);
+  color: var(--color-mute);
+  letter-spacing: 0.08em;
+}
+.service-body {
+  margin: 8px 0 0;
+  color: var(--color-body);
+  font-size: 14px;
+  line-height: 1.55;
+  flex: 1;
+}
+.service-chips {
+  margin-top: 16px;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.service-chips .chip {
+  padding: 3px 10px;
+}
+
+/* ---------------------------------------------------------------------------
+   Section: reasons — a hairline-separated list, not another card grid
+--------------------------------------------------------------------------- */
+
+.reason-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 0 64px;
+}
+.reason {
+  display: flex;
+  align-items: flex-start;
+  gap: 14px;
+  padding: 24px 0;
+  border-top: 1px solid var(--color-hairline);
+}
+.reason-title {
+  font: 600 17px/1.3 var(--font-sans);
+  letter-spacing: -0.015em;
+  color: var(--color-ink);
+  margin: 3px 0 0;
+}
+.reason-body {
+  font: 400 14px/1.55 var(--font-sans);
+  color: var(--color-body);
+  margin: 6px 0 0;
+  max-width: 42ch;
+}
+@media (max-width: 880px) {
+  .reason-grid {
+    gap: 0 40px;
+  }
+}
+@media (max-width: 640px) {
+  .reason-grid {
+    grid-template-columns: 1fr;
+  }
+  .reason {
+    padding: 20px 0;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Section: cases — challenge, solution, result
+--------------------------------------------------------------------------- */
+
+.cases {
+  display: grid;
+  gap: 0;
+}
+.case {
+  padding: 48px 0;
+  border-top: 1px solid var(--color-hairline);
+  display: grid;
+  grid-template-columns: 300px 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.case:last-child {
+  border-bottom: 1px solid var(--color-hairline);
+}
+.case-left {
+  position: sticky;
+  top: 96px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+.case-meta {
+  font: 400 11px/16px var(--font-mono);
+  color: var(--color-mute);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  white-space: nowrap;
+}
+.case-meta-num {
+  color: var(--color-ink);
+  font-weight: 500;
+}
+.case-meta-sep {
+  color: var(--color-hairline-strong);
+}
+.case-meta-cat {
+  color: var(--color-body);
+}
+.case-title {
+  font: 600 clamp(24px, 2.6vw, 30px)/1.15 var(--font-sans);
+  letter-spacing: -0.03em;
+  color: var(--color-ink);
+  margin: 0;
+  text-wrap: balance;
+}
+.case-client {
+  font: 400 14px/1.45 var(--font-sans);
+  color: var(--color-body);
+  margin-top: -8px;
+}
+.case-tech {
+  padding-top: 20px;
+  border-top: 1px solid var(--color-hairline);
+}
+.case-tech-label {
+  font: 400 11px/16px var(--font-mono);
+  color: var(--color-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+  margin-bottom: 10px;
+}
+.case-tech-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+.case-right {
+  display: grid;
+  gap: 4px;
+}
+.case-block {
+  padding: 16px 0;
+}
+.case-block:first-child {
+  padding-top: 0;
+}
+.case-block + .case-block {
+  border-top: 1px solid var(--color-hairline);
+}
+.case-block-label {
+  font: 500 11px/16px var(--font-mono);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  color: var(--color-mute);
+  display: inline-flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 10px;
+}
+.case-block p {
+  font: 400 16px/1.7 var(--font-sans);
+  color: var(--gray-900);
+  margin: 0;
+  max-width: 62ch;
+}
+.case-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 2px;
+  display: inline-block;
+}
+.case-dot--challenge {
+  background: var(--color-warn);
+}
+.case-dot--solution {
+  background: var(--color-ink);
+}
+.case-dot--result {
+  background: var(--accent-deep);
+}
+@media (max-width: 880px) {
+  .case {
+    grid-template-columns: 1fr;
+    gap: 24px;
+    padding: 40px 0;
+  }
+  .case-left {
+    position: static;
+  }
+}
+@media (max-width: 640px) {
+  .case {
+    padding: 32px 0;
+  }
+  .case-block p {
+    font-size: 15px;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Section: about — text beside a portrait, closed with a signature
+--------------------------------------------------------------------------- */
+
+.about-grid {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr;
+  gap: 64px;
+  align-items: start;
+}
+.about-body {
+  margin-top: 28px;
+  display: grid;
+  gap: 20px;
+  max-width: 560px;
+}
+.about-body p {
+  font: 400 17px/1.75 var(--font-sans);
+  color: var(--color-body);
+  margin: 0;
+}
+.about-sign {
+  margin-top: 32px;
+  padding-top: 20px;
+  border-top: 1px solid var(--color-hairline);
+}
+.about-sign-greeting {
+  font: 400 15px/1.4 var(--font-sans);
+  color: var(--color-body);
+  margin-bottom: 8px;
+}
+.about-sign-name {
+  font: 600 20px/1.2 var(--font-sans);
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+}
+.about-sign-role {
+  margin-top: 4px;
+  font: 400 12px/16px var(--font-mono);
+  color: var(--color-mute);
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+}
+.about-portrait-wrap {
+  position: sticky;
+  top: 96px;
+}
+.about-portrait {
+  border-radius: 16px;
+  overflow: hidden;
+  box-shadow: var(--elev-5);
+  aspect-ratio: 3/4;
+  background: var(--color-canvas-soft);
+}
+.about-portrait img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+@media (max-width: 900px) {
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+  .about-portrait-wrap {
+    position: static;
+    max-width: 380px;
+  }
+}
+@media (max-width: 640px) {
+  .about-body p {
+    font-size: 16px;
+    line-height: 1.7;
+  }
+}
+
+/* ---------------------------------------------------------------------------
+   Section: not found
+--------------------------------------------------------------------------- */
+
+.notfound {
+  min-height: 60vh;
+  display: flex;
+  align-items: center;
+}
+.notfound-inner {
+  text-align: center;
+  max-width: 520px;
+  margin: 0 auto;
+}
+.notfound-code {
+  font: 600 96px/1 var(--font-sans);
+  letter-spacing: -0.04em;
+  color: var(--color-hairline-strong);
+}
+.notfound-title {
+  font: 600 28px/1.2 var(--font-sans);
+  letter-spacing: -0.02em;
+  color: var(--color-ink);
+  margin: 24px 0 12px;
+}
+.notfound-body {
+  font: 400 16px/1.55 var(--font-sans);
+  color: var(--color-body);
+  margin: 0 0 32px;
+}
+
+/* ---------------------------------------------------------------------------
+   Utilities
+--------------------------------------------------------------------------- */
+
+.rule {
+  height: 1px;
+  background: var(--color-hairline);
+  border: 0;
+  margin: 0;
+}
+.mt {
+  margin-top: 32px;
+}
+.is-hidden {
+  display: none !important;
+}

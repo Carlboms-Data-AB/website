@@ -1,0 +1,62 @@
+---
+/**
+ * The footer. Identical in both repositories: the brand block, three columns of
+ * links and the two closing lines are all read from the copy object.
+ *
+ * A column item without an href renders as plain text — an address is not a
+ * link. An href that starts with http opens in a new tab.
+ */
+import { url } from '~/site';
+import type { Copy } from '~/copy';
+
+export interface Props {
+  t: Copy;
+}
+
+const { t } = Astro.props;
+const year = new Date().getFullYear();
+---
+
+<footer class="footer">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-col">
+        <div class="footer-brand">
+          <img src={url('/favicon.svg')} alt="" width="32" height="32" />
+          <span>{t.brand}</span>
+        </div>
+        <p class="footer-tagline">{t.footer.tagline}</p>
+      </div>
+
+      {
+        t.footer.columns.map((column) => (
+          <div class="footer-col">
+            <h2>{column.title}</h2>
+            <ul>
+              {column.items.map((item) => (
+                <li>
+                  {item.href ? (
+                    <a
+                      href={url(item.href)}
+                      target={item.href.startsWith('http') ? '_blank' : undefined}
+                      rel={item.href.startsWith('http') ? 'noopener noreferrer' : undefined}
+                    >
+                      {item.label}
+                    </a>
+                  ) : (
+                    item.label
+                  )}
+                </li>
+              ))}
+            </ul>
+          </div>
+        ))
+      }
+    </div>
+
+    <div class="footer-bottom">
+      <span>© {year} {t.footer.legal}</span>
+      <span>{t.footer.note}</span>
+    </div>
+  </div>
+</footer>
