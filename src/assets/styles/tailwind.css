@@ -90,6 +90,15 @@ html { scroll-behavior: smooth; }
   width: 6px; height: 6px; border-radius: 50%;
   background: var(--brand-green);
   display: inline-block;
+  animation: eyebrow-dot-pulse 2s ease-out infinite;
+}
+@keyframes eyebrow-dot-pulse {
+  0%   { box-shadow: 0 0 0 0 rgba(22, 176, 121, 0.5); }
+  70%  { box-shadow: 0 0 0 6px rgba(22, 176, 121, 0); }
+  100% { box-shadow: 0 0 0 0 rgba(22, 176, 121, 0); }
+}
+@media (prefers-reduced-motion: reduce) {
+  .eyebrow .dot { animation: none; }
 }
 
 h1.display-hero {
