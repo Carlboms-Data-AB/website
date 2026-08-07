@@ -137,7 +137,7 @@ const iconPaths: Record<string, string> = {
   </section>
 
   <!-- Varför Carlboms Data -->
-  <section class="section tight" id="varfor" style="background:var(--color-canvas);">
+  <section class="section tight section--canvas" id="varfor">
     <div class="container">
       <div class="section-intro">
         <h2 class="eyebrow section-label"><span class="dot"></span>Varför Carlboms Data</h2>
@@ -187,21 +187,21 @@ const iconPaths: Record<string, string> = {
             <div class="case-right">
               <div class="case-section">
                 <div class="case-section-label">
-                  <span class="cs-dot" style="background:#c50000;"></span>
+                  <span class="cs-dot cs-dot--challenge"></span>
                   Utmaningen
                 </div>
                 <p>{c.utmaning}</p>
               </div>
               <div class="case-section">
                 <div class="case-section-label">
-                  <span class="cs-dot" style="background:var(--color-ink);"></span>
+                  <span class="cs-dot cs-dot--solution"></span>
                   Lösningen
                 </div>
                 <p>{c.losning}</p>
               </div>
               <div class="case-section">
                 <div class="case-section-label">
-                  <span class="cs-dot" style="background:#0e7a55;"></span>
+                  <span class="cs-dot cs-dot--result"></span>
                   Resultatet
                 </div>
                 <p>{c.resultat}</p>
@@ -214,7 +214,7 @@ const iconPaths: Record<string, string> = {
   </section>
 
   <!-- Om -->
-  <section class="section tight" id="om" style="background:var(--color-canvas);">
+  <section class="section tight section--canvas" id="om">
     <div class="container">
       <div class="om-grid">
         <div class="om-text">
@@ -298,14 +298,14 @@ const iconPaths: Record<string, string> = {
             <span class="submit-label">Skicka
               <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
             </span>
-            <span class="submit-sending" style="display:none;">Skickar…</span>
+            <span class="submit-sending is-hidden">Skickar…</span>
           </button>
 
-          <div class="form-status form-success" id="form-success" style="display:none;">
+          <div class="form-status form-success is-hidden" id="form-success">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 6 9 17l-5-5"/></svg>
             Tack! Jag hör av mig inom kort.
           </div>
-          <div class="form-status form-error" id="form-error" style="display:none;">
+          <div class="form-status form-error is-hidden" id="form-error">
             <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m15 9-6 6"/><path d="m9 9 6 6"/></svg>
             Något gick fel. Försök igen eller maila <a href="mailto:hello@carlbomsdata.se">hello@carlbomsdata.se</a>.
           </div>
@@ -355,6 +355,8 @@ const iconPaths: Record<string, string> = {
   .om-text .section-label,
   .kontakt-grid .section-label { margin-bottom: 24px; }
   .kontakt-grid .section-label { color: rgba(255, 255, 255, 0.55); }
+  .section--canvas { background: var(--color-canvas); }
+  .is-hidden { display: none; }
   @media (max-width: 640px) { .section-intro { margin-bottom: 32px; } }
 
   .chip {
@@ -461,6 +463,9 @@ const iconPaths: Record<string, string> = {
     color: var(--color-mute); display: inline-flex; align-items: center; gap: 10px; margin-bottom: 10px;
   }
   .cs-dot { width: 6px; height: 6px; border-radius: 2px; display: inline-block; }
+  .cs-dot--challenge { background: #c50000; }
+  .cs-dot--solution { background: var(--color-ink); }
+  .cs-dot--result { background: #0e7a55; }
   .case-section p { font: 400 16px/1.7 var(--font-sans); color: var(--gray-900); margin: 0; max-width: 62ch; }
   @media (max-width: 880px) {
     .case-card { grid-template-columns: 1fr; gap: 24px; padding: 40px 0; }
