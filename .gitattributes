@@ -1,0 +1,12 @@
+# One line ending everywhere. Without this, a file written on Windows and a file
+# written on Linux differ by 11 bytes and nothing else, which is enough to make
+# "is this identical to the other repository's copy?" answer no when it should
+# answer yes.
+* text=auto eol=lf
+
+# Binary, so git does not try.
+*.png binary
+*.jpg binary
+*.jpeg binary
+*.webp binary
+*.ico binary
