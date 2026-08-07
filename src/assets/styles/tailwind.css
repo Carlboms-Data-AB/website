@@ -73,7 +73,7 @@ html { scroll-behavior: smooth; }
 @media (max-width: 640px) {
   .section { padding: 48px 0; }
   .section.tight { padding: 40px 0; }
-  h1, h2, h3, p, .lead { hyphens: auto; -webkit-hyphens: auto; }
+  h1, h2, h3, p, .lead { hyphens: none; -webkit-hyphens: none; overflow-wrap: break-word; }
 }
 
 .eyebrow {
