@@ -9,6 +9,8 @@ const metadata = {
   ignoreTitleTemplate: true,
 };
 
+const currentYear = new Date().getFullYear();
+
 // Kompetensområden — de två positioneringspelarna först, därefter djupet
 const tjanster = [
   { icon: 'git-merge', title: 'MES/ERP-integration', body: 'Jag kopplar samman produktionssystem, affärssystem och databaser så att informationen flödar automatiskt mellan systemen.', chips: ['MES / ERP', 'T-SQL', 'HTTP / REST', 'ODBC'] },
@@ -253,7 +255,7 @@ const iconPaths: Record<string, string> = {
       <div class="kontakt-grid">
         <div>
           <div class="eyebrow" style="color:rgba(255,255,255,0.55);">
-            <span style="width:6px;height:6px;border-radius:50%;background:var(--brand-green);display:inline-block;"></span>
+            <span class="dot"></span>
             Kontakt
           </div>
           <h2 class="kontakt-heading">Hör av er.</h2>
@@ -328,10 +330,37 @@ const iconPaths: Record<string, string> = {
       </div>
     </div>
   </section>
+
+  <footer class="site-footer">
+    <div class="container footer-inner">
+      <span class="footer-copy">© {currentYear} Carlboms Data AB · Lund</span>
+      <div class="footer-links">
+        <span class="footer-badge">
+          <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
+          Cookiefri sajt – ingen spårning
+        </span>
+        <a class="footer-link" href="https://github.com/Carlboms-Data-AB/website" target="_blank" rel="noopener noreferrer">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true"><path d="M12 .5C5.7.5.5 5.7.5 12c0 5.1 3.3 9.4 7.9 10.9.6.1.8-.2.8-.6 0-.3 0-1.1 0-2-3.2.7-3.9-1.5-3.9-1.5-.5-1.3-1.3-1.7-1.3-1.7-1.1-.7.1-.7.1-.7 1.2.1 1.8 1.2 1.8 1.2 1 1.8 2.7 1.3 3.4 1 .1-.7.4-1.3.7-1.6-2.6-.3-5.3-1.3-5.3-5.8 0-1.3.5-2.3 1.2-3.1-.1-.3-.5-1.6.1-3.2 0 0 1-.3 3.3 1.2a11.4 11.4 0 0 1 6 0c2.3-1.5 3.3-1.2 3.3-1.2.6 1.6.2 2.9.1 3.2.8.8 1.2 1.8 1.2 3.1 0 4.5-2.7 5.5-5.3 5.8.4.4.8 1.1.8 2.2 0 1.6 0 2.9 0 3.3 0 .3.2.7.8.6 4.6-1.5 7.9-5.8 7.9-10.9C23.5 5.7 18.3.5 12 .5z"/></svg>
+          Källkod på GitHub
+        </a>
+      </div>
+    </div>
+  </footer>
 </Layout>
 
 <style>
   section[id] { scroll-margin-top: 80px; }
+
+  /* Footer */
+  .site-footer { border-top: 1px solid var(--color-hairline); padding: 26px 0; }
+  .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 16px; flex-wrap: wrap; }
+  .footer-copy, .footer-badge, .footer-link { font: 400 12px/16px var(--font-mono); text-transform: uppercase; letter-spacing: 0.06em; }
+  .footer-copy { color: var(--color-mute); }
+  .footer-links { display: inline-flex; align-items: center; gap: 22px; flex-wrap: wrap; }
+  .footer-badge { display: inline-flex; align-items: center; gap: 7px; color: var(--brand-green-deep); }
+  .footer-link { display: inline-flex; align-items: center; gap: 7px; color: var(--color-body); text-decoration: none; transition: color 0.15s ease; }
+  .footer-link:hover { color: var(--color-ink); }
+  @media (max-width: 560px) { .footer-inner { flex-direction: column; align-items: flex-start; gap: 12px; } }
 
   /* Hero */
   .hero-section { position: relative; overflow: hidden; }
