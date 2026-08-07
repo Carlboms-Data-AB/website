@@ -116,10 +116,10 @@ h2.display-section {
   text-wrap: balance;
 }
 h3.display-card {
-  font: 600 clamp(20px, 2.2vw, 24px)/1.2 var(--font-sans);
+  font: 600 20px/1.2 var(--font-sans);
   letter-spacing: -0.02em;
   color: var(--color-ink);
-  margin: 0;
+  margin: 16px 0 0;
 }
 .lead {
   font: 400 clamp(17px, 1.6vw, 22px)/1.5 var(--font-sans);

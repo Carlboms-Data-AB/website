@@ -113,7 +113,7 @@ const iconPaths: Record<string, string> = {
   <section class="section tight" id="tjanster">
     <div class="container">
       <div class="section-intro">
-        <div class="eyebrow section-label"><span class="dot"></span>Mina tjänster</div>
+        <h2 class="eyebrow section-label"><span class="dot"></span>Mina tjänster</h2>
       </div>
 
       <div class="tjanst-grid">
@@ -125,7 +125,7 @@ const iconPaths: Record<string, string> = {
               </div>
               <span class="tjanst-num">{String(i + 1).padStart(2, '0')}</span>
             </div>
-            <h3 class="display-card" style="margin-top:16px;font-size:20px;">{t.title}</h3>
+            <h3 class="display-card">{t.title}</h3>
             <p class="tjanst-body">{t.body}</p>
             <div class="tjanst-chips">
               {t.chips.map(c => <span class="chip">{c}</span>)}
@@ -140,7 +140,7 @@ const iconPaths: Record<string, string> = {
   <section class="section tight" id="varfor" style="background:var(--color-canvas);">
     <div class="container">
       <div class="section-intro">
-        <div class="eyebrow section-label"><span class="dot"></span>Varför Carlboms Data</div>
+        <h2 class="eyebrow section-label"><span class="dot"></span>Varför Carlboms Data</h2>
       </div>
 
       <div class="fordel-grid">
@@ -163,7 +163,7 @@ const iconPaths: Record<string, string> = {
   <section class="section tight" id="referenser">
     <div class="container">
       <div class="section-intro">
-        <h2 class="eyebrow section-label" style="margin:0;"><span class="dot"></span>Referenser</h2>
+        <h2 class="eyebrow section-label"><span class="dot"></span>Referenser</h2>
       </div>
 
       <div class="cases-stack">
@@ -218,7 +218,7 @@ const iconPaths: Record<string, string> = {
     <div class="container">
       <div class="om-grid">
         <div class="om-text">
-          <div class="eyebrow section-label" style="margin-bottom:24px;"><span class="dot"></span>Om Carlboms Data</div>
+          <h2 class="eyebrow section-label"><span class="dot"></span>Om Carlboms Data</h2>
           <div class="om-body">
             <p>Jag heter Tobias Carlbom och driver Carlboms Data AB i Lund. Jag hjälper tillverkningsföretag med MES/ERP-integration, systemintegration och specialutvecklade verktyg.</p>
             <p>Min styrka är att jag arbetar med både IT och automation. Det gör att jag kan förstå hela kedjan — från maskiner och styrsystem till databaser, affärssystem och användarnas arbetsflöden.</p>
@@ -246,10 +246,7 @@ const iconPaths: Record<string, string> = {
     <div class="container" style="position:relative;">
       <div class="kontakt-grid">
         <div>
-          <div class="eyebrow section-label" style="color:rgba(255,255,255,0.55);margin-bottom:20px;">
-            <span class="dot"></span>
-            Kontakt
-          </div>
+          <h2 class="eyebrow section-label"><span class="dot"></span>Kontakt</h2>
           <p class="kontakt-lead">
             Hör av er så pratar vi om hur jag kan få era system att samarbeta bättre. Carlboms Data är baserat i Lund och arbetar med kunder i hela Sverige.
           </p>
@@ -354,7 +351,10 @@ const iconPaths: Record<string, string> = {
 
   .section-intro { max-width: 720px; margin: 0 auto 48px; text-align: center; }
   .section-intro .eyebrow { justify-content: center; }
-  .section-label { font-size: 20px; line-height: 26px; }
+  .section-label { font-size: 20px; line-height: 26px; margin: 0; }
+  .om-text .section-label,
+  .kontakt-grid .section-label { margin-bottom: 24px; }
+  .kontakt-grid .section-label { color: rgba(255, 255, 255, 0.55); }
   @media (max-width: 640px) { .section-intro { margin-bottom: 32px; } }
 
   .chip {
