@@ -41,6 +41,22 @@ Every word is in `src/copy.ts`. Change text there, not in markup.
 Anchors (`#tjanster`, `#how`, `#kontakt`, …) are addresses, not copy. Renaming
 one breaks links people already have — don't, unless asked.
 
+## Mobile
+
+The narrowest target is a 320px phone, which leaves a 280px column inside
+`.container`. Two things have broken that before:
+
+- **`minmax(Npx, 1fr)` in a grid.** `auto-fit` always lays down at least one
+  track, so a 360px minimum is 360px wide inside a 280px column and the page
+  scrolls sideways. Write `minmax(min(Npx, 100%), 1fr)`.
+- **`white-space: nowrap` on something long.** Fine for a chip, not for a line
+  of uppercase mono. Let it wrap.
+
+`body { overflow-x: clip }` is a backstop, not a fix — if it is doing work,
+something above is still wrong. `clip` rather than `hidden` because `hidden`
+would make the body a scroll container and break every `position: sticky` on
+the page.
+
 ## Do not
 
 - Add dependencies. The count is the point.
@@ -49,3 +65,4 @@ one breaks links people already have — don't, unless asked.
   Astro's aliases apply and the build fails. Use a relative path.
 - Hyphenate. `hyphens: none` is set on purpose: Swedish compounds break at their
   seams and read as särskrivningar.
+- Write a bare `minmax(Npx, …)`. See above.

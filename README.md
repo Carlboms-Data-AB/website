@@ -24,11 +24,29 @@ src/components/Footer.astro
 src/components/Contact.astro
 src/components/ContactForm.astro
 src/components/Shot.astro
+src/pages/index.astro
 src/pages/404.astro
 tsconfig.json
+.gitattributes
 .gitignore
 .github/workflows/deploy.yml
+CLAUDE.md
 public/robots.txt
+```
+
+To check that claim rather than trust it:
+
+```sh
+for f in src/styles/brand.css src/site.ts src/layouts/Base.astro \
+         src/components/Nav.astro src/components/Footer.astro \
+         src/components/Contact.astro src/components/ContactForm.astro \
+         src/components/Shot.astro src/pages/index.astro src/pages/404.astro \
+         tsconfig.json .gitattributes .gitignore CLAUDE.md \
+         .github/workflows/deploy.yml public/robots.txt; do
+  a=$(git hash-object "$f")
+  b=$(git -C ../rowmantic-print-web hash-object "$f")
+  [ "$a" = "$b" ] && echo "ok    $f" || echo "DIFF  $f"
+done
 ```
 
 Three things differ, and only three:

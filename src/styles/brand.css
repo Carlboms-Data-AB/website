@@ -87,6 +87,18 @@ body {
   text-rendering: optimizeLegibility;
 }
 
+/* A backstop against horizontal scroll on phones. `clip` rather than `hidden`
+   on purpose: `hidden` would make the body a scroll container and break every
+   `position: sticky` on the page — the header, the case column, the portrait.
+   `clip` creates no scroll container, so overflow-y stays `visible`.
+
+   This hides a symptom, so treat it as one: anything that overflows is still a
+   bug worth finding. It is here so that finding it later is not a production
+   incident. */
+body {
+  overflow-x: clip;
+}
+
 *,
 *::before,
 *::after {
@@ -410,15 +422,19 @@ li,
   letter-spacing: 0.06em;
 }
 
+/* min(Npx, 100%) rather than a bare Npx: auto-fit always lays down at least one
+   track, and a track whose minimum is 360px is 360px wide inside a 320px phone
+   — which is a horizontally scrolling page, not a narrower card. The min()
+   lets the track give up its minimum once the container is smaller than it. */
 .grid-auto {
   display: grid;
   gap: 20px;
-  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(280px, 100%), 1fr));
 }
 .grid-2 {
   display: grid;
   gap: 24px;
-  grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+  grid-template-columns: repeat(auto-fit, minmax(min(360px, 100%), 1fr));
 }
 .grid-3 {
   display: grid;
@@ -540,7 +556,11 @@ li,
     display: none;
   }
 }
-@media (max-width: 380px) {
+/* The brand word, the language toggle and the call to action do not fit on a
+   phone once all three are there — and all three refuse to wrap, so what does
+   not fit becomes horizontal scroll. The call to action goes first: the hero
+   repeats it two screens down. */
+@media (max-width: 480px) {
   .nav-cta {
     display: none;
   }
@@ -1026,7 +1046,7 @@ a.contact-row:hover {
 }
 .step {
   display: grid;
-  grid-template-columns: minmax(260px, 1fr) minmax(0, 1.35fr);
+  grid-template-columns: minmax(min(260px, 100%), 1fr) minmax(0, 1.35fr);
   gap: 32px;
   align-items: center;
   background: #fff;
@@ -1143,7 +1163,7 @@ a.contact-row:hover {
   padding: 48px 0;
   border-top: 1px solid var(--color-hairline);
   display: grid;
-  grid-template-columns: 300px 1fr;
+  grid-template-columns: minmax(0, 300px) minmax(0, 1fr);
   gap: 64px;
   align-items: start;
 }
@@ -1157,6 +1177,8 @@ a.contact-row:hover {
   flex-direction: column;
   gap: 20px;
 }
+/* Wraps rather than nowrap: "01 · Modernisering & virtualisering" in uppercase
+   mono is wider than a 320px phone's column. */
 .case-meta {
   font: 400 11px/16px var(--font-mono);
   color: var(--color-mute);
@@ -1164,8 +1186,8 @@ a.contact-row:hover {
   text-transform: uppercase;
   display: flex;
   align-items: center;
-  gap: 8px;
-  white-space: nowrap;
+  flex-wrap: wrap;
+  gap: 4px 8px;
 }
 .case-meta-num {
   color: var(--color-ink);
