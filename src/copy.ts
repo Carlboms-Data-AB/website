@@ -131,7 +131,7 @@ const sv: Copy = {
   home: '/',
 
   meta: {
-    title: 'Carlboms Data — IT och automation för tillverkningsindustrin',
+    title: 'Carlboms Data — Systemintegration för tillverkningsindustrin',
     description:
       'Jag hjälper tillverkningsföretag med MES/ERP-integration, systemintegration och ' +
       'specialutvecklade verktyg som får IT och automation att fungera tillsammans.',
