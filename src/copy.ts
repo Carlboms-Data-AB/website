@@ -148,7 +148,7 @@ const sv: Copy = {
   },
 
   hero: {
-    title: 'Konsult inom IT och automation',
+    title: 'Konsult inom Systemintegration',
     lead:
       'Jag hjälper tillverkningsföretag med MES/ERP-integration, systemintegration och ' +
       'specialutvecklade verktyg.',
