@@ -78,7 +78,6 @@ const tools = [
 
   <div id="toolModal" class="tool-modal" hidden>
     <div class="tool-modal-bar">
-      <span id="toolModalTitle" class="tool-modal-title"></span>
       <button id="toolModalClose" class="tool-modal-close" type="button">Stäng ✕</button>
     </div>
     <iframe id="toolModalFrame" title=""></iframe>
@@ -145,14 +144,10 @@ const tools = [
   .tool-modal-bar {
     display: flex;
     align-items: center;
-    justify-content: space-between;
-    gap: 16px;
+    justify-content: flex-end;
     padding: 10px 16px;
     border-bottom: 1px solid var(--color-line, rgba(0, 0, 0, 0.1));
     background: var(--color-canvas-soft, #f6f6f6);
-  }
-  .tool-modal-title {
-    font: 600 15px/1 var(--font-sans);
   }
   .tool-modal-close {
     height: 36px;
@@ -178,7 +173,6 @@ const tools = [
 <script>
   const modal = document.getElementById('toolModal') as HTMLElement | null;
   const frame = document.getElementById('toolModalFrame') as HTMLIFrameElement | null;
-  const title = document.getElementById('toolModalTitle');
   const closeBtn = document.getElementById('toolModalClose');
 
   const close = () => {
@@ -196,7 +190,6 @@ const tools = [
       if (!src) return;
       frame.src = src;
       frame.title = name;
-      if (title) title.textContent = name;
       modal.hidden = false;
       document.body.style.overflow = 'hidden';
     });
