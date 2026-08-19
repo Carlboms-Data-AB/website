@@ -145,7 +145,7 @@ const sv: Copy = {
     ],
     cta: 'Boka rådgivning',
     ctaHref: '#kontakt',
-    tools: 'Verktyg',
+    tools: 'Tools',
     toolsHref: '/tools',
   },
 

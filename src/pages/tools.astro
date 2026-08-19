@@ -6,7 +6,7 @@ import { url } from '~/site';
 import { copy } from '~/copy';
 
 const base = copy.sv;
-const t = { ...base, meta: { ...base.meta, title: 'Verktyg – Carlboms Data AB' } };
+const t = { ...base, meta: { ...base.meta, title: 'Tools – Carlboms Data AB' } };
 
 const tools = [
   {
@@ -37,10 +37,10 @@ const tools = [
   <main>
     <section class="section">
       <div class="container tools-page">
-        <h1 class="tools-title">Verktyg</h1>
+        <h1 class="tools-title">Tools</h1>
         <p class="tools-lead">
-          Små webbverktyg som körs helt i din webbläsare. Inget laddas upp, och
-          själva verktyget startar först när du klickar på Öppna.
+          Små appar som körs helt i din webbläsare. Inget laddas upp, och själva
+          appen startar först när du klickar på Öppna.
         </p>
 
         <ul class="tools-list">
@@ -59,9 +59,9 @@ const tools = [
                 <div class="tool-embed" data-src={url(tool.src)}>
                   <div class="tool-embed-start">
                     <button class="cta" type="button">
-                      Öppna verktyget
+                      Öppna
                     </button>
-                    <span class="tool-note">Verktyget startar först när du klickar.</span>
+                    <span class="tool-note">Appen startar först när du klickar.</span>
                   </div>
                 </div>
               </li>
