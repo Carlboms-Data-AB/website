@@ -154,7 +154,7 @@ const sv: Copy = {
       'specialutvecklade verktyg.',
     cta: 'Boka ett rådgivningssamtal',
     ctaHref: '#kontakt',
-    ctaSecondary: 'Se tjänsterna',
+    ctaSecondary: 'Se tjänster',
     ctaSecondaryHref: '#tjanster',
   },
 
