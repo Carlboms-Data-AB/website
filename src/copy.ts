@@ -54,7 +54,7 @@ export interface Copy {
   alternates?: { hreflang: string; href: string }[];
 
   meta: { title: string; description: string };
-  nav: { links: NavLink[]; cta: string; ctaHref: string };
+  nav: { links: NavLink[]; cta: string; ctaHref: string; tools?: string; toolsHref?: string };
 
   hero: {
     title: string;
@@ -145,6 +145,8 @@ const sv: Copy = {
     ],
     cta: 'Boka rådgivning',
     ctaHref: '#kontakt',
+    tools: 'Verktyg',
+    toolsHref: '/tools',
   },
 
   hero: {

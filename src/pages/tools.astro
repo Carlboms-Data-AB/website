@@ -1,0 +1,160 @@
+---
+import Base from '~/layouts/Base.astro';
+import Nav from '~/components/Nav.astro';
+import Footer from '~/components/Footer.astro';
+import { url } from '~/site';
+import { copy } from '~/copy';
+
+const base = copy.sv;
+const t = { ...base, meta: { ...base.meta, title: 'Verktyg – Carlboms Data AB' } };
+
+const tools = [
+  {
+    name: 'Freeze Detector',
+    src: '/verktyg/freeze/',
+    body:
+      'Hittar frysningar i en skärminspelning — sekunderna då bilden står helt ' +
+      'still. Ladda upp en MP4, markera kameraytan, och få en tidslinje och en ' +
+      'lista över varje frys att klicka dig igenom. Allt sker i webbläsaren; ' +
+      'inget laddas upp.',
+    tech: ['MP4 / H.264', 'WebCodecs', 'inget laddas upp'],
+  },
+  {
+    name: 'Parcel Cropper',
+    src: '/verktyg/parcel/',
+    body:
+      'Beskär fraktsedeln ur en PostNord- eller Tradera-PDF och sparar etiketten ' +
+      'i rätt storlek, 104,4 × 187,8 mm, för en etikettskrivare. Text och ' +
+      'streckkod behålls som vektor och förblir skarpa. Allt sker i webbläsaren; ' +
+      'PDF:en laddas aldrig upp.',
+    tech: ['PDF', 'vektor', 'inget laddas upp'],
+  },
+];
+---
+
+<Base t={t} noindex>
+  <Nav t={t} />
+  <main>
+    <section class="section">
+      <div class="container tools-page">
+        <h1 class="tools-title">Verktyg</h1>
+        <p class="tools-lead">
+          Små webbverktyg som körs helt i din webbläsare. Inget laddas upp, och
+          själva verktyget startar först när du klickar på Öppna.
+        </p>
+
+        <ul class="tools-list">
+          {
+            tools.map((tool) => (
+              <li class="tool-card">
+                <div class="tool-head">
+                  <h2>{tool.name}</h2>
+                  <div class="tool-chips">
+                    {tool.tech.map((c) => (
+                      <span class="chip">{c}</span>
+                    ))}
+                  </div>
+                </div>
+                <p class="tool-body">{tool.body}</p>
+                <div class="tool-embed" data-src={url(tool.src)}>
+                  <div class="tool-embed-start">
+                    <button class="cta" type="button">
+                      Öppna verktyget
+                    </button>
+                    <span class="tool-note">Verktyget startar först när du klickar.</span>
+                  </div>
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+      </div>
+    </section>
+  </main>
+  <Footer t={t} />
+</Base>
+
+<style>
+  .tools-page {
+    max-width: 840px;
+  }
+  .tools-title {
+    font: 600 34px/1.1 var(--font-sans);
+    letter-spacing: -0.5px;
+    margin: 0 0 12px;
+  }
+  .tools-lead {
+    color: var(--color-body);
+    max-width: 60ch;
+    margin: 0 0 40px;
+  }
+  .tools-list {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: grid;
+    gap: 28px;
+  }
+  .tool-card {
+    border: 1px solid var(--color-line, rgba(0, 0, 0, 0.1));
+    border-radius: 16px;
+    padding: 24px;
+    background: var(--color-canvas-soft, #fff);
+  }
+  .tool-head {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 8px 16px;
+  }
+  .tool-head h2 {
+    font: 600 20px/1.2 var(--font-sans);
+    margin: 0;
+  }
+  .tool-chips {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+  }
+  .tool-body {
+    color: var(--color-body);
+    margin: 12px 0 20px;
+    max-width: 62ch;
+  }
+  .tool-embed-start {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .tool-note {
+    color: var(--color-muted, #666);
+    font-size: 14px;
+  }
+  .tool-embed iframe {
+    width: 100%;
+    height: 82vh;
+    min-height: 560px;
+    border: 0;
+    border-radius: 12px;
+    background: #fff;
+    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.12);
+  }
+</style>
+
+<script>
+  document.querySelectorAll<HTMLElement>('.tool-embed').forEach((box) => {
+    const button = box.querySelector('button');
+    button?.addEventListener('click', () => {
+      const src = box.dataset.src;
+      if (!src) return;
+      const frame = document.createElement('iframe');
+      frame.src = src;
+      frame.loading = 'lazy';
+      const heading = box.closest('.tool-card')?.querySelector('h2');
+      if (heading?.textContent) frame.title = heading.textContent;
+      box.replaceChildren(frame);
+    });
+  });
+</script>

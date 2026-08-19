@@ -33,6 +33,9 @@ const { t } = Astro.props;
 
     <div class="nav-right">
       {t.other && <a class="nav-lang" href={url(t.other.href)}>{t.other.label}</a>}
+      {t.nav.tools && (
+        <a class="cta secondary nav-cta" href={url(t.nav.toolsHref)}>{t.nav.tools}</a>
+      )}
       <a class="cta nav-cta" href={t.nav.ctaHref}>
         {t.nav.cta}
         <svg
