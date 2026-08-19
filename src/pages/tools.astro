@@ -59,13 +59,14 @@ const tools = [
                   </div>
                 </div>
                 <p class="tool-body">{tool.body}</p>
-                <div class="tool-embed" data-src={url(tool.src)}>
-                  <div class="tool-embed-start">
-                    <button class="cta" type="button">
-                      Öppna
-                    </button>
-                  </div>
-                </div>
+                <button
+                  class="cta tool-open"
+                  type="button"
+                  data-src={url(tool.src)}
+                  data-name={tool.name}
+                >
+                  Öppna
+                </button>
               </li>
             ))
           }
@@ -74,6 +75,14 @@ const tools = [
     </section>
   </main>
   <Footer t={t} />
+
+  <div id="toolModal" class="tool-modal" hidden>
+    <div class="tool-modal-bar">
+      <span id="toolModalTitle" class="tool-modal-title"></span>
+      <button id="toolModalClose" class="tool-modal-close" type="button">Stäng ✕</button>
+    </div>
+    <iframe id="toolModalFrame" title=""></iframe>
+  </div>
 </Base>
 
 <style>
@@ -124,35 +133,77 @@ const tools = [
     margin: 12px 0 20px;
     max-width: 62ch;
   }
-  .tool-embed-start {
+
+  .tool-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+  }
+  .tool-modal-bar {
     display: flex;
     align-items: center;
-    gap: 14px;
-    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 10px 16px;
+    border-bottom: 1px solid var(--color-line, rgba(0, 0, 0, 0.1));
+    background: var(--color-canvas-soft, #f6f6f6);
   }
-  .tool-embed iframe {
-    width: 100%;
-    height: 82vh;
-    min-height: 560px;
-    border: 0;
-    border-radius: 12px;
+  .tool-modal-title {
+    font: 600 15px/1 var(--font-sans);
+  }
+  .tool-modal-close {
+    height: 36px;
+    padding: 0 16px;
+    border: 1px solid var(--color-line, rgba(0, 0, 0, 0.15));
+    border-radius: 100px;
     background: #fff;
-    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.12);
+    color: var(--color-ink, #111);
+    font: 500 14px/1 var(--font-sans);
+    cursor: pointer;
+  }
+  .tool-modal-close:hover {
+    background: var(--color-canvas-soft, #eee);
+  }
+  .tool-modal iframe {
+    flex: 1;
+    width: 100%;
+    border: 0;
+    background: #fff;
   }
 </style>
 
 <script>
-  document.querySelectorAll<HTMLElement>('.tool-embed').forEach((box) => {
-    const button = box.querySelector('button');
-    button?.addEventListener('click', () => {
-      const src = box.dataset.src;
+  const modal = document.getElementById('toolModal') as HTMLElement | null;
+  const frame = document.getElementById('toolModalFrame') as HTMLIFrameElement | null;
+  const title = document.getElementById('toolModalTitle');
+  const closeBtn = document.getElementById('toolModalClose');
+
+  const close = () => {
+    if (!modal || !frame) return;
+    modal.hidden = true;
+    frame.removeAttribute('src');
+    document.body.style.overflow = '';
+  };
+
+  document.querySelectorAll<HTMLButtonElement>('.tool-open').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (!modal || !frame) return;
+      const src = btn.dataset.src;
+      const name = btn.dataset.name || '';
       if (!src) return;
-      const frame = document.createElement('iframe');
       frame.src = src;
-      frame.loading = 'lazy';
-      const heading = box.closest('.tool-card')?.querySelector('h2');
-      if (heading?.textContent) frame.title = heading.textContent;
-      box.replaceChildren(frame);
+      frame.title = name;
+      if (title) title.textContent = name;
+      modal.hidden = false;
+      document.body.style.overflow = 'hidden';
     });
+  });
+
+  closeBtn?.addEventListener('click', close);
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && modal && !modal.hidden) close();
   });
 </script>
