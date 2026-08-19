@@ -1,0 +1,104 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <title>Parcel Cropper</title>
+  <meta name="description" content="Crop the PostNord shipping label to a 104.4 × 187.8 mm label directly in your browser.">
+  <link rel="stylesheet" href="styles.css?v=1785747701">
+</head>
+<body>
+  <main>
+    <header class="topbar">
+      <span class="brand" id="brand" title="Start over">Parcel Cropper</span>
+      <ol class="steps">
+        <li data-step="1">Upload</li>
+        <li data-step="2">Crop</li>
+        <li data-step="3">Result</li>
+      </ol>
+      <div class="nav">
+        <button id="backButton" type="button" hidden>Back</button>
+        <button id="nextButton" class="primary" type="button" hidden>Next</button>
+      </div>
+    </header>
+
+    <section id="panelUpload" class="panel">
+      <label id="dropZone" class="drop" for="fileInput">
+        <input id="fileInput" type="file" accept="application/pdf,.pdf" hidden>
+        <span>Choose or drop a PDF shipping label</span>
+      </label>
+    </section>
+
+    <section id="panelEdit" class="panel" hidden>
+      <div class="tools">
+        <button id="rotateLeftButton" class="tb-btn" type="button" aria-label="Rotate left" title="Rotate left">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="1 4 1 10 7 10"/><path d="M3.51 15a9 9 0 1 0 2.13-9.36L1 10"/></svg>
+        </button>
+        <button id="rotateRightButton" class="tb-btn" type="button" aria-label="Rotate right" title="Rotate right">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"/></svg>
+        </button>
+        <span class="sep"></span>
+        <button id="zoomOutButton" class="tb-btn" type="button" aria-label="Zoom out" title="Zoom out">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <button id="zoomInButton" class="tb-btn" type="button" aria-label="Zoom in" title="Zoom in">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="12" y1="5" x2="12" y2="19"/><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+        <span class="sep"></span>
+        <button id="resetButton" class="tb-btn" type="button" aria-label="Reset" title="Reset">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="23 4 23 10 17 10"/><polyline points="1 20 1 14 7 14"/><path d="M3.51 9a9 9 0 0 1 14.85-3.36L23 10M1 14l4.64 4.36A9 9 0 0 0 20.49 15"/></svg>
+        </button>
+        <span class="sep"></span>
+        <span class="tb-size">
+          <input id="ow2" class="tb-input" type="number" min="20" max="500" step="0.1" aria-label="Width in mm">
+          <span class="tb-x">×</span>
+          <input id="oh2" class="tb-input" type="number" min="20" max="1000" step="0.1" aria-label="Height in mm">
+          <span class="tb-unit">mm</span>
+        </span>
+      </div>
+      <div id="preview" class="viewport">
+        <div id="pageStage" class="stage">
+          <canvas id="pdfCanvas" aria-label="Preview"></canvas>
+          <div id="selection" class="selection" tabindex="0" aria-label="Crop area">
+            <button class="handle nw" data-handle="nw" type="button" aria-label="Top left corner"></button>
+            <button class="handle n" data-handle="n" type="button" aria-label="Top edge"></button>
+            <button class="handle ne" data-handle="ne" type="button" aria-label="Top right corner"></button>
+            <button class="handle e" data-handle="e" type="button" aria-label="Right edge"></button>
+            <button class="handle se" data-handle="se" type="button" aria-label="Bottom right corner"></button>
+            <button class="handle s" data-handle="s" type="button" aria-label="Bottom edge"></button>
+            <button class="handle sw" data-handle="sw" type="button" aria-label="Bottom left corner"></button>
+            <button class="handle w" data-handle="w" type="button" aria-label="Left edge"></button>
+          </div>
+          <div id="shadeTop" class="shade"></div>
+          <div id="shadeRight" class="shade"></div>
+          <div id="shadeBottom" class="shade"></div>
+          <div id="shadeLeft" class="shade"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="panelDownload" class="panel" hidden>
+      <div class="tools">
+        <span class="tb-size">
+          <input id="ow3" class="tb-input" type="number" readonly tabindex="-1" aria-label="Width in mm">
+          <span class="tb-x">×</span>
+          <input id="oh3" class="tb-input" type="number" readonly tabindex="-1" aria-label="Height in mm">
+          <span class="tb-unit">mm</span>
+        </span>
+      </div>
+      <div id="resultPreview" class="viewport result">
+        <canvas id="resultCanvas" aria-label="Finished label"></canvas>
+      </div>
+    </section>
+
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+
+    <footer class="footer">© 2026 Carlboms Data · Everything runs locally in your browser – nothing is uploaded or stored.</footer>
+  </main>
+
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+  <script src="https://unpkg.com/pdf-lib@1.17.1/dist/pdf-lib.min.js"></script>
+  <script src="app.js?v=1785747700"></script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#ffffff">
+  <title>Freeze Detector</title>
+  <meta name="description" content="Finds freezes in a screen recording directly in your browser – the video is never uploaded.">
+  <link rel="stylesheet" href="styles.css?v=26">
+</head>
+<body>
+  <main>
+    <header class="topbar">
+      <span class="brand" id="brand" title="Start over">Freeze Detector</span>
+      <ol class="steps">
+        <li data-step="1">Upload</li>
+        <li data-step="2">Crop</li>
+        <li data-step="3">Analyze</li>
+        <li data-step="4">Result</li>
+      </ol>
+      <div class="nav">
+        <button id="backButton" type="button" hidden>Back</button>
+        <button id="nextButton" class="primary" type="button" hidden>Analyze</button>
+      </div>
+    </header>
+
+    <section id="panelUpload" class="panel">
+      <label id="dropZone" class="drop" for="fileInput">
+        <input id="fileInput" type="file" accept="video/mp4,video/x-matroska,video/webm,video/*" hidden>
+        <span>Choose or drop a screen recording (MP4)</span>
+      </label>
+    </section>
+
+    <section id="panelCrop" class="panel" hidden>
+      <p class="crophint">Select the <strong>entire camera image</strong>. Small areas show featureless paper between pattern objects and cause false stills.</p>
+      <div class="croptools">
+        <span>Preview</span>
+        <input id="scrub" type="range" min="0" max="100" value="10" step="0.1" aria-label="Preview position">
+        <span id="scrubTime">0:00</span>
+        <span class="sep"></span>
+        <button id="fullFrameButton" type="button">Full frame</button>
+      </div>
+      <div class="viewport crop">
+        <div id="stage" class="stage">
+          <canvas id="cropCanvas" aria-label="Preview"></canvas>
+          <div id="selection" class="selection" tabindex="0" aria-label="Analysis area">
+            <button class="handle nw" data-handle="nw" type="button" aria-label="Top left corner"></button>
+            <button class="handle n" data-handle="n" type="button" aria-label="Top edge"></button>
+            <button class="handle ne" data-handle="ne" type="button" aria-label="Top right corner"></button>
+            <button class="handle e" data-handle="e" type="button" aria-label="Right edge"></button>
+            <button class="handle se" data-handle="se" type="button" aria-label="Bottom right corner"></button>
+            <button class="handle s" data-handle="s" type="button" aria-label="Bottom edge"></button>
+            <button class="handle sw" data-handle="sw" type="button" aria-label="Bottom left corner"></button>
+            <button class="handle w" data-handle="w" type="button" aria-label="Left edge"></button>
+          </div>
+          <div id="shadeTop" class="shade"></div>
+          <div id="shadeRight" class="shade"></div>
+          <div id="shadeBottom" class="shade"></div>
+          <div id="shadeLeft" class="shade"></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="panelAnalyze" class="panel" hidden>
+      <div class="viewport center">
+        <div class="progressbox">
+          <p id="progressText">Preparing …</p>
+          <div class="bar"><div id="barFill"></div></div>
+        </div>
+      </div>
+    </section>
+
+    <section id="panelResult" class="panel" hidden>
+      <div class="summary">
+        <p id="verdict" class="verdict"></p>
+        <p id="meta" class="meta"></p>
+      </div>
+      <div id="playerWrap" class="playerwrap">
+        <video id="player" playsinline></video>
+      </div>
+      <div class="tl-row">
+        <button id="playPause" type="button" title="Play/pause">&#9654;</button>
+        <button id="prevStill" type="button" title="Previous still period">&#8676;</button>
+        <button id="nextStill" type="button" title="Next still period">&#8677;</button>
+        <span class="tl-sep"></span>
+        <button id="viewToggle" type="button" title="Toggle full frame / analyzed region" hidden>Full frame</button>
+        <span class="tl-sep"></span>
+        <label class="mergectl">merge&nbsp;&lt;<input id="mergeGap" type="number" value="5" min="0" step="1">s</label>
+        <span class="tl-sep"></span>
+        <button id="zoomOut" type="button" title="Zoom out">&minus;</button>
+        <button id="zoomIn" type="button" title="Zoom in">+</button>
+        <span id="stillPos" class="tl-pos"></span>
+      </div>
+      <div class="tl-strip">
+        <canvas id="timeline" aria-label="Timeline with still periods"></canvas>
+      </div>
+      <div class="viewport result">
+        <table id="resultTable" class="rtable">
+          <thead>
+            <tr><th class="num">#</th><th>Start</th><th>End</th><th class="num">Duration</th><th class="num">Gap before</th></tr>
+          </thead>
+          <tbody id="resultBody"></tbody>
+        </table>
+      </div>
+    </section>
+
+    <p id="status" class="status" role="status" aria-live="polite"></p>
+
+    <footer class="footer">© 2026 Carlboms Data · Everything runs locally in your browser – nothing is uploaded or stored.</footer>
+  </main>
+
+  <script src="https://cdn.jsdelivr.net/npm/mp4box@0.5.2/dist/mp4box.all.min.js"></script>
+  <script src="app.js?v=26"></script>
+</body>
+</html>
