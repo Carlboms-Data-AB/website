@@ -48,6 +48,7 @@
   const mergeGap = document.getElementById('mergeGap');
   const resultTable = document.getElementById('resultTable');
   const resultBody = document.getElementById('resultBody');
+  const recStart = document.getElementById('recStart');
   const status = document.getElementById('status');
 
   let runId = 0;
@@ -63,6 +64,7 @@
   let showFull = false;
   let rawRuns = [];
   let analysisMeta = null;
+  let recStartEpoch = null;
 
   const mergeRuns = (runs, gap) => {
     if (!runs.length) return [];
@@ -99,6 +101,7 @@
         ['', hms(b)],
         ['num dur', `${Math.round(b - a)} s`],
         ['num', prevStart === null ? '–' : `${hms(Math.round(a - prevStart))}`],
+        ['', recStartEpoch === null ? '–' : clockOf(recStartEpoch + Math.round(a * 1000))],
       ];
       for (const [cls, text] of cells) {
         const td = document.createElement('td');
@@ -231,6 +234,17 @@
     const h = Math.floor(t / 3600), m = Math.floor((t % 3600) / 60), s = t % 60;
     return h ? `${h}:${String(m).padStart(2, '0')}:${String(s).padStart(2, '0')}`
              : `${m}:${String(s).padStart(2, '0')}`;
+  };
+
+  const pad2 = (n) => String(n).padStart(2, '0');
+  const clockOf = (epoch) => {
+    const d = new Date(epoch);
+    return `${pad2(d.getHours())}:${pad2(d.getMinutes())}:${pad2(d.getSeconds())}`;
+  };
+  const fmtLocalInput = (epoch) => {
+    const d = new Date(epoch);
+    return `${d.getFullYear()}-${pad2(d.getMonth() + 1)}-${pad2(d.getDate())}` +
+           `T${pad2(d.getHours())}:${pad2(d.getMinutes())}:${pad2(d.getSeconds())}`;
   };
 
   const reset = () => {
@@ -623,6 +637,8 @@
       median: ds[Math.floor(n / 2)].toFixed(2), max: ds[n - 1].toFixed(2), cov: covNote,
     };
     lastCrop = crop;
+    recStartEpoch = (file && file.lastModified ? file.lastModified : 0) - Math.round(duration * 1000);
+    if (recStart) recStart.value = fmtLocalInput(recStartEpoch);
     viewStart = 0;
     viewEnd = duration;
     renderResults();
@@ -648,6 +664,10 @@
     if (f) openFile(f);
   });
   mergeGap.addEventListener('input', renderResults);
+  if (recStart) recStart.addEventListener('input', () => {
+    const t = Date.parse(recStart.value);
+    if (!Number.isNaN(t)) { recStartEpoch = t; renderResults(); }
+  });
   nextButton.addEventListener('click', () => { if (file) runAnalysis(); });
   backButton.addEventListener('click', reset);
   const brandEl = document.getElementById('brand');

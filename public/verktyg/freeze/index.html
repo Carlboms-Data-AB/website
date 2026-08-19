@@ -74,6 +74,10 @@
       <div class="summary">
         <p id="verdict" class="verdict"></p>
         <p id="meta" class="meta"></p>
+        <label class="recstart">Recording started
+          <input id="recStart" type="datetime-local" step="1">
+          <span class="recnote">from the file's saved time — edit if it's off</span>
+        </label>
       </div>
       <div id="playerWrap" class="playerwrap">
         <video id="player" playsinline></video>
@@ -97,7 +101,7 @@
       <div class="viewport result">
         <table id="resultTable" class="rtable">
           <thead>
-            <tr><th class="num">#</th><th>Start</th><th>End</th><th class="num">Duration</th><th class="num">Gap before</th></tr>
+            <tr><th class="num">#</th><th>Start</th><th>End</th><th class="num">Duration</th><th class="num">Gap before</th><th>Clock</th></tr>
           </thead>
           <tbody id="resultBody"></tbody>
         </table>
