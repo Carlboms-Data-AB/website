@@ -27,3 +27,11 @@
   --accent-selection-bg: #d6f3e6;
   --accent-selection-ink: #0e2a1d;
 }
+
+/* The footer contact line, shown where the tagline sits, in the same small
+   mono type as the bottom line. Website-specific, so it lives here. */
+.footer .footer-tagline {
+  font: 400 12px/18px var(--font-mono);
+  color: rgba(255, 255, 255, 0.55);
+  max-width: 420px;
+}

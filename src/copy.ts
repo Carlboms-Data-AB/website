@@ -138,11 +138,7 @@ const sv: Copy = {
   },
 
   nav: {
-    links: [
-      { href: '#tjanster', label: 'Tjänster' },
-      { href: '#referenser', label: 'Referenser' },
-      { href: '#om', label: 'Om' },
-    ],
+    links: [],
     cta: 'Boka rådgivning',
     ctaHref: '#kontakt',
     tools: 'Tools',
@@ -379,7 +375,7 @@ const sv: Copy = {
   },
 
   footer: {
-    tagline: 'IT och automation för tillverkningsindustrin.',
+    tagline: `${EMAIL} · Lund, Sverige · Momsreg. SE559494046101`,
     columns: [
       {
         title: 'Innehåll',
@@ -403,8 +399,8 @@ const sv: Copy = {
         ],
       },
     ],
-    legal: 'Carlboms Data AB · Momsreg. SE559494046101',
-    note: 'Cookiefri sajt · ingen spårning · byggt i Lund.',
+    legal: 'Carlboms Data AB',
+    note: 'Cookiefri sajt · ingen spårning',
   },
 
   notFound: {
