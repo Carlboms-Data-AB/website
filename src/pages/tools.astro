@@ -21,7 +21,6 @@ const tools = [
       'still. Välj en MP4, markera kameraytan, och få en tidslinje och en ' +
       'lista över varje frys att klicka dig igenom. Allt körs lokalt i ' +
       'webbläsaren – filen skickas aldrig till någon server.',
-    tech: ['MP4 / H.264', 'WebCodecs', 'körs lokalt'],
   },
   {
     name: 'Parcel Cropper',
@@ -31,7 +30,6 @@ const tools = [
       'i rätt storlek, 104,4 × 187,8 mm, för en etikettskrivare. Text och ' +
       'streckkod behålls som vektor och förblir skarpa. Allt körs lokalt i ' +
       'webbläsaren – PDF:en skickas aldrig till någon server.',
-    tech: ['PDF', 'vektor', 'körs lokalt'],
   },
 ];
 ---
@@ -51,14 +49,7 @@ const tools = [
           {
             tools.map((tool) => (
               <li class="tool-card">
-                <div class="tool-head">
-                  <h2>{tool.name}</h2>
-                  <div class="tool-chips">
-                    {tool.tech.map((c) => (
-                      <span class="chip">{c}</span>
-                    ))}
-                  </div>
-                </div>
+                <h2 class="tool-name">{tool.name}</h2>
                 <p class="tool-body">{tool.body}</p>
                 <button
                   class="cta tool-open"
@@ -112,21 +103,9 @@ const tools = [
     padding: 24px;
     background: var(--color-canvas-soft, #fff);
   }
-  .tool-head {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    gap: 8px 16px;
-  }
-  .tool-head h2 {
+  .tool-name {
     font: 600 20px/1.2 var(--font-sans);
     margin: 0;
-  }
-  .tool-chips {
-    display: flex;
-    flex-wrap: wrap;
-    gap: 6px;
   }
   .tool-body {
     color: var(--color-body);
