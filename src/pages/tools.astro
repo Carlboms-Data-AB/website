@@ -18,10 +18,10 @@ const tools = [
     src: '/verktyg/freeze/',
     body:
       'Hittar frysningar i en skärminspelning — sekunderna då bilden står helt ' +
-      'still. Ladda upp en MP4, markera kameraytan, och få en tidslinje och en ' +
-      'lista över varje frys att klicka dig igenom. Allt sker i webbläsaren; ' +
-      'inget laddas upp.',
-    tech: ['MP4 / H.264', 'WebCodecs', 'inget laddas upp'],
+      'still. Välj en MP4, markera kameraytan, och få en tidslinje och en ' +
+      'lista över varje frys att klicka dig igenom. Allt körs lokalt i ' +
+      'webbläsaren – filen skickas aldrig till någon server.',
+    tech: ['MP4 / H.264', 'WebCodecs', 'körs lokalt'],
   },
   {
     name: 'Parcel Cropper',
@@ -29,9 +29,9 @@ const tools = [
     body:
       'Beskär fraktsedeln ur en PostNord- eller Tradera-PDF och sparar etiketten ' +
       'i rätt storlek, 104,4 × 187,8 mm, för en etikettskrivare. Text och ' +
-      'streckkod behålls som vektor och förblir skarpa. Allt sker i webbläsaren; ' +
-      'PDF:en laddas aldrig upp.',
-    tech: ['PDF', 'vektor', 'inget laddas upp'],
+      'streckkod behålls som vektor och förblir skarpa. Allt körs lokalt i ' +
+      'webbläsaren – PDF:en skickas aldrig till någon server.',
+    tech: ['PDF', 'vektor', 'körs lokalt'],
   },
 ];
 ---
@@ -43,7 +43,8 @@ const tools = [
       <div class="container tools-page">
         <h1 class="tools-title">Verktyg</h1>
         <p class="tools-lead">
-          Små appar som körs helt i din webbläsare. Inget laddas upp.
+          Små appar som körs helt i din webbläsare. Allt sker lokalt – inget
+          skickas till någon server.
         </p>
 
         <ul class="tools-list">
