@@ -57,31 +57,42 @@ const programs = [
     name: 'vhdx2vmdk',
     plat: 'Windows',
     href: `${DL}/vhdx2vmdk/vhdx2vmdk.exe`,
-    body: 'Batchkonverterar Hyper-V VHDX-diskar till VMware VMDK.',
+    body:
+      'Batchkonverterar Hyper-V VHDX-diskar till VMware VMDK. Ett enkelt ' +
+      'gränssnitt runt qemu-img — peka ut filerna och konvertera flera på en gång.',
   },
   {
     name: 'disk2vhd',
     plat: 'Windows',
     href: `${DL}/disk2vhd/Disk2vhd.zip`,
-    body: 'Avbildar en fysisk disk till en VHD-fil.',
+    body:
+      'Avbildar en fysisk disk till en VHD-fil. Första steget när en fysisk ' +
+      'maskin ska flyttas in i en virtuell.',
   },
   {
-    name: 'qemu-img för Windows',
+    name: 'qemu-img',
     plat: 'Windows',
     href: `${DL}/qemu-img-windows-x64/qemu-img-windows-x64-v10.0.0.zip`,
-    body: 'Kör qemu-img på Windows utan att installera hela QEMU — konvertera diskavbilder.',
+    body:
+      'Kör qemu-img på Windows utan att installera hela QEMU. Konverterar och ' +
+      'inspekterar diskavbilder — qcow2, vmdk, vhdx, raw med flera.',
     code: 'https://github.com/Carlboms-Data-AB/qemu-img-windows-x64',
   },
   {
     name: 'chm2txt',
     plat: 'Windows',
     href: `${DL}/chm2txt/chm2txt-v3.0.0-win.zip`,
-    body: 'Extraherar text ur CHM-hjälpfiler (CitectSCADA).',
+    body:
+      'Extraherar texten ur CHM-hjälpfiler till ren text. Använder Windows ' +
+      'inbyggda hh.exe för att packa upp och rensar sedan bort HTML.',
   },
   {
     name: 'terminal-banner',
+    plat: 'Linux',
     link: 'https://github.com/Carlboms-Data-AB/terminal-banner',
-    body: 'Färgglad inloggningsbanner (MOTD) för Linux. Öppen källkod på GitHub.',
+    body:
+      'Färgglad inloggningsbanner (MOTD) för Linux som visas vid inloggning. ' +
+      'Öppen källkod — hela skriptet finns på GitHub.',
   },
 ];
 
@@ -91,17 +102,22 @@ const licensed = [
     plat: 'Windows',
     body:
       'Lättviktig DBF-editor för CitectSCADA — öppnar och redigerar dBASE III-' +
-      'filer med automatisk backup och svensk teckenkodning.',
+      'filer med automatisk backup och svensk teckenkodning. En enda liten exe ' +
+      'utan installation, från Windows XP till 11.',
   },
   {
     name: 'e-designer2citect',
     plat: 'Windows',
-    body: 'Migrerar Beijer E-Designer-projekt till Citect.',
+    body:
+      'Migrerar Beijer E-Designer-projekt till Citect. Automatiserar en annars ' +
+      'manuell och tidsödande överföring.',
   },
   {
     name: 'pdf2png',
     plat: 'Windows',
-    body: 'Konverterar PDF-sidor till PNG-bilder.',
+    body:
+      'Konverterar PDF-sidor till PNG-bilder, en bild per sida. För när du ' +
+      'snabbt behöver sidorna som bilder i stället för PDF.',
   },
 ];
 ---
