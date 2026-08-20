@@ -22,7 +22,7 @@ const webApps = [
       'Hittar frysningar i en skärminspelning — de sekunder då bilden står helt ' +
       'still. Ladda in en MP4, markera kameraytan och få en tidslinje och en ' +
       'lista över varje frys.',
-    shots: ['/verktyg/shots/freeze-detector/1.gif'],
+    shots: ['/verktyg/shots/freeze-detector/1.mp4'],
   },
   {
     name: 'Parcel Cropper',
@@ -31,7 +31,7 @@ const webApps = [
       'Beskär fraktsedeln ur en PostNord- eller Tradera-PDF och sparar etiketten ' +
       'för etikettskrivare. Text och streckkod behålls som vektor och förblir skarpa.',
     code: 'https://github.com/Carlboms-Data-AB/postnord-parcel-cropper',
-    shots: ['/verktyg/shots/parcel-cropper/1.gif'],
+    shots: ['/verktyg/shots/parcel-cropper/1.mp4'],
   },
   {
     name: 'Pneumatic Calculator',
@@ -40,7 +40,7 @@ const webApps = [
       'Räknar på dubbelverkande pneumatikcylindrar: kraft, erforderligt tryck, ' +
       'cylinderdiameter (ISO 15552) och luftförbrukning. Stöder bar, psi, kPa och MPa.',
     code: 'https://github.com/Carlboms-Data-AB/pneumatic-calculator',
-    shots: ['/verktyg/shots/pneumatic-calculator/1.gif'],
+    shots: ['/verktyg/shots/pneumatic-calculator/1.mp4'],
   },
   {
     name: 'Network Tools',
@@ -48,7 +48,7 @@ const webApps = [
     body:
       'Portscanner och DNS-koll i webbläsaren — se om portar är öppna på en värd ' +
       'och hur DNS-poster har spridit sig mellan namnservrar.',
-    shots: ['/verktyg/shots/network-tools/1.gif'],
+    shots: ['/verktyg/shots/network-tools/1.mp4'],
   },
 ];
 
@@ -310,6 +310,7 @@ const licensed = [
     <button id="shotClose" class="shot-close" type="button" data-close aria-label="Stäng">✕</button>
     <button id="shotPrev" class="shot-nav shot-prev" type="button" aria-label="Föregående" hidden>‹</button>
     <img id="shotImg" class="shot-img" alt="" />
+    <video id="shotVideo" class="shot-img" autoplay loop muted playsinline hidden></video>
     <button id="shotNext" class="shot-nav shot-next" type="button" aria-label="Nästa" hidden>›</button>
     <span id="shotCount" class="shot-count"></span>
   </div>
@@ -669,6 +670,7 @@ const licensed = [
   });
   const shotModal = document.getElementById('shotModal') as HTMLElement | null;
   const shotImg = document.getElementById('shotImg') as HTMLImageElement | null;
+  const shotVideo = document.getElementById('shotVideo') as HTMLVideoElement | null;
   const shotPrev = document.getElementById('shotPrev') as HTMLElement | null;
   const shotNext = document.getElementById('shotNext') as HTMLElement | null;
   const shotCount = document.getElementById('shotCount');
@@ -676,8 +678,16 @@ const licensed = [
   let shotIdx = 0;
 
   const renderShot = () => {
-    if (!shotImg) return;
-    shotImg.src = shotList[shotIdx] || '';
+    const src = shotList[shotIdx] || '';
+    const isVid = /\.(mp4|webm)$/i.test(src);
+    if (shotVideo) {
+      if (isVid) { shotVideo.src = src; shotVideo.hidden = false; shotVideo.play().catch(() => {}); }
+      else { shotVideo.pause(); shotVideo.removeAttribute('src'); shotVideo.hidden = true; }
+    }
+    if (shotImg) {
+      if (isVid) { shotImg.removeAttribute('src'); shotImg.hidden = true; }
+      else { shotImg.src = src; shotImg.hidden = false; }
+    }
     const multi = shotList.length > 1;
     if (shotCount) shotCount.textContent = multi ? `${shotIdx + 1} / ${shotList.length}` : '';
     if (shotPrev) shotPrev.hidden = !multi;
@@ -700,6 +710,8 @@ const licensed = [
     if (!shotModal) return;
     shotModal.hidden = true;
     shotImg?.removeAttribute('src');
+    shotVideo?.pause();
+    shotVideo?.removeAttribute('src');
     document.body.style.overflow = '';
   };
 
