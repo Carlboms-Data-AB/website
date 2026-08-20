@@ -88,6 +88,15 @@ const programs = [
       'inbyggda hh.exe för att packa upp och rensar sedan bort HTML.',
   },
   {
+    name: 'Glass Kiosk',
+    plat: 'Windows',
+    href: `${DL}/glass-kiosk/GlassKiosk.zip`,
+    body:
+      'Lättviktig kiosk-webbläsare för Windows (WebView2). Lås datorn till en ' +
+      'webbsida med autostart, dold verktygsrad och lösenordsskydd.',
+    code: 'https://github.com/Carlboms-Data-AB/Glass-Kiosk-Desktop',
+  },
+  {
     name: 'terminal-banner',
     plat: 'Linux',
     link: 'https://github.com/Carlboms-Data-AB/terminal-banner',
@@ -99,12 +108,19 @@ const programs = [
 
 const licensed = [
   {
-    name: 'dbf-editor',
+    name: 'Rowmantic Print',
     plat: 'Windows',
     body:
-      'Lättviktig DBF-editor för CitectSCADA — öppnar och redigerar dBASE III-' +
-      'filer med automatisk backup och svensk teckenkodning. En enda liten exe ' +
-      'utan installation, från Windows XP till 11.',
+      'Komplett system för etikettutskrift i produktion — en designer för att ' +
+      'rita etiketter, en tjänst som sköter utskrifterna och ett administrationsverktyg.',
+  },
+  {
+    name: 'OpcLogger',
+    plat: 'Windows',
+    body:
+      'OPC DA-gateway för KepServerEX. Körs som en headless Windows-tjänst, ' +
+      'prenumererar automatiskt på alla taggar och kan agera via e-post, SQL, ' +
+      'webhook, MQTT och InfluxDB — med en WPF-app för att styra den.',
   },
   {
     name: 'e-designer2citect',
@@ -112,6 +128,21 @@ const licensed = [
     body:
       'Migrerar Beijer E-Designer-projekt till Citect. Automatiserar en annars ' +
       'manuell och tidsödande överföring.',
+  },
+  {
+    name: 'e-designer-extracter',
+    plat: 'Windows',
+    body:
+      'Extraherar innehållet ur Beijer E-Designer-projekt för granskning och ' +
+      'vidare bearbetning.',
+  },
+  {
+    name: 'dbf-editor',
+    plat: 'Windows',
+    body:
+      'Lättviktig DBF-editor för CitectSCADA — öppnar och redigerar dBASE III-' +
+      'filer med automatisk backup och svensk teckenkodning. En enda liten exe ' +
+      'utan installation, från Windows XP till 11.',
   },
   {
     name: 'pdf2png',
