@@ -46,7 +46,6 @@ const webApps = [
 const programs = [
   {
     name: 'FlamingoDoctor',
-    plat: 'Windows',
     href: `${DL}/flamingodoctor/FlamingoDoctor.zip`,
     body:
       'Diagnostik för kamera och nätverk — kontrollerar nåbarhet, nätverkskort ' +
@@ -55,7 +54,6 @@ const programs = [
   },
   {
     name: 'vhdx2vmdk',
-    plat: 'Windows',
     href: `${DL}/vhdx2vmdk/vhdx2vmdk.exe`,
     body:
       'Batchkonverterar Hyper-V VHDX-diskar till VMware VMDK. Ett enkelt ' +
@@ -63,7 +61,6 @@ const programs = [
   },
   {
     name: 'disk2vhd',
-    plat: 'Windows',
     href: `${DL}/disk2vhd/Disk2vhd.zip`,
     body:
       'Avbildar en fysisk disk till en VHD-fil. Första steget när en fysisk ' +
@@ -71,7 +68,6 @@ const programs = [
   },
   {
     name: 'qemu-img',
-    plat: 'Windows',
     href: `${DL}/qemu-img-windows-x64/qemu-img-windows-x64-v10.0.0.zip`,
     body:
       'Kör qemu-img på Windows utan att installera hela QEMU. Konverterar och ' +
@@ -80,7 +76,6 @@ const programs = [
   },
   {
     name: 'chm2txt',
-    plat: 'Windows',
     href: `${DL}/chm2txt/chm2txt-v3.0.0-win.zip`,
     body:
       'Extraherar texten ur CHM-hjälpfiler till ren text. Använder Windows ' +
@@ -88,7 +83,6 @@ const programs = [
   },
   {
     name: 'Glass Kiosk',
-    plat: 'Windows',
     href: `${DL}/glass-kiosk/GlassKiosk.zip`,
     body:
       'Lättviktig kiosk-webbläsare för Windows (WebView2). Lås datorn till en ' +
@@ -97,7 +91,6 @@ const programs = [
   },
   {
     name: 'terminal-banner',
-    plat: 'Linux',
     link: 'https://github.com/Carlboms-Data-AB/terminal-banner',
     body:
       'Färgglad inloggningsbanner (MOTD) för Linux som visas vid inloggning. ' +
@@ -108,14 +101,12 @@ const programs = [
 const licensed = [
   {
     name: 'Rowmantic Print',
-    plat: 'Windows',
     body:
       'Komplett system för etikettutskrift i produktion — en designer för att ' +
       'rita etiketter, en tjänst som sköter utskrifterna och ett administrationsverktyg.',
   },
   {
     name: 'OpcLogger',
-    plat: 'Windows',
     body:
       'OPC DA-gateway för KepServerEX. Körs som en headless Windows-tjänst, ' +
       'prenumererar automatiskt på alla taggar och kan agera via e-post, SQL, ' +
@@ -123,21 +114,18 @@ const licensed = [
   },
   {
     name: 'e-designer2citect',
-    plat: 'Windows',
     body:
       'Migrerar Beijer E-Designer-projekt till Citect. Automatiserar en annars ' +
       'manuell och tidsödande överföring.',
   },
   {
     name: 'e-designer-extracter',
-    plat: 'Windows',
     body:
       'Extraherar innehållet ur Beijer E-Designer-projekt för granskning och ' +
       'vidare bearbetning.',
   },
   {
     name: 'dbf-editor',
-    plat: 'Windows',
     body:
       'Lättviktig DBF-editor för CitectSCADA — öppnar och redigerar dBASE III-' +
       'filer med automatisk backup och svensk teckenkodning. En enda liten exe ' +
@@ -145,10 +133,15 @@ const licensed = [
   },
   {
     name: 'pdf2png',
-    plat: 'Windows',
     body:
       'Konverterar PDF-sidor till PNG-bilder, en bild per sida. För när du ' +
       'snabbt behöver sidorna som bilder i stället för PDF.',
+  },
+  {
+    name: 'dwg2pdf',
+    body:
+      'Konverterar AutoCAD DWG-ritningar till PDF med bibehållen ' +
+      'vektorkvalitet. Drivs av QCAD-motorn under ett enkelt gränssnitt.',
   },
 ];
 ---
@@ -206,7 +199,6 @@ const licensed = [
                       Källkod ↗
                     </a>
                   )}
-                  {tool.plat && <span class="tool-plat">{tool.plat}</span>}
                 </div>
               </li>
             ))
@@ -225,7 +217,6 @@ const licensed = [
                   <button class="cta secondary demo-open" type="button" data-tool={tool.name}>
                     Boka demo
                   </button>
-                  {tool.plat && <span class="tool-plat">{tool.plat}</span>}
                 </div>
               </li>
             ))
@@ -333,15 +324,6 @@ const licensed = [
     align-items: center;
     gap: 14px;
     flex-wrap: wrap;
-  }
-  .tool-plat {
-    margin-left: auto;
-    font: 400 11px/1 var(--font-mono);
-    letter-spacing: 0.02em;
-    color: var(--color-muted, #666);
-    border: 1px solid var(--color-line, rgba(0, 0, 0, 0.12));
-    border-radius: 100px;
-    padding: 5px 10px;
   }
   .cta[disabled] {
     opacity: 0.45;
