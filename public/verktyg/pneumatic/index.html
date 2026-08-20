@@ -1,0 +1,1024 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>Pneumatic Cylinder Calculator</title>
+
+        <style>
+            :root {
+                --bg: #e8eaed;
+                --surface: #ffffff;
+                --surface-alt: #f3f4f6;
+                --border: #c9cdd3;
+                --border-light: #dfe2e6;
+                --text: #1a1d23;
+                --text-muted: #5f6672;
+                --accent: #1659a9;
+                --accent-hover: #0f4a8f;
+                --header-bg: #1a1d23;
+                --header-text: #f0f1f3;
+                --result-bg: #edf5ed;
+                --result-border: #4a9e4a;
+                --result-text: #1d6b1d;
+                --error-bg: #fdeaea;
+                --error-border: #c44;
+                --error-text: #8b1a1a;
+                --radius: 6px;
+                --shadow: 0 1px 4px rgba(0,0,0,0.08);
+            }
+
+            *,
+            *::before,
+            *::after {
+                box-sizing: border-box;
+            }
+
+            body {
+                font-family: "Segoe UI", system-ui, -apple-system, sans-serif;
+                background: var(--bg);
+                color: var(--text);
+                margin: 0;
+                padding: 0;
+                line-height: 1.5;
+                -webkit-text-size-adjust: 100%;
+            }
+
+            header {
+                background: var(--header-bg);
+                color: var(--header-text);
+                padding: 0.9rem 1.2rem;
+                display: flex;
+                align-items: center;
+                gap: 0.7rem;
+            }
+
+            header h1 {
+                margin: 0;
+                font-size: 1.15rem;
+                font-weight: 700;
+                letter-spacing: 0.02em;
+            }
+
+            header .tag {
+                font-size: 0.65rem;
+                background: rgba(255,255,255,0.12);
+                padding: 0.15rem 0.5rem;
+                border-radius: 3px;
+                letter-spacing: 0.04em;
+                text-transform: uppercase;
+                white-space: nowrap;
+            }
+
+            header .gh-link {
+                margin-left: auto;
+                display: inline-flex;
+                align-items: center;
+                gap: 0.4rem;
+                color: var(--header-text);
+                text-decoration: none;
+                font-size: 0.78rem;
+                font-weight: 600;
+                padding: 0.35rem 0.65rem;
+                border: 1px solid rgba(255,255,255,0.22);
+                border-radius: 4px;
+                background: rgba(255,255,255,0.06);
+                transition: background 0.15s, border-color 0.15s;
+                white-space: nowrap;
+            }
+
+            header .gh-link:hover {
+                background: rgba(255,255,255,0.14);
+                border-color: rgba(255,255,255,0.35);
+            }
+
+            header .gh-link svg {
+                width: 16px;
+                height: 16px;
+                fill: currentColor;
+            }
+
+            main {
+                max-width: 960px;
+                margin: 0 auto;
+                padding: 1.2rem;
+            }
+
+            /* --- Cards --- */
+            .card {
+                background: var(--surface);
+                border: 1px solid var(--border);
+                border-radius: var(--radius);
+                box-shadow: var(--shadow);
+                padding: 1.1rem 1.2rem;
+                margin-bottom: 1.2rem;
+            }
+
+            .calc-grid .card {
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 0;
+            }
+
+            .calc-grid .card .card-footer {
+                margin-top: auto;
+            }
+
+            .calc-grid .card .card-footer .note {
+                min-height: 2.5em;
+            }
+
+            .card h2 {
+                margin: 0 0 0.8rem 0;
+                font-size: 0.95rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.06em;
+                color: var(--accent);
+                border-bottom: 2px solid var(--border-light);
+                padding-bottom: 0.4rem;
+            }
+
+            /* --- Grid layouts --- */
+            .grid-2 {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 0.8rem;
+                align-items: end;
+            }
+
+            .grid-3 {
+                display: grid;
+                grid-template-columns: 1fr 1fr 1fr;
+                gap: 0.8rem;
+                align-items: end;
+            }
+
+            .calc-grid {
+                display: grid;
+                grid-template-columns: 1fr 1fr;
+                gap: 1.2rem;
+            }
+
+            /* --- Form elements --- */
+            label {
+                display: block;
+                margin-bottom: 0.7rem;
+            }
+
+            label .label-text {
+                display: block;
+                font-size: 0.78rem;
+                font-weight: 600;
+                color: var(--text-muted);
+                margin-bottom: 0.2rem;
+                text-transform: uppercase;
+                letter-spacing: 0.03em;
+            }
+
+            input[type="number"],
+            select {
+                width: 100%;
+                padding: 0.5rem 0.55rem;
+                font-size: 0.95rem;
+                font-family: "Consolas", "SF Mono", "Menlo", monospace;
+                border: 1px solid var(--border);
+                border-radius: 4px;
+                background: var(--surface);
+                color: var(--text);
+                transition: border-color 0.15s;
+            }
+
+            input[type="number"]:focus,
+            select:focus {
+                outline: none;
+                border-color: var(--accent);
+                box-shadow: 0 0 0 2px rgba(22,89,169,0.15);
+            }
+
+            /* --- Input with unit dropdown --- */
+            .input-unit {
+                display: flex;
+            }
+
+            .input-unit input[type="number"] {
+                border-top-right-radius: 0;
+                border-bottom-right-radius: 0;
+                border-right: none;
+                flex: 1;
+                min-width: 0;
+            }
+
+            .input-unit select {
+                width: auto;
+                min-width: 3.8rem;
+                border-top-left-radius: 0;
+                border-bottom-left-radius: 0;
+                background: var(--surface-alt);
+                font-size: 0.8rem;
+                padding: 0.5rem 0.25rem;
+                font-family: "Segoe UI", system-ui, sans-serif;
+                font-weight: 600;
+                color: var(--text-muted);
+                cursor: pointer;
+                text-align: center;
+            }
+
+            /* --- Radio buttons --- */
+            .radio-row {
+                display: flex;
+                gap: 1.2rem;
+                margin-bottom: 0.7rem;
+            }
+
+            .radio-row label {
+                display: flex;
+                align-items: center;
+                gap: 0.35rem;
+                margin-bottom: 0;
+                font-size: 0.88rem;
+                font-weight: 500;
+                cursor: pointer;
+            }
+
+            .radio-row input[type="radio"] {
+                margin: 0;
+                accent-color: var(--accent);
+            }
+
+            /* --- Buttons --- */
+            button {
+                display: block;
+                width: 100%;
+                padding: 0.55rem 1rem;
+                font-size: 0.88rem;
+                font-weight: 700;
+                text-transform: uppercase;
+                letter-spacing: 0.05em;
+                color: #fff;
+                background: var(--accent);
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                transition: background 0.15s;
+                margin-top: 0.3rem;
+            }
+
+            button:hover {
+                background: var(--accent-hover);
+            }
+
+            button:active {
+                transform: translateY(1px);
+            }
+
+            /* --- Result / Error boxes --- */
+            .result-box {
+                margin-top: 0.7rem;
+                padding: 0.6rem 0.75rem;
+                border-radius: 4px;
+                font-family: "Consolas", "SF Mono", "Menlo", monospace;
+                font-size: 0.92rem;
+                font-weight: 600;
+                background: var(--surface-alt);
+                border: 1px solid var(--border-light);
+                color: var(--text-muted);
+                min-height: 2.4rem;
+                display: flex;
+                align-items: center;
+                word-break: break-word;
+            }
+
+            .result-box.ok {
+                background: var(--result-bg);
+                border-color: var(--result-border);
+                color: var(--result-text);
+            }
+
+            .result-box.err {
+                background: var(--error-bg);
+                border-color: var(--error-border);
+                color: var(--error-text);
+            }
+
+            /* --- Areas display --- */
+            .areas-display {
+                display: flex;
+                gap: 1.5rem;
+                flex-wrap: wrap;
+                margin-top: 0.3rem;
+            }
+
+            .areas-display .area-item {
+                font-size: 0.82rem;
+                color: var(--text-muted);
+            }
+
+            .areas-display .area-val {
+                font-family: "Consolas", "SF Mono", "Menlo", monospace;
+                font-weight: 700;
+                color: var(--text);
+            }
+
+            /* --- Helpers --- */
+            .note {
+                font-size: 0.72rem;
+                color: var(--text-muted);
+                margin-top: 0.4rem;
+                line-height: 1.4;
+            }
+
+            .section-label {
+                font-size: 0.72rem;
+                font-weight: 600;
+                color: var(--text-muted);
+                text-transform: uppercase;
+                letter-spacing: 0.04em;
+                margin-bottom: 0.35rem;
+            }
+
+            /* --- Cylinder diagram --- */
+            .cylinder-diagram {
+                background: var(--surface-alt);
+                border: 1px solid var(--border-light);
+                border-radius: 4px;
+                padding: 0.3rem 0;
+                margin-bottom: 0.9rem;
+            }
+
+            .cylinder-diagram svg {
+                display: block;
+                margin: 0 auto;
+                width: 65%;
+                height: auto;
+                max-width: 460px;
+                min-width: 280px;
+            }
+
+            /* --- Responsive --- */
+            @media (max-width: 700px) {
+                main { padding: 0.7rem; }
+                .calc-grid,
+                .grid-2,
+                .grid-3 { grid-template-columns: 1fr; }
+                .card { padding: 0.9rem; }
+                header h1 { font-size: 1rem; }
+                .radio-row { gap: 0.8rem; }
+                .cylinder-diagram svg { width: 90%; }
+                header .gh-link span { display: none; }
+                header .gh-link { padding: 0.35rem 0.45rem; }
+            }
+        </style>
+    </head>
+    <body>
+
+        <header>
+            <h1>Pneumatic Cylinder Calculator</h1>
+            <span class="tag">BETA</span>
+        </header>
+
+        <main>
+
+            <!-- ========== SECTION 1: GEOMETRY ========== -->
+            <div class="card">
+                <h2>1 &mdash; Cylinder Geometry</h2>
+
+                <div class="cylinder-diagram">
+                    <svg viewBox="0 0 500 130" xmlns="http://www.w3.org/2000/svg">
+                        <!-- Barrel -->
+                        <rect x="25" y="16" width="355" height="92" rx="3" fill="#c8cdd4" stroke="#8a9099" stroke-width="1.5"/>
+                        <!-- Cap-side chamber -->
+                        <rect x="37" y="23" width="152.5" height="78" fill="#dbeafe"/>
+                        <!-- Rod-side chamber -->
+                        <rect x="200.5" y="23" width="167.5" height="78" fill="#eff6ff"/>
+                        <!-- Left end cap -->
+                        <rect x="25" y="16" width="12" height="92" rx="3" fill="#6b7585" stroke="#555f6a" stroke-width="1"/>
+                        <!-- Right end cap (top) -->
+                        <rect x="368" y="16" width="12" height="30.4" fill="#6b7585" stroke="#555f6a" stroke-width="1"/>
+                        <!-- Right end cap (bottom) -->
+                        <rect x="368" y="77.6" width="12" height="30.4" fill="#6b7585" stroke="#555f6a" stroke-width="1"/>
+                        <!-- Right cap edges -->
+                        <line x1="368" y1="16" x2="380" y2="16" stroke="#555f6a" stroke-width="1"/>
+                        <line x1="368" y1="108" x2="380" y2="108" stroke="#555f6a" stroke-width="1"/>
+                        <line x1="380" y1="16" x2="380" y2="46.4" stroke="#555f6a" stroke-width="1"/>
+                        <line x1="380" y1="77.6" x2="380" y2="108" stroke="#555f6a" stroke-width="1"/>
+                        <!-- Piston -->
+                        <rect x="189.5" y="23" width="11" height="78" rx="2" fill="#3d4654" stroke="#2a313b" stroke-width="1"/>
+                        <!-- Piston rod -->
+                        <rect x="200.5" y="46.4" width="259.5" height="31.2" rx="2" fill="#8a9099" stroke="#6b7585" stroke-width="1"/>
+                        <!-- Thread grooves -->
+                        <line x1="446" y1="48.4" x2="446" y2="75.6" stroke="#6b7585" stroke-width="0.8" opacity="0.6"/>
+                        <line x1="451" y1="48.4" x2="451" y2="75.6" stroke="#6b7585" stroke-width="0.8" opacity="0.6"/>
+                        <line x1="456" y1="48.4" x2="456" y2="75.6" stroke="#6b7585" stroke-width="0.8" opacity="0.6"/>
+                        <!-- Chamber labels -->
+                        <text x="113.25" y="66" font-family="system-ui,sans-serif" font-size="10" text-anchor="middle" fill="#1a1d23" font-weight="600">Cap side</text>
+                        <text x="284.25" y="66" font-family="system-ui,sans-serif" font-size="10" text-anchor="middle" fill="#1a1d23" font-weight="600">Rod side</text>
+                        <!-- Dimension D -->
+                        <line x1="20" y1="23" x2="20" y2="101" stroke="#1659a9" stroke-width="1.2"/>
+                        <line x1="17" y1="27" x2="20" y2="23" stroke="#1659a9" stroke-width="1.2"/>
+                        <line x1="23" y1="27" x2="20" y2="23" stroke="#1659a9" stroke-width="1.2"/>
+                        <line x1="17" y1="97" x2="20" y2="101" stroke="#1659a9" stroke-width="1.2"/>
+                        <line x1="23" y1="97" x2="20" y2="101" stroke="#1659a9" stroke-width="1.2"/>
+                        <line x1="17" y1="23" x2="24" y2="23" stroke="#1659a9" stroke-width="0.5" opacity="0.4"/>
+                        <line x1="17" y1="101" x2="24" y2="101" stroke="#1659a9" stroke-width="0.5" opacity="0.4"/>
+                        <text x="18" y="66" font-family="system-ui,sans-serif" font-size="12" text-anchor="end" fill="#1659a9" font-weight="700">D</text>
+                        <!-- Dimension d -->
+                        <line x1="470" y1="46.4" x2="470" y2="77.6" stroke="#1659a9" stroke-width="1.2"/>
+                        <line x1="467" y1="50.4" x2="470" y2="46.4" stroke="#1659a9" stroke-width="1.2"/>
+                        <line x1="473" y1="50.4" x2="470" y2="46.4" stroke="#1659a9" stroke-width="1.2"/>
+                        <line x1="467" y1="73.6" x2="470" y2="77.6" stroke="#1659a9" stroke-width="1.2"/>
+                        <line x1="473" y1="73.6" x2="470" y2="77.6" stroke="#1659a9" stroke-width="1.2"/>
+                        <line x1="461" y1="46.4" x2="473" y2="46.4" stroke="#1659a9" stroke-width="0.5" opacity="0.4"/>
+                        <line x1="461" y1="77.6" x2="473" y2="77.6" stroke="#1659a9" stroke-width="0.5" opacity="0.4"/>
+                        <text x="484" y="66" font-family="system-ui,sans-serif" font-size="12" text-anchor="start" fill="#1659a9" font-weight="700">d</text>
+                    </svg>
+                </div>
+
+                <div class="grid-3">
+                    <label>
+                        <span class="label-text">ISO 15552 Preset</span>
+                        <select id="isoPreset">
+                            <option value="">Custom / Manual</option>
+                            <option value="32,12">&#x2300;32 / &#x2300;12</option>
+                            <option value="40,16">&#x2300;40 / &#x2300;16</option>
+                            <option value="50,20">&#x2300;50 / &#x2300;20</option>
+                            <option value="63,20">&#x2300;63 / &#x2300;20</option>
+                            <option value="80,25">&#x2300;80 / &#x2300;25</option>
+                            <option value="100,25">&#x2300;100 / &#x2300;25</option>
+                            <option value="125,32">&#x2300;125 / &#x2300;32</option>
+                            <option value="160,40">&#x2300;160 / &#x2300;40</option>
+                            <option value="200,40">&#x2300;200 / &#x2300;40</option>
+                            <option value="250,50">&#x2300;250 / &#x2300;50</option>
+                            <option value="320,63">&#x2300;320 / &#x2300;63</option>
+                        </select>
+                    </label>
+
+                    <label>
+                        <span class="label-text">Bore D</span>
+                        <div class="input-unit">
+                            <input id="bore" type="number" value="50" min="0" step="0.1">
+                            <select id="boreUnit" class="unit-sel" data-unit="length">
+                                <option value="mm">mm</option>
+                                <option value="cm">cm</option>
+                                <option value="in">in</option>
+                            </select>
+                        </div>
+                    </label>
+
+                    <label>
+                        <span class="label-text">Rod <span style="text-transform:none">d</span></span>
+                        <div class="input-unit">
+                            <input id="rod" type="number" value="20" min="0" step="0.1">
+                            <select id="rodUnit" class="unit-sel" data-unit="length">
+                                <option value="mm">mm</option>
+                                <option value="cm">cm</option>
+                                <option value="in">in</option>
+                            </select>
+                        </div>
+                    </label>
+                </div>
+
+                <label>
+                    <span class="label-text">Friction loss (%)</span>
+                    <input id="friction" type="number" value="0" min="0" max="50" step="0.5" style="max-width:160px;">
+                </label>
+
+                <div class="areas-display">
+                    <span class="area-item">Cap-side area: <span class="area-val" id="areaCapDisplay">&mdash;</span> mm&sup2;</span>
+                    <span class="area-item">Rod-side area: <span class="area-val" id="areaRodDisplay">&mdash;</span> mm&sup2;</span>
+                    <span class="area-item">Area ratio: <span class="area-val" id="areaRatioDisplay">&mdash;</span></span>
+                </div>
+            </div>
+
+            <div class="calc-grid">
+
+                <!-- ========== SECTION 2: FORCE ========== -->
+                <div class="card">
+                    <h2>2 &mdash; Force Calculator</h2>
+
+                    <div class="grid-2">
+                        <label>
+                            <span class="label-text">Cap-side P&#x2090;</span>
+                            <div class="input-unit">
+                                <input id="forcePA" type="number" value="6" min="0" step="0.1">
+                                <select class="unit-sel" data-unit="pressure">
+                                    <option value="bar">bar</option><option value="psi">psi</option>
+                                    <option value="kPa">kPa</option><option value="MPa">MPa</option>
+                                </select>
+                            </div>
+                        </label>
+                        <label>
+                            <span class="label-text">Rod-side P&#x1D47;</span>
+                            <div class="input-unit">
+                                <input id="forcePB" type="number" value="0" min="0" step="0.1">
+                                <select class="unit-sel" data-unit="pressure">
+                                    <option value="bar">bar</option><option value="psi">psi</option>
+                                    <option value="kPa">kPa</option><option value="MPa">MPa</option>
+                                </select>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="section-label">Direction</div>
+                    <div class="radio-row">
+                        <label><input type="radio" name="forceDir" value="ext" checked> Extension</label>
+                        <label><input type="radio" name="forceDir" value="ret"> Retraction</label>
+                    </div>
+
+                    <div class="card-footer">
+                        <button onclick="calcForce()">Calculate Force</button>
+                        <div class="result-box" id="forceResult">&mdash;</div>
+                        <div class="note">F = P&#x2090;&middot;A<sub>cap</sub> &minus; P&#x1D47;&middot;A<sub>rod</sub> (extension). Effective = theoretical &times; (1 &minus; friction%).</div>
+                    </div>
+                </div>
+
+                <!-- ========== SECTION 3: REQUIRED PRESSURE ========== -->
+                <div class="card">
+                    <h2>3 &mdash; Required Pressure</h2>
+
+                    <label>
+                        <span class="label-text">Target force</span>
+                        <div class="input-unit">
+                            <input id="reqForce" type="number" value="1000" min="0" step="1">
+                            <select class="unit-sel" data-unit="force">
+                                <option value="N">N</option><option value="kN">kN</option>
+                                <option value="lbf">lbf</option><option value="kgf">kgf</option>
+                            </select>
+                        </div>
+                    </label>
+
+                    <div class="grid-2">
+                        <label>
+                            <span class="label-text">Cap-side P&#x2090;</span>
+                            <div class="input-unit">
+                                <input id="reqPA" type="number" placeholder="known or empty" step="0.1">
+                                <select id="reqPAUnit" class="unit-sel" data-unit="pressure">
+                                    <option value="bar">bar</option><option value="psi">psi</option>
+                                    <option value="kPa">kPa</option><option value="MPa">MPa</option>
+                                </select>
+                            </div>
+                        </label>
+                        <label>
+                            <span class="label-text">Rod-side P&#x1D47;</span>
+                            <div class="input-unit">
+                                <input id="reqPB" type="number" placeholder="known or empty" step="0.1">
+                                <select id="reqPBUnit" class="unit-sel" data-unit="pressure">
+                                    <option value="bar">bar</option><option value="psi">psi</option>
+                                    <option value="kPa">kPa</option><option value="MPa">MPa</option>
+                                </select>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="section-label">Direction</div>
+                    <div class="radio-row">
+                        <label><input type="radio" name="reqDir" value="ext" checked> Extension</label>
+                        <label><input type="radio" name="reqDir" value="ret"> Retraction</label>
+                    </div>
+
+                    <div class="card-footer">
+                        <button onclick="calcReqPressure()">Calculate Pressure</button>
+                        <div class="result-box" id="reqResult">&mdash;</div>
+                        <div class="note">Fill in the target force and one known pressure. The calculator solves for the missing one. Friction is applied to the target force.</div>
+                    </div>
+                </div>
+
+                <!-- ========== SECTION 4: BORE SIZING ========== -->
+                <div class="card">
+                    <h2>4 &mdash; Bore Sizing</h2>
+
+                    <div class="grid-2">
+                        <label>
+                            <span class="label-text">Target force</span>
+                            <div class="input-unit">
+                                <input id="sizeForce" type="number" value="1000" min="0" step="1">
+                                <select class="unit-sel" data-unit="force">
+                                    <option value="N">N</option><option value="kN">kN</option>
+                                    <option value="lbf">lbf</option><option value="kgf">kgf</option>
+                                </select>
+                            </div>
+                        </label>
+                        <label>
+                            <span class="label-text">Available pressure</span>
+                            <div class="input-unit">
+                                <input id="sizePressure" type="number" value="6" min="0" step="0.1">
+                                <select class="unit-sel" data-unit="pressure">
+                                    <option value="bar">bar</option><option value="psi">psi</option>
+                                    <option value="kPa">kPa</option><option value="MPa">MPa</option>
+                                </select>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="section-label">Direction</div>
+                    <div class="radio-row">
+                        <label><input type="radio" name="sizeDir" value="ext" checked> Extension</label>
+                        <label><input type="radio" name="sizeDir" value="ret"> Retraction</label>
+                    </div>
+
+                    <div class="card-footer">
+                        <button onclick="calcBoreSize()">Calculate Bore</button>
+                        <div class="result-box" id="sizeResult">&mdash;</div>
+                        <div class="note">Calculates minimum bore for the target force. For retraction, uses standard ISO rod sizes. Suggests next ISO 15552 bore.</div>
+                    </div>
+                </div>
+
+                <!-- ========== SECTION 5: AIR CONSUMPTION ========== -->
+                <div class="card">
+                    <h2>5 &mdash; Air Consumption</h2>
+
+                    <div class="grid-3">
+                        <label>
+                            <span class="label-text">Stroke</span>
+                            <div class="input-unit">
+                                <input id="airStroke" type="number" value="100" min="0" step="1">
+                                <select class="unit-sel" data-unit="length">
+                                    <option value="mm">mm</option><option value="cm">cm</option><option value="in">in</option>
+                                </select>
+                            </div>
+                        </label>
+                        <label>
+                            <span class="label-text">Cycles / min</span>
+                            <input id="airCycles" type="number" value="10" min="0" step="1">
+                        </label>
+                        <label>
+                            <span class="label-text">Supply pressure</span>
+                            <div class="input-unit">
+                                <input id="airPressure" type="number" value="6" min="0" step="0.1">
+                                <select class="unit-sel" data-unit="pressure">
+                                    <option value="bar">bar</option><option value="psi">psi</option>
+                                    <option value="kPa">kPa</option><option value="MPa">MPa</option>
+                                </select>
+                            </div>
+                        </label>
+                    </div>
+
+                    <div class="card-footer">
+                        <button onclick="calcAirConsumption()">Calculate Air Consumption</button>
+                        <div class="result-box" id="airResult">&mdash;</div>
+                        <div class="note">Free air per double stroke (extend + retract) using Boyle's law. Atmospheric pressure = 1.01325 bar.</div>
+                    </div>
+                </div>
+
+            </div><!-- /calc-grid -->
+
+        </main>
+
+        <script>
+            // ==================== ISO 15552 DATA ====================
+
+            var ISO_BORES = [32, 40, 50, 63, 80, 100, 125, 160, 200, 250, 320];
+
+            var ISO_RODS = {
+                32: 12, 40: 16, 50: 20, 63: 20, 80: 25,
+                100: 25, 125: 32, 160: 40, 200: 40, 250: 50, 320: 63
+            };
+
+            var P_ATM = 1.01325;
+
+            // ==================== UNIT SYSTEM ====================
+            // Factor: multiply display value by factor to get base unit (bar / mm / N)
+
+            var UF = {
+                pressure: { bar: 1, psi: 0.0689476, kPa: 0.01, MPa: 10 },
+                length: { mm: 1, cm: 10, "in": 25.4 },
+                force: { N: 1, kN: 1000, lbf: 4.44822, kgf: 9.80665 }
+            };
+
+            // Read an input field in base units using its own sibling unit dropdown
+            function readField(id) {
+                var el = document.getElementById(id);
+                var v = parseFloat(el.value);
+                if (isNaN(v)) { return NaN; }
+
+                var wrap = el.closest(".input-unit");
+                if (!wrap) { return v; } // no unit dropdown, return raw
+
+                var sel = wrap.querySelector(".unit-sel");
+                var type = sel.getAttribute("data-unit");
+                return v * UF[type][sel.value];
+            }
+
+            // Read optional field that may be empty
+            function readFieldOpt(id) {
+                var el = document.getElementById(id);
+                var s = el.value.trim();
+                if (s === "") { return { empty: true }; }
+
+                var v = parseFloat(s);
+                if (isNaN(v)) { return { empty: true }; }
+
+                var wrap = el.closest(".input-unit");
+                if (!wrap) { return { empty: false, base: v }; }
+
+                var sel = wrap.querySelector(".unit-sel");
+                var type = sel.getAttribute("data-unit");
+                return {
+                    empty: false,
+                    base: v * UF[type][sel.value],
+                    raw: v,
+                    unit: sel.value,
+                    type: type
+                };
+            }
+
+            // ==================== HELPERS ====================
+
+            function fmt(n, decimals) {
+                if (decimals === undefined) { decimals = 1; }
+                return n.toFixed(decimals);
+            }
+
+            // Format pressure with 2-decimal + 4-decimal precision
+            function fmtPres(barVal, unitStr) {
+                var u = unitStr || "bar";
+                var d = barVal / UF.pressure[u];
+                var rounded = d.toFixed(2);
+                var precise = d.toFixed(4);
+
+                if (parseFloat(rounded) === parseFloat(precise)) {
+                    return rounded + " " + u;
+                }
+                return rounded + " " + u + " (" + precise + " " + u + ")";
+            }
+
+            function setResult(id, text, ok) {
+                var el = document.getElementById(id);
+                el.textContent = text;
+                el.className = "result-box " + (ok ? "ok" : "err");
+            }
+
+            function getRadio(name) {
+                var el = document.querySelector('input[name="' + name + '"]:checked');
+                return el ? el.value : "ext";
+            }
+
+            function getFriction() {
+                var f = parseFloat(document.getElementById("friction").value);
+                if (isNaN(f) || f < 0) { f = 0; }
+                if (f > 50) { f = 50; }
+                return f / 100;
+            }
+
+            // Geometry always returns values in mm
+            function getGeometry() {
+                var D = readField("bore");
+                var d = readField("rod");
+
+                if (isNaN(D) || isNaN(d) || D <= 0 || d < 0 || d >= D) {
+                    return null;
+                }
+
+                var aCap = Math.PI / 4 * D * D;
+                var aRod = Math.PI / 4 * (D * D - d * d);
+                return { D: D, d: d, aCap: aCap, aRod: aRod };
+            }
+
+            // ==================== AREAS DISPLAY ====================
+
+            // Update areas when bore/rod units change
+            document.getElementById("boreUnit").addEventListener("change", updateAreas);
+            document.getElementById("rodUnit").addEventListener("change", updateAreas);
+
+            function updateAreas() {
+                var g = getGeometry();
+                var capEl = document.getElementById("areaCapDisplay");
+                var rodEl = document.getElementById("areaRodDisplay");
+                var ratioEl = document.getElementById("areaRatioDisplay");
+
+                if (!g) {
+                    capEl.textContent = "\u2014";
+                    rodEl.textContent = "\u2014";
+                    ratioEl.textContent = "\u2014";
+                    return;
+                }
+
+                capEl.textContent = fmt(g.aCap, 2);
+                rodEl.textContent = fmt(g.aRod, 2);
+                ratioEl.textContent = fmt(g.aRod / g.aCap, 3);
+            }
+
+            // ==================== PRESET ====================
+
+            document.getElementById("isoPreset").addEventListener("change", function () {
+                var v = this.value;
+                if (!v) { return; }
+
+                var parts = v.split(",").map(Number);
+
+                // Convert each preset value (in mm) to its own field's unit
+                var boreUnitFactor = UF.length[document.getElementById("boreUnit").value];
+                var rodUnitFactor = UF.length[document.getElementById("rodUnit").value];
+
+                document.getElementById("bore").value = parseFloat((parts[0] / boreUnitFactor).toPrecision(6));
+                document.getElementById("rod").value = parseFloat((parts[1] / rodUnitFactor).toPrecision(6));
+                updateAreas();
+            });
+
+            document.getElementById("bore").addEventListener("input", function () {
+                document.getElementById("isoPreset").value = "";
+                updateAreas();
+            });
+
+            document.getElementById("rod").addEventListener("input", function () {
+                document.getElementById("isoPreset").value = "";
+                updateAreas();
+            });
+
+            // ==================== SECTION 2: FORCE ====================
+
+            function calcForce() {
+                var g = getGeometry();
+                if (!g) {
+                    setResult("forceResult", "Error: Invalid geometry (rod must be < bore).", false);
+                    return;
+                }
+
+                var pA = readField("forcePA");
+                var pB = readField("forcePB");
+                if (isNaN(pA) || isNaN(pB)) {
+                    setResult("forceResult", "Error: Enter valid pressures.", false);
+                    return;
+                }
+
+                var dir = getRadio("forceDir");
+                var fric = getFriction();
+                var fTheo;
+
+                if (dir === "ext") {
+                    fTheo = pA * 0.1 * g.aCap - pB * 0.1 * g.aRod;
+                } else {
+                    fTheo = pB * 0.1 * g.aRod - pA * 0.1 * g.aCap;
+                }
+
+                var fEff = fTheo * (1 - fric);
+                var label = dir === "ext" ? "Extension" : "Retraction";
+
+                if (fTheo < 0) {
+                    setResult("forceResult", label + ": Net force negative (" + fmt(fTheo, 1) + " N). Moves the other way.", false);
+                    return;
+                }
+
+                setResult("forceResult",
+                          label + ":  Theoretical " + fmt(fTheo, 1) + " N  |  Effective " + fmt(fEff, 1) + " N",
+                          true
+                         );
+            }
+
+            // ==================== SECTION 3: REQUIRED PRESSURE ====================
+
+            function calcReqPressure() {
+                var g = getGeometry();
+                if (!g) {
+                    setResult("reqResult", "Error: Invalid geometry.", false);
+                    return;
+                }
+
+                var F = readField("reqForce");
+                if (isNaN(F) || F <= 0) {
+                    setResult("reqResult", "Error: Enter a positive target force.", false);
+                    return;
+                }
+
+                var pa = readFieldOpt("reqPA");
+                var pb = readFieldOpt("reqPB");
+
+                if (!pa.empty && !pb.empty) {
+                    setResult("reqResult", "Leave one pressure field empty.", false);
+                    return;
+                }
+                if (pa.empty && pb.empty) {
+                    setResult("reqResult", "Enter a known pressure in one field, leave the other empty.", false);
+                    return;
+                }
+
+                var dir = getRadio("reqDir");
+                var fric = getFriction();
+                var fTheo = F / (1 - fric);
+                var result;
+
+                if (dir === "ext") {
+                    if (!pa.empty) {
+                        result = (pa.base * 0.1 * g.aCap - fTheo) / (0.1 * g.aRod);
+                        setResult("reqResult",
+                                  "Required rod-side P\u1D47 = " + fmtPres(result, document.getElementById("reqPBUnit").value),
+                                  true
+                                 );
+                    } else {
+                        result = (fTheo + pb.base * 0.1 * g.aRod) / (0.1 * g.aCap);
+                        setResult("reqResult",
+                                  "Required cap-side P\u2090 = " + fmtPres(result, document.getElementById("reqPAUnit").value),
+                                  true
+                                 );
+                    }
+                } else {
+                    if (!pb.empty) {
+                        result = (pb.base * 0.1 * g.aRod - fTheo) / (0.1 * g.aCap);
+                        setResult("reqResult",
+                                  "Required cap-side P\u2090 = " + fmtPres(result, document.getElementById("reqPAUnit").value),
+                                  true
+                                 );
+                    } else {
+                        result = (fTheo + pa.base * 0.1 * g.aCap) / (0.1 * g.aRod);
+                        setResult("reqResult",
+                                  "Required rod-side P\u1D47 = " + fmtPres(result, document.getElementById("reqPBUnit").value),
+                                  true
+                                 );
+                    }
+                }
+            }
+
+            // ==================== SECTION 4: BORE SIZING ====================
+
+            function calcBoreSize() {
+                var F = readField("sizeForce");
+                var P = readField("sizePressure");
+
+                if (isNaN(F) || isNaN(P) || F <= 0 || P <= 0) {
+                    setResult("sizeResult", "Error: Enter positive values.", false);
+                    return;
+                }
+
+                var fric = getFriction();
+                var fTheo = F / (1 - fric);
+                var dir = getRadio("sizeDir");
+                var pN = P * 0.1;
+
+                if (dir === "ext") {
+                    var minBore = Math.sqrt(4 * (fTheo / pN) / Math.PI);
+                    var isoBore = null;
+
+                    for (var j = 0; j < ISO_BORES.length; j++) {
+                        if (ISO_BORES[j] >= minBore) {
+                            isoBore = ISO_BORES[j];
+                            break;
+                        }
+                    }
+
+                    var isoText = isoBore
+                        ? "  |  Next ISO: \u2300" + isoBore + " mm (rod \u2300" + ISO_RODS[isoBore] + " mm)"
+                        : "  |  Exceeds ISO range";
+
+                    setResult("sizeResult",
+                              "Extension: Min bore \u2300" + fmt(minBore, 1) + " mm" + isoText,
+                              true
+                             );
+                } else {
+                    var found = false;
+                    for (var i = 0; i < ISO_BORES.length; i++) {
+                        var b = ISO_BORES[i];
+                        var r = ISO_RODS[b];
+                        var aRet = Math.PI / 4 * (b * b - r * r);
+                        var fRet = pN * aRet;
+
+                        if (fRet >= fTheo) {
+                            setResult("sizeResult",
+                                      "Retraction: \u2300" + b + " mm (rod \u2300" + r + " mm)  |  Force = " + fmt(fRet, 1) + " N",
+                                      true
+                                     );
+                            found = true;
+                            break;
+                        }
+                    }
+                    if (!found) {
+                        setResult("sizeResult", "Error: No ISO bore up to \u2300320 is enough.", false);
+                    }
+                }
+            }
+
+            // ==================== SECTION 5: AIR CONSUMPTION ====================
+
+            function calcAirConsumption() {
+                var g = getGeometry();
+                if (!g) {
+                    setResult("airResult", "Error: Invalid geometry.", false);
+                    return;
+                }
+
+                var stroke = readField("airStroke");
+                var cycles = parseFloat(document.getElementById("airCycles").value);
+                var pSupply = readField("airPressure");
+
+                if (isNaN(stroke) || isNaN(cycles) || isNaN(pSupply) || stroke <= 0 || cycles < 0 || pSupply <= 0) {
+                    setResult("airResult", "Error: Enter valid positive values.", false);
+                    return;
+                }
+
+                var compressionRatio = (pSupply + P_ATM) / P_ATM;
+                var vExtFree = g.aCap * stroke * compressionRatio / 1e6;
+                var vRetFree = g.aRod * stroke * compressionRatio / 1e6;
+                var vCycleFree = vExtFree + vRetFree;
+                var vPerMin = vCycleFree * cycles;
+
+                setResult("airResult",
+                          "Per cycle: " + fmt(vCycleFree, 3) + " Nl  (ext " + fmt(vExtFree, 3) + " + ret " + fmt(vRetFree, 3) + ")  |  " + fmt(vPerMin, 2) + " Nl/min",
+                          true
+                         );
+            }
+
+            // ==================== INIT ====================
+            updateAreas();
+        </script>
+
+    </body>
+</html>
