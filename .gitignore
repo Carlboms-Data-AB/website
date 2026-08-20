@@ -9,3 +9,5 @@ dist/
 
 # local docs (brand guidelines, web copy)
 docs/
+CLAUDE.md
+.claude/
