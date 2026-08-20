@@ -41,6 +41,13 @@ const webApps = [
       'Enheter i bar, psi, kPa och MPa.',
     code: 'https://github.com/Carlboms-Data-AB/pneumatic-calculator',
   },
+  {
+    name: 'Network Tools',
+    href: 'https://network-tools.anvil.app',
+    body:
+      'Portscanner och DNS-propageringskoll — se om portar är öppna på en ' +
+      'värd och hur DNS-poster har spridit sig över namnservrar.',
+  },
 ];
 
 const programs = [
@@ -165,9 +172,15 @@ const licensed = [
                 <h3 class="tool-name">{tool.name}</h3>
                 <p class="tool-body">{tool.body}</p>
                 <div class="tool-foot">
-                  <button class="cta tool-open" type="button" data-src={url(tool.src)} data-name={tool.name}>
-                    Öppna
-                  </button>
+                  {tool.src ? (
+                    <button class="cta tool-open" type="button" data-src={url(tool.src)} data-name={tool.name}>
+                      Öppna
+                    </button>
+                  ) : (
+                    <a class="cta" href={tool.href} target="_blank" rel="noopener noreferrer">
+                      Öppna ↗
+                    </a>
+                  )}
                   {tool.code && (
                     <a class="cta secondary" href={tool.code} target="_blank" rel="noopener noreferrer">
                       Källkod ↗
