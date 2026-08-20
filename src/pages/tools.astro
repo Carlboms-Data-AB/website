@@ -30,6 +30,7 @@ const webApps = [
       'Beskär fraktsedeln ur en PostNord- eller Tradera-PDF och sparar etiketten ' +
       'i rätt storlek, 104,4 × 187,8 mm, för en etikettskrivare. Text och ' +
       'streckkod behålls som vektor och förblir skarpa.',
+    code: 'https://github.com/Carlboms-Data-AB/postnord-parcel-cropper',
   },
   {
     name: 'Pneumatic Calculator',
@@ -38,6 +39,7 @@ const webApps = [
       'Räknar på dubbelverkande pneumatikcylindrar — kraft, erforderligt tryck, ' +
       'dimensionering av cylinderdiameter (ISO 15552) och luftförbrukning. ' +
       'Enheter i bar, psi, kPa och MPa.',
+    code: 'https://github.com/Carlboms-Data-AB/pneumatic-calculator',
   },
 ];
 
@@ -68,6 +70,7 @@ const programs = [
     plat: 'Windows',
     href: `${DL}/qemu-img-windows-x64/qemu-img-windows-x64-v10.0.0.zip`,
     body: 'Kör qemu-img på Windows utan att installera hela QEMU — konvertera diskavbilder.',
+    code: 'https://github.com/Carlboms-Data-AB/qemu-img-windows-x64',
   },
   {
     name: 'chm2txt',
@@ -121,9 +124,16 @@ const licensed = [
               <li class="tool-card">
                 <h3 class="tool-name">{tool.name}</h3>
                 <p class="tool-body">{tool.body}</p>
-                <button class="cta tool-open" type="button" data-src={url(tool.src)} data-name={tool.name}>
-                  Öppna
-                </button>
+                <div class="tool-foot">
+                  <button class="cta tool-open" type="button" data-src={url(tool.src)} data-name={tool.name}>
+                    Öppna
+                  </button>
+                  {tool.code && (
+                    <a class="cta secondary" href={tool.code} target="_blank" rel="noopener noreferrer">
+                      Källkod ↗
+                    </a>
+                  )}
+                </div>
               </li>
             ))
           }
@@ -142,6 +152,11 @@ const licensed = [
                   ) : (
                     <a class="cta secondary" href={tool.link} target="_blank" rel="noopener noreferrer">
                       Öppna på GitHub ↗
+                    </a>
+                  )}
+                  {tool.code && (
+                    <a class="cta secondary" href={tool.code} target="_blank" rel="noopener noreferrer">
+                      Källkod ↗
                     </a>
                   )}
                   {tool.plat && <span class="tool-plat">{tool.plat}</span>}
