@@ -48,3 +48,19 @@
 .footer .footer-col a:hover {
   color: #fff;
 }
+
+/* Mobile nav. Both the "Verktyg" button and the "Boka rådgivning" CTA carry
+   .nav-cta, which brand.css hides below 480px — so on a phone the whole
+   right-hand group vanished. Keep Verktyg reachable, and drop the consultation
+   CTA a little earlier so the two never crowd the brand (the CTA is repeated in
+   the hero and the footer). Website-specific. */
+@media (max-width: 600px) {
+  .nav .nav-cta:not(.secondary) {
+    display: none;
+  }
+}
+@media (max-width: 480px) {
+  .nav .nav-cta.secondary {
+    display: inline-flex;
+  }
+}
