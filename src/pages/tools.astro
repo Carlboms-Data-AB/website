@@ -22,7 +22,7 @@ const webApps = [
       'Hittar frysningar i en skärminspelning — de sekunder då bilden står helt ' +
       'still. Ladda in en MP4, markera kameraytan och få en tidslinje och en ' +
       'lista över varje frys.',
-    shots: ['/verktyg/shots/freeze-detector/1.png'],
+    shots: ['/verktyg/shots/freeze-detector/1.gif'],
   },
   {
     name: 'Parcel Cropper',
@@ -32,7 +32,7 @@ const webApps = [
       'i rätt storlek (104,4 × 187,8 mm) för etikettskrivare. Text och streckkod ' +
       'behålls som vektor och förblir skarpa.',
     code: 'https://github.com/Carlboms-Data-AB/postnord-parcel-cropper',
-    shots: ['/verktyg/shots/parcel-cropper/1.png'],
+    shots: ['/verktyg/shots/parcel-cropper/1.gif'],
   },
   {
     name: 'Pneumatic Calculator',
@@ -41,7 +41,7 @@ const webApps = [
       'Räknar på dubbelverkande pneumatikcylindrar: kraft, erforderligt tryck, ' +
       'cylinderdiameter (ISO 15552) och luftförbrukning. Stöder bar, psi, kPa och MPa.',
     code: 'https://github.com/Carlboms-Data-AB/pneumatic-calculator',
-    shots: ['/verktyg/shots/pneumatic-calculator/1.png'],
+    shots: ['/verktyg/shots/pneumatic-calculator/1.gif'],
   },
   {
     name: 'Network Tools',
@@ -49,7 +49,7 @@ const webApps = [
     body:
       'Portscanner och DNS-koll i webbläsaren — se om portar är öppna på en värd ' +
       'och hur DNS-poster har spridit sig mellan namnservrar.',
-    shots: ['/verktyg/shots/network-tools/1.png'],
+    shots: ['/verktyg/shots/network-tools/1.gif'],
   },
 ];
 
@@ -101,6 +101,7 @@ const programs = [
     name: 'terminal-banner',
     link: 'https://github.com/Carlboms-Data-AB/terminal-banner',
     body: 'Färgglad inloggningsbanner (MOTD) för Linux. Öppen källkod på GitHub.',
+    shots: ['/verktyg/shots/terminal-banner/1.png', '/verktyg/shots/terminal-banner/2.png'],
   },
 ];
 
@@ -219,6 +220,15 @@ const licensed = [
                     <a class="cta secondary" href={tool.code} target="_blank" rel="noopener noreferrer">
                       Källkod ↗
                     </a>
+                  )}
+                  {tool.shots && (
+                    <button
+                      class="cta secondary shots-open"
+                      type="button"
+                      data-shots={JSON.stringify(tool.shots.map((s) => url(s)))}
+                    >
+                      Bilder
+                    </button>
                   )}
                 </div>
               </li>
