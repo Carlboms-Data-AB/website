@@ -3,7 +3,7 @@ import Base from '~/layouts/Base.astro';
 import Nav from '~/components/Nav.astro';
 import Footer from '~/components/Footer.astro';
 import { url } from '~/site';
-import { copy } from '~/copy';
+import { copy, FORM_API, SOURCE } from '~/copy';
 
 const base = copy.sv;
 const t = {
@@ -13,7 +13,6 @@ const t = {
 };
 
 const DL = 'https://github.com/Carlboms-Data-AB/downloads/releases/download';
-const demoHref = `${url('/')}#kontakt`;
 
 const webApps = [
   {
@@ -223,7 +222,9 @@ const licensed = [
                 <p class="tool-body">{tool.body}</p>
                 <div class="tool-foot">
                   <button class="cta" type="button" disabled>Beställ licens</button>
-                  <a class="cta secondary" href={demoHref}>Boka demo</a>
+                  <button class="cta secondary demo-open" type="button" data-tool={tool.name}>
+                    Boka demo
+                  </button>
                   {tool.plat && <span class="tool-plat">{tool.plat}</span>}
                 </div>
               </li>
@@ -240,6 +241,47 @@ const licensed = [
       <button id="toolModalClose" class="tool-modal-close" type="button">Stäng ✕</button>
     </div>
     <iframe id="toolModalFrame" title=""></iframe>
+  </div>
+
+  <div id="demoModal" class="demo-modal" hidden>
+    <div class="demo-backdrop" data-close></div>
+    <div class="demo-dialog" role="dialog" aria-modal="true" aria-labelledby="demoTitle">
+      <button class="demo-close" type="button" data-close aria-label="Stäng">✕</button>
+      <h2 id="demoTitle" class="demo-title">Boka demo</h2>
+      <p class="demo-sub" id="demoSub"></p>
+      <form id="demoForm" class="demo-form" data-endpoint={FORM_API} data-source={SOURCE}>
+        <div class="demo-field">
+          <label for="demoNamn">Namn *</label>
+          <input id="demoNamn" name="namn" type="text" required maxlength="200" autocomplete="name" />
+        </div>
+        <div class="demo-field">
+          <label for="demoEmail">E-post *</label>
+          <input id="demoEmail" name="email" type="email" required autocomplete="email" />
+        </div>
+        <div class="demo-field">
+          <label for="demoMsg">Meddelande *</label>
+          <textarea id="demoMsg" name="meddelande" required maxlength="5000"></textarea>
+        </div>
+        <input
+          type="text"
+          name="website"
+          class="demo-honeypot"
+          tabindex="-1"
+          autocomplete="off"
+          aria-hidden="true"
+        />
+        <button type="submit" class="cta demo-submit" id="demoSubmit">
+          <span class="demo-submit-label">Skicka demoförfrågan</span>
+          <span class="demo-submit-sending" hidden>Skickar …</span>
+        </button>
+        <div class="demo-status demo-success" id="demoSuccess" role="status" hidden>
+          Tack! Vi hör av oss inom kort.
+        </div>
+        <div class="demo-status demo-error" id="demoError" role="alert" hidden>
+          Något gick fel — mejla <a href="mailto:hello@carlbomsdata.se">hello@carlbomsdata.se</a>.
+        </div>
+      </form>
+    </div>
   </div>
 </Base>
 
@@ -342,6 +384,104 @@ const licensed = [
     border: 0;
     background: #fff;
   }
+
+  .demo-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1100;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 20px;
+  }
+  .demo-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.5);
+  }
+  .demo-dialog {
+    position: relative;
+    z-index: 1;
+    width: min(480px, 100%);
+    max-height: 90vh;
+    overflow-y: auto;
+    background: var(--color-canvas, #fff);
+    border-radius: 16px;
+    padding: 28px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.28);
+  }
+  .demo-close {
+    position: absolute;
+    top: 14px;
+    right: 14px;
+    width: 32px;
+    height: 32px;
+    border: 0;
+    border-radius: 100px;
+    background: transparent;
+    color: var(--color-muted, #666);
+    font-size: 15px;
+    cursor: pointer;
+  }
+  .demo-close:hover {
+    background: var(--color-canvas-soft, #eee);
+    color: var(--color-ink, #111);
+  }
+  .demo-title {
+    font: 600 22px/1.2 var(--font-sans);
+    margin: 0 0 4px;
+  }
+  .demo-sub {
+    color: var(--color-muted, #666);
+    margin: 0 0 20px;
+    font: 400 13px/1.4 var(--font-mono);
+  }
+  .demo-form {
+    display: grid;
+    gap: 14px;
+  }
+  .demo-field {
+    display: grid;
+    gap: 6px;
+  }
+  .demo-field label {
+    font: 500 13px/1 var(--font-sans);
+    color: var(--color-body);
+  }
+  .demo-field input,
+  .demo-field textarea {
+    font: inherit;
+    padding: 10px 12px;
+    border: 1px solid var(--color-line, rgba(0, 0, 0, 0.15));
+    border-radius: 8px;
+    background: #fff;
+    color: var(--color-ink, #111);
+  }
+  .demo-field textarea {
+    min-height: 90px;
+    resize: vertical;
+  }
+  .demo-honeypot {
+    position: absolute;
+    left: -9999px;
+    width: 1px;
+    height: 1px;
+    opacity: 0;
+  }
+  .demo-submit {
+    margin-top: 4px;
+    justify-content: center;
+  }
+  .demo-status {
+    font-size: 14px;
+    margin: 0;
+  }
+  .demo-success {
+    color: var(--accent-deep, #0e7a55);
+  }
+  .demo-error {
+    color: #b91c1c;
+  }
 </style>
 
 <script>
@@ -372,5 +512,70 @@ const licensed = [
   closeBtn?.addEventListener('click', close);
   document.addEventListener('keydown', (e) => {
     if (e.key === 'Escape' && modal && !modal.hidden) close();
+  });
+
+  const demoModal = document.getElementById('demoModal') as HTMLElement | null;
+  const demoForm = document.getElementById('demoForm') as HTMLFormElement | null;
+  const demoSub = document.getElementById('demoSub');
+  const demoMsg = document.getElementById('demoMsg') as HTMLTextAreaElement | null;
+  let demoTool = '';
+
+  const openDemo = (t: string) => {
+    if (!demoModal) return;
+    demoTool = t;
+    if (demoSub) demoSub.textContent = t;
+    if (demoMsg) demoMsg.value = `Jag vill boka en demo av ${t}.`;
+    document.getElementById('demoSuccess')?.setAttribute('hidden', '');
+    document.getElementById('demoError')?.setAttribute('hidden', '');
+    demoModal.hidden = false;
+    document.body.style.overflow = 'hidden';
+    document.getElementById('demoNamn')?.focus();
+  };
+  const closeDemo = () => {
+    if (!demoModal) return;
+    demoModal.hidden = true;
+    document.body.style.overflow = '';
+  };
+
+  document.querySelectorAll<HTMLButtonElement>('.demo-open').forEach((btn) => {
+    btn.addEventListener('click', () => openDemo(btn.dataset.tool || ''));
+  });
+  demoModal?.querySelectorAll('[data-close]').forEach((el) => el.addEventListener('click', closeDemo));
+  document.addEventListener('keydown', (e) => {
+    if (e.key === 'Escape' && demoModal && !demoModal.hidden) closeDemo();
+  });
+
+  demoForm?.addEventListener('submit', async (event) => {
+    event.preventDefault();
+    const button = document.getElementById('demoSubmit') as HTMLButtonElement;
+    const label = button.querySelector('.demo-submit-label') as HTMLElement;
+    const sending = button.querySelector('.demo-submit-sending') as HTMLElement;
+    const success = document.getElementById('demoSuccess') as HTMLElement;
+    const error = document.getElementById('demoError') as HTMLElement;
+
+    success.hidden = true;
+    error.hidden = true;
+    button.disabled = true;
+    label.hidden = true;
+    sending.hidden = false;
+
+    try {
+      const data = Object.fromEntries(new FormData(demoForm)) as Record<string, string>;
+      data.source = `${demoForm.dataset.source ?? ''} · demo: ${demoTool}`;
+      const response = await fetch(demoForm.dataset.endpoint ?? '', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(data),
+      });
+      if (!response.ok) throw new Error(response.statusText);
+      demoForm.reset();
+      success.hidden = false;
+    } catch {
+      error.hidden = false;
+    } finally {
+      button.disabled = false;
+      label.hidden = false;
+      sending.hidden = true;
+    }
   });
 </script>
