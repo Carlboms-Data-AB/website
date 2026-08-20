@@ -22,6 +22,7 @@ const webApps = [
       'Hittar frysningar i en skärminspelning — de sekunder då bilden står helt ' +
       'still. Ladda in en MP4, markera kameraytan och få en tidslinje och en ' +
       'lista över varje frys.',
+    shots: ['/verktyg/shots/freeze-detector/1.png'],
   },
   {
     name: 'Parcel Cropper',
@@ -31,6 +32,7 @@ const webApps = [
       'i rätt storlek (104,4 × 187,8 mm) för etikettskrivare. Text och streckkod ' +
       'behålls som vektor och förblir skarpa.',
     code: 'https://github.com/Carlboms-Data-AB/postnord-parcel-cropper',
+    shots: ['/verktyg/shots/parcel-cropper/1.png'],
   },
   {
     name: 'Pneumatic Calculator',
@@ -39,6 +41,7 @@ const webApps = [
       'Räknar på dubbelverkande pneumatikcylindrar: kraft, erforderligt tryck, ' +
       'cylinderdiameter (ISO 15552) och luftförbrukning. Stöder bar, psi, kPa och MPa.',
     code: 'https://github.com/Carlboms-Data-AB/pneumatic-calculator',
+    shots: ['/verktyg/shots/pneumatic-calculator/1.png'],
   },
   {
     name: 'Network Tools',
@@ -46,6 +49,7 @@ const webApps = [
     body:
       'Portscanner och DNS-koll i webbläsaren — se om portar är öppna på en värd ' +
       'och hur DNS-poster har spridit sig mellan namnservrar.',
+    shots: ['/verktyg/shots/network-tools/1.png'],
   },
 ];
 
@@ -181,6 +185,15 @@ const licensed = [
                       Källkod ↗
                     </a>
                   )}
+                  {tool.shots && (
+                    <button
+                      class="cta secondary shots-open"
+                      type="button"
+                      data-shots={JSON.stringify(tool.shots.map((s) => url(s)))}
+                    >
+                      Bilder
+                    </button>
+                  )}
                 </div>
               </li>
             ))
@@ -281,6 +294,15 @@ const licensed = [
         </div>
       </form>
     </div>
+  </div>
+
+  <div id="shotModal" class="shot-modal" hidden>
+    <div class="shot-backdrop" data-close></div>
+    <button id="shotClose" class="shot-close" type="button" data-close aria-label="Stäng">✕</button>
+    <button id="shotPrev" class="shot-nav shot-prev" type="button" aria-label="Föregående" hidden>‹</button>
+    <img id="shotImg" class="shot-img" alt="" />
+    <button id="shotNext" class="shot-nav shot-next" type="button" aria-label="Nästa" hidden>›</button>
+    <span id="shotCount" class="shot-count"></span>
   </div>
 </Base>
 
@@ -472,6 +494,74 @@ const licensed = [
   .demo-error {
     color: #b91c1c;
   }
+  .shot-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 1200;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 40px;
+  }
+  .shot-backdrop {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.85);
+  }
+  .shot-img {
+    position: relative;
+    z-index: 1;
+    max-width: 100%;
+    max-height: 100%;
+    border-radius: 8px;
+    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.5);
+  }
+  .shot-close,
+  .shot-nav {
+    position: absolute;
+    z-index: 2;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 0;
+    border-radius: 100px;
+    background: rgba(255, 255, 255, 0.14);
+    color: #fff;
+    cursor: pointer;
+  }
+  .shot-close:hover,
+  .shot-nav:hover {
+    background: rgba(255, 255, 255, 0.28);
+  }
+  .shot-close {
+    top: 16px;
+    right: 20px;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
+  }
+  .shot-nav {
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    font-size: 28px;
+  }
+  .shot-prev {
+    left: 16px;
+  }
+  .shot-next {
+    right: 16px;
+  }
+  .shot-count {
+    position: absolute;
+    bottom: 18px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 2;
+    color: rgba(255, 255, 255, 0.8);
+    font: 400 13px/1 var(--font-mono);
+  }
 </style>
 
 <script>
@@ -567,5 +657,59 @@ const licensed = [
       label.hidden = false;
       sending.hidden = true;
     }
+  });
+  const shotModal = document.getElementById('shotModal') as HTMLElement | null;
+  const shotImg = document.getElementById('shotImg') as HTMLImageElement | null;
+  const shotPrev = document.getElementById('shotPrev') as HTMLElement | null;
+  const shotNext = document.getElementById('shotNext') as HTMLElement | null;
+  const shotCount = document.getElementById('shotCount');
+  let shotList: string[] = [];
+  let shotIdx = 0;
+
+  const renderShot = () => {
+    if (!shotImg) return;
+    shotImg.src = shotList[shotIdx] || '';
+    const multi = shotList.length > 1;
+    if (shotCount) shotCount.textContent = multi ? `${shotIdx + 1} / ${shotList.length}` : '';
+    if (shotPrev) shotPrev.hidden = !multi;
+    if (shotNext) shotNext.hidden = !multi;
+  };
+  const stepShot = (d: number) => {
+    if (!shotList.length) return;
+    shotIdx = (shotIdx + d + shotList.length) % shotList.length;
+    renderShot();
+  };
+  const openShots = (list: string[]) => {
+    if (!shotModal || !list.length) return;
+    shotList = list;
+    shotIdx = 0;
+    renderShot();
+    shotModal.hidden = false;
+    document.body.style.overflow = 'hidden';
+  };
+  const closeShots = () => {
+    if (!shotModal) return;
+    shotModal.hidden = true;
+    shotImg?.removeAttribute('src');
+    document.body.style.overflow = '';
+  };
+
+  document.querySelectorAll<HTMLButtonElement>('.shots-open').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      try {
+        openShots(JSON.parse(btn.dataset.shots || '[]'));
+      } catch {
+        /* ignore malformed data */
+      }
+    });
+  });
+  shotPrev?.addEventListener('click', () => stepShot(-1));
+  shotNext?.addEventListener('click', () => stepShot(1));
+  shotModal?.querySelectorAll('[data-close]').forEach((el) => el.addEventListener('click', closeShots));
+  document.addEventListener('keydown', (e) => {
+    if (!shotModal || shotModal.hidden) return;
+    if (e.key === 'Escape') closeShots();
+    if (e.key === 'ArrowLeft') stepShot(-1);
+    if (e.key === 'ArrowRight') stepShot(1);
   });
 </script>
