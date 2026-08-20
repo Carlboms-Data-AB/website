@@ -12,14 +12,16 @@ const t = {
   nav: { ...base.nav, links: [], ctaHref: `${url('/')}#kontakt` },
 };
 
-const tools = [
+const DL = 'https://github.com/Carlboms-Data-AB/downloads/releases/download';
+
+const webApps = [
   {
     name: 'Freeze Detector',
     src: '/verktyg/freeze/',
     body:
       'Hittar frysningar i en skärminspelning — sekunderna då bilden står helt ' +
-      'still. Välj en MP4, markera kameraytan, och få en tidslinje och en ' +
-      'lista över varje frys att klicka dig igenom.',
+      'still. Välj en MP4, markera kameraytan, och få en tidslinje och en lista ' +
+      'över varje frys att klicka dig igenom.',
   },
   {
     name: 'Parcel Cropper',
@@ -38,6 +40,67 @@ const tools = [
       'Enheter i bar, psi, kPa och MPa.',
   },
 ];
+
+const programs = [
+  {
+    name: 'FlamingoDoctor',
+    plat: 'Windows',
+    href: `${DL}/flamingodoctor/FlamingoDoctor.zip`,
+    body:
+      'Diagnostik för kamera och nätverk — kontrollerar nåbarhet, nätverkskort ' +
+      'med mera och ger en samlad sammanfattning. Bra vid felsökning av ' +
+      'frysningar och nätverk.',
+  },
+  {
+    name: 'vhdx2vmdk',
+    plat: 'Windows',
+    href: `${DL}/vhdx2vmdk/vhdx2vmdk.exe`,
+    body: 'Batchkonverterar Hyper-V VHDX-diskar till VMware VMDK.',
+  },
+  {
+    name: 'disk2vhd',
+    plat: 'Windows',
+    href: `${DL}/disk2vhd/Disk2vhd.zip`,
+    body: 'Avbildar en fysisk disk till en VHD-fil.',
+  },
+  {
+    name: 'qemu-img för Windows',
+    plat: 'Windows',
+    href: `${DL}/qemu-img-windows-x64/qemu-img-windows-x64-v10.0.0.zip`,
+    body: 'Kör qemu-img på Windows utan att installera hela QEMU — konvertera diskavbilder.',
+  },
+  {
+    name: 'chm2txt',
+    plat: 'Windows',
+    href: `${DL}/chm2txt/chm2txt-v3.0.0-win.zip`,
+    body: 'Extraherar text ur CHM-hjälpfiler (CitectSCADA).',
+  },
+  {
+    name: 'terminal-banner',
+    link: 'https://github.com/Carlboms-Data-AB/terminal-banner',
+    body: 'Färgglad inloggningsbanner (MOTD) för Linux. Öppen källkod på GitHub.',
+  },
+];
+
+const licensed = [
+  {
+    name: 'dbf-editor',
+    plat: 'Windows',
+    body:
+      'Lättviktig DBF-editor för CitectSCADA — öppnar och redigerar dBASE III-' +
+      'filer med automatisk backup och svensk teckenkodning.',
+  },
+  {
+    name: 'e-designer2citect',
+    plat: 'Windows',
+    body: 'Migrerar Beijer E-Designer-projekt till Citect.',
+  },
+  {
+    name: 'pdf2png',
+    plat: 'Windows',
+    body: 'Konverterar PDF-sidor till PNG-bilder.',
+  },
+];
 ---
 
 <Base t={t} noindex>
@@ -47,24 +110,58 @@ const tools = [
       <div class="container tools-page">
         <h1 class="tools-title">Verktyg</h1>
         <p class="tools-lead">
-          Små appar som körs helt i din webbläsare. Allt sker lokalt – inget
-          skickas till någon server.
+          Egenutvecklade webb- och desktopverktyg för analys, felsökning,
+          testning och konvertering.
         </p>
 
+        <h2 class="tools-section">Kör i webbläsaren</h2>
         <ul class="tools-list">
           {
-            tools.map((tool) => (
+            webApps.map((tool) => (
               <li class="tool-card">
-                <h2 class="tool-name">{tool.name}</h2>
+                <h3 class="tool-name">{tool.name}</h3>
                 <p class="tool-body">{tool.body}</p>
-                <button
-                  class="cta tool-open"
-                  type="button"
-                  data-src={url(tool.src)}
-                  data-name={tool.name}
-                >
+                <button class="cta tool-open" type="button" data-src={url(tool.src)} data-name={tool.name}>
                   Öppna
                 </button>
+              </li>
+            ))
+          }
+        </ul>
+
+        <h2 class="tools-section">Ladda ner</h2>
+        <ul class="tools-list">
+          {
+            programs.map((tool) => (
+              <li class="tool-card">
+                <h3 class="tool-name">{tool.name}</h3>
+                <p class="tool-body">{tool.body}</p>
+                <div class="tool-foot">
+                  {tool.href ? (
+                    <a class="cta" href={tool.href}>Ladda ner</a>
+                  ) : (
+                    <a class="cta secondary" href={tool.link} target="_blank" rel="noopener noreferrer">
+                      Öppna på GitHub ↗
+                    </a>
+                  )}
+                  {tool.plat && <span class="tool-plat">{tool.plat}</span>}
+                </div>
+              </li>
+            ))
+          }
+        </ul>
+
+        <h2 class="tools-section">Kommersiellt</h2>
+        <ul class="tools-list">
+          {
+            licensed.map((tool) => (
+              <li class="tool-card">
+                <h3 class="tool-name">{tool.name}</h3>
+                <p class="tool-body">{tool.body}</p>
+                <div class="tool-foot">
+                  <button class="cta" type="button" disabled>Beställ licens</button>
+                  {tool.plat && <span class="tool-plat">{tool.plat}</span>}
+                </div>
               </li>
             ))
           }
@@ -93,15 +190,22 @@ const tools = [
   }
   .tools-lead {
     color: var(--color-body);
-    max-width: 60ch;
+    max-width: 62ch;
     margin: 0 0 40px;
+  }
+  .tools-section {
+    font: 400 12px/16px var(--font-mono);
+    text-transform: uppercase;
+    letter-spacing: 0.08em;
+    color: var(--color-muted, #666);
+    margin: 44px 0 16px;
   }
   .tools-list {
     list-style: none;
     margin: 0;
     padding: 0;
     display: grid;
-    gap: 28px;
+    gap: 20px;
   }
   .tool-card {
     border: 1px solid var(--color-line, rgba(0, 0, 0, 0.1));
@@ -117,6 +221,21 @@ const tools = [
     color: var(--color-body);
     margin: 12px 0 20px;
     max-width: 62ch;
+  }
+  .tool-foot {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    flex-wrap: wrap;
+  }
+  .tool-plat {
+    font: 400 12px/1 var(--font-mono);
+    color: var(--color-muted, #666);
+  }
+  .cta[disabled] {
+    opacity: 0.45;
+    cursor: not-allowed;
+    pointer-events: none;
   }
 
   .tool-modal {
