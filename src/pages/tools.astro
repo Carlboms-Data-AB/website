@@ -19,34 +19,33 @@ const webApps = [
     name: 'Freeze Detector',
     src: '/verktyg/freeze/',
     body:
-      'Hittar frysningar i en skärminspelning — sekunderna då bilden står helt ' +
-      'still. Välj en MP4, markera kameraytan, och få en tidslinje och en lista ' +
-      'över varje frys att klicka dig igenom.',
+      'Hittar frysningar i en skärminspelning — de sekunder då bilden står helt ' +
+      'still. Ladda in en MP4, markera kameraytan och få en tidslinje och en ' +
+      'lista över varje frys.',
   },
   {
     name: 'Parcel Cropper',
     src: '/verktyg/parcel/',
     body:
       'Beskär fraktsedeln ur en PostNord- eller Tradera-PDF och sparar etiketten ' +
-      'i rätt storlek, 104,4 × 187,8 mm, för en etikettskrivare. Text och ' +
-      'streckkod behålls som vektor och förblir skarpa.',
+      'i rätt storlek (104,4 × 187,8 mm) för etikettskrivare. Text och streckkod ' +
+      'behålls som vektor och förblir skarpa.',
     code: 'https://github.com/Carlboms-Data-AB/postnord-parcel-cropper',
   },
   {
     name: 'Pneumatic Calculator',
     src: '/verktyg/pneumatic/',
     body:
-      'Räknar på dubbelverkande pneumatikcylindrar — kraft, erforderligt tryck, ' +
-      'dimensionering av cylinderdiameter (ISO 15552) och luftförbrukning. ' +
-      'Enheter i bar, psi, kPa och MPa.',
+      'Räknar på dubbelverkande pneumatikcylindrar: kraft, erforderligt tryck, ' +
+      'cylinderdiameter (ISO 15552) och luftförbrukning. Stöder bar, psi, kPa och MPa.',
     code: 'https://github.com/Carlboms-Data-AB/pneumatic-calculator',
   },
   {
     name: 'Network Tools',
     href: 'https://network-tools.anvil.app',
     body:
-      'Portscanner och DNS-propageringskoll — se om portar är öppna på en ' +
-      'värd och hur DNS-poster har spridit sig över namnservrar.',
+      'Portscanner och DNS-koll i webbläsaren — se om portar är öppna på en värd ' +
+      'och hur DNS-poster har spridit sig mellan namnservrar.',
   },
 ];
 
@@ -55,53 +54,49 @@ const programs = [
     name: 'FlamingoDoctor',
     href: `${DL}/flamingodoctor/FlamingoDoctor.zip`,
     body:
-      'Diagnostik för kamera och nätverk — kontrollerar nåbarhet, nätverkskort ' +
-      'med mera och ger en samlad sammanfattning. Bra vid felsökning av ' +
-      'frysningar och nätverk.',
+      'Diagnostikverktyg för kamera och nätverk. Kör en rad kontroller — ' +
+      'nåbarhet, nätverkskort med mera — och sammanfattar resultatet för snabb ' +
+      'felsökning av frysningar och nätverksproblem.',
   },
   {
     name: 'vhdx2vmdk',
     href: `${DL}/vhdx2vmdk/vhdx2vmdk.exe`,
     body:
-      'Batchkonverterar Hyper-V VHDX-diskar till VMware VMDK. Ett enkelt ' +
-      'gränssnitt runt qemu-img — peka ut filerna och konvertera flera på en gång.',
+      'Konverterar Hyper-V VHDX-diskar till VMware VMDK. Ett enkelt gränssnitt ' +
+      'runt qemu-img, med stöd för att konvertera flera filer i batch.',
   },
   {
     name: 'disk2vhd',
     href: `${DL}/disk2vhd/Disk2vhd.zip`,
     body:
-      'Avbildar en fysisk disk till en VHD-fil. Första steget när en fysisk ' +
-      'maskin ska flyttas in i en virtuell.',
+      'Avbildar en fysisk disk till en VHD-fil — första steget när en fysisk ' +
+      'maskin ska virtualiseras.',
   },
   {
     name: 'qemu-img',
     href: `${DL}/qemu-img-windows-x64/qemu-img-windows-x64-v10.0.0.zip`,
     body:
       'Kör qemu-img på Windows utan att installera hela QEMU. Konverterar och ' +
-      'inspekterar diskavbilder — qcow2, vmdk, vhdx, raw med flera.',
+      'inspekterar diskavbilder i format som qcow2, vmdk, vhdx och raw.',
     code: 'https://github.com/Carlboms-Data-AB/qemu-img-windows-x64',
   },
   {
     name: 'chm2txt',
     href: `${DL}/chm2txt/chm2txt-v3.0.0-win.zip`,
-    body:
-      'Extraherar texten ur CHM-hjälpfiler till ren text. Använder Windows ' +
-      'inbyggda hh.exe för att packa upp och rensar sedan bort HTML.',
+    body: 'Extraherar innehållet ur CHM-hjälpfiler till ren, sökbar text.',
   },
   {
     name: 'Glass Kiosk',
     href: `${DL}/glass-kiosk/GlassKiosk.zip`,
     body:
-      'Lättviktig kiosk-webbläsare för Windows (WebView2). Lås datorn till en ' +
-      'webbsida med autostart, dold verktygsrad och lösenordsskydd.',
+      'Kiosk-webbläsare för Windows. Låser en dator till en enda webbsida, med ' +
+      'autostart, dold verktygsrad och lösenordsskydd.',
     code: 'https://github.com/Carlboms-Data-AB/Glass-Kiosk-Desktop',
   },
   {
     name: 'terminal-banner',
     link: 'https://github.com/Carlboms-Data-AB/terminal-banner',
-    body:
-      'Färgglad inloggningsbanner (MOTD) för Linux som visas vid inloggning. ' +
-      'Öppen källkod — hela skriptet finns på GitHub.',
+    body: 'Färgglad inloggningsbanner (MOTD) för Linux. Öppen källkod på GitHub.',
   },
 ];
 
@@ -109,21 +104,21 @@ const licensed = [
   {
     name: 'Rowmantic Print',
     body:
-      'Komplett system för etikettutskrift i produktion — en designer för att ' +
-      'rita etiketter, en tjänst som sköter utskrifterna och ett administrationsverktyg.',
+      'Komplett system för etikettutskrift i produktion: en designer för att ' +
+      'rita etiketter, en utskriftstjänst och ett administrationsverktyg.',
   },
   {
     name: 'OpcLogger',
     body:
-      'OPC DA-gateway för KepServerEX. Körs som en headless Windows-tjänst, ' +
-      'prenumererar automatiskt på alla taggar och kan agera via e-post, SQL, ' +
-      'webhook, MQTT och InfluxDB — med en WPF-app för att styra den.',
+      'OPC DA-gateway för KepServerEX. Körs som en Windows-tjänst som läser alla ' +
+      'taggar och vidarebefordrar dem till e-post, SQL, webhook, MQTT eller ' +
+      'InfluxDB, med en app för konfiguration och övervakning.',
   },
   {
     name: 'e-designer2citect',
     body:
-      'Migrerar Beijer E-Designer-projekt till Citect. Automatiserar en annars ' +
-      'manuell och tidsödande överföring.',
+      'Migrerar Beijer E-Designer-projekt till Citect och automatiserar en ' +
+      'annars manuell och tidsödande överföring.',
   },
   {
     name: 'e-designer-extracter',
@@ -134,20 +129,21 @@ const licensed = [
   {
     name: 'dbf-editor',
     body:
-      'Lättviktig DBF-editor för CitectSCADA — öppnar och redigerar dBASE III-' +
-      'filer med automatisk backup och svensk teckenkodning. En enda liten exe ' +
-      'utan installation, från Windows XP till 11.',
+      'DBF-editor för CitectSCADA. Öppnar och redigerar dBASE III-filer med ' +
+      'automatisk backup och svensk teckenkodning — en enda liten exe utan ' +
+      'installation, från Windows XP till 11.',
   },
   {
     name: 'pdf2png',
     body:
-      'Konverterar PDF-sidor till PNG-bilder, en bild per sida. För när du ' +
-      'snabbt behöver sidorna som bilder i stället för PDF.',
+      'Konverterar PDF-sidor till PNG-bilder, en bild per sida — för när du ' +
+      'snabbt behöver sidorna som bild i stället för PDF.',
   },
   {
     name: 'dwg2pdf',
     body:
-      'Konverterar AutoCAD DWG-ritningar till PDF med bibehållen vektorkvalitet.',
+      'Konverterar AutoCAD DWG-ritningar till PDF med bibehållen ' +
+      'vektorkvalitet. Fristående — inga andra program behövs.',
   },
 ];
 ---
