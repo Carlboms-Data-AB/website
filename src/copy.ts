@@ -375,7 +375,7 @@ const sv: Copy = {
   },
 
   footer: {
-    tagline: `${EMAIL} · Lund, Sverige · Momsreg. SE559494046101`,
+    tagline: 'Org.nr 559494-0461\nMomsreg.nr SE559494046101\nLund, Sverige',
     columns: [
       {
         title: 'Innehåll',
@@ -389,7 +389,7 @@ const sv: Copy = {
       },
       {
         title: 'Kontakt',
-        items: [{ label: EMAIL, href: `mailto:${EMAIL}` }, { label: 'Lund, Sverige' }],
+        items: [{ label: EMAIL, href: `mailto:${EMAIL}` }],
       },
       {
         title: 'Följ',
