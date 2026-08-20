@@ -36,3 +36,15 @@
   max-width: 420px;
   white-space: pre-line;
 }
+
+/* Footer link rows in the same quiet mono style as the company details and the
+   column headings, so the whole footer reads as one consistent block. */
+.footer .footer-col li {
+  font: 400 12px/20px var(--font-mono);
+}
+.footer .footer-col a {
+  color: rgba(255, 255, 255, 0.55);
+}
+.footer .footer-col a:hover {
+  color: #fff;
+}

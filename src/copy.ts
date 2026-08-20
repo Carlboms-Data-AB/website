@@ -394,7 +394,6 @@ const sv: Copy = {
       {
         title: 'Följ',
         items: [
-          { label: 'LinkedIn ↗', href: 'https://linkedin.com' },
           { label: 'Källkod på GitHub ↗', href: 'https://github.com/Carlboms-Data-AB/website' },
         ],
       },
