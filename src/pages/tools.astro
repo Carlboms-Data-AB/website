@@ -13,6 +13,7 @@ const t = {
 };
 
 const DL = 'https://github.com/Carlboms-Data-AB/downloads/releases/download';
+const demoHref = `${url('/')}#kontakt`;
 
 const webApps = [
   {
@@ -191,6 +192,7 @@ const licensed = [
                 <p class="tool-body">{tool.body}</p>
                 <div class="tool-foot">
                   <button class="cta" type="button" disabled>Beställ licens</button>
+                  <a class="cta secondary" href={demoHref}>Boka demo</a>
                   {tool.plat && <span class="tool-plat">{tool.plat}</span>}
                 </div>
               </li>
