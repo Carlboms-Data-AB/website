@@ -28,6 +28,7 @@ export const EMAIL = 'hello@carlbomsdata.se';
  * apart in the inbox: without it both arrive as the same "Förfrågan från …".
  */
 export const FORM_API = 'https://carlbomsdata-form-submission.anvil.app/_/api/contact';
+export const LIKES_API = 'https://like-counter.anvil.app/_/api/likes';
 export const SOURCE = 'carlbomsdata';
 
 export interface NavLink {

@@ -3,7 +3,7 @@ import Base from '~/layouts/Base.astro';
 import Nav from '~/components/Nav.astro';
 import Footer from '~/components/Footer.astro';
 import { url } from '~/site';
-import { copy, FORM_API, SOURCE } from '~/copy';
+import { copy, FORM_API, SOURCE, LIKES_API } from '~/copy';
 
 const base = copy.sv;
 const t = {
@@ -13,6 +13,7 @@ const t = {
 };
 
 const DL = 'https://github.com/Carlboms-Data-AB/downloads/releases/download';
+const likeKey = (name) => name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/(^-|-$)/g, '');
 
 const webApps = [
   {
@@ -157,7 +158,7 @@ const licensed = [
   <Nav t={t} />
   <main>
     <section class="section">
-      <div class="container tools-page">
+      <div class="container tools-page" data-likes-api={LIKES_API}>
         <h1 class="tools-title">Verktyg</h1>
         <p class="tools-lead">
           Egenutvecklade webb- och desktopverktyg för analys, felsökning,
@@ -169,7 +170,13 @@ const licensed = [
           {
             webApps.map((tool) => (
               <li class="tool-card">
-                <h3 class="tool-name">{tool.name}</h3>
+                <div class="tool-head">
+                  <h3 class="tool-name">{tool.name}</h3>
+                  <button class="like-btn" type="button" data-key={likeKey(tool.name)} aria-label="Gilla">
+                    <svg class="like-heart" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.2C.6 8.5 2 5 5.2 5c2 0 3.3 1.1 4.1 2.3l.7 1 .7-1C11.5 6.1 12.8 5 14.8 5 18 5 19.4 8.5 22 11.8 19.5 16.4 12 21 12 21z"/></svg>
+                    <span class="like-count"></span>
+                  </button>
+                </div>
                 <p class="tool-body">{tool.body}</p>
                 <div class="tool-foot">
                   {tool.src ? (
@@ -206,7 +213,13 @@ const licensed = [
           {
             programs.map((tool) => (
               <li class="tool-card">
-                <h3 class="tool-name">{tool.name}</h3>
+                <div class="tool-head">
+                  <h3 class="tool-name">{tool.name}</h3>
+                  <button class="like-btn" type="button" data-key={likeKey(tool.name)} aria-label="Gilla">
+                    <svg class="like-heart" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.2C.6 8.5 2 5 5.2 5c2 0 3.3 1.1 4.1 2.3l.7 1 .7-1C11.5 6.1 12.8 5 14.8 5 18 5 19.4 8.5 22 11.8 19.5 16.4 12 21 12 21z"/></svg>
+                    <span class="like-count"></span>
+                  </button>
+                </div>
                 <p class="tool-body">{tool.body}</p>
                 <div class="tool-foot">
                   {tool.href ? (
@@ -241,7 +254,13 @@ const licensed = [
           {
             licensed.map((tool) => (
               <li class="tool-card">
-                <h3 class="tool-name">{tool.name}</h3>
+                <div class="tool-head">
+                  <h3 class="tool-name">{tool.name}</h3>
+                  <button class="like-btn" type="button" data-key={likeKey(tool.name)} aria-label="Gilla">
+                    <svg class="like-heart" viewBox="0 0 24 24" width="15" height="15" aria-hidden="true"><path d="M12 21s-7.5-4.6-10-9.2C.6 8.5 2 5 5.2 5c2 0 3.3 1.1 4.1 2.3l.7 1 .7-1C11.5 6.1 12.8 5 14.8 5 18 5 19.4 8.5 22 11.8 19.5 16.4 12 21 12 21z"/></svg>
+                    <span class="like-count"></span>
+                  </button>
+                </div>
                 <p class="tool-body">{tool.body}</p>
                 <div class="tool-foot">
                   <button class="cta" type="button" disabled>Beställ licens</button>
@@ -573,6 +592,18 @@ const licensed = [
     color: rgba(255, 255, 255, 0.8);
     font: 400 13px/1 var(--font-mono);
   }
+  .tool-head { display: flex; align-items: flex-start; justify-content: space-between; gap: 12px; }
+  .like-btn {
+    flex: none; display: inline-flex; align-items: center; gap: 6px;
+    border: 1px solid var(--color-line, rgba(0, 0, 0, 0.14)); background: transparent;
+    border-radius: 100px; padding: 5px 11px; cursor: pointer;
+    color: var(--color-muted, #666); font: 500 13px/1 var(--font-sans);
+  }
+  .like-btn:hover { border-color: rgba(230, 50, 80, 0.5); color: #e6324f; }
+  .like-heart { width: 15px; height: 15px; fill: none; stroke: currentColor; stroke-width: 2; }
+  .like-btn.liked { color: #e6324f; border-color: rgba(230, 50, 80, 0.45); cursor: default; }
+  .like-btn.liked .like-heart { fill: #e6324f; stroke: #e6324f; }
+  .like-count:empty { display: none; }
 </style>
 
 <script>
@@ -733,5 +764,37 @@ const licensed = [
     if (e.key === 'Escape') closeShots();
     if (e.key === 'ArrowLeft') stepShot(-1);
     if (e.key === 'ArrowRight') stepShot(1);
+  });
+  const likesRoot = document.querySelector('.tools-page') as HTMLElement | null;
+  const LIKES_API = likesRoot?.dataset.likesApi || '';
+  const likeBtns = [...document.querySelectorAll<HTMLButtonElement>('.like-btn')];
+  const likedFlag = (k: string) => 'tools-liked:' + k;
+  likeBtns.forEach((b) => { if (localStorage.getItem(likedFlag(b.dataset.key || ''))) b.classList.add('liked'); });
+  if (LIKES_API) {
+    fetch(LIKES_API)
+      .then((r) => r.json())
+      .then((counts) => {
+        likeBtns.forEach((b) => {
+          const span = b.querySelector('.like-count'); if (!span) return;
+          span.textContent = String(counts[b.dataset.key || ''] || 0);
+        });
+      })
+      .catch(() => {});
+  }
+  likeBtns.forEach((b) => {
+    b.addEventListener('click', async () => {
+      const key = b.dataset.key || '';
+      if (!key || localStorage.getItem(likedFlag(key))) return;
+      localStorage.setItem(likedFlag(key), '1');
+      b.classList.add('liked');
+      const span = b.querySelector('.like-count');
+      if (span) span.textContent = String((parseInt(span.textContent || '0', 10) || 0) + 1);
+      if (!LIKES_API) return;
+      try {
+        const res = await fetch(LIKES_API, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ key }) });
+        const data = await res.json();
+        if (span && data && typeof data.count === 'number') span.textContent = String(data.count);
+      } catch (e) { /* keep optimistic */ }
+    });
   });
 </script>
