@@ -173,7 +173,7 @@ const licensed = [
                 <div class="tool-head">
                   <h3 class="tool-name">{tool.name}</h3>
                   <button class="like-btn" type="button" data-key={likeKey(tool.name)} aria-label="Gilla">
-                    <svg class="like-heart" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    <svg class="like-heart" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                     <span class="like-count"></span>
                   </button>
                 </div>
@@ -216,7 +216,7 @@ const licensed = [
                 <div class="tool-head">
                   <h3 class="tool-name">{tool.name}</h3>
                   <button class="like-btn" type="button" data-key={likeKey(tool.name)} aria-label="Gilla">
-                    <svg class="like-heart" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    <svg class="like-heart" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                     <span class="like-count"></span>
                   </button>
                 </div>
@@ -257,7 +257,7 @@ const licensed = [
                 <div class="tool-head">
                   <h3 class="tool-name">{tool.name}</h3>
                   <button class="like-btn" type="button" data-key={likeKey(tool.name)} aria-label="Gilla">
-                    <svg class="like-heart" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z"/></svg>
+                    <svg class="like-heart" viewBox="0 0 24 24" width="16" height="16" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
                     <span class="like-count"></span>
                   </button>
                 </div>
@@ -599,10 +599,18 @@ const licensed = [
     border-radius: 100px; padding: 5px 11px; cursor: pointer;
     color: var(--color-muted, #666); font: 500 13px/1 var(--font-sans);
   }
-  .like-btn:hover { border-color: rgba(230, 50, 80, 0.5); color: #e6324f; }
-  .like-heart { width: 16px; height: 16px; fill: none; stroke: currentColor; stroke-width: 2; }
-  .like-btn.liked { color: #e6324f; border-color: rgba(230, 50, 80, 0.45); cursor: default; }
-  .like-btn.liked .like-heart { fill: #e6324f; stroke: #e6324f; }
+  .like-btn:hover { border-color: rgba(237, 73, 86, 0.55); color: #ed4956; }
+  .like-heart { width: 17px; height: 17px; fill: none; stroke: currentColor; stroke-width: 2; }
+  .like-btn.liked { color: #ed4956; border-color: rgba(237, 73, 86, 0.45); cursor: default; }
+  .like-btn.liked .like-heart { fill: #ed4956; stroke: #ed4956; }
+  .like-btn.pop .like-heart { animation: heart-pop 0.45s ease; }
+  @keyframes heart-pop {
+    0% { transform: scale(1); }
+    30% { transform: scale(1.35); }
+    55% { transform: scale(0.85); }
+    80% { transform: scale(1.12); }
+    100% { transform: scale(1); }
+  }
   .like-count:empty { display: none; }
 </style>
 
@@ -787,6 +795,8 @@ const licensed = [
       if (!key || localStorage.getItem(likedFlag(key))) return;
       localStorage.setItem(likedFlag(key), '1');
       b.classList.add('liked');
+      b.classList.add('pop');
+      setTimeout(() => b.classList.remove('pop'), 460);
       const span = b.querySelector('.like-count');
       if (span) span.textContent = String((parseInt(span.textContent || '0', 10) || 0) + 1);
       if (!LIKES_API) return;
