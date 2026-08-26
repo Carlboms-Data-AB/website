@@ -4,7 +4,7 @@
  * Kept in one file on purpose: editing copy should not mean touching markup,
  * and a sentence that lives on its own is a sentence anyone can change.
  *
- * The shape mirrors Carlboms-Data-AB/rowmantic-print-web. The fields the shared
+ * The shape mirrors carlbomsdata/rowmantic-print-web. The fields the shared
  * components read — brand, home, other, alternates, meta, nav, contact, form,
  * footer — are named the same in both repositories, which is what lets
  * Base.astro, Nav.astro, Footer.astro and ContactForm.astro be identical files.
@@ -395,7 +395,7 @@ const sv: Copy = {
       {
         title: 'Följ',
         items: [
-          { label: 'Källkod på GitHub ↗', href: 'https://github.com/Carlboms-Data-AB/website' },
+          { label: 'Källkod på GitHub ↗', href: 'https://github.com/carlbomsdata/website' },
         ],
       },
     ],

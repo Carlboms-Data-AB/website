@@ -1,8 +1,8 @@
 /* ===========================================================================
    The stylesheet.
    ===========================================================================
-   This file is byte-identical in Carlboms-Data-AB/website and
-   Carlboms-Data-AB/rowmantic-print-web. Every accent reaches its colour through
+   This file is byte-identical in carlbomsdata/website and
+   carlbomsdata/rowmantic-print-web. Every accent reaches its colour through
    a token in theme.css, which is the only stylesheet that differs between the
    two — so the sites cannot drift apart visually, and a fix made here applies
    to both by copying one file.

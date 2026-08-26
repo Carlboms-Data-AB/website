@@ -5,7 +5,7 @@ four dependencies, no build plugins.
 
 ## Shape
 
-Shares its file tree with `Carlboms-Data-AB/rowmantic-print-web`; most files are
+Shares its file tree with `carlbomsdata/rowmantic-print-web`; most files are
 byte-identical. Only three differ: `src/styles/theme.css` (accent colour),
 `src/copy.ts` (the words), `src/components/Landing.astro` (the sections). Shared
 styling lives in `src/styles/brand.css` and is copied across, not rewritten per
