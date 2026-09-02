@@ -323,17 +323,15 @@ const sv: Copy = {
   about: {
     title: 'Om Carlboms Data',
     body: [
-      'Jag heter Tobias Carlbom och driver Carlboms Data AB i Lund. Jag hjälper ' +
-        'tillverkningsföretag med MES/ERP-integration, systemintegration och specialutvecklade ' +
-        'verktyg.',
-      'Min styrka är att jag arbetar med både IT och automation. Det gör att jag kan förstå ' +
-        'hela kedjan — från maskiner och styrsystem till databaser, affärssystem och ' +
-        'användarnas arbetsflöden.',
-      'Jag arbetar prestigelöst och utgår från problemet, inte från en viss produkt eller ' +
-        'plattform.',
-      'Jag bygger lösningar som passar den befintliga verksamheten, utan onödig ' +
-        'leverantörsinlåsning. Ni har direktkontakt med mig genom hela uppdraget och lösningen ' +
-        'är er, utan inlåsning.',
+      'Jag heter Tobias och började min yrkesbana som IT-tekniker inom tillverkningsindustrin. ' +
+        'Med tiden lärde jag mig programmering och gick vidare till att arbeta med automation ' +
+        'och mjukvaruutveckling.',
+      'I dag driver jag eget företag och hjälper industriföretag med programutveckling och ' +
+        'systemintegration. Det kan handla om att koppla samman maskiner och affärssystem, ta ' +
+        'bort manuella arbetsmoment eller utveckla verktyg som inte går att köpa färdiga.',
+      'Jag är glad att jag hann bygga upp erfarenhet inom både IT och programmering innan ' +
+        'dagens AI-verktyg slog igenom. I dag använder jag AI flitigt, vilket har förändrat ' +
+        'mitt arbetssätt och ökat min produktivitet kraftigt.',
     ],
     portraitAlt: 'Tobias Carlbom',
     sign: {
