@@ -71,7 +71,9 @@ const programs = [
   },
   {
     name: 'disk2vhd',
-    href: `${DL}/disk2vhd/Disk2vhd.zip`,
+    href: 'https://download.sysinternals.com/files/Disk2vhd.zip',
+    source: 'https://learn.microsoft.com/sysinternals/downloads/disk2vhd',
+    sourceName: 'Microsoft',
     body:
       'Avbildar en fysisk disk till en VHD-fil — första steget när en fysisk ' +
       'maskin ska virtualiseras.',
@@ -193,6 +195,11 @@ const licensed = [
                       Källkod ↗
                     </a>
                   )}
+                  {tool.source && (
+                    <a class="cta secondary" href={tool.source} target="_blank" rel="noopener noreferrer">
+                      Källa: {tool.sourceName} ↗
+                    </a>
+                  )}
                   {tool.shots && (
                     <button
                       class="cta secondary shots-open"
@@ -232,6 +239,11 @@ const licensed = [
                   {tool.code && (
                     <a class="cta secondary" href={tool.code} target="_blank" rel="noopener noreferrer">
                       Källkod ↗
+                    </a>
+                  )}
+                  {tool.source && (
+                    <a class="cta secondary" href={tool.source} target="_blank" rel="noopener noreferrer">
+                      Källa: {tool.sourceName} ↗
                     </a>
                   )}
                   {tool.shots && (
